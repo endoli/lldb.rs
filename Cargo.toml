@@ -8,6 +8,7 @@ description = ""
 keywords = ["lldb", "debugger"]
 homepage = "https://github.com/endoli/lldb.rs"
 repository = "https://github.com/endoli/lldb.rs"
+build = "build.rs"
 
 [dependencies]
 lldb-sys = "0.0.1"
