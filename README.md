@@ -15,6 +15,15 @@ Add it to your `Cargo.toml` like so:
 lldb = "0.0.1"
 ```
 
+On Mac OS X, the `LLDB.framework` requires that an `@rpath`
+be configured for your application so that the `LLDB.framework`
+can be found. This isn't directly supported by Cargo today, but
+for local work and development, you can do this:
+
+```shell
+export DYLD_FRAMEWORK_PATH=/Applications/Xcode.app/Contents/SharedFrameworks
+```
+
 ## Status of Implementation
 
 Things are under active development. This project is not quite
