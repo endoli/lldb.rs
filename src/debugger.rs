@@ -24,9 +24,7 @@ impl SBDebugger {
     ///
     /// This should be called before LLDB functionality is used.
     pub fn initialize() {
-        unsafe {
-            sys::SBDebuggerInitialize();
-        }
+        unsafe { sys::SBDebuggerInitialize() };
     }
 
     /// Tear down LLDB.
@@ -35,9 +33,7 @@ impl SBDebugger {
     /// to use LLDB functionality. Typically, this is called as the
     /// application exits.
     pub fn terminate() {
-        unsafe {
-            sys::SBDebuggerTerminate();
-        }
+        unsafe { sys::SBDebuggerTerminate() };
     }
 
     /// Create a new instance of `SBDebugger`.
@@ -63,9 +59,7 @@ impl SBDebugger {
     /// stepping or continuing without waiting for the process
     /// to change state.
     pub fn set_async(&mut self, async: bool) {
-        unsafe {
-            sys::SBDebuggerSetAsync(self.raw_debugger, async as u8);
-        }
+        unsafe { sys::SBDebuggerSetAsync(self.raw_debugger, async as u8) }
     }
 
     /// Get the LLDB version string.
