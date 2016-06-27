@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use super::platform::SBPlatform;
 use super::target::SBTarget;
 use sys;
 
@@ -85,6 +86,22 @@ impl SBDebugger {
             debugger: self,
             idx: 0,
         }
+    }
+
+    /// Get the currently selected [`SBPlatform`].
+    ///
+    /// [`SBPlatform`]: struct.SBPlatform.html
+    pub fn selected_platform(&self) -> SBPlatform {
+        unsafe {
+            SBPlatform { raw_platform: sys::SBDebuggerGetSelectedPlatform(self.raw_debugger) }
+        }
+    }
+
+    /// Set the selected [`SBPlatform`].
+    ///
+    /// [`SBPlatform`]: struct.SBPlatform.html
+    pub fn set_selected_platform(&mut self, platform: &SBPlatform) {
+        unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw_debugger, platform.raw_platform) };
     }
 }
 
