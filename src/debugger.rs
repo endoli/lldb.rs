@@ -16,7 +16,7 @@ use sys;
 #[derive(Debug)]
 pub struct SBDebugger {
     /// The underlying raw `SBDebuggerRef`.
-    pub raw_debugger: sys::SBDebuggerRef,
+    pub raw: sys::SBDebuggerRef,
 }
 
 impl SBDebugger {
@@ -41,7 +41,7 @@ impl SBDebugger {
     /// If `source_init_files` is `true`, then `~/.lldbinit` will
     /// be processed.
     pub fn create(source_init_files: bool) -> SBDebugger {
-        unsafe { SBDebugger { raw_debugger: sys::SBDebuggerCreate2(source_init_files as u8) } }
+        unsafe { SBDebugger { raw: sys::SBDebuggerCreate2(source_init_files as u8) } }
     }
 
     /// Get whether or not the debugger is in async mode.
@@ -50,7 +50,7 @@ impl SBDebugger {
     /// stepping or continuing without waiting for the process
     /// to change state.
     pub fn async(&self) -> bool {
-        unsafe { sys::SBDebuggerGetAsync(self.raw_debugger) != 0 }
+        unsafe { sys::SBDebuggerGetAsync(self.raw) != 0 }
     }
 
     /// Set the debugger to be in async mode or not.
@@ -59,7 +59,7 @@ impl SBDebugger {
     /// stepping or continuing without waiting for the process
     /// to change state.
     pub fn set_async(&mut self, async: bool) {
-        unsafe { sys::SBDebuggerSetAsync(self.raw_debugger, async as u8) }
+        unsafe { sys::SBDebuggerSetAsync(self.raw, async as u8) }
     }
 
     /// Get the LLDB version string.
@@ -86,16 +86,14 @@ impl SBDebugger {
     ///
     /// [`SBPlatform`]: struct.SBPlatform.html
     pub fn selected_platform(&self) -> SBPlatform {
-        unsafe {
-            SBPlatform { raw_platform: sys::SBDebuggerGetSelectedPlatform(self.raw_debugger) }
-        }
+        unsafe { SBPlatform { raw: sys::SBDebuggerGetSelectedPlatform(self.raw) } }
     }
 
     /// Set the selected [`SBPlatform`].
     ///
     /// [`SBPlatform`]: struct.SBPlatform.html
     pub fn set_selected_platform(&mut self, platform: &SBPlatform) {
-        unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw_debugger, platform.raw_platform) };
+        unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw, platform.raw) };
     }
 }
 
@@ -109,11 +107,9 @@ impl<'d> Iterator for DebuggerTargetIter<'d> {
     type Item = SBTarget;
 
     fn next(&mut self) -> Option<SBTarget> {
-        if self.idx < unsafe { sys::SBDebuggerGetNumTargets(self.debugger.raw_debugger) as usize } {
+        if self.idx < unsafe { sys::SBDebuggerGetNumTargets(self.debugger.raw) as usize } {
             let r = Some(SBTarget {
-                raw_target: unsafe {
-                    sys::SBDebuggerGetTargetAtIndex(self.debugger.raw_debugger, self.idx as u32)
-                },
+                raw: unsafe { sys::SBDebuggerGetTargetAtIndex(self.debugger.raw, self.idx as u32) },
             });
             self.idx += 1;
             r

@@ -4,11 +4,29 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::filespec::SBFileSpec;
 use sys;
 
-/// Represents a compilation unit or compiled source file.
+/// A compilation unit or compiled source file.
 #[derive(Debug)]
 pub struct SBCompileUnit {
     /// The underlying raw `SBCompileUnitRef`.
-    pub raw_compile_unit: sys::SBCompileUnitRef,
+    pub raw: sys::SBCompileUnitRef,
+}
+
+impl SBCompileUnit {
+    /// Check whether or not this is a valid `SBCompileUnit` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBCompileUnitIsValid(self.raw) != 0 }
+    }
+
+    /// The source file for the compile unit.
+    pub fn filespec(&self) -> SBFileSpec {
+        SBFileSpec { raw: unsafe { sys::SBCompileUnitGetFileSpec(self.raw) } }
+    }
+
+    /// The language for the compile unit.
+    pub fn language(&self) -> sys::LLDBLanguageType {
+        unsafe { sys::SBCompileUnitGetLanguage(self.raw) }
+    }
 }

@@ -63,24 +63,24 @@
 //! most common usages will involve these structs and their corresponding methods:
 //!
 //! * [`SBDebugger`]: Manages the entire debug experience and creates [`SBTarget`]s.
-//! * [`SBTarget`]: Represents the target program running under the debugger.
-//! * [`SBProcess`]: Represents the process associated with the target program.
-//! * [`SBThread`]: Represents a thread of execution. [`SBProcess`] contains
+//! * [`SBTarget`]: The target program running under the debugger.
+//! * [`SBProcess`]: The process associated with the target program.
+//! * [`SBThread`]: A thread of execution. [`SBProcess`] contains
 //!   [`SBThread`]s.
-//! * [`SBFrame`]: Represents one of the stack frames associated with
+//! * [`SBFrame`]: One of the stack frames associated with
 //!   a thread. [`SBThread`] contains [`SBFrame`]s.
 //! * [`SBSymbolContext`]: A container that stores various debugger
 //!   related info.
-//! * [`SBValue`]: Represents the value of a variable, a register, or an
+//! * [`SBValue`]: The value of a variable, a register, or an
 //!   expression.
-//! * [`SBModule`]: Represents an executable image and its associated object
+//! * [`SBModule`]: An executable image and its associated object
 //!   and symbol files.  [`SBTarget`] contains [`SBModule`]s.
-//! * [`SBBreakpoint`]: Represents a logical breakpoint and its associated
+//! * [`SBBreakpoint`]: A logical breakpoint and its associated
 //!   settings. [`SBTarget`] contains [`SBBreakpoint`]s.
-//! * [`SBSymbol`]: Represents the symbol possibly associated with a stack frame.
-//! * [`SBCompileUnit`]: Represents a compilation unit, or compiled source file.
-//! * [`SBFunction`]: Represents a generic function, which can be inlined or not.
-//! * [`SBBlock`]: Represents a lexical block. [`SBFunction`] contains [`SBBlock`]s.
+//! * [`SBSymbol`]: The symbol possibly associated with a stack frame.
+//! * [`SBCompileUnit`]: A compilation unit, or compiled source file.
+//! * [`SBFunction`]: A generic function, which can be inlined or not.
+//! * [`SBBlock`]: A lexical block. [`SBFunction`] contains [`SBBlock`]s.
 //! * [`SBLineEntry`]: Specifies an association with a contiguous range of
 //!   instructions and a source file location. [`SBCompileUnit`] contains
 //!   [`SBLineEntry`]s.
@@ -125,14 +125,20 @@
 
 extern crate lldb_sys as sys;
 
+mod address;
 mod block;
 mod breakpoint;
 mod compileunit;
+mod data;
 mod debugger;
+mod filespec;
 mod frame;
 mod function;
+mod instruction;
+mod instructionlist;
 mod lineentry;
 mod module;
+mod modulespec;
 mod platform;
 mod process;
 mod symbol;
@@ -141,14 +147,20 @@ mod target;
 mod thread;
 mod value;
 
+pub use self::address::SBAddress;
 pub use self::block::SBBlock;
 pub use self::breakpoint::SBBreakpoint;
 pub use self::compileunit::SBCompileUnit;
+pub use self::data::SBData;
 pub use self::debugger::SBDebugger;
+pub use self::filespec::SBFileSpec;
 pub use self::frame::SBFrame;
 pub use self::function::SBFunction;
+pub use self::instruction::SBInstruction;
+pub use self::instructionlist::SBInstructionList;
 pub use self::lineentry::SBLineEntry;
 pub use self::module::SBModule;
+pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::SBProcess;
 pub use self::symbol::SBSymbol;

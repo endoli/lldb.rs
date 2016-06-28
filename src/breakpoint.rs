@@ -6,9 +6,9 @@
 
 use sys;
 
-/// Represents a logical breakpoint and its associated settings.
+/// A logical breakpoint and its associated settings.
 #[derive(Debug)]
 pub struct SBBreakpoint {
     /// The underlying raw `SBBreakpointRef`.
-    pub raw_breakpoint: sys::SBBreakpointRef,
+    pub raw: sys::SBBreakpointRef,
 }

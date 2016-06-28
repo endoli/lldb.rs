@@ -4,11 +4,101 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CStr;
+use super::address::SBAddress;
+use super::filespec::SBFileSpec;
 use sys;
 
-/// Represents a lexical block.
+/// A lexical block.
 #[derive(Debug)]
 pub struct SBBlock {
     /// The underlying raw `SBBlockRef`.
-    pub raw_block: sys::SBBlockRef,
+    pub raw: sys::SBBlockRef,
+}
+
+impl SBBlock {
+    /// Check whether or not this is a valid `SBBlock` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBBlockIsValid(self.raw) != 0 }
+    }
+
+    /// Does this block represent an inlined function?
+    pub fn is_inlined(&self) -> bool {
+        unsafe { sys::SBBlockIsInlined(self.raw) != 0 }
+    }
+
+    /// Get the function name if this block represents an inlined function.
+    pub fn inlined_name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBBlockGetInlinedName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    /// Get the call site file if this block represents an inlined function.
+    pub fn inlined_call_site_file(&self) -> SBFileSpec {
+        SBFileSpec { raw: unsafe { sys::SBBlockGetInlinedCallSiteFile(self.raw) } }
+    }
+
+    /// Get the call site line number if this block represents an inlined function.
+    pub fn inlined_call_site_line(&self) -> Option<u32> {
+        let line = unsafe { sys::SBBlockGetInlinedCallSiteLine(self.raw) };
+        if line > 0 {
+            Some(line)
+        } else {
+            None
+        }
+    }
+
+    /// Get the call site column number if this block represents an inlined function.
+    pub fn inlined_call_site_column(&self) -> Option<u32> {
+        let column = unsafe { sys::SBBlockGetInlinedCallSiteColumn(self.raw) };
+        if column > 0 {
+            Some(column)
+        } else {
+            None
+        }
+    }
+
+    /// Get the parent block
+    pub fn parent(&self) -> SBBlock {
+        SBBlock { raw: unsafe { sys::SBBlockGetParent(self.raw) } }
+    }
+
+    /// Get the inlined block that is or contains this block.
+    pub fn containing_inlined_block(&self) -> SBBlock {
+        SBBlock { raw: unsafe { sys::SBBlockGetContainingInlinedBlock(self.raw) } }
+    }
+
+    /// Get the sibling block for this block.
+    pub fn sibling(&self) -> SBBlock {
+        SBBlock { raw: unsafe { sys::SBBlockGetSibling(self.raw) } }
+    }
+
+    /// Get the first child block for this block.
+    pub fn first_child(&self) -> SBBlock {
+        SBBlock { raw: unsafe { sys::SBBlockGetFirstChild(self.raw) } }
+    }
+
+    /// The number of address ranges associated with this block.
+    pub fn num_ranges(&self) -> u32 {
+        unsafe { sys::SBBlockGetNumRanges(self.raw) }
+    }
+
+    /// Get the start address of an address range.
+    pub fn range_start_address(&self, idx: u32) -> SBAddress {
+        SBAddress { raw: unsafe { sys::SBBlockGetRangeStartAddress(self.raw, idx) } }
+    }
+
+    /// Get the end address of an address range.
+    pub fn range_end_address(&self, idx: u32) -> SBAddress {
+        SBAddress { raw: unsafe { sys::SBBlockGetRangeEndAddress(self.raw, idx) } }
+    }
+
+    /// Given an address, find out which address range it is part of.
+    pub fn range_index_for_block_address(&self, block_address: &SBAddress) -> u32 {
+        unsafe { sys::SBBlockGetRangeIndexForBlockAddress(self.raw, block_address.raw) }
+    }
 }

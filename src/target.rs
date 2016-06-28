@@ -4,11 +4,70 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::debugger::SBDebugger;
+use super::filespec::SBFileSpec;
+use super::module::SBModule;
+use super::modulespec::SBModuleSpec;
+use super::platform::SBPlatform;
+use super::process::SBProcess;
 use sys;
 
-/// Represents the target program running under the debugger.
+/// The target program running under the debugger.
 #[derive(Debug)]
 pub struct SBTarget {
     /// The underlying raw `SBTargetRef`.
-    pub raw_target: sys::SBTargetRef,
+    pub raw: sys::SBTargetRef,
+}
+
+impl SBTarget {
+    /// Check whether or not this is a valid `SBTarget` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBTargetIsValid(self.raw) != 0 }
+    }
+
+    /// Get the [`SBPlatform`] associated with this target.
+    ///
+    /// After return, the platform object should be checked for validity.
+    ///
+    /// [`SBPlatform`]: strut.SBPlatform.html
+    pub fn platform(&self) -> SBPlatform {
+        unsafe { SBPlatform { raw: sys::SBTargetGetPlatform(self.raw) } }
+    }
+
+    /// Get the [`SBProcess`] associated with this target.
+    ///
+    /// [`SBProcess`]: strut.SBProcess.html
+    pub fn process(&self) -> SBProcess {
+        unsafe { SBProcess { raw: sys::SBTargetGetProcess(self.raw) } }
+    }
+
+    /// Get a filespec for the executable.
+    pub fn executable(&self) -> SBFileSpec {
+        SBFileSpec { raw: unsafe { sys::SBTargetGetExecutable(self.raw) } }
+    }
+
+    /// Add a module to the target.
+    pub fn add_module(&self, module: &SBModule) -> bool {
+        unsafe { sys::SBTargetAddModule(self.raw, module.raw) != 0 }
+    }
+
+    /// Add a module to the target using an `SBModuleSpec`.
+    pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> SBModule {
+        SBModule { raw: unsafe { sys::SBTargetAddModule4(self.raw, module_spec.raw) } }
+    }
+
+    /// Remove a module from the target.
+    pub fn remove_module(&self, module: &SBModule) -> bool {
+        unsafe { sys::SBTargetRemoveModule(self.raw, module.raw) != 0 }
+    }
+
+    /// Get the debugger controlling this target.
+    pub fn debugger(&self) -> SBDebugger {
+        SBDebugger { raw: unsafe { sys::SBTargetGetDebugger(self.raw) } }
+    }
+
+    /// Find the module for the given `SBFileSpec`.
+    pub fn find_module(&self, file_spec: &SBFileSpec) -> SBModule {
+        SBModule { raw: unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) } }
+    }
 }

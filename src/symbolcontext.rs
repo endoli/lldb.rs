@@ -10,5 +10,5 @@ use sys;
 #[derive(Debug)]
 pub struct SBSymbolContext {
     /// The underlying raw `SBSymbolContextRef`.
-    pub raw_symbol_context: sys::SBSymbolContextRef,
+    pub raw: sys::SBSymbolContextRef,
 }

@@ -6,9 +6,9 @@
 
 use sys;
 
-/// The value of a variable, register or expression.
+/// A list of machine instructions.
 #[derive(Debug)]
-pub struct SBValue {
-    /// The underlying raw `SBValueRef`.
-    pub raw: sys::SBValueRef,
+pub struct SBInstructionList {
+    /// The underlying raw `SBInstructionListRef`.
+    pub raw: sys::SBInstructionListRef,
 }

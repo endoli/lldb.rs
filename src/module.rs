@@ -4,11 +4,40 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::filespec::SBFileSpec;
 use sys;
 
-/// Represents an executable image and its associated object and symbol files.
+/// An executable image and its associated object and symbol files.
 #[derive(Debug)]
 pub struct SBModule {
     /// The underlying raw `SBModuleRef`.
-    pub raw_module: sys::SBModuleRef,
+    pub raw: sys::SBModuleRef,
+}
+
+impl SBModule {
+    /// Check whether or not this is a valid `SBModule` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBModuleIsValid(self.raw) != 0 }
+    }
+
+    /// The file for the module on the host system that is running LLDB.
+    ///
+    /// This can differ from the path on the platform since we might
+    /// be doing remote debugging.
+    pub fn filespec(&self) -> SBFileSpec {
+        SBFileSpec { raw: unsafe { sys::SBModuleGetFileSpec(self.raw) } }
+    }
+
+    /// The file for the module as it is known on the remote system on
+    /// which it is being debugged.
+    ///
+    /// For local debugging this is always the same as `SBModule::filespec`.
+    /// But remote debugging might mention a file `/usr/lib/liba.dylib`
+    /// which might be locally downloaded and cached. In this case the
+    /// platform file could be something like:
+    /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
+    /// The file could also be cached in a local developer kit directory.
+    pub fn platform_filespec(&self) -> SBFileSpec {
+        SBFileSpec { raw: unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) } }
+    }
 }

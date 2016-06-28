@@ -7,7 +7,7 @@
 use std::ffi::CStr;
 use sys;
 
-/// Represents a platform that can represent the current host or a
+/// A platform that can represent the current host or a
 /// remote host debug platform.
 ///
 /// The `SBPlatform` class represents the current host, or a remote host.
@@ -33,19 +33,19 @@ use sys;
 #[derive(Debug)]
 pub struct SBPlatform {
     /// The underlying raw `SBPlatformRef`.
-    pub raw_platform: sys::SBPlatformRef,
+    pub raw: sys::SBPlatformRef,
 }
 
 impl SBPlatform {
     /// Check whether or not this is a valid `SBPlatform` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBPlatformIsValid(self.raw_platform) != 0 }
+        unsafe { sys::SBPlatformIsValid(self.raw) != 0 }
     }
 
     /// The working directory for this platform.
     pub fn working_directory(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetWorkingDirectory(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetWorkingDirectory(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -57,7 +57,7 @@ impl SBPlatform {
     /// When debugging on the host platform, this would be `"host"`.
     pub fn name(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetName(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetName(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -69,7 +69,7 @@ impl SBPlatform {
     /// An example value might be `"x86_64-apple-macosx"`.
     pub fn triple(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetTriple(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetTriple(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -79,7 +79,7 @@ impl SBPlatform {
     /// The hostname for this platform.
     pub fn hostname(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetHostname(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetHostname(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -89,7 +89,7 @@ impl SBPlatform {
     /// The build ID for the platforms' OS version.
     pub fn os_build(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetOSBuild(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetOSBuild(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -102,7 +102,7 @@ impl SBPlatform {
     /// Tue Apr 19 18:36:36 PDT 2016; root:xnu-3248.50.21~8/RELEASE_X86_64"`.
     pub fn os_description(&self) -> &str {
         unsafe {
-            match CStr::from_ptr(sys::SBPlatformGetOSDescription(self.raw_platform)).to_str() {
+            match CStr::from_ptr(sys::SBPlatformGetOSDescription(self.raw)).to_str() {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
@@ -113,20 +113,20 @@ impl SBPlatform {
     ///
     /// On Mac OS X 10.11.4, this would have the value `10`.
     pub fn os_major_version(&self) -> u32 {
-        unsafe { sys::SBPlatformGetOSMajorVersion(self.raw_platform) }
+        unsafe { sys::SBPlatformGetOSMajorVersion(self.raw) }
     }
 
     /// The minor component of the platform's OS version.
     ///
     /// On Mac OS X 10.11.4, this would have the value `11`.
     pub fn os_minor_version(&self) -> u32 {
-        unsafe { sys::SBPlatformGetOSMinorVersion(self.raw_platform) }
+        unsafe { sys::SBPlatformGetOSMinorVersion(self.raw) }
     }
 
     /// The patch or update component of the platform's OS version.
     ///
     /// On Mac OS X 10.11.4, this would have the value `4`.
     pub fn os_update_version(&self) -> u32 {
-        unsafe { sys::SBPlatformGetOSUpdateVersion(self.raw_platform) }
+        unsafe { sys::SBPlatformGetOSUpdateVersion(self.raw) }
     }
 }
