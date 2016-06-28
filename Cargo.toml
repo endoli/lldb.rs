@@ -6,6 +6,7 @@ license = "MIT/Apache-2.0"
 readme = "README.md"
 description = ""
 keywords = ["lldb", "debugger"]
+documentation = "https://endoli.github.io/lldb.rs/"
 homepage = "https://github.com/endoli/lldb.rs"
 repository = "https://github.com/endoli/lldb.rs"
 build = "build.rs"
