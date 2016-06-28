@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBDebugger","Creates [`SBTarget`]s, provides access to them and manages the overall debugging experience."]]});

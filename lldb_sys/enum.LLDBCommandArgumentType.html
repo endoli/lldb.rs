@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `LLDBCommandArgumentType` enum in crate `lldb_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, LLDBCommandArgumentType">
+
+    <title>lldb_sys::LLDBCommandArgumentType - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>lldb_sys</a></p><script>window.sidebarCurrent = {name: 'LLDBCommandArgumentType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>lldb_sys</a>::<wbr><a class='enum' href=''>LLDBCommandArgumentType</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-853' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#524-609' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum LLDBCommandArgumentType {
+    eArgTypeAddress,
+    eArgTypeAddressOrExpression,
+    eArgTypeAliasName,
+    eArgTypeAliasOptions,
+    eArgTypeArchitecture,
+    eArgTypeBoolean,
+    eArgTypeBreakpointID,
+    eArgTypeBreakpointIDRange,
+    eArgTypeBreakpointName,
+    eArgTypeByteSize,
+    eArgTypeClassName,
+    eArgTypeCommandName,
+    eArgTypeCount,
+    eArgTypeDescriptionVerbosity,
+    eArgTypeDirectoryName,
+    eArgTypeDisassemblyFlavor,
+    eArgTypeEndAddress,
+    eArgTypeExpression,
+    eArgTypeExpressionPath,
+    eArgTypeExprFormat,
+    eArgTypeFilename,
+    eArgTypeFormat,
+    eArgTypeFrameIndex,
+    eArgTypeFullName,
+    eArgTypeFunctionName,
+    eArgTypeFunctionOrSymbol,
+    eArgTypeGDBFormat,
+    eArgTypeHelpText,
+    eArgTypeIndex,
+    eArgTypeLanguage,
+    eArgTypeLineNum,
+    eArgTypeLogCategory,
+    eArgTypeLogChannel,
+    eArgTypeMethod,
+    eArgTypeName,
+    eArgTypeNewPathPrefix,
+    eArgTypeNumLines,
+    eArgTypeNumberPerLine,
+    eArgTypeOffset,
+    eArgTypeOldPathPrefix,
+    eArgTypeOneLiner,
+    eArgTypePath,
+    eArgTypePermissionsNumber,
+    eArgTypePermissionsString,
+    eArgTypePid,
+    eArgTypePlugin,
+    eArgTypeProcessName,
+    eArgTypePythonClass,
+    eArgTypePythonFunction,
+    eArgTypePythonScript,
+    eArgTypeQueueName,
+    eArgTypeRegisterName,
+    eArgTypeRegularExpression,
+    eArgTypeRunArgs,
+    eArgTypeRunMode,
+    eArgTypeScriptedCommandSynchronicity,
+    eArgTypeScriptLang,
+    eArgTypeSearchWord,
+    eArgTypeSelector,
+    eArgTypeSettingIndex,
+    eArgTypeSettingKey,
+    eArgTypeSettingPrefix,
+    eArgTypeSettingVariableName,
+    eArgTypeShlibName,
+    eArgTypeSourceFile,
+    eArgTypeSortOrder,
+    eArgTypeStartAddress,
+    eArgTypeSummaryString,
+    eArgTypeSymbol,
+    eArgTypeThreadID,
+    eArgTypeThreadIndex,
+    eArgTypeThreadName,
+    eArgTypeTypeName,
+    eArgTypeUnsignedInteger,
+    eArgTypeUnixSignal,
+    eArgTypeVarName,
+    eArgTypeValue,
+    eArgTypeWidth,
+    eArgTypeNone,
+    eArgTypePlatform,
+    eArgTypeWatchpointID,
+    eArgTypeWatchpointIDRange,
+    eArgTypeWatchType,
+    eArgTypeLastArg,
+}</pre><h2 class='variants'>Variants</h2>
+<table class='variants_table'><tr><td id='variant.eArgTypeAddress'><code>eArgTypeAddress</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeAddressOrExpression'><code>eArgTypeAddressOrExpression</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeAliasName'><code>eArgTypeAliasName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeAliasOptions'><code>eArgTypeAliasOptions</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeArchitecture'><code>eArgTypeArchitecture</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeBoolean'><code>eArgTypeBoolean</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeBreakpointID'><code>eArgTypeBreakpointID</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeBreakpointIDRange'><code>eArgTypeBreakpointIDRange</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeBreakpointName'><code>eArgTypeBreakpointName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeByteSize'><code>eArgTypeByteSize</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeClassName'><code>eArgTypeClassName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeCommandName'><code>eArgTypeCommandName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeCount'><code>eArgTypeCount</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeDescriptionVerbosity'><code>eArgTypeDescriptionVerbosity</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeDirectoryName'><code>eArgTypeDirectoryName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeDisassemblyFlavor'><code>eArgTypeDisassemblyFlavor</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeEndAddress'><code>eArgTypeEndAddress</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeExpression'><code>eArgTypeExpression</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeExpressionPath'><code>eArgTypeExpressionPath</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeExprFormat'><code>eArgTypeExprFormat</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFilename'><code>eArgTypeFilename</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFormat'><code>eArgTypeFormat</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFrameIndex'><code>eArgTypeFrameIndex</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFullName'><code>eArgTypeFullName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFunctionName'><code>eArgTypeFunctionName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeFunctionOrSymbol'><code>eArgTypeFunctionOrSymbol</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeGDBFormat'><code>eArgTypeGDBFormat</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeHelpText'><code>eArgTypeHelpText</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeIndex'><code>eArgTypeIndex</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeLanguage'><code>eArgTypeLanguage</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeLineNum'><code>eArgTypeLineNum</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeLogCategory'><code>eArgTypeLogCategory</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeLogChannel'><code>eArgTypeLogChannel</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeMethod'><code>eArgTypeMethod</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeName'><code>eArgTypeName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeNewPathPrefix'><code>eArgTypeNewPathPrefix</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeNumLines'><code>eArgTypeNumLines</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeNumberPerLine'><code>eArgTypeNumberPerLine</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeOffset'><code>eArgTypeOffset</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeOldPathPrefix'><code>eArgTypeOldPathPrefix</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeOneLiner'><code>eArgTypeOneLiner</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePath'><code>eArgTypePath</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePermissionsNumber'><code>eArgTypePermissionsNumber</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePermissionsString'><code>eArgTypePermissionsString</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePid'><code>eArgTypePid</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePlugin'><code>eArgTypePlugin</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeProcessName'><code>eArgTypeProcessName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePythonClass'><code>eArgTypePythonClass</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePythonFunction'><code>eArgTypePythonFunction</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePythonScript'><code>eArgTypePythonScript</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeQueueName'><code>eArgTypeQueueName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeRegisterName'><code>eArgTypeRegisterName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeRegularExpression'><code>eArgTypeRegularExpression</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeRunArgs'><code>eArgTypeRunArgs</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeRunMode'><code>eArgTypeRunMode</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeScriptedCommandSynchronicity'><code>eArgTypeScriptedCommandSynchronicity</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeScriptLang'><code>eArgTypeScriptLang</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSearchWord'><code>eArgTypeSearchWord</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSelector'><code>eArgTypeSelector</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSettingIndex'><code>eArgTypeSettingIndex</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSettingKey'><code>eArgTypeSettingKey</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSettingPrefix'><code>eArgTypeSettingPrefix</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSettingVariableName'><code>eArgTypeSettingVariableName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeShlibName'><code>eArgTypeShlibName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSourceFile'><code>eArgTypeSourceFile</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSortOrder'><code>eArgTypeSortOrder</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeStartAddress'><code>eArgTypeStartAddress</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSummaryString'><code>eArgTypeSummaryString</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeSymbol'><code>eArgTypeSymbol</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeThreadID'><code>eArgTypeThreadID</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeThreadIndex'><code>eArgTypeThreadIndex</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeThreadName'><code>eArgTypeThreadName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeTypeName'><code>eArgTypeTypeName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeUnsignedInteger'><code>eArgTypeUnsignedInteger</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeUnixSignal'><code>eArgTypeUnixSignal</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeVarName'><code>eArgTypeVarName</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeValue'><code>eArgTypeValue</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeWidth'><code>eArgTypeWidth</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeNone'><code>eArgTypeNone</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypePlatform'><code>eArgTypePlatform</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeWatchpointID'><code>eArgTypeWatchpointID</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeWatchpointIDRange'><code>eArgTypeWatchpointIDRange</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeWatchType'><code>eArgTypeWatchType</code></td><td></td><td></td></tr><tr><td id='variant.eArgTypeLastArg'><code>eArgTypeLastArg</code></td><td></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb_sys/enum.LLDBCommandArgumentType.html' title='lldb_sys::LLDBCommandArgumentType'>LLDBCommandArgumentType</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lldb_sys/enum.LLDBCommandArgumentType.html' title='lldb_sys::LLDBCommandArgumentType'>LLDBCommandArgumentType</a></code></h4>
+<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb_sys/enum.LLDBCommandArgumentType.html' title='lldb_sys::LLDBCommandArgumentType'>LLDBCommandArgumentType</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb_sys/enum.LLDBCommandArgumentType.html' title='lldb_sys::LLDBCommandArgumentType'>LLDBCommandArgumentType</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb_sys";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

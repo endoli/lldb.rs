@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `lldb` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, lldb">
+
+    <title>lldb - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'lldb', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>lldb</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-0' class='srclink' href='../src/lldb/src/lib.rs.html#7-176' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'>
+<h1 id='lldb' class='section-header'><a href='#lldb'>LLDB</a></h1>
+<h2 id='installation' class='section-header'><a href='#installation'>Installation</a></h2>
+<p>This crate works with Cargo and is on <a href="https://crates.io/crates/lldb">crates.io</a>.
+Add it to your <code>Cargo.toml</code> like so:</p>
+
+<pre><code class="language-toml">lldb = &quot;0.0.1&quot;
+</code></pre>
+
+<h3 id='mac-os-x-installation-notes' class='section-header'><a href='#mac-os-x-installation-notes'>Mac OS X Installation Notes</a></h3>
+<p>On Mac OS X, this library relies upon being able to find
+the <code>LLDB.framework</code> that is provided by Xcode.app.</p>
+
+<p>In your own application, you will need to configure the
+<code>@rpath</code> for your execuable to point to the location
+of the <code>LLDB.framework</code> that you are using. Doing this
+automatically is not currently supported by Cargo.</p>
+
+<p>For testing, you can use the version provided by
+Xcode.app by setting an environment variable:</p>
+
+<pre><code class="language-shell">export DYLD_FRAMEWORK_PATH=/Applications/Xcode.app/Contents/SharedFrameworks
+</code></pre>
+
+<h2 id='usage' class='section-header'><a href='#usage'>Usage</a></h2>
+<p>LLDB must be initialized before the functionality is used. This
+is done with <code>SBDebugger::initialize()</code>:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>lldb</span>;
+
+<span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>::<span class='ident'>initialize</span>();</pre>
+
+<p>Similarly, it must be terminated after you are done using it:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>lldb</span>;
+
+<span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>::<span class='ident'>initialize</span>();
+<span class='comment'>// Use LLDB functionality ...</span>
+<span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>::<span class='ident'>terminate</span>();</pre>
+
+<p>The primary entry point from here will be <a href="struct.SBDebugger.html"><code>SBDebugger</code></a>. This will
+be how you create a debug target and begin the actually interesting
+stuff.</p>
+
+<h2 id='important-classes' class='section-header'><a href='#important-classes'>Important Classes</a></h2>
+<p>The LLDB API provides many structs and a wide range of functionality. Some of the
+most common usages will involve these structs and their corresponding methods:</p>
+
+<ul>
+<li><a href="struct.SBDebugger.html"><code>SBDebugger</code></a>: Manages the entire debug experience and creates <a href="struct.SBTarget.html"><code>SBTarget</code></a>s.</li>
+<li><a href="struct.SBTarget.html"><code>SBTarget</code></a>: The target program running under the debugger.</li>
+<li><a href="struct.SBProcess.html"><code>SBProcess</code></a>: The process associated with the target program.</li>
+<li><a href="struct.SBThread.html"><code>SBThread</code></a>: A thread of execution. <a href="struct.SBProcess.html"><code>SBProcess</code></a> contains
+<a href="struct.SBThread.html"><code>SBThread</code></a>s.</li>
+<li><a href="struct.SBFrame.html"><code>SBFrame</code></a>: One of the stack frames associated with
+a thread. <a href="struct.SBThread.html"><code>SBThread</code></a> contains <a href="struct.SBFrame.html"><code>SBFrame</code></a>s.</li>
+<li><a href="struct.SBSymbolContext.html"><code>SBSymbolContext</code></a>: A container that stores various debugger
+related info.</li>
+<li><a href="struct.SBValue.html"><code>SBValue</code></a>: The value of a variable, a register, or an
+expression.</li>
+<li><a href="struct.SBModule.html"><code>SBModule</code></a>: An executable image and its associated object
+and symbol files.  <a href="struct.SBTarget.html"><code>SBTarget</code></a> contains <a href="struct.SBModule.html"><code>SBModule</code></a>s.</li>
+<li><a href="struct.SBBreakpoint.html"><code>SBBreakpoint</code></a>: A logical breakpoint and its associated
+settings. <a href="struct.SBTarget.html"><code>SBTarget</code></a> contains <a href="struct.SBBreakpoint.html"><code>SBBreakpoint</code></a>s.</li>
+<li><a href="struct.SBSymbol.html"><code>SBSymbol</code></a>: The symbol possibly associated with a stack frame.</li>
+<li><a href="struct.SBCompileUnit.html"><code>SBCompileUnit</code></a>: A compilation unit, or compiled source file.</li>
+<li><a href="struct.SBFunction.html"><code>SBFunction</code></a>: A generic function, which can be inlined or not.</li>
+<li><a href="struct.SBBlock.html"><code>SBBlock</code></a>: A lexical block. <a href="struct.SBFunction.html"><code>SBFunction</code></a> contains <a href="struct.SBBlock.html"><code>SBBlock</code></a>s.</li>
+<li><a href="struct.SBLineEntry.html"><code>SBLineEntry</code></a>: Specifies an association with a contiguous range of
+instructions and a source file location. <a href="struct.SBCompileUnit.html"><code>SBCompileUnit</code></a> contains
+<a href="struct.SBLineEntry.html"><code>SBLineEntry</code></a>s.</li>
+</ul>
+
+<h2 id='development-guidelines' class='section-header'><a href='#development-guidelines'>Development Guidelines</a></h2>
+<p>The official LLDB bindings for C++ and Python maintain very
+strict backwards compatibility. This has resulted in them
+having methods that are considered to be deprecated in favor
+of newer methods with more comprehensive arguments. The Rust
+bindings don&#39;t have that problem (yet), so we should try to
+only write bindings for the recommended usages and not the
+deprecated methods.</p>
+
+<p>The documentation for the official bindings is also somewhat
+spotty. While it would be great to contribute upstream to
+improve that, we should seek to have these bindings be well
+documented and with more examples.</p>
+
+<p>People should be jealous of the quality of our bindings.
+Sic itur ad astra.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBAddress.html'
+                                  title='lldb::SBAddress'>SBAddress</a></td>
+                           <td class='docblock short'>
+                                <p>A section + offset based address class.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBBlock.html'
+                                  title='lldb::SBBlock'>SBBlock</a></td>
+                           <td class='docblock short'>
+                                <p>A lexical block.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBBreakpoint.html'
+                                  title='lldb::SBBreakpoint'>SBBreakpoint</a></td>
+                           <td class='docblock short'>
+                                <p>A logical breakpoint and its associated settings.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBCompileUnit.html'
+                                  title='lldb::SBCompileUnit'>SBCompileUnit</a></td>
+                           <td class='docblock short'>
+                                <p>A compilation unit or compiled source file.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBData.html'
+                                  title='lldb::SBData'>SBData</a></td>
+                           <td class='docblock short'>
+                                <p>A block of data.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBDebugger.html'
+                                  title='lldb::SBDebugger'>SBDebugger</a></td>
+                           <td class='docblock short'>
+                                <p>Creates <a href="struct.SBTarget.html"><code>SBTarget</code></a>s, provides access to them and manages
+the overall debugging experience.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBFileSpec.html'
+                                  title='lldb::SBFileSpec'>SBFileSpec</a></td>
+                           <td class='docblock short'>
+                                <p>A file specification that divides the path into a
+directory and basename.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBFrame.html'
+                                  title='lldb::SBFrame'>SBFrame</a></td>
+                           <td class='docblock short'>
+                                <p>One of the stack frames associated with a thread.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBFunction.html'
+                                  title='lldb::SBFunction'>SBFunction</a></td>
+                           <td class='docblock short'>
+                                <p>A generic function, which can be inlined or not.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBInstruction.html'
+                                  title='lldb::SBInstruction'>SBInstruction</a></td>
+                           <td class='docblock short'>
+                                <p>A machine instruction.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBInstructionList.html'
+                                  title='lldb::SBInstructionList'>SBInstructionList</a></td>
+                           <td class='docblock short'>
+                                <p>A list of machine instructions.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBLineEntry.html'
+                                  title='lldb::SBLineEntry'>SBLineEntry</a></td>
+                           <td class='docblock short'>
+                                <p>Specifies an association with a contiguous range of
+instructions and a source file location.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBModule.html'
+                                  title='lldb::SBModule'>SBModule</a></td>
+                           <td class='docblock short'>
+                                <p>An executable image and its associated object and symbol files.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBModuleSpec.html'
+                                  title='lldb::SBModuleSpec'>SBModuleSpec</a></td>
+                           <td class='docblock short'>
+                                <p>A description of an <code>SBModule</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBPlatform.html'
+                                  title='lldb::SBPlatform'>SBPlatform</a></td>
+                           <td class='docblock short'>
+                                <p>A platform that can represent the current host or a
+remote host debug platform.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBProcess.html'
+                                  title='lldb::SBProcess'>SBProcess</a></td>
+                           <td class='docblock short'>
+                                <p>The process associated with the target program.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBSymbol.html'
+                                  title='lldb::SBSymbol'>SBSymbol</a></td>
+                           <td class='docblock short'>
+                                <p>The symbol possibly associated with a stack frame.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBSymbolContext.html'
+                                  title='lldb::SBSymbolContext'>SBSymbolContext</a></td>
+                           <td class='docblock short'>
+                                <p>A container that stores various debugger related info.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBTarget.html'
+                                  title='lldb::SBTarget'>SBTarget</a></td>
+                           <td class='docblock short'>
+                                <p>The target program running under the debugger.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBThread.html'
+                                  title='lldb::SBThread'>SBThread</a></td>
+                           <td class='docblock short'>
+                                <p>A thread of execution.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBValue.html'
+                                  title='lldb::SBValue'>SBValue</a></td>
+                           <td class='docblock short'>
+                                <p>The value of a variable, register or expression.</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBModuleSpec","A description of an `SBModule`."]]});

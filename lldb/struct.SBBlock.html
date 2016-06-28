@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBBlock` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBBlock">
+
+    <title>lldb::SBBlock - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBBlock', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBBlock</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-55' class='srclink' href='../src/lldb/src/block.rs.html#14-17' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBBlock {
+    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBlockRef.html' title='lldb_sys::lldb_sys::SBBlockRef'>SBBlockRef</a>,
+}</pre><div class='docblock'><p>A lexical block.</p>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                             <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBBlockRef</code>.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h3><div class='impl-items'><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBBlock</code> value.</p>
+</div><h4 id='method.is_inlined' class='method'><code>fn <a href='#method.is_inlined' class='fnname'>is_inlined</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Does this block represent an inlined function?</p>
+</div><h4 id='method.inlined_name' class='method'><code>fn <a href='#method.inlined_name' class='fnname'>inlined_name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>Get the function name if this block represents an inlined function.</p>
+</div><h4 id='method.inlined_call_site_file' class='method'><code>fn <a href='#method.inlined_call_site_file' class='fnname'>inlined_call_site_file</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBFileSpec.html' title='lldb::SBFileSpec'>SBFileSpec</a></code></h4>
+<div class='docblock'><p>Get the call site file if this block represents an inlined function.</p>
+</div><h4 id='method.inlined_call_site_line' class='method'><code>fn <a href='#method.inlined_call_site_line' class='fnname'>inlined_call_site_line</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<div class='docblock'><p>Get the call site line number if this block represents an inlined function.</p>
+</div><h4 id='method.inlined_call_site_column' class='method'><code>fn <a href='#method.inlined_call_site_column' class='fnname'>inlined_call_site_column</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<div class='docblock'><p>Get the call site column number if this block represents an inlined function.</p>
+</div><h4 id='method.parent' class='method'><code>fn <a href='#method.parent' class='fnname'>parent</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
+<div class='docblock'><p>Get the parent block</p>
+</div><h4 id='method.containing_inlined_block' class='method'><code>fn <a href='#method.containing_inlined_block' class='fnname'>containing_inlined_block</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
+<div class='docblock'><p>Get the inlined block that is or contains this block.</p>
+</div><h4 id='method.sibling' class='method'><code>fn <a href='#method.sibling' class='fnname'>sibling</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
+<div class='docblock'><p>Get the sibling block for this block.</p>
+</div><h4 id='method.first_child' class='method'><code>fn <a href='#method.first_child' class='fnname'>first_child</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
+<div class='docblock'><p>Get the first child block for this block.</p>
+</div><h4 id='method.num_ranges' class='method'><code>fn <a href='#method.num_ranges' class='fnname'>num_ranges</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+<div class='docblock'><p>The number of address ranges associated with this block.</p>
+</div><h4 id='method.range_start_address' class='method'><code>fn <a href='#method.range_start_address' class='fnname'>range_start_address</a>(&amp;self, idx: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h4>
+<div class='docblock'><p>Get the start address of an address range.</p>
+</div><h4 id='method.range_end_address' class='method'><code>fn <a href='#method.range_end_address' class='fnname'>range_end_address</a>(&amp;self, idx: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h4>
+<div class='docblock'><p>Get the end address of an address range.</p>
+</div><h4 id='method.range_index_for_block_address' class='method'><code>fn <a href='#method.range_index_for_block_address' class='fnname'>range_index_for_block_address</a>(&amp;self, block_address: &amp;<a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+<div class='docblock'><p>Given an address, find out which address range it is part of.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

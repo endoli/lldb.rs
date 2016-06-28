@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBFileSpec","A file specification that divides the path into a directory and basename."]]});

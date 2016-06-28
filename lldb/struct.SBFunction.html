@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBFunction` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBFunction">
+
+    <title>lldb::SBFunction - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBFunction', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBFunction</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-267' class='srclink' href='../src/lldb/src/function.rs.html#13-16' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBFunction {
+    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBFunctionRef.html' title='lldb_sys::lldb_sys::SBFunctionRef'>SBFunctionRef</a>,
+}</pre><div class='docblock'><p>A generic function, which can be inlined or not.</p>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                             <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBFunctionRef</code>.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBFunction.html' title='lldb::SBFunction'>SBFunction</a></code></h3><div class='impl-items'><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBFunction</code> value.</p>
+</div><h4 id='method.name' class='method'><code>fn <a href='#method.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>The name of this function.</p>
+</div><h4 id='method.display_name' class='method'><code>fn <a href='#method.display_name' class='fnname'>display_name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>The display name for the function, as it should be seen in a UI.</p>
+</div><h4 id='method.mangled_name' class='method'><code>fn <a href='#method.mangled_name' class='fnname'>mangled_name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>The mangled (linkage) name for this function.</p>
+</div><h4 id='method.start_address' class='method'><code>fn <a href='#method.start_address' class='fnname'>start_address</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h4>
+<div class='docblock'><p>Get the address of the start of this function.</p>
+</div><h4 id='method.end_address' class='method'><code>fn <a href='#method.end_address' class='fnname'>end_address</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h4>
+<div class='docblock'><p>Get the address of the end of this function.</p>
+</div><h4 id='method.prologue_byte_size' class='method'><code>fn <a href='#method.prologue_byte_size' class='fnname'>prologue_byte_size</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+<div class='docblock'><p>Get the size of the function prologue, in bytes.</p>
+</div><h4 id='method.is_optimized' class='method'><code>fn <a href='#method.is_optimized' class='fnname'>is_optimized</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Returns true if the function was compiled with optimization.</p>
+
+<p>Optimization, in this case, is meant to indicate that the debugger
+experience may be confusing for the user -- variables optimized away,
+stepping jumping between source lines -- and the driver may want to
+provide some guidance to the user about this.
+Returns false if unoptimized, or unknown.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBFunction.html' title='lldb::SBFunction'>SBFunction</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

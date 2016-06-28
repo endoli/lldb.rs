@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Source to the Rust file `src/thread.rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang">
+
+    <title>thread.rs.html -- source</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
+<span id="2"> 2</span>
+<span id="3"> 3</span>
+<span id="4"> 4</span>
+<span id="5"> 5</span>
+<span id="6"> 6</span>
+<span id="7"> 7</span>
+<span id="8"> 8</span>
+<span id="9"> 9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+</pre><pre class='rust '>
+<span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
+<span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
+<span class='comment'>// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
+<span class='comment'>// option. This file may not be copied, modified, or distributed</span>
+<span class='comment'>// except according to those terms.</span>
+
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>value</span>::<span class='ident'>SBValue</span>;
+<span class='kw'>use</span> <span class='ident'>sys</span>;
+
+<span class='doccomment'>/// A thread of execution.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// `SBThread`s can be referred to by their ID, which maps to the system</span>
+<span class='doccomment'>/// specific thread identifier, or by `IndexID`.  The ID may or may not</span>
+<span class='doccomment'>/// be unique depending on whether the system reuses its thread identifiers.</span>
+<span class='doccomment'>/// The `IndexID` is a monotonically increasing identifier that will always</span>
+<span class='doccomment'>/// uniquely reference a particular thread, and when that thread goes</span>
+<span class='doccomment'>/// away it will not be reused.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBThread</span> {
+    <span class='doccomment'>/// The underlying raw `SBThreadRef`.</span>
+    <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBThreadRef</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>SBThread</span> {
+    <span class='doccomment'>/// Check whether or not this is a valid `SBThread` value.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
+    }
+
+    <span class='doccomment'>/// Get the stop reason for this thread.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>stop_reason</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>sys</span>::<span class='ident'>LLDBStopReason</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetStopReason</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+
+    <span class='doccomment'>/// The return value from the last stop if we just stopped due</span>
+    <span class='doccomment'>/// to stepping out of a function</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>stop_return_value</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBValue</span> {
+        <span class='ident'>SBValue</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetStopReturnValue</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    }
+
+    <span class='doccomment'>/// Returns a unique thread identifier for the current `SBThread`</span>
+    <span class='doccomment'>/// that will remain constant throughout the thread&#39;s lifetime in</span>
+    <span class='doccomment'>/// this process and will not be reused by another thread during this</span>
+    <span class='doccomment'>/// process lifetime.  On Mac OS X systems, this is a system-wide</span>
+    <span class='doccomment'>/// unique thread identifier; this identifier is also used by</span>
+    <span class='doccomment'>/// other tools like sample which helps to associate data from</span>
+    <span class='doccomment'>/// those tools with lldb.  See related `SBThread::index_id`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>thread_id</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>sys</span>::<span class='ident'>lldb_tid_t</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetThreadID</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+
+    <span class='doccomment'>/// Return the index number for this `SBThread`.  The index</span>
+    <span class='doccomment'>/// number is the same thing that a user gives as an argument</span>
+    <span class='doccomment'>/// to `thread select` in the command line lldb.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// These numbers start at `1` (for the first thread lldb sees</span>
+    <span class='doccomment'>/// in a debug session) and increments up throughout the process</span>
+    <span class='doccomment'>/// lifetime.  An index number will not be reused for a different</span>
+    <span class='doccomment'>/// thread later in a process - thread 1 will always be associated</span>
+    <span class='doccomment'>/// with the same thread.  See related `SBThread::thread_id`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>index_id</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetIndexID</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+}
+</pre>
+</section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "lldb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>

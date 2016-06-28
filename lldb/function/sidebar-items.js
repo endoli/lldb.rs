@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBFunction","A generic function, which can be inlined or not."]]});

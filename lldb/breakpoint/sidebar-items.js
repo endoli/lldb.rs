@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBBreakpoint","A logical breakpoint and its associated settings."]]});
