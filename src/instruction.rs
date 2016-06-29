@@ -17,6 +17,20 @@ pub struct SBInstruction {
 }
 
 impl SBInstruction {
+    /// Construct a new `SBInstruction`.
+    pub fn new(raw: sys::SBInstructionRef) -> SBInstruction {
+        SBInstruction { raw: raw }
+    }
+
+    /// Construct a new `Some(SBInstruction)` or `None`.
+    pub fn maybe(raw: sys::SBInstructionRef) -> Option<SBInstruction> {
+        if unsafe { sys::SBInstructionIsValid(raw) != 0 } {
+            Some(SBInstruction { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBInstruction` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBInstructionIsValid(self.raw) != 0 }

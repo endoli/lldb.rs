@@ -15,6 +15,20 @@ pub struct SBModuleSpec {
 }
 
 impl SBModuleSpec {
+    /// Construct a new `SBModuleSpec`.
+    pub fn new(raw: sys::SBModuleSpecRef) -> SBModuleSpec {
+        SBModuleSpec { raw: raw }
+    }
+
+    /// Construct a new `Some(SBModuleSpec)` or `None`.
+    pub fn maybe(raw: sys::SBModuleSpecRef) -> Option<SBModuleSpec> {
+        if unsafe { sys::SBModuleSpecIsValid(raw) != 0 } {
+            Some(SBModuleSpec { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBModuleSpec` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBModuleSpecIsValid(self.raw) != 0 }

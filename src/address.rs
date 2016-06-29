@@ -51,6 +51,20 @@ pub struct SBAddress {
 }
 
 impl SBAddress {
+    /// Construct a new `SBAddress`.
+    pub fn new(raw: sys::SBAddressRef) -> SBAddress {
+        SBAddress { raw: raw }
+    }
+
+    /// Construct a new `Some(SBAddress)` or `None`.
+    pub fn maybe(raw: sys::SBAddressRef) -> Option<SBAddress> {
+        if unsafe { sys::SBAddressIsValid(raw) != 0 } {
+            Some(SBAddress { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBAddress` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBAddressIsValid(self.raw) != 0 }

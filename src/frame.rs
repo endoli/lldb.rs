@@ -23,6 +23,20 @@ pub struct SBFrame {
 }
 
 impl SBFrame {
+    /// Construct a new `SBFrame`.
+    pub fn new(raw: sys::SBFrameRef) -> SBFrame {
+        SBFrame { raw: raw }
+    }
+
+    /// Construct a new `Some(SBFrame)` or `None`.
+    pub fn maybe(raw: sys::SBFrameRef) -> Option<SBFrame> {
+        if unsafe { sys::SBFrameIsValid(raw) != 0 } {
+            Some(SBFrame { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBFrame` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBFrameIsValid(self.raw) != 0 }

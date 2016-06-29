@@ -22,6 +22,20 @@ pub struct SBThread {
 }
 
 impl SBThread {
+    /// Construct a new `SBThread`.
+    pub fn new(raw: sys::SBThreadRef) -> SBThread {
+        SBThread { raw: raw }
+    }
+
+    /// Construct a new `Some(SBThread)` or `None`.
+    pub fn maybe(raw: sys::SBThreadRef) -> Option<SBThread> {
+        if unsafe { sys::SBThreadIsValid(raw) != 0 } {
+            Some(SBThread { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBThread` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBThreadIsValid(self.raw) != 0 }

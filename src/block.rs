@@ -17,6 +17,20 @@ pub struct SBBlock {
 }
 
 impl SBBlock {
+    /// Construct a new `SBBlock`.
+    pub fn new(raw: sys::SBBlockRef) -> SBBlock {
+        SBBlock { raw: raw }
+    }
+
+    /// Construct a new `Some(SBBlock)` or `None`.
+    pub fn maybe(raw: sys::SBBlockRef) -> Option<SBBlock> {
+        if unsafe { sys::SBBlockIsValid(raw) != 0 } {
+            Some(SBBlock { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBBlock` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBBlockIsValid(self.raw) != 0 }

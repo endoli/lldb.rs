@@ -19,6 +19,20 @@ pub struct SBFileSpec {
 }
 
 impl SBFileSpec {
+    /// Construct a new `SBFileSpec`.
+    pub fn new(raw: sys::SBFileSpecRef) -> SBFileSpec {
+        SBFileSpec { raw: raw }
+    }
+
+    /// Construct a new `Some(SBFileSpec)` or `None`.
+    pub fn maybe(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
+        if unsafe { sys::SBFileSpecIsValid(raw) != 0 } {
+            Some(SBFileSpec { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBFileSpec` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBFileSpecIsValid(self.raw) != 0 }

@@ -15,6 +15,20 @@ pub struct SBModule {
 }
 
 impl SBModule {
+    /// Construct a new `SBModule`.
+    pub fn new(raw: sys::SBModuleRef) -> SBModule {
+        SBModule { raw: raw }
+    }
+
+    /// Construct a new `Some(SBModule)` or `None`.
+    pub fn maybe(raw: sys::SBModuleRef) -> Option<SBModule> {
+        if unsafe { sys::SBModuleIsValid(raw) != 0 } {
+            Some(SBModule { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBModule` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBModuleIsValid(self.raw) != 0 }

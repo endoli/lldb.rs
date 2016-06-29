@@ -12,3 +12,24 @@ pub struct SBBreakpoint {
     /// The underlying raw `SBBreakpointRef`.
     pub raw: sys::SBBreakpointRef,
 }
+
+impl SBBreakpoint {
+    /// Construct a new `SBBreakpoint`.
+    pub fn new(raw: sys::SBBreakpointRef) -> SBBreakpoint {
+        SBBreakpoint { raw: raw }
+    }
+
+    /// Construct a new `Some(SBBreakpoint)` or `None`.
+    pub fn maybe(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
+        if unsafe { sys::SBBreakpointIsValid(raw) != 0 } {
+            Some(SBBreakpoint { raw: raw })
+        } else {
+            None
+        }
+    }
+
+    /// Check whether or not this is a valid `SBBreakpoint` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBBreakpointIsValid(self.raw) != 0 }
+    }
+}

@@ -12,3 +12,24 @@ pub struct SBData {
     /// The underlying raw `SBDataRef`.
     pub raw: sys::SBDataRef,
 }
+
+impl SBData {
+    /// Construct a new `SBData`.
+    pub fn new(raw: sys::SBDataRef) -> SBData {
+        SBData { raw: raw }
+    }
+
+    /// Construct a new `Some(SBData)` or `None`.
+    pub fn maybe(raw: sys::SBDataRef) -> Option<SBData> {
+        if unsafe { sys::SBDataIsValid(raw) != 0 } {
+            Some(SBData { raw: raw })
+        } else {
+            None
+        }
+    }
+
+    /// Check whether or not this is a valid `SBData` value.
+    pub fn is_valid(&self) -> bool {
+        unsafe { sys::SBDataIsValid(self.raw) != 0 }
+    }
+}

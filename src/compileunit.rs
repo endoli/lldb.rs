@@ -15,6 +15,20 @@ pub struct SBCompileUnit {
 }
 
 impl SBCompileUnit {
+    /// Construct a new `SBCompileUnit`.
+    pub fn new(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
+        SBCompileUnit { raw: raw }
+    }
+
+    /// Construct a new `Some(SBCompileUnit)` or `None`.
+    pub fn maybe(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
+        if unsafe { sys::SBCompileUnitIsValid(raw) != 0 } {
+            Some(SBCompileUnit { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBCompileUnit` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBCompileUnitIsValid(self.raw) != 0 }

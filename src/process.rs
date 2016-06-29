@@ -15,6 +15,20 @@ pub struct SBProcess {
 }
 
 impl SBProcess {
+    /// Construct a new `SBProcess`.
+    pub fn new(raw: sys::SBProcessRef) -> SBProcess {
+        SBProcess { raw: raw }
+    }
+
+    /// Construct a new `Some(SBProcess)` or `None`.
+    pub fn maybe(raw: sys::SBProcessRef) -> Option<SBProcess> {
+        if unsafe { sys::SBProcessIsValid(raw) != 0 } {
+            Some(SBProcess { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBProcess` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBProcessIsValid(self.raw) != 0 }

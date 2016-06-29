@@ -37,6 +37,20 @@ pub struct SBPlatform {
 }
 
 impl SBPlatform {
+    /// Construct a new `SBPlatform`.
+    pub fn new(raw: sys::SBPlatformRef) -> SBPlatform {
+        SBPlatform { raw: raw }
+    }
+
+    /// Construct a new `Some(SBPlatform)` or `None`.
+    pub fn maybe(raw: sys::SBPlatformRef) -> Option<SBPlatform> {
+        if unsafe { sys::SBPlatformIsValid(raw) != 0 } {
+            Some(SBPlatform { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBPlatform` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBPlatformIsValid(self.raw) != 0 }

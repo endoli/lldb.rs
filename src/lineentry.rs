@@ -17,6 +17,20 @@ pub struct SBLineEntry {
 }
 
 impl SBLineEntry {
+    /// Construct a new `SBLineEntry`.
+    pub fn new(raw: sys::SBLineEntryRef) -> SBLineEntry {
+        SBLineEntry { raw: raw }
+    }
+
+    /// Construct a new `Some(SBLineEntry)` or `None`.
+    pub fn maybe(raw: sys::SBLineEntryRef) -> Option<SBLineEntry> {
+        if unsafe { sys::SBLineEntryIsValid(raw) != 0 } {
+            Some(SBLineEntry { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBLineEntry` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBLineEntryIsValid(self.raw) != 0 }

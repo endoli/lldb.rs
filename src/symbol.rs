@@ -16,6 +16,20 @@ pub struct SBSymbol {
 }
 
 impl SBSymbol {
+    /// Construct a new `SBSymbol`.
+    pub fn new(raw: sys::SBSymbolRef) -> SBSymbol {
+        SBSymbol { raw: raw }
+    }
+
+    /// Construct a new `Some(SBSymbol)` or `None`.
+    pub fn maybe(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
+        if unsafe { sys::SBSymbolIsValid(raw) != 0 } {
+            Some(SBSymbol { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBSymbol` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBSymbolIsValid(self.raw) != 0 }

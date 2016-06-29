@@ -20,6 +20,20 @@ pub struct SBTarget {
 }
 
 impl SBTarget {
+    /// Construct a new `SBTarget`.
+    pub fn new(raw: sys::SBTargetRef) -> SBTarget {
+        SBTarget { raw: raw }
+    }
+
+    /// Construct a new `Some(SBTarget)` or `None`.
+    pub fn maybe(raw: sys::SBTargetRef) -> Option<SBTarget> {
+        if unsafe { sys::SBTargetIsValid(raw) != 0 } {
+            Some(SBTarget { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBTarget` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBTargetIsValid(self.raw) != 0 }

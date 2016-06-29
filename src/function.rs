@@ -16,6 +16,20 @@ pub struct SBFunction {
 }
 
 impl SBFunction {
+    /// Construct a new `SBFunction`.
+    pub fn new(raw: sys::SBFunctionRef) -> SBFunction {
+        SBFunction { raw: raw }
+    }
+
+    /// Construct a new `Some(SBFunction)` or `None`.
+    pub fn maybe(raw: sys::SBFunctionRef) -> Option<SBFunction> {
+        if unsafe { sys::SBFunctionIsValid(raw) != 0 } {
+            Some(SBFunction { raw: raw })
+        } else {
+            None
+        }
+    }
+
     /// Check whether or not this is a valid `SBFunction` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBFunctionIsValid(self.raw) != 0 }
