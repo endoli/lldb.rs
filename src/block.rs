@@ -52,8 +52,8 @@ impl SBBlock {
     }
 
     /// Get the call site file if this block represents an inlined function.
-    pub fn inlined_call_site_file(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBBlockGetInlinedCallSiteFile(self.raw) } }
+    pub fn inlined_call_site_file(&self) -> Option<SBFileSpec> {
+        SBFileSpec::maybe(unsafe { sys::SBBlockGetInlinedCallSiteFile(self.raw) })
     }
 
     /// Get the call site line number if this block represents an inlined function.
@@ -77,23 +77,23 @@ impl SBBlock {
     }
 
     /// Get the parent block
-    pub fn parent(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBBlockGetParent(self.raw) } }
+    pub fn parent(&self) -> Option<SBBlock> {
+        SBBlock::maybe(unsafe { sys::SBBlockGetParent(self.raw) })
     }
 
     /// Get the inlined block that is or contains this block.
-    pub fn containing_inlined_block(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBBlockGetContainingInlinedBlock(self.raw) } }
+    pub fn containing_inlined_block(&self) -> Option<SBBlock> {
+        SBBlock::maybe(unsafe { sys::SBBlockGetContainingInlinedBlock(self.raw) })
     }
 
     /// Get the sibling block for this block.
-    pub fn sibling(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBBlockGetSibling(self.raw) } }
+    pub fn sibling(&self) -> Option<SBBlock> {
+        SBBlock::maybe(unsafe { sys::SBBlockGetSibling(self.raw) })
     }
 
     /// Get the first child block for this block.
-    pub fn first_child(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBBlockGetFirstChild(self.raw) } }
+    pub fn first_child(&self) -> Option<SBBlock> {
+        SBBlock::maybe(unsafe { sys::SBBlockGetFirstChild(self.raw) })
     }
 
     /// The number of address ranges associated with this block.

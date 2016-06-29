@@ -38,17 +38,17 @@ impl SBLineEntry {
 
     /// The start address for this line entry.
     pub fn start_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBLineEntryGetStartAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBLineEntryGetStartAddress(self.raw) })
     }
 
     /// The end address for this line entry.
     pub fn end_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBLineEntryGetEndAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBLineEntryGetEndAddress(self.raw) })
     }
 
     /// The file (`SBFileSpec`) for this line entry.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBLineEntryGetFileSpec(self.raw) } }
+        SBFileSpec::new(unsafe { sys::SBLineEntryGetFileSpec(self.raw) })
     }
 
     /// The 1-based line number for this line entry.

@@ -48,8 +48,8 @@ impl SBThread {
 
     /// The return value from the last stop if we just stopped due
     /// to stepping out of a function
-    pub fn stop_return_value(&self) -> SBValue {
-        SBValue { raw: unsafe { sys::SBThreadGetStopReturnValue(self.raw) } }
+    pub fn stop_return_value(&self) -> Option<SBValue> {
+        SBValue::maybe(unsafe { sys::SBThreadGetStopReturnValue(self.raw) })
     }
 
     /// Returns a unique thread identifier for the current `SBThread`

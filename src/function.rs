@@ -67,12 +67,12 @@ impl SBFunction {
 
     /// Get the address of the start of this function.
     pub fn start_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBFunctionGetStartAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBFunctionGetStartAddress(self.raw) })
     }
 
     /// Get the address of the end of this function.
     pub fn end_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBFunctionGetEndAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBFunctionGetEndAddress(self.raw) })
     }
 
     /// Get the size of the function prologue, in bytes.

@@ -49,32 +49,32 @@ impl SBFrame {
 
     /// The program counter (PC) as a section offset address (`SBAddress`).
     pub fn pc_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBFrameGetPCAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBFrameGetPCAddress(self.raw) })
     }
 
     /// The `SBModule` for this stack frame.
     pub fn module(&self) -> SBModule {
-        SBModule { raw: unsafe { sys::SBFrameGetModule(self.raw) } }
+        SBModule::new(unsafe { sys::SBFrameGetModule(self.raw) })
     }
 
     /// The `SBCompileUnit` for this stack frame.
     pub fn compile_unit(&self) -> SBCompileUnit {
-        SBCompileUnit { raw: unsafe { sys::SBFrameGetCompileUnit(self.raw) } }
+        SBCompileUnit::new(unsafe { sys::SBFrameGetCompileUnit(self.raw) })
     }
 
     /// The `SBFunction` for this stack frame.
     pub fn function(&self) -> SBFunction {
-        SBFunction { raw: unsafe { sys::SBFrameGetFunction(self.raw) } }
+        SBFunction::new(unsafe { sys::SBFrameGetFunction(self.raw) })
     }
 
     /// The `SBSymbol` for this stack frame.
     pub fn symbol(&self) -> SBSymbol {
-        SBSymbol { raw: unsafe { sys::SBFrameGetSymbol(self.raw) } }
+        SBSymbol::new(unsafe { sys::SBFrameGetSymbol(self.raw) })
     }
 
     /// Get the deepest block that contains the frame PC.
     pub fn block(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBFrameGetBlock(self.raw) } }
+        SBBlock::new(unsafe { sys::SBFrameGetBlock(self.raw) })
     }
 
     /// Get the appropriate function name for this frame. Inlined functions in
@@ -91,21 +91,21 @@ impl SBFrame {
     /// * NULL
     ///
     /// See also `is_inlined`.
-    pub fn function_name(&self) -> &str {
+    pub fn function_name(&self) -> Option<&str> {
         unsafe {
             match CStr::from_ptr(sys::SBFrameGetFunctionName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
+                Ok(s) => Some(s),
+                _ => None,
             }
         }
     }
 
     #[allow(missing_docs)]
-    pub fn display_function_name(&self) -> &str {
+    pub fn display_function_name(&self) -> Option<&str> {
         unsafe {
             match CStr::from_ptr(sys::SBFrameGetDisplayFunctionName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
+                Ok(s) => Some(s),
+                _ => None,
             }
         }
     }
@@ -128,16 +128,16 @@ impl SBFrame {
     /// block that defines this frame. If the PC isn't currently in an inlined
     /// function, the lexical block that defines the function is returned.
     pub fn frame_block(&self) -> SBBlock {
-        SBBlock { raw: unsafe { sys::SBFrameGetFrameBlock(self.raw) } }
+        SBBlock::new(unsafe { sys::SBFrameGetFrameBlock(self.raw) })
     }
 
     /// The line table entry (`SBLineEntry`) for this stack frame.
-    pub fn line_entry(&self) -> SBLineEntry {
-        SBLineEntry { raw: unsafe { sys::SBFrameGetLineEntry(self.raw) } }
+    pub fn line_entry(&self) -> Option<SBLineEntry> {
+        SBLineEntry::maybe(unsafe { sys::SBFrameGetLineEntry(self.raw) })
     }
 
     /// The thread that is executing this stack frame.
     pub fn thread(&self) -> SBThread {
-        SBThread { raw: unsafe { sys::SBFrameGetThread(self.raw) } }
+        SBThread::new(unsafe { sys::SBFrameGetThread(self.raw) })
     }
 }

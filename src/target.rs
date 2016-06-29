@@ -56,8 +56,8 @@ impl SBTarget {
     }
 
     /// Get a filespec for the executable.
-    pub fn executable(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBTargetGetExecutable(self.raw) } }
+    pub fn executable(&self) -> Option<SBFileSpec> {
+        SBFileSpec::maybe(unsafe { sys::SBTargetGetExecutable(self.raw) })
     }
 
     /// Add a module to the target.
@@ -66,8 +66,8 @@ impl SBTarget {
     }
 
     /// Add a module to the target using an `SBModuleSpec`.
-    pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> SBModule {
-        SBModule { raw: unsafe { sys::SBTargetAddModule4(self.raw, module_spec.raw) } }
+    pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> Option<SBModule> {
+        SBModule::maybe(unsafe { sys::SBTargetAddModule4(self.raw, module_spec.raw) })
     }
 
     /// Remove a module from the target.
@@ -81,7 +81,7 @@ impl SBTarget {
     }
 
     /// Find the module for the given `SBFileSpec`.
-    pub fn find_module(&self, file_spec: &SBFileSpec) -> SBModule {
-        SBModule { raw: unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) } }
+    pub fn find_module(&self, file_spec: &SBFileSpec) -> Option<SBModule> {
+        SBModule::maybe(unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) })
     }
 }

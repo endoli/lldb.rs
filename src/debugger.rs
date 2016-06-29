@@ -41,7 +41,7 @@ impl SBDebugger {
     /// If `source_init_files` is `true`, then `~/.lldbinit` will
     /// be processed.
     pub fn create(source_init_files: bool) -> SBDebugger {
-        unsafe { SBDebugger { raw: sys::SBDebuggerCreate2(source_init_files as u8) } }
+        SBDebugger { raw: unsafe { sys::SBDebuggerCreate2(source_init_files as u8) } }
     }
 
     /// Get whether or not the debugger is in async mode.

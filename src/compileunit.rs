@@ -36,7 +36,7 @@ impl SBCompileUnit {
 
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBCompileUnitGetFileSpec(self.raw) } }
+        SBFileSpec::new(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
     }
 
     /// The language for the compile unit.

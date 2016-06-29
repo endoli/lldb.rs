@@ -38,7 +38,7 @@ impl SBInstruction {
 
     /// Get the address of the instruction.
     pub fn address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBInstructionGetAddress(self.raw) } }
+        SBAddress::new(unsafe { sys::SBInstructionGetAddress(self.raw) })
     }
 
     /// Get the address class for the address of the instruction.
@@ -48,7 +48,7 @@ impl SBInstruction {
 
     #[allow(missing_docs)]
     pub fn data(&self, target: &SBTarget) -> SBData {
-        SBData { raw: unsafe { sys::SBInstructionGetData(self.raw, target.raw) } }
+        SBData::new(unsafe { sys::SBInstructionGetData(self.raw, target.raw) })
     }
 
     #[allow(missing_docs)]

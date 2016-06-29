@@ -39,7 +39,7 @@ impl SBModule {
     /// This can differ from the path on the platform since we might
     /// be doing remote debugging.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBModuleGetFileSpec(self.raw) } }
+        SBFileSpec::new(unsafe { sys::SBModuleGetFileSpec(self.raw) })
     }
 
     /// The file for the module as it is known on the remote system on
@@ -52,6 +52,6 @@ impl SBModule {
     /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
-        SBFileSpec { raw: unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) } }
+        SBFileSpec::new(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
 }

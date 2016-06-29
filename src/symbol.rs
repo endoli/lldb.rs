@@ -66,13 +66,13 @@ impl SBSymbol {
     }
 
     /// Get the address of the start of this function.
-    pub fn start_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBSymbolGetStartAddress(self.raw) } }
+    pub fn start_address(&self) -> Option<SBAddress> {
+        SBAddress::maybe(unsafe { sys::SBSymbolGetStartAddress(self.raw) })
     }
 
     /// Get the address of the end of this function.
-    pub fn end_address(&self) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBSymbolGetEndAddress(self.raw) } }
+    pub fn end_address(&self) -> Option<SBAddress> {
+        SBAddress::maybe(unsafe { sys::SBSymbolGetEndAddress(self.raw) })
     }
 
     /// Get the size of the function prologue, in bytes.
