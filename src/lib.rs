@@ -6,6 +6,11 @@
 
 //! # LLDB
 //!
+//! This crate provides a safe binding to the public API for [LLDB], the
+//! debugger provided by the [LLVM project]. LLDB provides a modern, high
+//! performance debugger framework and is the default debugger for Mac OS X
+//! and iOS.
+//!
 //! ## Installation
 //!
 //! This crate works with Cargo and is on [crates.io].
@@ -31,6 +36,16 @@
 //! ```shell
 //! export DYLD_FRAMEWORK_PATH=/Applications/Xcode.app/Contents/SharedFrameworks
 //! ```
+//!
+//! ### Linux Installation Notes
+//!
+//! Support for building this has not yet been provided for Linux.
+//! Contributions are welcome!
+//!
+//! ### Windows Installation Notes
+//!
+//! Support for building this has not yet been provided for Linux.
+//! Contributions are welcome!
 //!
 //! ## Usage
 //!
@@ -103,6 +118,8 @@
 //! People should be jealous of the quality of our bindings.
 //! Sic itur ad astra.
 //!
+//! [LLDB]: http://lldb.llvm.org/
+//! [LLVM project]: http://llvm.org/
 //! [crates.io]: https://crates.io/crates/lldb
 //! [`SBDebugger`]: struct.SBDebugger.html
 //! [`SBTarget`]: struct.SBTarget.html
