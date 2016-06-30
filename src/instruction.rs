@@ -7,6 +7,7 @@
 use super::address::SBAddress;
 use super::data::SBData;
 use super::target::SBTarget;
+use super::AddressClass;
 use sys;
 
 /// A machine instruction.
@@ -42,7 +43,7 @@ impl SBInstruction {
     }
 
     /// Get the address class for the address of the instruction.
-    pub fn address_class(&self) -> sys::AddressClass {
+    pub fn address_class(&self) -> AddressClass {
         unsafe { sys::SBInstructionGetAddressClass(self.raw) }
     }
 

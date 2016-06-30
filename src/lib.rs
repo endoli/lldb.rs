@@ -142,6 +142,20 @@
 
 extern crate lldb_sys as sys;
 
+pub use sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
+
+pub use sys::{AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrder,
+              CommandArgumentType, CommandFlags, ConnectionStatus, DescriptionLevel,
+              DynamicValueType, EmulateInstructionOptions, Encoding, ErrorType,
+              ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,
+              FrameComparison, FunctionNameType, GdbSignal, InputReaderAction,
+              InputReaderGranularity, InstrumentationRuntimeType, LanguageType, LaunchFlags,
+              MatchType, MemberFunctionKind, PathType, Permissions, QueueItemKind, QueueKind,
+              RegisterKind, ReturnStatus, RunMode, ScriptLanguage, SectionType, StateType,
+              StopReason, SymbolContextItem, SymbolType, TemplateArgumentKind, TypeClass,
+              TypeFlags, TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType,
+              WatchpointKind};
+
 mod address;
 mod block;
 mod breakpoint;

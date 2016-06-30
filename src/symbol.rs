@@ -9,7 +9,7 @@ use std::ptr;
 use super::address::SBAddress;
 use super::instructionlist::SBInstructionList;
 use super::target::SBTarget;
-use super::DisassemblyFlavor;
+use super::{DisassemblyFlavor, SymbolType};
 use sys;
 
 /// The symbol possibly associated with a stack frame.
@@ -106,7 +106,7 @@ impl SBSymbol {
     }
 
     /// What type of symbol is this?
-    pub fn symbol_type(&self) -> sys::SymbolType {
+    pub fn symbol_type(&self) -> SymbolType {
         unsafe { sys::SBSymbolGetType(self.raw) }
     }
 

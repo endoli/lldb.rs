@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use super::filespec::SBFileSpec;
+use super::LanguageType;
 use sys;
 
 /// A compilation unit or compiled source file.
@@ -40,7 +41,7 @@ impl SBCompileUnit {
     }
 
     /// The language for the compile unit.
-    pub fn language(&self) -> sys::LanguageType {
+    pub fn language(&self) -> LanguageType {
         unsafe { sys::SBCompileUnitGetLanguage(self.raw) }
     }
 }

@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use super::{lldb_pid_t, StateType};
 use sys;
 
 /// The process associated with the target program.
@@ -35,13 +36,12 @@ impl SBProcess {
     }
 
     /// The current state of this process (running, stopped, exited, etc.).
-    pub fn state(&self) -> sys::StateType {
+    pub fn state(&self) -> StateType {
         unsafe { sys::SBProcessGetState(self.raw) }
     }
 
     /// Returns `true` if the process is currently alive.
     pub fn is_alive(&self) -> bool {
-        use sys::StateType;
         match self.state() {
             StateType::Attaching | StateType::Launching | StateType::Stopped |
             StateType::Running | StateType::Stepping | StateType::Crashed |
@@ -52,7 +52,6 @@ impl SBProcess {
 
     /// Returns `true` if the process is currently running.
     pub fn is_running(&self) -> bool {
-        use sys::StateType;
         match self.state() {
             StateType::Running | StateType::Stepping => true,
             _ => false,
@@ -61,7 +60,6 @@ impl SBProcess {
 
     /// Returns `true` if the process is currently stopped.
     pub fn is_stopped(&self) -> bool {
-        use sys::StateType;
         match self.state() {
             StateType::Stopped | StateType::Crashed | StateType::Suspended => true,
             _ => false,
@@ -86,7 +84,7 @@ impl SBProcess {
     }
 
     /// Returns the process ID of the process.
-    pub fn process_id(&self) -> sys::lldb_pid_t {
+    pub fn process_id(&self) -> lldb_pid_t {
         unsafe { sys::SBProcessGetProcessID(self.raw) }
     }
 

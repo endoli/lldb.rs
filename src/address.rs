@@ -12,6 +12,7 @@ use super::module::SBModule;
 use super::symbol::SBSymbol;
 use super::symbolcontext::SBSymbolContext;
 use super::target::SBTarget;
+use super::AddressClass;
 use sys;
 
 /// A section + offset based address class.
@@ -82,7 +83,7 @@ impl SBAddress {
     }
 
     /// Get the address class for this address.
-    pub fn address_class(&self) -> sys::AddressClass {
+    pub fn address_class(&self) -> AddressClass {
         unsafe { sys::SBAddressGetAddressClass(self.raw) }
     }
 

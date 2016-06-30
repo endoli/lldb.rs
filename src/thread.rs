@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use super::value::SBValue;
+use super::{lldb_tid_t, StopReason};
 use sys;
 
 /// A thread of execution.
@@ -42,7 +43,7 @@ impl SBThread {
     }
 
     /// Get the stop reason for this thread.
-    pub fn stop_reason(&self) -> sys::StopReason {
+    pub fn stop_reason(&self) -> StopReason {
         unsafe { sys::SBThreadGetStopReason(self.raw) }
     }
 
@@ -59,7 +60,7 @@ impl SBThread {
     /// unique thread identifier; this identifier is also used by
     /// other tools like sample which helps to associate data from
     /// those tools with lldb.  See related `SBThread::index_id`.
-    pub fn thread_id(&self) -> sys::lldb_tid_t {
+    pub fn thread_id(&self) -> lldb_tid_t {
         unsafe { sys::SBThreadGetThreadID(self.raw) }
     }
 
