@@ -33,3 +33,9 @@ impl SBValue {
         unsafe { sys::SBValueIsValid(self.raw) != 0 }
     }
 }
+
+impl Drop for SBValue {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBValue(self.raw) };
+    }
+}

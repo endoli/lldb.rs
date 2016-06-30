@@ -55,3 +55,9 @@ impl SBModule {
         SBFileSpec::new(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
 }
+
+impl Drop for SBModule {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBModule(self.raw) };
+    }
+}

@@ -62,3 +62,9 @@ impl SBInstruction {
         unsafe { sys::SBInstructionDoesBranch(self.raw) != 0 }
     }
 }
+
+impl Drop for SBInstruction {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBInstruction(self.raw) };
+    }
+}

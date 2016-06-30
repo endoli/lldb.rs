@@ -85,3 +85,9 @@ impl SBTarget {
         SBModule::maybe(unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) })
     }
 }
+
+impl Drop for SBTarget {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBTarget(self.raw) };
+    }
+}

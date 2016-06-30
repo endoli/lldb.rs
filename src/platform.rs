@@ -144,3 +144,9 @@ impl SBPlatform {
         unsafe { sys::SBPlatformGetOSUpdateVersion(self.raw) }
     }
 }
+
+impl Drop for SBPlatform {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBPlatform(self.raw) };
+    }
+}

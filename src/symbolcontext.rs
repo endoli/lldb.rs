@@ -33,3 +33,9 @@ impl SBSymbolContext {
         unsafe { sys::SBSymbolContextIsValid(self.raw) != 0 }
     }
 }
+
+impl Drop for SBSymbolContext {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBSymbolContext(self.raw) };
+    }
+}

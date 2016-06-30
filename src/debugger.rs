@@ -119,6 +119,12 @@ impl<'d> Iterator for DebuggerTargetIter<'d> {
     }
 }
 
+impl Drop for SBDebugger {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBDebugger(self.raw) };
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::SBDebugger;

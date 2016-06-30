@@ -122,3 +122,9 @@ impl SBSymbol {
         unsafe { sys::SBSymbolIsSynthetic(self.raw) != 0 }
     }
 }
+
+impl Drop for SBSymbol {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBSymbol(self.raw) };
+    }
+}

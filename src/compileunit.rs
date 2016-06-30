@@ -45,3 +45,9 @@ impl SBCompileUnit {
         unsafe { sys::SBCompileUnitGetLanguage(self.raw) }
     }
 }
+
+impl Drop for SBCompileUnit {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBCompileUnit(self.raw) };
+    }
+}

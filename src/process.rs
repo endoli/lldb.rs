@@ -100,3 +100,9 @@ impl SBProcess {
         unsafe { sys::SBProcessGetAddressByteSize(self.raw) }
     }
 }
+
+impl Drop for SBProcess {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBProcess(self.raw) };
+    }
+}

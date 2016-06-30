@@ -67,3 +67,9 @@ impl SBLineEntry {
         unsafe { sys::SBLineEntryGetColumn(self.raw) }
     }
 }
+
+impl Drop for SBLineEntry {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBLineEntry(self.raw) };
+    }
+}

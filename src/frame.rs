@@ -141,3 +141,9 @@ impl SBFrame {
         SBThread::new(unsafe { sys::SBFrameGetThread(self.raw) })
     }
 }
+
+impl Drop for SBFrame {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBFrame(self.raw) };
+    }
+}

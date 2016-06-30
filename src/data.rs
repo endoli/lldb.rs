@@ -33,3 +33,9 @@ impl SBData {
         unsafe { sys::SBDataIsValid(self.raw) != 0 }
     }
 }
+
+impl Drop for SBData {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBData(self.raw) };
+    }
+}

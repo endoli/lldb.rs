@@ -116,3 +116,9 @@ impl SBBlock {
         unsafe { sys::SBBlockGetRangeIndexForBlockAddress(self.raw, block_address.raw) }
     }
 }
+
+impl Drop for SBBlock {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBBlock(self.raw) };
+    }
+}

@@ -91,3 +91,9 @@ impl SBFunction {
         unsafe { sys::SBFunctionGetIsOptimized(self.raw) != 0 }
     }
 }
+
+impl Drop for SBFunction {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBFunction(self.raw) };
+    }
+}

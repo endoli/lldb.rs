@@ -106,3 +106,9 @@ impl SBModuleSpec {
         unimplemented!();
     }
 }
+
+impl Drop for SBModuleSpec {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBModuleSpec(self.raw) };
+    }
+}

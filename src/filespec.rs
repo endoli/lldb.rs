@@ -63,3 +63,9 @@ impl SBFileSpec {
         }
     }
 }
+
+impl Drop for SBFileSpec {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBFileSpec(self.raw) };
+    }
+}

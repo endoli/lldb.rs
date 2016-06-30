@@ -33,3 +33,9 @@ impl SBBreakpoint {
         unsafe { sys::SBBreakpointIsValid(self.raw) != 0 }
     }
 }
+
+impl Drop for SBBreakpoint {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBBreakpoint(self.raw) };
+    }
+}

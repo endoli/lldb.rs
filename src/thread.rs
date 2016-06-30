@@ -77,3 +77,9 @@ impl SBThread {
         unsafe { sys::SBThreadGetIndexID(self.raw) }
     }
 }
+
+impl Drop for SBThread {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBThread(self.raw) };
+    }
+}

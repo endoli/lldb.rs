@@ -230,3 +230,9 @@ impl SBAddress {
         SBLineEntry::maybe(unsafe { sys::SBAddressGetLineEntry(self.raw) })
     }
 }
+
+impl Drop for SBAddress {
+    fn drop(&mut self) {
+        unsafe { sys::DisposeSBAddress(self.raw) };
+    }
+}
