@@ -5,6 +5,9 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use super::error::SBError;
+use super::launchinfo::SBLaunchInfo;
+use super::lldb_pid_t;
 use sys;
 
 /// A platform that can represent the current host or a
@@ -142,6 +145,26 @@ impl SBPlatform {
     /// On Mac OS X 10.11.4, this would have the value `4`.
     pub fn os_update_version(&self) -> u32 {
         unsafe { sys::SBPlatformGetOSUpdateVersion(self.raw) }
+    }
+
+    /// Launch a process. This is not for debugging that process.
+    pub fn launch(&self, launch_info: &SBLaunchInfo) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBPlatformLaunch(self.raw, launch_info.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Kill a process.
+    pub fn kill(&self, pid: lldb_pid_t) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBPlatformKill(self.raw, pid) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
     }
 }
 
