@@ -19,12 +19,12 @@ pub struct SBInstruction {
 
 impl SBInstruction {
     /// Construct a new `SBInstruction`.
-    pub fn new(raw: sys::SBInstructionRef) -> SBInstruction {
+    pub fn wrap(raw: sys::SBInstructionRef) -> SBInstruction {
         SBInstruction { raw: raw }
     }
 
     /// Construct a new `Some(SBInstruction)` or `None`.
-    pub fn maybe(raw: sys::SBInstructionRef) -> Option<SBInstruction> {
+    pub fn maybe_wrap(raw: sys::SBInstructionRef) -> Option<SBInstruction> {
         if unsafe { sys::SBInstructionIsValid(raw) != 0 } {
             Some(SBInstruction { raw: raw })
         } else {
@@ -39,7 +39,7 @@ impl SBInstruction {
 
     /// Get the address of the instruction.
     pub fn address(&self) -> SBAddress {
-        SBAddress::new(unsafe { sys::SBInstructionGetAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBInstructionGetAddress(self.raw) })
     }
 
     /// Get the address class for the address of the instruction.
@@ -49,7 +49,7 @@ impl SBInstruction {
 
     #[allow(missing_docs)]
     pub fn data(&self, target: &SBTarget) -> SBData {
-        SBData::new(unsafe { sys::SBInstructionGetData(self.raw, target.raw) })
+        SBData::wrap(unsafe { sys::SBInstructionGetData(self.raw, target.raw) })
     }
 
     #[allow(missing_docs)]

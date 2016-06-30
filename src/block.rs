@@ -18,12 +18,12 @@ pub struct SBBlock {
 
 impl SBBlock {
     /// Construct a new `SBBlock`.
-    pub fn new(raw: sys::SBBlockRef) -> SBBlock {
+    pub fn wrap(raw: sys::SBBlockRef) -> SBBlock {
         SBBlock { raw: raw }
     }
 
     /// Construct a new `Some(SBBlock)` or `None`.
-    pub fn maybe(raw: sys::SBBlockRef) -> Option<SBBlock> {
+    pub fn maybe_wrap(raw: sys::SBBlockRef) -> Option<SBBlock> {
         if unsafe { sys::SBBlockIsValid(raw) != 0 } {
             Some(SBBlock { raw: raw })
         } else {
@@ -53,7 +53,7 @@ impl SBBlock {
 
     /// Get the call site file if this block represents an inlined function.
     pub fn inlined_call_site_file(&self) -> Option<SBFileSpec> {
-        SBFileSpec::maybe(unsafe { sys::SBBlockGetInlinedCallSiteFile(self.raw) })
+        SBFileSpec::maybe_wrap(unsafe { sys::SBBlockGetInlinedCallSiteFile(self.raw) })
     }
 
     /// Get the call site line number if this block represents an inlined function.
@@ -78,22 +78,22 @@ impl SBBlock {
 
     /// Get the parent block
     pub fn parent(&self) -> Option<SBBlock> {
-        SBBlock::maybe(unsafe { sys::SBBlockGetParent(self.raw) })
+        SBBlock::maybe_wrap(unsafe { sys::SBBlockGetParent(self.raw) })
     }
 
     /// Get the inlined block that is or contains this block.
     pub fn containing_inlined_block(&self) -> Option<SBBlock> {
-        SBBlock::maybe(unsafe { sys::SBBlockGetContainingInlinedBlock(self.raw) })
+        SBBlock::maybe_wrap(unsafe { sys::SBBlockGetContainingInlinedBlock(self.raw) })
     }
 
     /// Get the sibling block for this block.
     pub fn sibling(&self) -> Option<SBBlock> {
-        SBBlock::maybe(unsafe { sys::SBBlockGetSibling(self.raw) })
+        SBBlock::maybe_wrap(unsafe { sys::SBBlockGetSibling(self.raw) })
     }
 
     /// Get the first child block for this block.
     pub fn first_child(&self) -> Option<SBBlock> {
-        SBBlock::maybe(unsafe { sys::SBBlockGetFirstChild(self.raw) })
+        SBBlock::maybe_wrap(unsafe { sys::SBBlockGetFirstChild(self.raw) })
     }
 
     /// The number of address ranges associated with this block.

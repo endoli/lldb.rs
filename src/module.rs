@@ -16,12 +16,12 @@ pub struct SBModule {
 
 impl SBModule {
     /// Construct a new `SBModule`.
-    pub fn new(raw: sys::SBModuleRef) -> SBModule {
+    pub fn wrap(raw: sys::SBModuleRef) -> SBModule {
         SBModule { raw: raw }
     }
 
     /// Construct a new `Some(SBModule)` or `None`.
-    pub fn maybe(raw: sys::SBModuleRef) -> Option<SBModule> {
+    pub fn maybe_wrap(raw: sys::SBModuleRef) -> Option<SBModule> {
         if unsafe { sys::SBModuleIsValid(raw) != 0 } {
             Some(SBModule { raw: raw })
         } else {
@@ -39,7 +39,7 @@ impl SBModule {
     /// This can differ from the path on the platform since we might
     /// be doing remote debugging.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::new(unsafe { sys::SBModuleGetFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBModuleGetFileSpec(self.raw) })
     }
 
     /// The file for the module as it is known on the remote system on
@@ -52,7 +52,7 @@ impl SBModule {
     /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
-        SBFileSpec::new(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
 }
 

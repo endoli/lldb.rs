@@ -15,12 +15,12 @@ pub struct SBBreakpoint {
 
 impl SBBreakpoint {
     /// Construct a new `SBBreakpoint`.
-    pub fn new(raw: sys::SBBreakpointRef) -> SBBreakpoint {
+    pub fn wrap(raw: sys::SBBreakpointRef) -> SBBreakpoint {
         SBBreakpoint { raw: raw }
     }
 
     /// Construct a new `Some(SBBreakpoint)` or `None`.
-    pub fn maybe(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
+    pub fn maybe_wrap(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
         if unsafe { sys::SBBreakpointIsValid(raw) != 0 } {
             Some(SBBreakpoint { raw: raw })
         } else {

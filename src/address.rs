@@ -53,12 +53,12 @@ pub struct SBAddress {
 
 impl SBAddress {
     /// Construct a new `SBAddress`.
-    pub fn new(raw: sys::SBAddressRef) -> SBAddress {
+    pub fn wrap(raw: sys::SBAddressRef) -> SBAddress {
         SBAddress { raw: raw }
     }
 
     /// Construct a new `Some(SBAddress)` or `None`.
-    pub fn maybe(raw: sys::SBAddressRef) -> Option<SBAddress> {
+    pub fn maybe_wrap(raw: sys::SBAddressRef) -> Option<SBAddress> {
         if unsafe { sys::SBAddressIsValid(raw) != 0 } {
             Some(SBAddress { raw: raw })
         } else {
@@ -95,7 +95,7 @@ impl SBAddress {
     /// resolved to a code or data address using
     /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
     pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
-        SBSymbolContext::new(unsafe { sys::SBAddressGetSymbolContext(self.raw, resolve_scope) })
+        SBSymbolContext::wrap(unsafe { sys::SBAddressGetSymbolContext(self.raw, resolve_scope) })
     }
 
     /// Get the `SBModule` for a given address.
@@ -117,7 +117,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn module(&self) -> Option<SBModule> {
-        SBModule::maybe(unsafe { sys::SBAddressGetModule(self.raw) })
+        SBModule::maybe_wrap(unsafe { sys::SBAddressGetModule(self.raw) })
     }
 
     /// Get the `SBCompileUnit` for a given address.
@@ -139,7 +139,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn compile_unit(&self) -> Option<SBCompileUnit> {
-        SBCompileUnit::maybe(unsafe { sys::SBAddressGetCompileUnit(self.raw) })
+        SBCompileUnit::maybe_wrap(unsafe { sys::SBAddressGetCompileUnit(self.raw) })
     }
 
     /// Get the `SBFunction` for a given address.
@@ -161,7 +161,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn function(&self) -> Option<SBFunction> {
-        SBFunction::maybe(unsafe { sys::SBAddressGetFunction(self.raw) })
+        SBFunction::maybe_wrap(unsafe { sys::SBAddressGetFunction(self.raw) })
     }
 
     /// Get the `SBBlock` for a given address.
@@ -183,7 +183,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn block(&self) -> Option<SBBlock> {
-        SBBlock::maybe(unsafe { sys::SBAddressGetBlock(self.raw) })
+        SBBlock::maybe_wrap(unsafe { sys::SBAddressGetBlock(self.raw) })
     }
 
     /// Get the `SBSymbol` for a given address.
@@ -205,7 +205,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn symbol(&self) -> Option<SBSymbol> {
-        SBSymbol::maybe(unsafe { sys::SBAddressGetSymbol(self.raw) })
+        SBSymbol::maybe_wrap(unsafe { sys::SBAddressGetSymbol(self.raw) })
     }
 
     /// Get the `SBLineEntry` for a given address.
@@ -227,7 +227,7 @@ impl SBAddress {
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn line_entry(&self) -> Option<SBLineEntry> {
-        SBLineEntry::maybe(unsafe { sys::SBAddressGetLineEntry(self.raw) })
+        SBLineEntry::maybe_wrap(unsafe { sys::SBAddressGetLineEntry(self.raw) })
     }
 }
 

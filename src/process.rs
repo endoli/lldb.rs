@@ -17,12 +17,12 @@ pub struct SBProcess {
 
 impl SBProcess {
     /// Construct a new `SBProcess`.
-    pub fn new(raw: sys::SBProcessRef) -> SBProcess {
+    pub fn wrap(raw: sys::SBProcessRef) -> SBProcess {
         SBProcess { raw: raw }
     }
 
     /// Construct a new `Some(SBProcess)` or `None`.
-    pub fn maybe(raw: sys::SBProcessRef) -> Option<SBProcess> {
+    pub fn maybe_wrap(raw: sys::SBProcessRef) -> Option<SBProcess> {
         if unsafe { sys::SBProcessIsValid(raw) != 0 } {
             Some(SBProcess { raw: raw })
         } else {

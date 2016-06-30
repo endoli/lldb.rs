@@ -15,12 +15,12 @@ pub struct SBValue {
 
 impl SBValue {
     /// Construct a new `SBValue`.
-    pub fn new(raw: sys::SBValueRef) -> SBValue {
+    pub fn wrap(raw: sys::SBValueRef) -> SBValue {
         SBValue { raw: raw }
     }
 
     /// Construct a new `Some(SBValue)` or `None`.
-    pub fn maybe(raw: sys::SBValueRef) -> Option<SBValue> {
+    pub fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
         if unsafe { sys::SBValueIsValid(raw) != 0 } {
             Some(SBValue { raw: raw })
         } else {

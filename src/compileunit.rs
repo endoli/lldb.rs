@@ -17,12 +17,12 @@ pub struct SBCompileUnit {
 
 impl SBCompileUnit {
     /// Construct a new `SBCompileUnit`.
-    pub fn new(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
+    pub fn wrap(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
         SBCompileUnit { raw: raw }
     }
 
     /// Construct a new `Some(SBCompileUnit)` or `None`.
-    pub fn maybe(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
+    pub fn maybe_wrap(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
         if unsafe { sys::SBCompileUnitIsValid(raw) != 0 } {
             Some(SBCompileUnit { raw: raw })
         } else {
@@ -37,7 +37,7 @@ impl SBCompileUnit {
 
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::new(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
     }
 
     /// The language for the compile unit.

@@ -17,12 +17,12 @@ pub struct SBFunction {
 
 impl SBFunction {
     /// Construct a new `SBFunction`.
-    pub fn new(raw: sys::SBFunctionRef) -> SBFunction {
+    pub fn wrap(raw: sys::SBFunctionRef) -> SBFunction {
         SBFunction { raw: raw }
     }
 
     /// Construct a new `Some(SBFunction)` or `None`.
-    pub fn maybe(raw: sys::SBFunctionRef) -> Option<SBFunction> {
+    pub fn maybe_wrap(raw: sys::SBFunctionRef) -> Option<SBFunction> {
         if unsafe { sys::SBFunctionIsValid(raw) != 0 } {
             Some(SBFunction { raw: raw })
         } else {
@@ -67,12 +67,12 @@ impl SBFunction {
 
     /// Get the address of the start of this function.
     pub fn start_address(&self) -> SBAddress {
-        SBAddress::new(unsafe { sys::SBFunctionGetStartAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBFunctionGetStartAddress(self.raw) })
     }
 
     /// Get the address of the end of this function.
     pub fn end_address(&self) -> SBAddress {
-        SBAddress::new(unsafe { sys::SBFunctionGetEndAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBFunctionGetEndAddress(self.raw) })
     }
 
     /// Get the size of the function prologue, in bytes.

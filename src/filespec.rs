@@ -20,12 +20,12 @@ pub struct SBFileSpec {
 
 impl SBFileSpec {
     /// Construct a new `SBFileSpec`.
-    pub fn new(raw: sys::SBFileSpecRef) -> SBFileSpec {
+    pub fn wrap(raw: sys::SBFileSpecRef) -> SBFileSpec {
         SBFileSpec { raw: raw }
     }
 
     /// Construct a new `Some(SBFileSpec)` or `None`.
-    pub fn maybe(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
+    pub fn maybe_wrap(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
         if unsafe { sys::SBFileSpecIsValid(raw) != 0 } {
             Some(SBFileSpec { raw: raw })
         } else {

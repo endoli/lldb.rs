@@ -21,12 +21,12 @@ pub struct SBSymbol {
 
 impl SBSymbol {
     /// Construct a new `SBSymbol`.
-    pub fn new(raw: sys::SBSymbolRef) -> SBSymbol {
+    pub fn wrap(raw: sys::SBSymbolRef) -> SBSymbol {
         SBSymbol { raw: raw }
     }
 
     /// Construct a new `Some(SBSymbol)` or `None`.
-    pub fn maybe(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
+    pub fn maybe_wrap(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
         if unsafe { sys::SBSymbolIsValid(raw) != 0 } {
             Some(SBSymbol { raw: raw })
         } else {
@@ -79,14 +79,14 @@ impl SBSymbol {
             DisassemblyFlavor::Default => ptr::null(),
             DisassemblyFlavor::Intel => CString::new("intel").unwrap().as_ptr(),
         };
-        SBInstructionList::new(unsafe {
+        SBInstructionList::wrap(unsafe {
             sys::SBSymbolGetInstructions2(self.raw, target.raw, flavor)
         })
     }
 
     /// Get the address that this symbol refers to, if present.
     pub fn start_address(&self) -> Option<SBAddress> {
-        SBAddress::maybe(unsafe { sys::SBSymbolGetStartAddress(self.raw) })
+        SBAddress::maybe_wrap(unsafe { sys::SBSymbolGetStartAddress(self.raw) })
     }
 
     /// If the symbol has an address and the underlying value has a
@@ -97,7 +97,7 @@ impl SBSymbol {
     /// this will result in `None` rather than the same address as the
     /// `start_address`.
     pub fn end_address(&self) -> Option<SBAddress> {
-        SBAddress::maybe(unsafe { sys::SBSymbolGetEndAddress(self.raw) })
+        SBAddress::maybe_wrap(unsafe { sys::SBSymbolGetEndAddress(self.raw) })
     }
 
     /// Get the size of the function prologue, in bytes.

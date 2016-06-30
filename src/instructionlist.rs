@@ -15,12 +15,12 @@ pub struct SBInstructionList {
 
 impl SBInstructionList {
     /// Construct a new `SBInstructionList`.
-    pub fn new(raw: sys::SBInstructionListRef) -> SBInstructionList {
+    pub fn wrap(raw: sys::SBInstructionListRef) -> SBInstructionList {
         SBInstructionList { raw: raw }
     }
 
     /// Construct a new `Some(SBInstructionList)` or `None`.
-    pub fn maybe(raw: sys::SBInstructionListRef) -> Option<SBInstructionList> {
+    pub fn maybe_wrap(raw: sys::SBInstructionListRef) -> Option<SBInstructionList> {
         if unsafe { sys::SBInstructionListIsValid(raw) != 0 } {
             Some(SBInstructionList { raw: raw })
         } else {

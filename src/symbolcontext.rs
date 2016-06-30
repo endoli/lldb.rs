@@ -15,12 +15,12 @@ pub struct SBSymbolContext {
 
 impl SBSymbolContext {
     /// Construct a new `SBSymbolContext`.
-    pub fn new(raw: sys::SBSymbolContextRef) -> SBSymbolContext {
+    pub fn wrap(raw: sys::SBSymbolContextRef) -> SBSymbolContext {
         SBSymbolContext { raw: raw }
     }
 
     /// Construct a new `Some(SBSymbolContext)` or `None`.
-    pub fn maybe(raw: sys::SBSymbolContextRef) -> Option<SBSymbolContext> {
+    pub fn maybe_wrap(raw: sys::SBSymbolContextRef) -> Option<SBSymbolContext> {
         if unsafe { sys::SBSymbolContextIsValid(raw) != 0 } {
             Some(SBSymbolContext { raw: raw })
         } else {

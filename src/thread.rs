@@ -24,12 +24,12 @@ pub struct SBThread {
 
 impl SBThread {
     /// Construct a new `SBThread`.
-    pub fn new(raw: sys::SBThreadRef) -> SBThread {
+    pub fn wrap(raw: sys::SBThreadRef) -> SBThread {
         SBThread { raw: raw }
     }
 
     /// Construct a new `Some(SBThread)` or `None`.
-    pub fn maybe(raw: sys::SBThreadRef) -> Option<SBThread> {
+    pub fn maybe_wrap(raw: sys::SBThreadRef) -> Option<SBThread> {
         if unsafe { sys::SBThreadIsValid(raw) != 0 } {
             Some(SBThread { raw: raw })
         } else {
@@ -50,7 +50,7 @@ impl SBThread {
     /// The return value from the last stop if we just stopped due
     /// to stepping out of a function
     pub fn stop_return_value(&self) -> Option<SBValue> {
-        SBValue::maybe(unsafe { sys::SBThreadGetStopReturnValue(self.raw) })
+        SBValue::maybe_wrap(unsafe { sys::SBThreadGetStopReturnValue(self.raw) })
     }
 
     /// Returns a unique thread identifier for the current `SBThread`
