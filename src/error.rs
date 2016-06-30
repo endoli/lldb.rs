@@ -17,6 +17,11 @@ pub struct SBError {
 
 impl SBError {
     /// Construct a new `SBError`.
+    pub fn new() -> SBError {
+        SBError::wrap(unsafe { sys::CreateSBError() })
+    }
+
+    /// Construct a new `SBError`.
     pub fn wrap(raw: sys::SBErrorRef) -> SBError {
         SBError { raw: raw }
     }
@@ -64,6 +69,12 @@ impl SBError {
     /// What type of error is this?
     pub fn error_type(&self) -> ErrorType {
         unsafe { sys::SBErrorGetType(self.raw) }
+    }
+}
+
+impl Default for SBError {
+    fn default() -> SBError {
+        SBError::new()
     }
 }
 
