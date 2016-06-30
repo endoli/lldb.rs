@@ -82,7 +82,7 @@ impl SBAddress {
     }
 
     /// Get the address class for this address.
-    pub fn address_class(&self) -> sys::LLDBAddressClass {
+    pub fn address_class(&self) -> sys::AddressClass {
         unsafe { sys::SBAddressGetAddressClass(self.raw) }
     }
 

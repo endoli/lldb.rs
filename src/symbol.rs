@@ -81,8 +81,8 @@ impl SBSymbol {
     }
 
     /// What type of symbol is this?
-    pub fn symbol_type(&self) -> sys::LLDBSymbolType {
-        unsafe { sys::SBSymbolGetType(self.raw) as sys::LLDBSymbolType }
+    pub fn symbol_type(&self) -> sys::SymbolType {
+        unsafe { sys::SBSymbolGetType(self.raw) }
     }
 
     /// Is this symbol externally visible (exported) from the module that

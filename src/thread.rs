@@ -42,7 +42,7 @@ impl SBThread {
     }
 
     /// Get the stop reason for this thread.
-    pub fn stop_reason(&self) -> sys::LLDBStopReason {
+    pub fn stop_reason(&self) -> sys::StopReason {
         unsafe { sys::SBThreadGetStopReason(self.raw) }
     }
 

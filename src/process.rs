@@ -35,34 +35,35 @@ impl SBProcess {
     }
 
     /// The current state of this process (running, stopped, exited, etc.).
-    pub fn state(&self) -> sys::LLDBStateType {
+    pub fn state(&self) -> sys::StateType {
         unsafe { sys::SBProcessGetState(self.raw) }
     }
 
     /// Returns `true` if the process is currently alive.
     pub fn is_alive(&self) -> bool {
-        use sys::LLDBStateType::*;
+        use sys::StateType;
         match self.state() {
-            eStateAttaching | eStateLaunching | eStateStopped | eStateRunning |
-            eStateStepping | eStateCrashed | eStateSuspended => true,
+            StateType::Attaching | StateType::Launching | StateType::Stopped |
+            StateType::Running | StateType::Stepping | StateType::Crashed |
+            StateType::Suspended => true,
             _ => false,
         }
     }
 
     /// Returns `true` if the process is currently running.
     pub fn is_running(&self) -> bool {
-        use sys::LLDBStateType::*;
+        use sys::StateType;
         match self.state() {
-            eStateRunning | eStateStepping => true,
+            StateType::Running | StateType::Stepping => true,
             _ => false,
         }
     }
 
     /// Returns `true` if the process is currently stopped.
     pub fn is_stopped(&self) -> bool {
-        use sys::LLDBStateType::*;
+        use sys::StateType;
         match self.state() {
-            eStateStopped | eStateCrashed | eStateSuspended => true,
+            StateType::Stopped | StateType::Crashed | StateType::Suspended => true,
             _ => false,
         }
     }

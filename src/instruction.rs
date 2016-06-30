@@ -42,7 +42,7 @@ impl SBInstruction {
     }
 
     /// Get the address class for the address of the instruction.
-    pub fn address_class(&self) -> sys::LLDBAddressClass {
+    pub fn address_class(&self) -> sys::AddressClass {
         unsafe { sys::SBInstructionGetAddressClass(self.raw) }
     }
 

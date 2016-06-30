@@ -40,7 +40,7 @@ impl SBCompileUnit {
     }
 
     /// The language for the compile unit.
-    pub fn language(&self) -> sys::LLDBLanguageType {
+    pub fn language(&self) -> sys::LanguageType {
         unsafe { sys::SBCompileUnitGetLanguage(self.raw) }
     }
 }
