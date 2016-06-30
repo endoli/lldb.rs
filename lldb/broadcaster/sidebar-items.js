@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBBroadcaster","An entity which can broadcast events."]]});

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `CommandArgumentType` enum in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, CommandArgumentType">
+
+    <title>lldb::CommandArgumentType - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'CommandArgumentType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>lldb</a>::<wbr><a class='enum' href=''>CommandArgumentType</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-851' class='srclink' href='../lldb_sys/lldb_sys/enum.CommandArgumentType.html?gotosrc=851' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum CommandArgumentType {
+    Address,
+    AddressOrExpression,
+    AliasName,
+    AliasOptions,
+    Architecture,
+    Boolean,
+    BreakpointID,
+    BreakpointIDRange,
+    BreakpointName,
+    ByteSize,
+    ClassName,
+    CommandName,
+    Count,
+    DescriptionVerbosity,
+    DirectoryName,
+    DisassemblyFlavor,
+    EndAddress,
+    Expression,
+    ExpressionPath,
+    ExprFormat,
+    Filename,
+    Format,
+    FrameIndex,
+    FullName,
+    FunctionName,
+    FunctionOrSymbol,
+    GDBFormat,
+    HelpText,
+    Index,
+    Language,
+    LineNum,
+    LogCategory,
+    LogChannel,
+    Method,
+    Name,
+    NewPathPrefix,
+    NumLines,
+    NumberPerLine,
+    Offset,
+    OldPathPrefix,
+    OneLiner,
+    Path,
+    PermissionsNumber,
+    PermissionsString,
+    Pid,
+    Plugin,
+    ProcessName,
+    PythonClass,
+    PythonFunction,
+    PythonScript,
+    QueueName,
+    RegisterName,
+    RegularExpression,
+    RunArgs,
+    RunMode,
+    ScriptedCommandSynchronicity,
+    ScriptLang,
+    SearchWord,
+    Selector,
+    SettingIndex,
+    SettingKey,
+    SettingPrefix,
+    SettingVariableName,
+    ShlibName,
+    SourceFile,
+    SortOrder,
+    StartAddress,
+    SummaryString,
+    Symbol,
+    ThreadID,
+    ThreadIndex,
+    ThreadName,
+    TypeName,
+    UnsignedInteger,
+    UnixSignal,
+    VarName,
+    Value,
+    Width,
+    None,
+    Platform,
+    WatchpointID,
+    WatchpointIDRange,
+    WatchType,
+    LastArg,
+}</pre><h2 class='variants'>Variants</h2>
+<table class='variants_table'><tr><td id='variant.Address'><code>Address</code></td><td></td><td></td></tr><tr><td id='variant.AddressOrExpression'><code>AddressOrExpression</code></td><td></td><td></td></tr><tr><td id='variant.AliasName'><code>AliasName</code></td><td></td><td></td></tr><tr><td id='variant.AliasOptions'><code>AliasOptions</code></td><td></td><td></td></tr><tr><td id='variant.Architecture'><code>Architecture</code></td><td></td><td></td></tr><tr><td id='variant.Boolean'><code>Boolean</code></td><td></td><td></td></tr><tr><td id='variant.BreakpointID'><code>BreakpointID</code></td><td></td><td></td></tr><tr><td id='variant.BreakpointIDRange'><code>BreakpointIDRange</code></td><td></td><td></td></tr><tr><td id='variant.BreakpointName'><code>BreakpointName</code></td><td></td><td></td></tr><tr><td id='variant.ByteSize'><code>ByteSize</code></td><td></td><td></td></tr><tr><td id='variant.ClassName'><code>ClassName</code></td><td></td><td></td></tr><tr><td id='variant.CommandName'><code>CommandName</code></td><td></td><td></td></tr><tr><td id='variant.Count'><code>Count</code></td><td></td><td></td></tr><tr><td id='variant.DescriptionVerbosity'><code>DescriptionVerbosity</code></td><td></td><td></td></tr><tr><td id='variant.DirectoryName'><code>DirectoryName</code></td><td></td><td></td></tr><tr><td id='variant.DisassemblyFlavor'><code>DisassemblyFlavor</code></td><td></td><td></td></tr><tr><td id='variant.EndAddress'><code>EndAddress</code></td><td></td><td></td></tr><tr><td id='variant.Expression'><code>Expression</code></td><td></td><td></td></tr><tr><td id='variant.ExpressionPath'><code>ExpressionPath</code></td><td></td><td></td></tr><tr><td id='variant.ExprFormat'><code>ExprFormat</code></td><td></td><td></td></tr><tr><td id='variant.Filename'><code>Filename</code></td><td></td><td></td></tr><tr><td id='variant.Format'><code>Format</code></td><td></td><td></td></tr><tr><td id='variant.FrameIndex'><code>FrameIndex</code></td><td></td><td></td></tr><tr><td id='variant.FullName'><code>FullName</code></td><td></td><td></td></tr><tr><td id='variant.FunctionName'><code>FunctionName</code></td><td></td><td></td></tr><tr><td id='variant.FunctionOrSymbol'><code>FunctionOrSymbol</code></td><td></td><td></td></tr><tr><td id='variant.GDBFormat'><code>GDBFormat</code></td><td></td><td></td></tr><tr><td id='variant.HelpText'><code>HelpText</code></td><td></td><td></td></tr><tr><td id='variant.Index'><code>Index</code></td><td></td><td></td></tr><tr><td id='variant.Language'><code>Language</code></td><td></td><td></td></tr><tr><td id='variant.LineNum'><code>LineNum</code></td><td></td><td></td></tr><tr><td id='variant.LogCategory'><code>LogCategory</code></td><td></td><td></td></tr><tr><td id='variant.LogChannel'><code>LogChannel</code></td><td></td><td></td></tr><tr><td id='variant.Method'><code>Method</code></td><td></td><td></td></tr><tr><td id='variant.Name'><code>Name</code></td><td></td><td></td></tr><tr><td id='variant.NewPathPrefix'><code>NewPathPrefix</code></td><td></td><td></td></tr><tr><td id='variant.NumLines'><code>NumLines</code></td><td></td><td></td></tr><tr><td id='variant.NumberPerLine'><code>NumberPerLine</code></td><td></td><td></td></tr><tr><td id='variant.Offset'><code>Offset</code></td><td></td><td></td></tr><tr><td id='variant.OldPathPrefix'><code>OldPathPrefix</code></td><td></td><td></td></tr><tr><td id='variant.OneLiner'><code>OneLiner</code></td><td></td><td></td></tr><tr><td id='variant.Path'><code>Path</code></td><td></td><td></td></tr><tr><td id='variant.PermissionsNumber'><code>PermissionsNumber</code></td><td></td><td></td></tr><tr><td id='variant.PermissionsString'><code>PermissionsString</code></td><td></td><td></td></tr><tr><td id='variant.Pid'><code>Pid</code></td><td></td><td></td></tr><tr><td id='variant.Plugin'><code>Plugin</code></td><td></td><td></td></tr><tr><td id='variant.ProcessName'><code>ProcessName</code></td><td></td><td></td></tr><tr><td id='variant.PythonClass'><code>PythonClass</code></td><td></td><td></td></tr><tr><td id='variant.PythonFunction'><code>PythonFunction</code></td><td></td><td></td></tr><tr><td id='variant.PythonScript'><code>PythonScript</code></td><td></td><td></td></tr><tr><td id='variant.QueueName'><code>QueueName</code></td><td></td><td></td></tr><tr><td id='variant.RegisterName'><code>RegisterName</code></td><td></td><td></td></tr><tr><td id='variant.RegularExpression'><code>RegularExpression</code></td><td></td><td></td></tr><tr><td id='variant.RunArgs'><code>RunArgs</code></td><td></td><td></td></tr><tr><td id='variant.RunMode'><code>RunMode</code></td><td></td><td></td></tr><tr><td id='variant.ScriptedCommandSynchronicity'><code>ScriptedCommandSynchronicity</code></td><td></td><td></td></tr><tr><td id='variant.ScriptLang'><code>ScriptLang</code></td><td></td><td></td></tr><tr><td id='variant.SearchWord'><code>SearchWord</code></td><td></td><td></td></tr><tr><td id='variant.Selector'><code>Selector</code></td><td></td><td></td></tr><tr><td id='variant.SettingIndex'><code>SettingIndex</code></td><td></td><td></td></tr><tr><td id='variant.SettingKey'><code>SettingKey</code></td><td></td><td></td></tr><tr><td id='variant.SettingPrefix'><code>SettingPrefix</code></td><td></td><td></td></tr><tr><td id='variant.SettingVariableName'><code>SettingVariableName</code></td><td></td><td></td></tr><tr><td id='variant.ShlibName'><code>ShlibName</code></td><td></td><td></td></tr><tr><td id='variant.SourceFile'><code>SourceFile</code></td><td></td><td></td></tr><tr><td id='variant.SortOrder'><code>SortOrder</code></td><td></td><td></td></tr><tr><td id='variant.StartAddress'><code>StartAddress</code></td><td></td><td></td></tr><tr><td id='variant.SummaryString'><code>SummaryString</code></td><td></td><td></td></tr><tr><td id='variant.Symbol'><code>Symbol</code></td><td></td><td></td></tr><tr><td id='variant.ThreadID'><code>ThreadID</code></td><td></td><td></td></tr><tr><td id='variant.ThreadIndex'><code>ThreadIndex</code></td><td></td><td></td></tr><tr><td id='variant.ThreadName'><code>ThreadName</code></td><td></td><td></td></tr><tr><td id='variant.TypeName'><code>TypeName</code></td><td></td><td></td></tr><tr><td id='variant.UnsignedInteger'><code>UnsignedInteger</code></td><td></td><td></td></tr><tr><td id='variant.UnixSignal'><code>UnixSignal</code></td><td></td><td></td></tr><tr><td id='variant.VarName'><code>VarName</code></td><td></td><td></td></tr><tr><td id='variant.Value'><code>Value</code></td><td></td><td></td></tr><tr><td id='variant.Width'><code>Width</code></td><td></td><td></td></tr><tr><td id='variant.None'><code>None</code></td><td></td><td></td></tr><tr><td id='variant.Platform'><code>Platform</code></td><td></td><td></td></tr><tr><td id='variant.WatchpointID'><code>WatchpointID</code></td><td></td><td></td></tr><tr><td id='variant.WatchpointIDRange'><code>WatchpointIDRange</code></td><td></td><td></td></tr><tr><td id='variant.WatchType'><code>WatchType</code></td><td></td><td></td></tr><tr><td id='variant.LastArg'><code>LastArg</code></td><td></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb/enum.CommandArgumentType.html' title='lldb::CommandArgumentType'>CommandArgumentType</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb/enum.CommandArgumentType.html' title='lldb::CommandArgumentType'>CommandArgumentType</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb/enum.CommandArgumentType.html' title='lldb::CommandArgumentType'>CommandArgumentType</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.CommandArgumentType.html' title='lldb::CommandArgumentType'>CommandArgumentType</a></code></h4>
+<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

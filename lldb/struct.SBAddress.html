@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-16' class='srclink' href='../src/lldb/src/address.rs.html#48-51' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-19' class='srclink' href='../src/lldb/src/address.rs.html#49-52' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBAddress {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAddressRef.html' title='lldb_sys::lldb_sys::SBAddressRef'>SBAddressRef</a>,
 }</pre><div class='docblock'><p>A section + offset based address class.</p>
@@ -85,14 +85,18 @@ set/cleared.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBAddressRef</code>.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h3><div class='impl-items'><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h3><div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAddressRef.html' title='lldb_sys::lldb_sys::SBAddressRef'>SBAddressRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h4>
+<div class='docblock'><p>Construct a new <code>SBAddress</code>.</p>
+</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAddressRef.html' title='lldb_sys::lldb_sys::SBAddressRef'>SBAddressRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a>&gt;</code></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBAddress)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBAddress</code> value.</p>
 </div><h4 id='method.file_address' class='method'><code>fn <a href='#method.file_address' class='fnname'>file_address</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
 <div class='docblock'><p>The address that represents the address as it is found in the
 object file that defines it.</p>
 </div><h4 id='method.load_address' class='method'><code>fn <a href='#method.load_address' class='fnname'>load_address</a>(&amp;self, target: &amp;<a class='struct' href='../lldb/struct.SBTarget.html' title='lldb::SBTarget'>SBTarget</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
 <div class='docblock'><p>The address as it has been loaded into memory by a target.</p>
-</div><h4 id='method.address_class' class='method'><code>fn <a href='#method.address_class' class='fnname'>address_class</a>(&amp;self) -&gt; <a class='enum' href='../lldb_sys/lldb_sys/enum.LLDBAddressClass.html' title='lldb_sys::lldb_sys::LLDBAddressClass'>LLDBAddressClass</a></code></h4>
+</div><h4 id='method.address_class' class='method'><code>fn <a href='#method.address_class' class='fnname'>address_class</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.AddressClass.html' title='lldb::AddressClass'>AddressClass</a></code></h4>
 <div class='docblock'><p>Get the address class for this address.</p>
 </div><h4 id='method.symbol_context' class='method'><code>fn <a href='#method.symbol_context' class='fnname'>symbol_context</a>(&amp;self, resolve_scope: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a></code></h4>
 <div class='docblock'><p>Get the <code>SBSymbolContext</code> for a given address.</p>
@@ -102,7 +106,7 @@ module, or it might refer to something on the stack or heap.
 This will only return valid values if the address has been
 resolved to a code or data address using
 <code>SBAddress::set_load_address</code> or <code>SBTarget::resolve_load_address</code>.</p>
-</div><h4 id='method.module' class='method'><code>fn <a href='#method.module' class='fnname'>module</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a></code></h4>
+</div><h4 id='method.module' class='method'><code>fn <a href='#method.module' class='fnname'>module</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBModule</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -123,7 +127,7 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div><h4 id='method.compile_unit' class='method'><code>fn <a href='#method.compile_unit' class='fnname'>compile_unit</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBCompileUnit.html' title='lldb::SBCompileUnit'>SBCompileUnit</a></code></h4>
+</div><h4 id='method.compile_unit' class='method'><code>fn <a href='#method.compile_unit' class='fnname'>compile_unit</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBCompileUnit.html' title='lldb::SBCompileUnit'>SBCompileUnit</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBCompileUnit</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -144,7 +148,7 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div><h4 id='method.function' class='method'><code>fn <a href='#method.function' class='fnname'>function</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBFunction.html' title='lldb::SBFunction'>SBFunction</a></code></h4>
+</div><h4 id='method.function' class='method'><code>fn <a href='#method.function' class='fnname'>function</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBFunction.html' title='lldb::SBFunction'>SBFunction</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBFunction</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -165,7 +169,7 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div><h4 id='method.block' class='method'><code>fn <a href='#method.block' class='fnname'>block</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
+</div><h4 id='method.block' class='method'><code>fn <a href='#method.block' class='fnname'>block</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBBlock</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -186,7 +190,7 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div><h4 id='method.symbol' class='method'><code>fn <a href='#method.symbol' class='fnname'>symbol</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBSymbol.html' title='lldb::SBSymbol'>SBSymbol</a></code></h4>
+</div><h4 id='method.symbol' class='method'><code>fn <a href='#method.symbol' class='fnname'>symbol</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBSymbol.html' title='lldb::SBSymbol'>SBSymbol</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBSymbol</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -207,7 +211,7 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div><h4 id='method.line_entry' class='method'><code>fn <a href='#method.line_entry' class='fnname'>line_entry</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBLineEntry.html' title='lldb::SBLineEntry'>SBLineEntry</a></code></h4>
+</div><h4 id='method.line_entry' class='method'><code>fn <a href='#method.line_entry' class='fnname'>line_entry</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBLineEntry.html' title='lldb::SBLineEntry'>SBLineEntry</a>&gt;</code></h4>
 <div class='docblock'><p>Get the <code>SBLineEntry</code> for a given address.</p>
 
 <p>An address might refer to code or data from an existing
@@ -228,7 +232,8 @@ objects for an address:</p>
 
 <p>One or more bits from the <code>SymbolContextItem</code> enumerations can be logically
 OR&#39;ed together to more efficiently retrieve multiple symbol objects.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

@@ -91,6 +91,27 @@
 <span id="47">47</span>
 <span id="48">48</span>
 <span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -101,6 +122,7 @@
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>address</span>::<span class='ident'>SBAddress</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>data</span>::<span class='ident'>SBData</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>AddressClass</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A machine instruction.</span>
@@ -111,6 +133,20 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SBInstruction</span> {
+    <span class='doccomment'>/// Construct a new `SBInstruction`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBInstructionRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBInstruction</span> {
+        <span class='ident'>SBInstruction</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='doccomment'>/// Construct a new `Some(SBInstruction)` or `None`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>maybe_wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBInstructionRef</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBInstruction</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionIsValid</span>(<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBInstruction</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> })
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
+
     <span class='doccomment'>/// Check whether or not this is a valid `SBInstruction` value.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
@@ -118,17 +154,17 @@
 
     <span class='doccomment'>/// Get the address of the instruction.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>address</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBAddress</span> {
-        <span class='ident'>SBAddress</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBAddress</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the address class for the address of the instruction.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>address_class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>sys</span>::<span class='ident'>LLDBAddressClass</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>address_class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>AddressClass</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetAddressClass</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>data</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>target</span>: <span class='kw-2'>&amp;</span><span class='ident'>SBTarget</span>) <span class='op'>-&gt;</span> <span class='ident'>SBData</span> {
-        <span class='ident'>SBData</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetData</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>target</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBData</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetData</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>target</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
@@ -139,6 +175,12 @@
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_branch</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionDoesBranch</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SBInstruction</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBInstruction</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
     }
 }
 </pre>

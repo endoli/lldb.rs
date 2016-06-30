@@ -97,6 +97,26 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -117,6 +137,20 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SBLineEntry</span> {
+    <span class='doccomment'>/// Construct a new `SBLineEntry`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBLineEntryRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBLineEntry</span> {
+        <span class='ident'>SBLineEntry</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='doccomment'>/// Construct a new `Some(SBLineEntry)` or `None`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>maybe_wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBLineEntryRef</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBLineEntry</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryIsValid</span>(<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBLineEntry</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> })
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
+
     <span class='doccomment'>/// Check whether or not this is a valid `SBLineEntry` value.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
@@ -124,17 +158,17 @@
 
     <span class='doccomment'>/// The start address for this line entry.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>start_address</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBAddress</span> {
-        <span class='ident'>SBAddress</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetStartAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBAddress</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetStartAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// The end address for this line entry.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>end_address</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBAddress</span> {
-        <span class='ident'>SBAddress</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetEndAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBAddress</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetEndAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// The file (`SBFileSpec`) for this line entry.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>filespec</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBFileSpec</span> {
-        <span class='ident'>SBFileSpec</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetFileSpec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBFileSpec</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetFileSpec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// The 1-based line number for this line entry.</span>
@@ -151,6 +185,12 @@
     <span class='doccomment'>/// available.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>column</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLineEntryGetColumn</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SBLineEntry</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBLineEntry</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
     }
 }
 </pre>

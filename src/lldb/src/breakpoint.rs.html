@@ -56,6 +56,33 @@
 <span id="12">12</span>
 <span id="13">13</span>
 <span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -70,6 +97,33 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBBreakpoint</span> {
     <span class='doccomment'>/// The underlying raw `SBBreakpointRef`.</span>
     <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBBreakpointRef</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>SBBreakpoint</span> {
+    <span class='doccomment'>/// Construct a new `SBBreakpoint`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBBreakpointRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBBreakpoint</span> {
+        <span class='ident'>SBBreakpoint</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='doccomment'>/// Construct a new `Some(SBBreakpoint)` or `None`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>maybe_wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBBreakpointRef</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBBreakpoint</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBBreakpointIsValid</span>(<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBBreakpoint</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> })
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
+
+    <span class='doccomment'>/// Check whether or not this is a valid `SBBreakpoint` value.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBBreakpointIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SBBreakpoint</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBBreakpoint</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
+    }
 }
 </pre>
 </section>

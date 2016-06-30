@@ -259,6 +259,27 @@
 <span id="215">215</span>
 <span id="216">216</span>
 <span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -274,6 +295,7 @@
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>symbol</span>::<span class='ident'>SBSymbol</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>symbolcontext</span>::<span class='ident'>SBSymbolContext</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>AddressClass</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A section + offset based address class.</span>
@@ -313,6 +335,20 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SBAddress</span> {
+    <span class='doccomment'>/// Construct a new `SBAddress`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBAddressRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBAddress</span> {
+        <span class='ident'>SBAddress</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='doccomment'>/// Construct a new `Some(SBAddress)` or `None`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>maybe_wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBAddressRef</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBAddress</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressIsValid</span>(<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBAddress</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> })
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
+
     <span class='doccomment'>/// Check whether or not this is a valid `SBAddress` value.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
@@ -330,7 +366,7 @@
     }
 
     <span class='doccomment'>/// Get the address class for this address.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>address_class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>sys</span>::<span class='ident'>LLDBAddressClass</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>address_class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>AddressClass</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetAddressClass</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
     }
 
@@ -342,7 +378,7 @@
     <span class='doccomment'>/// resolved to a code or data address using</span>
     <span class='doccomment'>/// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>symbol_context</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>resolve_scope</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>SBSymbolContext</span> {
-        <span class='ident'>SBSymbolContext</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetSymbolContext</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>resolve_scope</span>) } }
+        <span class='ident'>SBSymbolContext</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetSymbolContext</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>resolve_scope</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBModule` for a given address.</span>
@@ -363,8 +399,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>module</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBModule</span> {
-        <span class='ident'>SBModule</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetModule</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>module</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBModule</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBModule</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetModule</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBCompileUnit` for a given address.</span>
@@ -385,8 +421,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_unit</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBCompileUnit</span> {
-        <span class='ident'>SBCompileUnit</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetCompileUnit</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_unit</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBCompileUnit</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBCompileUnit</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetCompileUnit</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBFunction` for a given address.</span>
@@ -407,8 +443,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>function</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBFunction</span> {
-        <span class='ident'>SBFunction</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetFunction</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>function</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBFunction</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBFunction</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetFunction</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBBlock` for a given address.</span>
@@ -429,8 +465,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>block</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBBlock</span> {
-        <span class='ident'>SBBlock</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetBlock</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>block</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBBlock</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBBlock</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetBlock</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBSymbol` for a given address.</span>
@@ -451,8 +487,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>symbol</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBSymbol</span> {
-        <span class='ident'>SBSymbol</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetSymbol</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>symbol</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBSymbol</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBSymbol</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetSymbol</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// Get the `SBLineEntry` for a given address.</span>
@@ -473,8 +509,14 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// One or more bits from the `SymbolContextItem` enumerations can be logically</span>
     <span class='doccomment'>/// OR&#39;ed together to more efficiently retrieve multiple symbol objects.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>line_entry</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBLineEntry</span> {
-        <span class='ident'>SBLineEntry</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetLineEntry</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>line_entry</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBLineEntry</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBLineEntry</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBAddressGetLineEntry</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SBAddress</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBAddress</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
     }
 }
 </pre>

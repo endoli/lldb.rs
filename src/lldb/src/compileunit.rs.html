@@ -74,6 +74,27 @@
 <span id="30">30</span>
 <span id="31">31</span>
 <span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -82,6 +103,7 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>filespec</span>::<span class='ident'>SBFileSpec</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>LanguageType</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A compilation unit or compiled source file.</span>
@@ -92,6 +114,20 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SBCompileUnit</span> {
+    <span class='doccomment'>/// Construct a new `SBCompileUnit`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBCompileUnit</span> {
+        <span class='ident'>SBCompileUnit</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='doccomment'>/// Construct a new `Some(SBCompileUnit)` or `None`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>maybe_wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitRef</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBCompileUnit</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitIsValid</span>(<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBCompileUnit</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> })
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
+
     <span class='doccomment'>/// Check whether or not this is a valid `SBCompileUnit` value.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
@@ -99,12 +135,18 @@
 
     <span class='doccomment'>/// The source file for the compile unit.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>filespec</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBFileSpec</span> {
-        <span class='ident'>SBFileSpec</span> { <span class='ident'>raw</span>: <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitGetFileSpec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) } }
+        <span class='ident'>SBFileSpec</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitGetFileSpec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
 
     <span class='doccomment'>/// The language for the compile unit.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>language</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>sys</span>::<span class='ident'>LLDBLanguageType</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>language</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LanguageType</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitGetLanguage</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SBCompileUnit</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBCompileUnit</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
     }
 }
 </pre>

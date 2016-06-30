@@ -47,14 +47,18 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-221' class='srclink' href='../src/lldb/src/frame.rs.html#20-23' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-433' class='srclink' href='../src/lldb/src/frame.rs.html#20-23' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBFrame {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBFrameRef.html' title='lldb_sys::lldb_sys::SBFrameRef'>SBFrameRef</a>,
 }</pre><div class='docblock'><p>One of the stack frames associated with a thread.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBFrameRef</code>.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h3><div class='impl-items'><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h3><div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBFrameRef.html' title='lldb_sys::lldb_sys::SBFrameRef'>SBFrameRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h4>
+<div class='docblock'><p>Construct a new <code>SBFrame</code>.</p>
+</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBFrameRef.html' title='lldb_sys::lldb_sys::SBFrameRef'>SBFrameRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a>&gt;</code></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBFrame)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBFrame</code> value.</p>
 </div><h4 id='method.frame_id' class='method'><code>fn <a href='#method.frame_id' class='fnname'>frame_id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
 <div class='docblock'><p>The zero-based stack frame index for this frame.</p>
@@ -70,7 +74,7 @@
 <div class='docblock'><p>The <code>SBSymbol</code> for this stack frame.</p>
 </div><h4 id='method.block' class='method'><code>fn <a href='#method.block' class='fnname'>block</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
 <div class='docblock'><p>Get the deepest block that contains the frame PC.</p>
-</div><h4 id='method.function_name' class='method'><code>fn <a href='#method.function_name' class='fnname'>function_name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+</div><h4 id='method.function_name' class='method'><code>fn <a href='#method.function_name' class='fnname'>function_name</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
 <div class='docblock'><p>Get the appropriate function name for this frame. Inlined functions in
 LLDB are represented by blocks that have inlined function information, so
 just looking at the <code>SBFunction</code> or <code>SBSymbol</code> for a frame isn&#39;t enough.
@@ -87,7 +91,7 @@ function name for the frame.</p>
 </ul>
 
 <p>See also <code>is_inlined</code>.</p>
-</div><h4 id='method.display_function_name' class='method'><code>fn <a href='#method.display_function_name' class='fnname'>display_function_name</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+</div><h4 id='method.display_function_name' class='method'><code>fn <a href='#method.display_function_name' class='fnname'>display_function_name</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
 <h4 id='method.is_inlined' class='method'><code>fn <a href='#method.is_inlined' class='fnname'>is_inlined</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Return <code>true</code> if this frame represents an inlined function.</p>
 </div><h4 id='method.frame_block' class='method'><code>fn <a href='#method.frame_block' class='fnname'>frame_block</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBlock.html' title='lldb::SBBlock'>SBBlock</a></code></h4>
@@ -103,11 +107,12 @@ When a function has inlined functions and the PC is currently
 in one of those inlined functions, this method will return the inlined
 block that defines this frame. If the PC isn&#39;t currently in an inlined
 function, the lexical block that defines the function is returned.</p>
-</div><h4 id='method.line_entry' class='method'><code>fn <a href='#method.line_entry' class='fnname'>line_entry</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBLineEntry.html' title='lldb::SBLineEntry'>SBLineEntry</a></code></h4>
+</div><h4 id='method.line_entry' class='method'><code>fn <a href='#method.line_entry' class='fnname'>line_entry</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBLineEntry.html' title='lldb::SBLineEntry'>SBLineEntry</a>&gt;</code></h4>
 <div class='docblock'><p>The line table entry (<code>SBLineEntry</code>) for this stack frame.</p>
 </div><h4 id='method.thread' class='method'><code>fn <a href='#method.thread' class='fnname'>thread</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a></code></h4>
 <div class='docblock'><p>The thread that is executing this stack frame.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBFrame.html' title='lldb::SBFrame'>SBFrame</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
