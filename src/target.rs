@@ -4,6 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::attachinfo::SBAttachInfo;
+use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
 use super::error::SBError;
 use super::filespec::SBFileSpec;
@@ -69,6 +71,18 @@ impl SBTarget {
         }
     }
 
+    #[allow(missing_docs)]
+    pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
+        let error: SBError = SBError::new();
+        let process =
+            SBProcess::wrap(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
+        if error.is_success() {
+            Ok(process)
+        } else {
+            Err(error)
+        }
+    }
+
     /// Get a filespec for the executable.
     pub fn executable(&self) -> Option<SBFileSpec> {
         SBFileSpec::maybe_wrap(unsafe { sys::SBTargetGetExecutable(self.raw) })
@@ -97,6 +111,11 @@ impl SBTarget {
     /// Find the module for the given `SBFileSpec`.
     pub fn find_module(&self, file_spec: &SBFileSpec) -> Option<SBModule> {
         SBModule::maybe_wrap(unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn broadcaster(&self) -> SBBroadcaster {
+        SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
     }
 }
 

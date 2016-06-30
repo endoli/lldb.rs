@@ -6,7 +6,9 @@
 
 use sys;
 
-/// The value of a variable, register or expression.
+/// Configuration for launching a process.
+///
+/// See `SBTarget::launch`.
 #[derive(Debug)]
 pub struct SBLaunchInfo {
     /// The underlying raw `SBLaunchInfoRef`.

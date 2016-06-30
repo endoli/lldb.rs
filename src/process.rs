@@ -5,6 +5,8 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use super::broadcaster::SBBroadcaster;
+use super::error::SBError;
 use super::{lldb_pid_t, StateType};
 use sys;
 
@@ -98,6 +100,72 @@ impl SBProcess {
     /// Get the size, in bytes, of an address.
     pub fn address_byte_size(&self) -> u32 {
         unsafe { sys::SBProcessGetAddressByteSize(self.raw) }
+    }
+
+    /// Kills the process and shuts down all threads that were spawned to
+    /// track and monitor the process.
+    pub fn destroy(&self) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessDestroy(self.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn continue_execution(&self) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessContinue(self.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn stop(&self) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessStop(self.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Same as calling `destroy`.
+    pub fn kill(&self) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessKill(self.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn detach(&self) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessDetach(self.raw) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Send the process a Unix signal.
+    pub fn signal(&self, signal: i32) -> Result<(), SBError> {
+        let error = SBError::wrap(unsafe { sys::SBProcessSignal(self.raw, signal) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn broadcaster(&self) -> SBBroadcaster {
+        SBBroadcaster::wrap(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
     }
 }
 
