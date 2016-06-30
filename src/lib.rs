@@ -186,6 +186,52 @@ pub use self::target::SBTarget;
 pub use self::thread::SBThread;
 pub use self::value::SBValue;
 
+/// Which syntax should be used in disassembly?
+///
+/// On x86, there are 2 syntaxes used for disassembly. Other
+/// architectures need not be concerned by this and can just
+/// use `DisassemblyFlavor::Default` all the time.
+#[derive(Clone, Copy, Debug)]
+pub enum DisassemblyFlavor {
+    /// The primary syntax used by the GNU Assembler and in the
+    /// Linux world.
+    ///
+    /// AT&T syntax:
+    ///
+    /// * Operations has a suffix, indicating the operand size.
+    /// * Prefixes registers with `%` and immediate values with `$`.
+    /// * Orders operands with source first, then destination.
+    /// * Memory operands are somewhat complicated.
+    ///
+    /// For example:
+    ///
+    /// ```asm
+    /// movb $0x05, %al
+    /// ```
+    ///
+    /// This syntax is described in detail in [GAS Syntax].
+    ///
+    /// [GAS Syntax]: https://en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax
+    ATT,
+    /// The default syntax.
+    Default,
+    /// The primary syntax used on Windows.
+    ///
+    /// This differs from AT&T syntax in that:
+    ///
+    /// * Operations are not suffixed.
+    /// * Registers are not prefixed with `%`, immediate values have a suffix.
+    /// * Operands are ordered so that the destination is first, then the source.
+    ///
+    /// For example:
+    ///
+    /// ```asm
+    /// mov al, 05h
+    /// ```
+    ///
+    Intel,
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

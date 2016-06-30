@@ -4,8 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
+use std::ptr;
 use super::address::SBAddress;
+use super::instructionlist::SBInstructionList;
+use super::target::SBTarget;
+use super::DisassemblyFlavor;
 use sys;
 
 /// The symbol possibly associated with a stack frame.
@@ -65,12 +69,33 @@ impl SBSymbol {
         }
     }
 
-    /// Get the address of the start of this function.
+    ///
+    pub fn get_instructions(&self,
+                            target: &SBTarget,
+                            flavor: DisassemblyFlavor)
+                            -> SBInstructionList {
+        let flavor = match flavor {
+            DisassemblyFlavor::ATT => CString::new("att").unwrap().as_ptr(),
+            DisassemblyFlavor::Default => ptr::null(),
+            DisassemblyFlavor::Intel => CString::new("intel").unwrap().as_ptr(),
+        };
+        SBInstructionList::new(unsafe {
+            sys::SBSymbolGetInstructions2(self.raw, target.raw, flavor)
+        })
+    }
+
+    /// Get the address that this symbol refers to, if present.
     pub fn start_address(&self) -> Option<SBAddress> {
         SBAddress::maybe(unsafe { sys::SBSymbolGetStartAddress(self.raw) })
     }
 
-    /// Get the address of the end of this function.
+    /// If the symbol has an address and the underlying value has a
+    /// non-zero size, this will have the address of the end of
+    /// the value.
+    ///
+    /// Note: It seems unfortunate that if the underlying value is 0-sized,
+    /// this will result in `None` rather than the same address as the
+    /// `start_address`.
     pub fn end_address(&self) -> Option<SBAddress> {
         SBAddress::maybe(unsafe { sys::SBSymbolGetEndAddress(self.raw) })
     }
