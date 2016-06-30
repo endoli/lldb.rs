@@ -12,7 +12,7 @@ Add it to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-lldb = "0.0.1"
+lldb = "0.0.2"
 ```
 
 On Mac OS X, the `LLDB.framework` requires that an `@rpath`
