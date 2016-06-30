@@ -5,7 +5,9 @@
 // except according to those terms.
 
 use super::debugger::SBDebugger;
+use super::error::SBError;
 use super::filespec::SBFileSpec;
+use super::launchinfo::SBLaunchInfo;
 use super::module::SBModule;
 use super::modulespec::SBModuleSpec;
 use super::platform::SBPlatform;
@@ -53,6 +55,18 @@ impl SBTarget {
     /// [`SBProcess`]: strut.SBProcess.html
     pub fn process(&self) -> SBProcess {
         unsafe { SBProcess { raw: sys::SBTargetGetProcess(self.raw) } }
+    }
+
+    /// Launch a target for debugging.
+    pub fn launch(&self, launch_info: SBLaunchInfo) -> Result<SBProcess, SBError> {
+        let error: SBError = SBError::new();
+        let process =
+            SBProcess::wrap(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
+        if error.is_success() {
+            Ok(process)
+        } else {
+            Err(error)
+        }
     }
 
     /// Get a filespec for the executable.
