@@ -34,6 +34,15 @@ use sys;
 /// Attaching to a process can be done by creating and filling
 /// out an [`SBAttachInfo`] and calling [`attach`].
 ///
+/// ```no_run
+/// use lldb::{lldb_pid_t, SBAttachInfo, SBError, SBProcess, SBTarget};
+/// fn attach_to_pid(target: &SBTarget, pid: lldb_pid_t) -> Result<SBProcess, SBError> {
+///     let attach_info = SBAttachInfo::new_with_pid(pid);
+///     // Probably want to set up a listener here.
+///     target.attach(attach_info)
+/// }
+/// ```
+///
 /// ## Core Files
 ///
 /// ...

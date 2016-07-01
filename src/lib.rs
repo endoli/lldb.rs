@@ -49,28 +49,8 @@
 //!
 //! ## Usage
 //!
-//! LLDB must be initialized before the functionality is used. This
-//! is done with `SBDebugger::initialize()`:
-//!
-//! ```
-//! use lldb;
-//!
-//! lldb::SBDebugger::initialize();
-//! ```
-//!
-//! Similarly, it must be terminated after you are done using it:
-//!
-//! ```
-//! use lldb;
-//!
-//! lldb::SBDebugger::initialize();
-//! // Use LLDB functionality ...
-//! lldb::SBDebugger::terminate();
-//! ```
-//!
-//! The primary entry point from here will be [`SBDebugger`]. This will
-//! be how you create a debug target and begin the actually interesting
-//! stuff.
+//! The primary entry point is [`SBDebugger`]. This will be how you
+//! create a debug target and begin the actually interesting stuff.
 //!
 //! ## Important Classes
 //!
