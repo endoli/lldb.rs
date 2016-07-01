@@ -73,6 +73,12 @@
 <span id="29">29</span>
 <span id="30">30</span>
 <span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -80,6 +86,7 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// Configuration for launching a process.</span>
@@ -94,6 +101,11 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>SBLaunchInfo</span> {
+    <span class='doccomment'>/// Construct a new `SBLaunchInfo`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>SBLaunchInfo</span> {
+        <span class='ident'>SBLaunchInfo</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>CreateSBLaunchInfo</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()) })
+    }
+
     <span class='doccomment'>/// Construct a new `SBLaunchInfo`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBLaunchInfoRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBLaunchInfo</span> {
         <span class='ident'>SBLaunchInfo</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }

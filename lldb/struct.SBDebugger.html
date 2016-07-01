@@ -47,17 +47,95 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-272' class='srclink' href='../src/lldb/src/debugger.rs.html#29-32' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-274' class='srclink' href='../src/lldb/src/debugger.rs.html#127-130' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBDebugger {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBDebuggerRef.html' title='lldb_sys::lldb_sys::SBDebuggerRef'>SBDebuggerRef</a>,
 }</pre><div class='docblock'><p>Creates <a href="struct.SBTarget.html"><code>SBTarget</code></a>s, provides access to them and manages
 the overall debugging experience.</p>
 
 <h1 id='initialization-and-teardown' class='section-header'><a href='#initialization-and-teardown'>Initialization and Teardown</a></h1>
-<p>...</p>
+<p>LLDB must be initialized before the functionality is used. This
+is done with <code>SBDebugger::initialize()</code>:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>;
+
+<span class='ident'>SBDebugger</span>::<span class='ident'>initialize</span>();</pre>
+
+<p>Similarly, it must be terminated after you are done using it:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>;
+
+<span class='ident'>SBDebugger</span>::<span class='ident'>initialize</span>();
+<span class='comment'>// Use LLDB functionality ...</span>
+<span class='ident'>SBDebugger</span>::<span class='ident'>terminate</span>();</pre>
+
+<p>Once you&#39;ve initialized LLDB, you&#39;re ready to create an instance
+of <code>SBDebugger</code>:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>lldb</span>::<span class='ident'>SBDebugger</span>;
+
+<span class='ident'>SBDebugger</span>::<span class='ident'>initialize</span>();
+
+<span class='kw'>let</span> <span class='ident'>debugger</span> <span class='op'>=</span> <span class='ident'>SBDebugger</span>::<span class='ident'>create</span>(<span class='boolval'>false</span>);
+<span class='comment'>// ... configure the debugger if needed ...</span>
+<span class='comment'>// ... create a target and do stuff ...</span>
+
+<span class='ident'>SBDebugger</span>::<span class='ident'>terminate</span>();</pre>
+
+<h1 id='configuration' class='section-header'><a href='#configuration'>Configuration</a></h1>
+<h2 id='async-mode' class='section-header'><a href='#async-mode'>Async Mode</a></h2>
+<p>While it is best to use LLDB in asynchronous mode, it does offer a
+synchronous mode, which can be easier to use for quick experiments
+or scripts.</p>
+
+<p>In synchronous mode, calls to the LLDB API do not return until the
+underlying action has been completed. This means that the thread
+from which you call LLDB will be blocked during that time, so this
+is not an ideal way to use LLDB for building interactive tools
+or a new user interface.</p>
+
+<p>In asynchronous mode, calls to the LLDB API will return immediately
+without waiting for the action to complete. This means that actions
+like launching a target, continuing the execution of a process and
+so on won&#39;t be completed immediately and you must process events
+to see what the results of an action are.</p>
+
+<p>Synchronous mode can be enabled by using <a href="#method.set_async"><code>set_async</code></a> and passing it
+a <code>false</code> value. You can see if you&#39;re in asynchronous mode or not
+by calling <a href="#method.async"><code>async</code></a>.</p>
 
 <h1 id='target-management' class='section-header'><a href='#target-management'>Target Management</a></h1>
-<p>...</p>
+<p>The <code>SBDebugger</code> instance tracks the various targets that are
+currently known to the debugger.</p>
+
+<p>Typically, you create a target with <a href="#method.create_target"><code>create_target</code></a>,
+<a href="#method.create_target_simple"><code>create_target_simple</code></a> or one of the related methods.</p>
+
+<p>Sometimes, you&#39;ll want to create a target without an associated
+executable. A common use case for this is to attach to a process
+by name or process ID where you don&#39;t know the executable in advance.
+The most convenient way to do this is:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>debugger</span> <span class='op'>=</span> <span class='ident'>SBDebugger</span>::<span class='ident'>create</span>(<span class='boolval'>false</span>);
+<span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>target</span>) <span class='op'>=</span> <span class='ident'>debugger</span>.<span class='ident'>create_target_simple</span>(<span class='string'>&quot;&quot;</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a target: {:?}&quot;</span>, <span class='ident'>target</span>);
+    <span class='comment'>// Now, maybe we&#39;d like to attach to something.</span>
+}</pre>
+
+<p>You can iterate over these targets which have been created by
+using <a href="#method.targets"><code>targets</code></a>:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='comment'>// Iterate over the targets...</span>
+<span class='kw'>for</span> <span class='ident'>target</span> <span class='kw'>in</span> <span class='ident'>debugger</span>.<span class='ident'>targets</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello {:?}!&quot;</span>, <span class='ident'>target</span>);
+}
+<span class='comment'>// Or collect them into a vector!</span>
+<span class='kw'>let</span> <span class='ident'>targets</span> <span class='op'>=</span> <span class='ident'>debugger</span>.<span class='ident'>targets</span>().<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>SBTarget</span><span class='op'>&gt;&gt;</span>();</pre>
 
 <h1 id='platform-management' class='section-header'><a href='#platform-management'>Platform Management</a></h1>
 <p>...</p>
@@ -93,6 +171,20 @@ stepping or continuing without waiting for the process
 to change state.</p>
 </div><h4 id='method.version' class='method'><code>fn <a href='#method.version' class='fnname'>version</a>() -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Get the LLDB version string.</p>
+</div><h4 id='method.create_target' class='method'><code>fn <a href='#method.create_target' class='fnname'>create_target</a>(&amp;self, executable: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, target_triple: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;, platform_name: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;, add_dependent_modules: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../lldb/struct.SBTarget.html' title='lldb::SBTarget'>SBTarget</a>, <a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
+<div class='docblock'><p>Create a target.</p>
+
+<p>The executable name may be an empty string to create
+an empty target.</p>
+</div><h4 id='method.create_target_simple' class='method'><code>fn <a href='#method.create_target_simple' class='fnname'>create_target_simple</a>(&amp;self, executable: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBTarget.html' title='lldb::SBTarget'>SBTarget</a>&gt;</code></h4>
+<div class='docblock'><p>Create a target from just an executable name.</p>
+
+<p>The executable name may be an empty string to create
+an empty target.</p>
+
+<p>Using [<code>create_target</code>] is preferred in most cases as
+that provides access to an <code>SBError</code> to inform the caller
+about what might have gone wrong.</p>
 </div><h4 id='method.targets' class='method'><code>fn <a href='#method.targets' class='fnname'>targets</a>(&amp;self) -&gt; DebuggerTargetIter</code></h4>
 <div class='docblock'><p>Get an iterator over the <a href="struct.SBTarget.html">targets</a> known to this debugger instance.</p>
 </div><h4 id='method.selected_platform' class='method'><code>fn <a href='#method.selected_platform' class='fnname'>selected_platform</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBPlatform.html' title='lldb::SBPlatform'>SBPlatform</a></code></h4>
