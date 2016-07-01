@@ -47,10 +47,56 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-871' class='srclink' href='../src/lldb/src/process.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-872' class='srclink' href='../src/lldb/src/process.rs.html#91-94' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBProcess {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBProcessRef.html' title='lldb_sys::lldb_sys::SBProcessRef'>SBProcessRef</a>,
 }</pre><div class='docblock'><p>The process associated with the target program.</p>
+
+<p>You get a process by attaching to or launching a target program.
+See <a href="struct.SBTarget.html"><code>SBTarget</code></a> for details.</p>
+
+<h1 id='process-state' class='section-header'><a href='#process-state'>Process State</a></h1>
+<p>The OS process ID (<code>pid_t</code>) for the process is available via
+<a href="#method.process_id"><code>process_id</code></a>.</p>
+
+<p>The <a href="enum.StateType.html">process state</a> can be obtained via <a href="#method.state"><code>state</code></a>. It is common to
+just check to see if the process <a href="#method.is_alive"><code>is_alive</code></a>, <a href="#method.is_running"><code>is_running</code></a> or
+<a href="#method.is_stopped"><code>is_stopped</code></a>.</p>
+
+<p>Once the process is in the <code>Exited</code> state, the <a href="#method.exit_status"><code>exit_status</code></a> and
+<a href="#method.exit_description"><code>exit_description</code></a> are available for inspection.</p>
+
+<h1 id='execution-control' class='section-header'><a href='#execution-control'>Execution Control</a></h1>
+<p>Once you have a process, you can:</p>
+
+<ul>
+<li><a href="#method.continue_execution"><code>continue_execution</code></a></li>
+<li><a href="#method.stop"><code>stop</code></a></li>
+<li><a href="#method.kill"><code>kill</code></a></li>
+<li><a href="#method.detach"><code>detach</code></a></li>
+</ul>
+
+<h1 id='threads' class='section-header'><a href='#threads'>Threads</a></h1>
+<p>The process contains the <a href="struct.SBThread.html">threads of execution</a> for the <a href="struct.SBTarget.html">target</a>. The
+available threads can be iterated over with <a href="#method.threads"><code>threads</code></a>:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='comment'>// Iterate over the threads...</span>
+<span class='kw'>for</span> <span class='ident'>thread</span> <span class='kw'>in</span> <span class='ident'>process</span>.<span class='ident'>threads</span>() {
+  <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello {}!&quot;</span>, <span class='ident'>thread</span>.<span class='ident'>thread_id</span>());
+}
+<span class='comment'>// Or collect them into a vector!</span>
+<span class='kw'>let</span> <span class='ident'>threads</span> <span class='op'>=</span> <span class='ident'>process</span>.<span class='ident'>threads</span>().<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>SBThread</span><span class='op'>&gt;&gt;</span>();</pre>
+
+<p>Specific individual threads can be looked up via <a href="#method.thread_by_id"><code>thread_by_id</code></a>
+and <a href="#method.thread_by_index_id"><code>thread_by_index_id</code></a> methods.</p>
+
+<p>Some functions operate on the &#39;currently selected thread&#39;. This can
+retrieved via <a href="#method.selected_thread"><code>selected_thread</code></a> and set via <a href="#method.set_selected_thread"><code>set_selected_thread</code></a>,
+<a href="#method.set_selected_thread_by_id"><code>set_selected_thread_by_id</code></a>, or <a href="#method.set_selected_thread_by_index_id"><code>set_selected_thread_by_index_id</code></a>.</p>
+
+<h1 id='events' class='section-header'><a href='#events'>Events</a></h1>
+<p>... to be written ...</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBProcessRef</code>.</p>
@@ -64,16 +110,26 @@
 <div class='docblock'><p>The current state of this process (running, stopped, exited, etc.).</p>
 </div><h4 id='method.is_alive' class='method'><code>fn <a href='#method.is_alive' class='fnname'>is_alive</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently alive.</p>
+
+<p>This corresponds to the process being in the <code>Attaching</code>,
+<code>Launching</code>, <code>Stopped</code>, <code>Running</code>, <code>Stepping</code>, <code>Crashed</code>
+or <code>Suspended</code> states.</p>
 </div><h4 id='method.is_running' class='method'><code>fn <a href='#method.is_running' class='fnname'>is_running</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently running.</p>
+
+<p>This corresponds to the process being in the <code>Running</code>
+or <code>Stepping</code> states.</p>
 </div><h4 id='method.is_stopped' class='method'><code>fn <a href='#method.is_stopped' class='fnname'>is_stopped</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently stopped.</p>
+
+<p>This corresponds to the process being in the <code>Stopped</code>, <code>Crashed</code>,
+or <code>Suspended</code> states.</p>
 </div><h4 id='method.exit_status' class='method'><code>fn <a href='#method.exit_status' class='fnname'>exit_status</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></h4>
 <div class='docblock'><p>The exit status of the process when the process state is
-<code>eStateExited</code>.</p>
+<code>Exited</code>.</p>
 </div><h4 id='method.exit_description' class='method'><code>fn <a href='#method.exit_description' class='fnname'>exit_description</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <div class='docblock'><p>The exit description of the process when the process state
-is <code>eStateExited</code>.</p>
+is <code>Exited</code>.</p>
 </div><h4 id='method.process_id' class='method'><code>fn <a href='#method.process_id' class='fnname'>process_id</a>(&amp;self) -&gt; <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a></code></h4>
 <div class='docblock'><p>Returns the process ID of the process.</p>
 </div><h4 id='method.unique_id' class='method'><code>fn <a href='#method.unique_id' class='fnname'>unique_id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
@@ -93,7 +149,21 @@ track and monitor the process.</p>
 <h4 id='method.signal' class='method'><code>fn <a href='#method.signal' class='fnname'>signal</a>(&amp;self, signal: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
 <div class='docblock'><p>Send the process a Unix signal.</p>
 </div><h4 id='method.broadcaster' class='method'><code>fn <a href='#method.broadcaster' class='fnname'>broadcaster</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<h4 id='method.threads' class='method'><code>fn <a href='#method.threads' class='fnname'>threads</a>(&amp;self) -&gt; ProcessThreadIter</code></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBThread.html">threads</a> known to this process instance.</p>
+</div><h4 id='method.thread_by_id' class='method'><code>fn <a href='#method.thread_by_id' class='fnname'>thread_by_id</a>(&amp;self, thread_id: <a class='type' href='../lldb/type.lldb_tid_t.html' title='lldb::lldb_tid_t'>lldb_tid_t</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the thread with the given thread ID.</p>
+</div><h4 id='method.thread_by_index_id' class='method'><code>fn <a href='#method.thread_by_index_id' class='fnname'>thread_by_index_id</a>(&amp;self, thread_index_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the thread with the given thread index ID.</p>
+</div><h4 id='method.selected_thread' class='method'><code>fn <a href='#method.selected_thread' class='fnname'>selected_thread</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a></code></h4>
+<div class='docblock'><p>Returns the currently selected thread.</p>
+</div><h4 id='method.set_selected_thread' class='method'><code>fn <a href='#method.set_selected_thread' class='fnname'>set_selected_thread</a>(&amp;self, thread: &amp;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Set the selected thread.</p>
+</div><h4 id='method.set_selected_thread_by_id' class='method'><code>fn <a href='#method.set_selected_thread_by_id' class='fnname'>set_selected_thread_by_id</a>(&amp;self, thread_id: <a class='type' href='../lldb/type.lldb_tid_t.html' title='lldb::lldb_tid_t'>lldb_tid_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Set the selected thread by ID.</p>
+</div><h4 id='method.set_selected_thread_by_index_id' class='method'><code>fn <a href='#method.set_selected_thread_by_index_id' class='fnname'>set_selected_thread_by_index_id</a>(&amp;self, thread_index_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Set the selected thread by index ID.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
