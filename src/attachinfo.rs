@@ -10,7 +10,9 @@ use sys;
 
 /// Configuration for attaching to a process.
 ///
-/// See `SBTarget::attach`.
+/// See [`SBTarget::attach`].
+///
+/// [`SBTarget::attach`]: struct.SBTarget.html#method.attach
 #[derive(Debug)]
 pub struct SBAttachInfo {
     /// The underlying raw `SBAttachInfoRef`.

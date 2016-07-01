@@ -4,6 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::frame::SBFrame;
+use super::process::SBProcess;
 use super::value::SBValue;
 use super::{lldb_tid_t, StopReason};
 use sys;
@@ -16,6 +18,44 @@ use sys;
 /// The `IndexID` is a monotonically increasing identifier that will always
 /// uniquely reference a particular thread, and when that thread goes
 /// away it will not be reused.
+///
+/// # Thread State
+///
+/// ...
+///
+/// # Execution Control
+///
+/// ...
+///
+/// # Frames
+///
+/// The thread contains [stack frames]. These can be iterated
+/// over with [`frames`]:
+///
+/// ```no_run
+/// # use lldb::{SBFrame, SBThread};
+/// # fn look_at_frames(thread: SBThread) {
+/// // Iterate over the frames...
+/// for frame in thread.frames() {
+///   println!("Hello {:?}!", frame);
+/// }
+/// // Or collect them into a vector!
+/// let frames = thread.frames().collect::<Vec<SBFrame>>();
+/// # }
+/// ```
+///
+/// Some functions operate on the 'currently selected frame'. This can
+/// retrieved via [`selected_frame`] and set via [`set_selected_frame`].
+///
+///
+/// # Events
+///
+/// ...
+///
+/// [stack frames]: struct.SBFrame.html
+/// [`frames`]: #method.frames
+/// [`selected_frame`]: #method.selected_frame
+/// [`set_selected_frame`]: #method.set_selected_frame
 #[derive(Debug)]
 pub struct SBThread {
     /// The underlying raw `SBThreadRef`.
@@ -75,6 +115,53 @@ impl SBThread {
     /// with the same thread.  See related `SBThread::thread_id`.
     pub fn index_id(&self) -> u32 {
         unsafe { sys::SBThreadGetIndexID(self.raw) }
+    }
+
+    /// Get an iterator over the [frames] known to this thread instance.
+    ///
+    /// [frames]: struct.SBFrame.html
+    pub fn frames(&self) -> ThreadFrameIter {
+        ThreadFrameIter {
+            thread: self,
+            idx: 0,
+        }
+    }
+
+    /// Get the currently selected frame for this thread.
+    pub fn selected_frame(&self) -> SBFrame {
+        SBFrame::wrap(unsafe { sys::SBThreadGetSelectedFrame(self.raw) })
+    }
+
+    /// Set the currently selected frame for this thread. This takes a frame index.
+    pub fn set_selected_frame(&self, frame_index: u32) -> Option<SBFrame> {
+        SBFrame::maybe_wrap(unsafe { sys::SBThreadSetSelectedFrame(self.raw, frame_index) })
+    }
+
+    /// Get the process in which this thread is running.
+    pub fn process(&self) -> SBProcess {
+        SBProcess::wrap(unsafe { sys::SBThreadGetProcess(self.raw) })
+    }
+}
+
+#[doc(hidden)]
+pub struct ThreadFrameIter<'d> {
+    thread: &'d SBThread,
+    idx: usize,
+}
+
+impl<'d> Iterator for ThreadFrameIter<'d> {
+    type Item = SBFrame;
+
+    fn next(&mut self) -> Option<SBFrame> {
+        if self.idx < unsafe { sys::SBThreadGetNumFrames(self.thread.raw) as usize } {
+            let r = Some(SBFrame::wrap(unsafe {
+                sys::SBThreadGetFrameAtIndex(self.thread.raw, self.idx as u32)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
     }
 }
 

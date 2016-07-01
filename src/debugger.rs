@@ -12,6 +12,18 @@ use sys;
 /// Creates [`SBTarget`]s, provides access to them and manages
 /// the overall debugging experience.
 ///
+/// # Initialization and Teardown
+///
+/// ...
+///
+/// # Target Management
+///
+/// ...
+///
+/// # Platform Management
+///
+/// ...
+///
 /// [`SBTarget`]: struct.SBTarget.html
 #[derive(Debug)]
 pub struct SBDebugger {

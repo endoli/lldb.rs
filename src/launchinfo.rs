@@ -8,7 +8,9 @@ use sys;
 
 /// Configuration for launching a process.
 ///
-/// See `SBTarget::launch`.
+/// See [`SBTarget::launch`].
+///
+/// [`SBTarget::launch`]: struct.SBTarget.html#method.launch
 #[derive(Debug)]
 pub struct SBLaunchInfo {
     /// The underlying raw `SBLaunchInfoRef`.

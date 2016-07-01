@@ -17,6 +17,43 @@ use super::process::SBProcess;
 use sys;
 
 /// The target program running under the debugger.
+///
+/// # Process Management
+///
+/// Starting a debug session is done by launching the target,
+/// attaching to a running process, or loading a core file.
+///
+/// ## Launching
+///
+/// Launching a process can be done by creating and filling
+/// out an [`SBLaunchInfo`] and calling [`launch`].
+///
+///
+/// ## Attaching
+///
+/// Attaching to a process can be done by creating and filling
+/// out an [`SBAttachInfo`] and calling [`attach`].
+///
+/// ## Core Files
+///
+/// ...
+///
+/// # Breakpoints and Watchpoints
+///
+/// ...
+///
+/// # Modules
+///
+/// ...
+///
+/// # Events
+///
+/// ...
+///
+/// [`SBLaunchInfo`]: struct.SBLaunchInfo.html
+/// [`launch`]: #method.launch
+/// [`SBAttachInfo`]: struct.SBAttachInfo.html
+/// [`attach`]: #method.attach
 #[derive(Debug)]
 pub struct SBTarget {
     /// The underlying raw `SBTargetRef`.
