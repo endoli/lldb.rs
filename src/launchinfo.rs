@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ptr;
 use sys;
 
 /// Configuration for launching a process.
@@ -18,6 +19,11 @@ pub struct SBLaunchInfo {
 }
 
 impl SBLaunchInfo {
+    /// Construct a new `SBLaunchInfo`.
+    pub fn new() -> SBLaunchInfo {
+        SBLaunchInfo::wrap(unsafe { sys::CreateSBLaunchInfo(ptr::null_mut()) })
+    }
+
     /// Construct a new `SBLaunchInfo`.
     pub fn wrap(raw: sys::SBLaunchInfoRef) -> SBLaunchInfo {
         SBLaunchInfo { raw: raw }
