@@ -37,7 +37,7 @@ use sys;
 /// # fn look_at_frames(thread: SBThread) {
 /// // Iterate over the frames...
 /// for frame in thread.frames() {
-///   println!("Hello {:?}!", frame);
+///     println!("Hello {:?}!", frame);
 /// }
 /// // Or collect them into a vector!
 /// let frames = thread.frames().collect::<Vec<SBFrame>>();

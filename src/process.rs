@@ -47,7 +47,7 @@ use sys;
 /// # fn look_at_threads(process: SBProcess) {
 /// // Iterate over the threads...
 /// for thread in process.threads() {
-///   println!("Hello {}!", thread.thread_id());
+///     println!("Hello {}!", thread.thread_id());
 /// }
 /// // Or collect them into a vector!
 /// let threads = process.threads().collect::<Vec<SBThread>>();
