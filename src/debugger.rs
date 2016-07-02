@@ -193,17 +193,15 @@ impl SBDebugger {
                          platform_name: Option<&str>,
                          add_dependent_modules: bool)
                          -> Result<SBTarget, SBError> {
-        let executable = CString::new(executable).unwrap().as_ptr();
-        let target_triple =
-            target_triple.map(CString::new).map(|s| s.unwrap().as_ptr()).unwrap_or(ptr::null());
-        let platform_name =
-            platform_name.map(CString::new).map(|s| s.unwrap().as_ptr()).unwrap_or(ptr::null());
+        let executable = CString::new(executable).unwrap();
+        let target_triple = target_triple.map(|s| CString::new(s).unwrap());
+        let platform_name = platform_name.map(|s| CString::new(s).unwrap());
         let error = SBError::new();
         let target = unsafe {
             sys::SBDebuggerCreateTarget(self.raw,
-                                        executable,
-                                        target_triple,
-                                        platform_name,
+                                        executable.as_ptr(),
+                                        target_triple.map_or(ptr::null(), |s| s.as_ptr()),
+                                        platform_name.map_or(ptr::null(), |s| s.as_ptr()),
                                         add_dependent_modules as u8,
                                         error.raw)
         };

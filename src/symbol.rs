@@ -76,12 +76,14 @@ impl SBSymbol {
                             flavor: DisassemblyFlavor)
                             -> SBInstructionList {
         let flavor = match flavor {
-            DisassemblyFlavor::ATT => CString::new("att").unwrap().as_ptr(),
-            DisassemblyFlavor::Default => ptr::null(),
-            DisassemblyFlavor::Intel => CString::new("intel").unwrap().as_ptr(),
+            DisassemblyFlavor::ATT => CString::new("att").ok(),
+            DisassemblyFlavor::Default => None,
+            DisassemblyFlavor::Intel => CString::new("intel").ok(),
         };
         SBInstructionList::wrap(unsafe {
-            sys::SBSymbolGetInstructions2(self.raw, target.raw, flavor)
+            sys::SBSymbolGetInstructions2(self.raw,
+                                          target.raw,
+                                          flavor.map_or(ptr::null(), |s| s.as_ptr()))
         })
     }
 
