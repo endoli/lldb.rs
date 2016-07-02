@@ -78,6 +78,12 @@ impl SBBroadcaster {
     }
 }
 
+impl Default for SBBroadcaster {
+    fn default() -> SBBroadcaster {
+        SBBroadcaster::new()
+    }
+}
+
 impl Drop for SBBroadcaster {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBroadcaster(self.raw) };

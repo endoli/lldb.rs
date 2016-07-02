@@ -181,6 +181,12 @@ impl SBListener {
     }
 }
 
+impl Default for SBListener {
+    fn default() -> SBListener {
+        SBListener::new()
+    }
+}
+
 impl Drop for SBListener {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBListener(self.raw) };

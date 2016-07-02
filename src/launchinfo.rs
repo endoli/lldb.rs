@@ -30,6 +30,12 @@ impl SBLaunchInfo {
     }
 }
 
+impl Default for SBLaunchInfo {
+    fn default() -> SBLaunchInfo {
+        SBLaunchInfo::new()
+    }
+}
+
 impl Drop for SBLaunchInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBLaunchInfo(self.raw) };
