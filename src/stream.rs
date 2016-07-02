@@ -64,6 +64,11 @@ impl SBStream {
     pub fn len(&self) -> usize {
         unsafe { sys::SBStreamGetSize(self.raw) as usize }
     }
+
+    /// Is this stream empty?
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
 impl Default for SBStream {
