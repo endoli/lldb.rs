@@ -42,7 +42,7 @@ use sys;
 /// Load addresses represents the virtual addresses where each section
 /// ends up getting loaded at runtime. Before executing a program, it
 /// is common for all of the load addresses to be unresolved. When a
-/// DynamicLoader plug-in receives notification that shared libraries
+/// `DynamicLoader` plug-in receives notification that shared libraries
 /// have been loaded/unloaded, the load addresses of the main executable
 /// and any images (shared libraries) will be  resolved/unresolved. When
 /// this happens, breakpoints that are in one of these sections can be
