@@ -4,10 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
+use super::stream::SBStream;
 use sys;
 
 /// A list of machine instructions.
-#[derive(Debug)]
 pub struct SBInstructionList {
     /// The underlying raw `SBInstructionListRef`.
     pub raw: sys::SBInstructionListRef,
@@ -31,6 +32,14 @@ impl SBInstructionList {
     /// Check whether or not this is a valid `SBInstructionList` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBInstructionListIsValid(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBInstructionList {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBInstructionListGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBInstructionList {{ {} }}", stream.data())
     }
 }
 

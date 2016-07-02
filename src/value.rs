@@ -4,10 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
+use super::stream::SBStream;
 use sys;
 
 /// The value of a variable, register or expression.
-#[derive(Debug)]
 pub struct SBValue {
     /// The underlying raw `SBValueRef`.
     pub raw: sys::SBValueRef,
@@ -31,6 +32,14 @@ impl SBValue {
     /// Check whether or not this is a valid `SBValue` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBValueIsValid(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBValue {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBValueGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBValue {{ {} }}", stream.data())
     }
 }
 

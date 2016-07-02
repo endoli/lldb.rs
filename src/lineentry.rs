@@ -4,13 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::address::SBAddress;
 use super::filespec::SBFileSpec;
+use super::stream::SBStream;
 use sys;
 
 /// Specifies an association with a contiguous range of
 /// instructions and a source file location.
-#[derive(Debug)]
 pub struct SBLineEntry {
     /// The underlying raw `SBLineEntryRef`.
     pub raw: sys::SBLineEntryRef,
@@ -65,6 +66,14 @@ impl SBLineEntry {
     /// available.
     pub fn column(&self) -> u32 {
         unsafe { sys::SBLineEntryGetColumn(self.raw) }
+    }
+}
+
+impl fmt::Debug for SBLineEntry {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBLineEntryGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBLineEntry {{ {} }}", stream.data())
     }
 }
 

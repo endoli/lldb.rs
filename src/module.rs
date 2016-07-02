@@ -4,11 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::filespec::SBFileSpec;
+use super::stream::SBStream;
 use sys;
 
 /// An executable image and its associated object and symbol files.
-#[derive(Debug)]
 pub struct SBModule {
     /// The underlying raw `SBModuleRef`.
     pub raw: sys::SBModuleRef,
@@ -53,6 +54,14 @@ impl SBModule {
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
         SBFileSpec::wrap(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
+    }
+}
+
+impl fmt::Debug for SBModule {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBModuleGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBModule {{ {} }}", stream.data())
     }
 }
 

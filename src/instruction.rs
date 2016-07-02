@@ -4,14 +4,15 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::address::SBAddress;
 use super::data::SBData;
+use super::stream::SBStream;
 use super::target::SBTarget;
 use super::AddressClass;
 use sys;
 
 /// A machine instruction.
-#[derive(Debug)]
 pub struct SBInstruction {
     /// The underlying raw `SBInstructionRef`.
     pub raw: sys::SBInstructionRef,
@@ -60,6 +61,14 @@ impl SBInstruction {
     #[allow(missing_docs)]
     pub fn is_branch(&self) -> bool {
         unsafe { sys::SBInstructionDoesBranch(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBInstruction {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBInstructionGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBInstruction {{ {} }}", stream.data())
     }
 }
 

@@ -5,15 +5,16 @@
 // except according to those terms.
 
 use std::ffi::{CStr, CString};
+use std::fmt;
 use std::ptr;
 use super::address::SBAddress;
 use super::instructionlist::SBInstructionList;
+use super::stream::SBStream;
 use super::target::SBTarget;
 use super::{DisassemblyFlavor, SymbolType};
 use sys;
 
 /// The symbol possibly associated with a stack frame.
-#[derive(Debug)]
 pub struct SBSymbol {
     /// The underlying raw `SBSymbolRef`.
     pub raw: sys::SBSymbolRef,
@@ -120,6 +121,14 @@ impl SBSymbol {
     /// module that contains it?
     pub fn is_synthetic(&self) -> bool {
         unsafe { sys::SBSymbolIsSynthetic(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBSymbol {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBSymbolGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBSymbol {{ {} }}", stream.data())
     }
 }
 

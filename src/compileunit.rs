@@ -4,12 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::filespec::SBFileSpec;
+use super::stream::SBStream;
 use super::LanguageType;
 use sys;
 
 /// A compilation unit or compiled source file.
-#[derive(Debug)]
 pub struct SBCompileUnit {
     /// The underlying raw `SBCompileUnitRef`.
     pub raw: sys::SBCompileUnitRef,
@@ -43,6 +44,14 @@ impl SBCompileUnit {
     /// The language for the compile unit.
     pub fn language(&self) -> LanguageType {
         unsafe { sys::SBCompileUnitGetLanguage(self.raw) }
+    }
+}
+
+impl fmt::Debug for SBCompileUnit {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBCompileUnitGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBCompileUnit {{ {} }}", stream.data())
     }
 }
 

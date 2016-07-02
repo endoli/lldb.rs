@@ -4,8 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::frame::SBFrame;
 use super::process::SBProcess;
+use super::stream::SBStream;
 use super::value::SBValue;
 use super::{lldb_tid_t, StopReason};
 use sys;
@@ -56,7 +58,6 @@ use sys;
 /// [`frames`]: #method.frames
 /// [`selected_frame`]: #method.selected_frame
 /// [`set_selected_frame`]: #method.set_selected_frame
-#[derive(Debug)]
 pub struct SBThread {
     /// The underlying raw `SBThreadRef`.
     pub raw: sys::SBThreadRef,
@@ -162,6 +163,14 @@ impl<'d> Iterator for ThreadFrameIter<'d> {
         } else {
             None
         }
+    }
+}
+
+impl fmt::Debug for SBThread {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBThreadGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBThread {{ {} }}", stream.data())
     }
 }
 

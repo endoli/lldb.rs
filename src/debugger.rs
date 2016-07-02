@@ -5,9 +5,11 @@
 // except according to those terms.
 
 use std::ffi::{CStr, CString};
+use std::fmt;
 use std::ptr;
 use super::error::SBError;
 use super::platform::SBPlatform;
+use super::stream::SBStream;
 use super::target::SBTarget;
 use sys;
 
@@ -123,7 +125,6 @@ use sys;
 /// [`create_target`]: #method.create_target
 /// [`create_target_simple`]: #method.create_target_simple
 /// [`targets`]: #method.targets
-#[derive(Debug)]
 pub struct SBDebugger {
     /// The underlying raw `SBDebuggerRef`.
     pub raw: sys::SBDebuggerRef,
@@ -270,6 +271,14 @@ impl<'d> Iterator for DebuggerTargetIter<'d> {
         } else {
             None
         }
+    }
+}
+
+impl fmt::Debug for SBDebugger {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBDebuggerGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBDebugger {{ {} }}", stream.data())
     }
 }
 

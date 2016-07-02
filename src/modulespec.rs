@@ -4,11 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::filespec::SBFileSpec;
+use super::stream::SBStream;
 use sys;
 
 /// A description of an `SBModule`.
-#[derive(Debug)]
 pub struct SBModuleSpec {
     /// The underlying raw `SBModuleSpecRef`.
     pub raw: sys::SBModuleSpecRef,
@@ -104,6 +105,14 @@ impl SBModuleSpec {
     #[allow(missing_docs)]
     pub fn set_uuid_bytes(&self, _object_name: &str) {
         unimplemented!();
+    }
+}
+
+impl fmt::Debug for SBModuleSpec {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBModuleSpecGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBModuleSpec {{ {} }}", stream.data())
     }
 }
 

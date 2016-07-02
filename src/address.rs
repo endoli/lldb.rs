@@ -4,11 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
 use super::function::SBFunction;
 use super::lineentry::SBLineEntry;
 use super::module::SBModule;
+use super::stream::SBStream;
 use super::symbol::SBSymbol;
 use super::symbolcontext::SBSymbolContext;
 use super::target::SBTarget;
@@ -45,7 +47,6 @@ use sys;
 /// and any images (shared libraries) will be  resolved/unresolved. When
 /// this happens, breakpoints that are in one of these sections can be
 /// set/cleared.
-#[derive(Debug)]
 pub struct SBAddress {
     /// The underlying raw `SBAddressRef`.
     pub raw: sys::SBAddressRef,
@@ -228,6 +229,14 @@ impl SBAddress {
     /// OR'ed together to more efficiently retrieve multiple symbol objects.
     pub fn line_entry(&self) -> Option<SBLineEntry> {
         SBLineEntry::maybe_wrap(unsafe { sys::SBAddressGetLineEntry(self.raw) })
+    }
+}
+
+impl fmt::Debug for SBAddress {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBAddressGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBAddress {{ {} }}", stream.data())
     }
 }
 

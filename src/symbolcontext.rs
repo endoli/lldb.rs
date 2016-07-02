@@ -4,10 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
+use super::stream::SBStream;
 use sys;
 
 /// A container that stores various debugger related info.
-#[derive(Debug)]
 pub struct SBSymbolContext {
     /// The underlying raw `SBSymbolContextRef`.
     pub raw: sys::SBSymbolContextRef,
@@ -31,6 +32,14 @@ impl SBSymbolContext {
     /// Check whether or not this is a valid `SBSymbolContext` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBSymbolContextIsValid(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBSymbolContext {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBSymbolContextGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBSymbolContext {{ {} }}", stream.data())
     }
 }
 

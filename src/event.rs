@@ -5,11 +5,12 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
 use super::broadcaster::SBBroadcaster;
+use super::stream::SBStream;
 use sys;
 
 /// An event.
-#[derive(Debug)]
 pub struct SBEvent {
     /// The underlying raw `SBEventRef`.
     pub raw: sys::SBEventRef,
@@ -68,6 +69,14 @@ impl SBEvent {
     #[allow(missing_docs)]
     pub fn broadcaster_matches_ref(&self, broadcaster: &SBBroadcaster) -> bool {
         unsafe { sys::SBEventBroadcasterMatchesRef(self.raw, broadcaster.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBEvent {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBEventGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBEvent {{ {} }}", stream.data())
     }
 }
 

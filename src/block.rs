@@ -5,12 +5,13 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
 use super::address::SBAddress;
 use super::filespec::SBFileSpec;
+use super::stream::SBStream;
 use sys;
 
 /// A lexical block.
-#[derive(Debug)]
 pub struct SBBlock {
     /// The underlying raw `SBBlockRef`.
     pub raw: sys::SBBlockRef,
@@ -114,6 +115,14 @@ impl SBBlock {
     /// Given an address, find out which address range it is part of.
     pub fn range_index_for_block_address(&self, block_address: &SBAddress) -> u32 {
         unsafe { sys::SBBlockGetRangeIndexForBlockAddress(self.raw, block_address.raw) }
+    }
+}
+
+impl fmt::Debug for SBBlock {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBBlockGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBBlock {{ {} }}", stream.data())
     }
 }
 

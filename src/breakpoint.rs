@@ -4,10 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
+use super::stream::SBStream;
 use sys;
 
 /// A logical breakpoint and its associated settings.
-#[derive(Debug)]
 pub struct SBBreakpoint {
     /// The underlying raw `SBBreakpointRef`.
     pub raw: sys::SBBreakpointRef,
@@ -31,6 +32,14 @@ impl SBBreakpoint {
     /// Check whether or not this is a valid `SBBreakpoint` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBBreakpointIsValid(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBBreakpoint {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBBreakpointGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBBreakpoint {{ {} }}", stream.data())
     }
 }
 

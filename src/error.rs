@@ -5,11 +5,12 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
+use super::stream::SBStream;
 use super::ErrorType;
 use sys;
 
 /// A container for holding any error code.
-#[derive(Debug)]
 pub struct SBError {
     /// The underlying raw `SBErrorRef`.
     pub raw: sys::SBErrorRef,
@@ -75,6 +76,14 @@ impl SBError {
 impl Default for SBError {
     fn default() -> SBError {
         SBError::new()
+    }
+}
+
+impl fmt::Debug for SBError {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBErrorGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBError {{ {} }}", stream.data())
     }
 }
 

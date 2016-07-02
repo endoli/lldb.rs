@@ -5,8 +5,10 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
+use super::stream::SBStream;
 use super::thread::SBThread;
 use super::{lldb_pid_t, lldb_tid_t, StateType};
 use sys;
@@ -87,7 +89,6 @@ use sys;
 /// [`set_selected_thread`]: #method.set_selected_thread
 /// [`set_selected_thread_by_id`]: #method.set_selected_thread_by_id
 /// [`set_selected_thread_by_index_id`]: #method.set_selected_thread_by_index_id
-#[derive(Debug)]
 pub struct SBProcess {
     /// The underlying raw `SBProcessRef`.
     pub raw: sys::SBProcessRef,
@@ -314,6 +315,14 @@ impl<'d> Iterator for ProcessThreadIter<'d> {
         } else {
             None
         }
+    }
+}
+
+impl fmt::Debug for SBProcess {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBProcessGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBProcess {{ {} }}", stream.data())
     }
 }
 

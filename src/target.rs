@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::fmt;
 use super::attachinfo::SBAttachInfo;
 use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
@@ -14,6 +15,8 @@ use super::module::SBModule;
 use super::modulespec::SBModuleSpec;
 use super::platform::SBPlatform;
 use super::process::SBProcess;
+use super::stream::SBStream;
+use super::DescriptionLevel;
 use sys;
 
 /// The target program running under the debugger.
@@ -63,7 +66,6 @@ use sys;
 /// [`launch`]: #method.launch
 /// [`SBAttachInfo`]: struct.SBAttachInfo.html
 /// [`attach`]: #method.attach
-#[derive(Debug)]
 pub struct SBTarget {
     /// The underlying raw `SBTargetRef`.
     pub raw: sys::SBTargetRef,
@@ -162,6 +164,14 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
+    }
+}
+
+impl fmt::Debug for SBTarget {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBTargetGetDescription(self.raw, stream.raw, DescriptionLevel::Brief) };
+        write!(fmt, "SBTarget {{ {} }}", stream.data())
     }
 }
 

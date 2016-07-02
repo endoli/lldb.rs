@@ -5,18 +5,19 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
 use super::address::SBAddress;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
 use super::function::SBFunction;
 use super::lineentry::SBLineEntry;
 use super::module::SBModule;
+use super::stream::SBStream;
 use super::symbol::SBSymbol;
 use super::thread::SBThread;
 use sys;
 
 /// One of the stack frames associated with a thread.
-#[derive(Debug)]
 pub struct SBFrame {
     /// The underlying raw `SBFrameRef`.
     pub raw: sys::SBFrameRef,
@@ -139,6 +140,14 @@ impl SBFrame {
     /// The thread that is executing this stack frame.
     pub fn thread(&self) -> SBThread {
         SBThread::wrap(unsafe { sys::SBFrameGetThread(self.raw) })
+    }
+}
+
+impl fmt::Debug for SBFrame {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBFrameGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBFrame {{ {} }}", stream.data())
     }
 }
 

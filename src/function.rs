@@ -5,11 +5,12 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
 use super::address::SBAddress;
+use super::stream::SBStream;
 use sys;
 
 /// A generic function, which can be inlined or not.
-#[derive(Debug)]
 pub struct SBFunction {
     /// The underlying raw `SBFunctionRef`.
     pub raw: sys::SBFunctionRef,
@@ -89,6 +90,14 @@ impl SBFunction {
     /// Returns false if unoptimized, or unknown.
     pub fn is_optimized(&self) -> bool {
         unsafe { sys::SBFunctionGetIsOptimized(self.raw) != 0 }
+    }
+}
+
+impl fmt::Debug for SBFunction {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBFunctionGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBFunction {{ {} }}", stream.data())
     }
 }
 

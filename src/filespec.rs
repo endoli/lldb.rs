@@ -5,6 +5,8 @@
 // except according to those terms.
 
 use std::ffi::CStr;
+use std::fmt;
+use super::stream::SBStream;
 use sys;
 
 /// A file specification that divides the path into a
@@ -12,7 +14,6 @@ use sys;
 ///
 /// The string values of the paths are put into uniqued string pools
 /// for fast comparisons and efficient memory usage.
-#[derive(Debug)]
 pub struct SBFileSpec {
     /// The underlying raw `SBFileSpecRef`.
     pub raw: sys::SBFileSpecRef,
@@ -61,6 +62,14 @@ impl SBFileSpec {
                 _ => panic!("Invalid string?"),
             }
         }
+    }
+}
+
+impl fmt::Debug for SBFileSpec {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBFileSpecGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBFileSpec {{ {} }}", stream.data())
     }
 }
 
