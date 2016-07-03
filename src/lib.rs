@@ -136,6 +136,12 @@ pub use sys::{AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrde
               TypeFlags, TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType,
               WatchpointKind};
 
+pub use sys::{LAUNCH_FLAG_EXEC, LAUNCH_FLAG_DEBUG, LAUNCH_FLAG_STOP_AT_ENTRY,
+              LAUNCH_FLAG_DISABLE_ASLR, LAUNCH_FLAG_DISABLE_STDIO, LAUNCH_FLAG_LAUNCH_IN_TTY,
+              LAUNCH_FLAG_LAUNCH_IN_SHELL, LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP,
+              LAUNCH_FLAG_DONT_SET_EXIT_STATUS, LAUNCH_FLAG_DETACH_ON_ERRROR,
+              LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS, LAUNCH_FLAG_CLOSE_TTY_ON_EXIT};
+
 mod address;
 mod attachinfo;
 mod block;

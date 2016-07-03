@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use std::ptr;
+use super::LaunchFlags;
 use sys;
 
 /// Configuration for launching a process.
@@ -27,6 +28,16 @@ impl SBLaunchInfo {
     /// Construct a new `SBLaunchInfo`.
     pub fn wrap(raw: sys::SBLaunchInfoRef) -> SBLaunchInfo {
         SBLaunchInfo { raw: raw }
+    }
+
+    #[allow(missing_docs)]
+    pub fn launch_flags(&self) -> LaunchFlags {
+        LaunchFlags::from_bits_truncate(unsafe { sys::SBLaunchInfoGetLaunchFlags(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_launch_flags(&self, launch_flags: LaunchFlags) {
+        unsafe { sys::SBLaunchInfoSetLaunchFlags(self.raw, launch_flags.bits()) }
     }
 }
 
