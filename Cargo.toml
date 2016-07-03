@@ -12,4 +12,4 @@ repository = "https://github.com/endoli/lldb.rs"
 build = "build.rs"
 
 [dependencies]
-lldb-sys = "0.0.7"
+lldb-sys = "0.0.8"
