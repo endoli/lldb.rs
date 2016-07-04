@@ -4,10 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
+use std::ptr;
 use super::address::SBAddress;
+use super::instructionlist::SBInstructionList;
 use super::stream::SBStream;
+use super::target::SBTarget;
+use super::DisassemblyFlavor;
 use sys;
 
 /// A generic function, which can be inlined or not.
@@ -64,6 +68,23 @@ impl SBFunction {
                 _ => panic!("Invalid string?"),
             }
         }
+    }
+
+    ///
+    pub fn get_instructions(&self,
+                            target: &SBTarget,
+                            flavor: DisassemblyFlavor)
+                            -> SBInstructionList {
+        let flavor = match flavor {
+            DisassemblyFlavor::ATT => CString::new("att").ok(),
+            DisassemblyFlavor::Default => None,
+            DisassemblyFlavor::Intel => CString::new("intel").ok(),
+        };
+        SBInstructionList::wrap(unsafe {
+            sys::SBFunctionGetInstructions2(self.raw,
+                                            target.raw,
+                                            flavor.map_or(ptr::null(), |s| s.as_ptr()))
+        })
     }
 
     /// Get the address of the start of this function.
