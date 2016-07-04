@@ -213,7 +213,7 @@ pub use self::filespec::SBFileSpec;
 pub use self::frame::SBFrame;
 pub use self::function::SBFunction;
 pub use self::instruction::SBInstruction;
-pub use self::instructionlist::SBInstructionList;
+pub use self::instructionlist::{SBInstructionList, SBInstructionListIter};
 pub use self::launchinfo::SBLaunchInfo;
 pub use self::lineentry::SBLineEntry;
 pub use self::listener::SBListener;

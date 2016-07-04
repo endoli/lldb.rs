@@ -5,10 +5,13 @@
 // except according to those terms.
 
 use std::fmt;
+use super::instruction::SBInstruction;
 use super::stream::SBStream;
 use sys;
 
-/// A list of machine instructions.
+/// A list of [machine instructions].
+///
+/// [machine instructions]: struct.SBInstruction.html
 pub struct SBInstructionList {
     /// The underlying raw `SBInstructionListRef`.
     pub raw: sys::SBInstructionListRef,
@@ -33,6 +36,24 @@ impl SBInstructionList {
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBInstructionListIsValid(self.raw) != 0 }
     }
+
+    /// Is this instruction list empty?
+    pub fn is_empty(&self) -> bool {
+        unsafe { sys::SBInstructionListGetSize(self.raw) == 0 }
+    }
+
+    /// Clear this instruction list.
+    pub fn clear(&self) {
+        unsafe { sys::SBInstructionListClear(self.raw) };
+    }
+
+    /// Iterate over this instruction list.
+    pub fn iter(&self) -> SBInstructionListIter {
+        SBInstructionListIter {
+            instruction_list: self,
+            idx: 0,
+        }
+    }
 }
 
 impl fmt::Debug for SBInstructionList {
@@ -46,5 +67,30 @@ impl fmt::Debug for SBInstructionList {
 impl Drop for SBInstructionList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBInstructionList(self.raw) };
+    }
+}
+
+/// An iterator over an [`SBInstructionList`].
+///
+/// [`SBInstructionList`]: struct.SBInstructionList.html
+pub struct SBInstructionListIter<'d> {
+    instruction_list: &'d SBInstructionList,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBInstructionListIter<'d> {
+    type Item = SBInstruction;
+
+    fn next(&mut self) -> Option<SBInstruction> {
+        if self.idx < unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) as usize } {
+            let r = SBInstruction::wrap(unsafe {
+                sys::SBInstructionListGetInstructionAtIndex(self.instruction_list.raw,
+                                                            self.idx as u32)
+            });
+            self.idx += 1;
+            Some(r)
+        } else {
+            None
+        }
     }
 }
