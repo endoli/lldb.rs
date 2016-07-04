@@ -80,23 +80,13 @@
 //!   instructions and a source file location. [`SBCompileUnit`] contains
 //!   [`SBLineEntry`]s.
 //!
-//! ## Development Guidelines
+//! ## Support and Maintenance
 //!
-//! The official LLDB bindings for C++ and Python maintain very
-//! strict backwards compatibility. This has resulted in them
-//! having methods that are considered to be deprecated in favor
-//! of newer methods with more comprehensive arguments. The Rust
-//! bindings don't have that problem (yet), so we should try to
-//! only write bindings for the recommended usages and not the
-//! deprecated methods.
-//!
-//! The documentation for the official bindings is also somewhat
-//! spotty. While it would be great to contribute upstream to
-//! improve that, we should seek to have these bindings be well
-//! documented and with more examples.
-//!
-//! People should be jealous of the quality of our bindings.
-//! Sic itur ad astra.
+//! I am developing this library largely on my own so far. I am able
+//! to offer support and maintenance, but would very much appreciate
+//! donations via [Patreon](https://patreon.com/endoli). I can also
+//! provide commercial support, so feel free to
+//! [contact me](mailto:bruce.mitchener@gmail.com).
 //!
 //! [LLDB]: http://lldb.llvm.org/
 //! [LLVM project]: http://llvm.org/
