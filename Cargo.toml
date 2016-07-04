@@ -11,5 +11,8 @@ homepage = "https://github.com/endoli/lldb.rs"
 repository = "https://github.com/endoli/lldb.rs"
 build = "build.rs"
 
+[[example]]
+name = "basic_synchronous"
+
 [dependencies]
 lldb-sys = "0.0.8"
