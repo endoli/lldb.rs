@@ -6,8 +6,10 @@
 
 use std::ffi::CString;
 use std::fmt;
+use super::breakpointlocation::SBBreakpointLocation;
 use super::stream::SBStream;
 use super::stringlist::SBStringList;
+use super::lldb_addr_t;
 use sys;
 
 /// A logical breakpoint and its associated settings.
@@ -148,6 +150,36 @@ impl SBBreakpoint {
         unsafe { sys::SBBreakpointGetNames(self.raw, names.raw) };
         names
     }
+
+    #[allow(missing_docs)]
+    pub fn clear_all_breakpoint_sites(&self) {
+        unsafe { sys::SBBreakpointClearAllBreakpointSites(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_location_by_address(&self, address: lldb_addr_t) -> Option<SBBreakpointLocation> {
+        SBBreakpointLocation::maybe_wrap(unsafe {
+            sys::SBBreakpointFindLocationByAddress(self.raw, address)
+        })
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_location_id_by_address(&self, address: lldb_addr_t) -> i32 {
+        unsafe { sys::SBBreakpointFindLocationIDByAddress(self.raw, address) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_location_by_id(&self, id: i32) -> Option<SBBreakpointLocation> {
+        SBBreakpointLocation::maybe_wrap(unsafe { sys::SBBreakpointFindLocationByID(self.raw, id) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn locations(&self) -> SBBreakpointLocationIter {
+        SBBreakpointLocationIter {
+            breakpoint: self,
+            idx: 0,
+        }
+    }
 }
 
 impl fmt::Debug for SBBreakpoint {
@@ -161,5 +193,29 @@ impl fmt::Debug for SBBreakpoint {
 impl Drop for SBBreakpoint {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBreakpoint(self.raw) };
+    }
+}
+
+/// An iterator over an [`SBBreakpoint`].
+///
+/// [`SBBreakpoint`]: struct.SBBreakpoint.html
+pub struct SBBreakpointLocationIter<'d> {
+    breakpoint: &'d SBBreakpoint,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBBreakpointLocationIter<'d> {
+    type Item = SBBreakpointLocation;
+
+    fn next(&mut self) -> Option<SBBreakpointLocation> {
+        if self.idx < unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) as usize } {
+            let r = SBBreakpointLocation::maybe_wrap(unsafe {
+                sys::SBBreakpointGetLocationAtIndex(self.breakpoint.raw, self.idx as u32)
+            });
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
     }
 }
