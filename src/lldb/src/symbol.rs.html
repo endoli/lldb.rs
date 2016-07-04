@@ -172,6 +172,17 @@
 <span id="128">128</span>
 <span id="129">129</span>
 <span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -180,15 +191,16 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::{<span class='ident'>CStr</span>, <span class='ident'>CString</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>address</span>::<span class='ident'>SBAddress</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>instructionlist</span>::<span class='ident'>SBInstructionList</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>DisassemblyFlavor</span>, <span class='ident'>SymbolType</span>};
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// The symbol possibly associated with a stack frame.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBSymbol</span> {
     <span class='doccomment'>/// The underlying raw `SBSymbolRef`.</span>
     <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBSymbolRef</span>,
@@ -250,12 +262,14 @@
                             <span class='ident'>flavor</span>: <span class='ident'>DisassemblyFlavor</span>)
                             <span class='op'>-&gt;</span> <span class='ident'>SBInstructionList</span> {
         <span class='kw'>let</span> <span class='ident'>flavor</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>flavor</span> {
-            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>ATT</span> <span class='op'>=&gt;</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='string'>&quot;att&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_ptr</span>(),
-            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>Default</span> <span class='op'>=&gt;</span> <span class='ident'>ptr</span>::<span class='ident'>null</span>(),
-            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>Intel</span> <span class='op'>=&gt;</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='string'>&quot;intel&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_ptr</span>(),
+            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>ATT</span> <span class='op'>=&gt;</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='string'>&quot;att&quot;</span>).<span class='ident'>ok</span>(),
+            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>Default</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='ident'>DisassemblyFlavor</span>::<span class='ident'>Intel</span> <span class='op'>=&gt;</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='string'>&quot;intel&quot;</span>).<span class='ident'>ok</span>(),
         };
         <span class='ident'>SBInstructionList</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> {
-            <span class='ident'>sys</span>::<span class='ident'>SBSymbolGetInstructions2</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>target</span>.<span class='ident'>raw</span>, <span class='ident'>flavor</span>)
+            <span class='ident'>sys</span>::<span class='ident'>SBSymbolGetInstructions2</span>(<span class='self'>self</span>.<span class='ident'>raw</span>,
+                                          <span class='ident'>target</span>.<span class='ident'>raw</span>,
+                                          <span class='ident'>flavor</span>.<span class='ident'>map_or</span>(<span class='ident'>ptr</span>::<span class='ident'>null</span>(), <span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>.<span class='ident'>as_ptr</span>()))
         })
     }
 
@@ -295,6 +309,14 @@
     <span class='doccomment'>/// module that contains it?</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_synthetic</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBSymbolIsSynthetic</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>SBSymbol</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fmt</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>SBStream</span>::<span class='ident'>new</span>();
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBSymbolGetDescription</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>stream</span>.<span class='ident'>raw</span>) };
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>fmt</span>, <span class='string'>&quot;SBSymbol {{ {} }}&quot;</span>, <span class='ident'>stream</span>.<span class='ident'>data</span>())
     }
 }
 

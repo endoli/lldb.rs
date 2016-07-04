@@ -47,8 +47,47 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/lldb_sys/lib.rs.html#7-18' title='goto source code'>[src]</a></span></h1>
-<h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+               </span><a id='src-0' class='srclink' href='../src/lldb_sys/lib.rs.html#7-19' title='goto source code'>[src]</a></span></h1>
+<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.FilePermissions.html'
+                                  title='lldb_sys::FilePermissions'>FilePermissions</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.LaunchFlags.html'
+                                  title='lldb_sys::LaunchFlags'>LaunchFlags</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Permissions.html'
+                                  title='lldb_sys::Permissions'>Permissions</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SymbolContextItem.html'
+                                  title='lldb_sys::SymbolContextItem'>SymbolContextItem</a></td>
+                           <td class='docblock short'>
+                                <p>These mask bits allow a common interface for queries that can
+limit the amount of information that gets parsed to only the
+information that is requested. These bits also can indicate what
+actually did get resolved during query function calls.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.TypeClass.html'
+                                  title='lldb_sys::TypeClass'>TypeClass</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.AccessType.html'
@@ -156,13 +195,6 @@
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.FilePermissions.html'
-                                  title='lldb_sys::FilePermissions'>FilePermissions</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
                            <td><a class='enum' href='enum.Format.html'
                                   title='lldb_sys::Format'>Format</a></td>
                            <td class='docblock short'>
@@ -219,13 +251,6 @@
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.LaunchFlags.html'
-                                  title='lldb_sys::LaunchFlags'>LaunchFlags</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
                            <td><a class='enum' href='enum.MatchType.html'
                                   title='lldb_sys::MatchType'>MatchType</a></td>
                            <td class='docblock short'>
@@ -242,13 +267,6 @@
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.PathType.html'
                                   title='lldb_sys::PathType'>PathType</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='enum' href='enum.Permissions.html'
-                                  title='lldb_sys::Permissions'>Permissions</a></td>
                            <td class='docblock short'>
                                 
                            </td>
@@ -807,16 +825,6 @@
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.SymbolContextItem.html'
-                                  title='lldb_sys::SymbolContextItem'>SymbolContextItem</a></td>
-                           <td class='docblock short'>
-                                <p>These mask bits allow a common interface for queries that can
-limit the amount of information that gets parsed to only the
-information that is requested. These bits also can indicate what
-actually did get resolved during query function calls.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
                            <td><a class='enum' href='enum.SymbolType.html'
                                   title='lldb_sys::SymbolType'>SymbolType</a></td>
                            <td class='docblock short'>
@@ -826,13 +834,6 @@ actually did get resolved during query function calls.</p>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.TemplateArgumentKind.html'
                                   title='lldb_sys::TemplateArgumentKind'>TemplateArgumentKind</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='enum' href='enum.TypeClass.html'
-                                  title='lldb_sys::TypeClass'>TypeClass</a></td>
                            <td class='docblock short'>
                                 
                            </td>
@@ -881,22 +882,511 @@ actually did get resolved during query function calls.</p>
                        </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='constant' href='constant.eFilePermissionsDirectoryDefault.html'
-                                  title='lldb_sys::eFilePermissionsDirectoryDefault'>eFilePermissionsDirectoryDefault</a></td>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_DIRECTORY_DEFAULT.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_DIRECTORY_DEFAULT'>FILE_PERMISSIONS_DIRECTORY_DEFAULT</a></td>
                            <td class='docblock short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='constant' href='constant.eFilePermissionsFileDefault.html'
-                                  title='lldb_sys::eFilePermissionsFileDefault'>eFilePermissionsFileDefault</a></td>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_R.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_R'>FILE_PERMISSIONS_EVERYONE_R</a></td>
                            <td class='docblock short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='constant' href='constant.eScriptLanguageDefault.html'
-                                  title='lldb_sys::eScriptLanguageDefault'>eScriptLanguageDefault</a></td>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RW.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_RW'>FILE_PERMISSIONS_EVERYONE_RW</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RWX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_RWX'>FILE_PERMISSIONS_EVERYONE_RWX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_RX'>FILE_PERMISSIONS_EVERYONE_RX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_W.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_W'>FILE_PERMISSIONS_EVERYONE_W</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_X.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_EVERYONE_X'>FILE_PERMISSIONS_EVERYONE_X</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_FILE_DEFAULT.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_FILE_DEFAULT'>FILE_PERMISSIONS_FILE_DEFAULT</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_EXECUTE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_EXECUTE'>FILE_PERMISSIONS_GROUP_EXECUTE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_READ.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_READ'>FILE_PERMISSIONS_GROUP_READ</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RW.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_RW'>FILE_PERMISSIONS_GROUP_RW</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RWX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_RWX'>FILE_PERMISSIONS_GROUP_RWX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_RX'>FILE_PERMISSIONS_GROUP_RX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_WRITE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_GROUP_WRITE'>FILE_PERMISSIONS_GROUP_WRITE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_EXECUTE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_EXECUTE'>FILE_PERMISSIONS_USER_EXECUTE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_READ.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_READ'>FILE_PERMISSIONS_USER_READ</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RW.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_RW'>FILE_PERMISSIONS_USER_RW</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RWX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_RWX'>FILE_PERMISSIONS_USER_RWX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_RX'>FILE_PERMISSIONS_USER_RX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_WRITE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_USER_WRITE'>FILE_PERMISSIONS_USER_WRITE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_EXECUTE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_EXECUTE'>FILE_PERMISSIONS_WORLD_EXECUTE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_READ.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_READ'>FILE_PERMISSIONS_WORLD_READ</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RW.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_RW'>FILE_PERMISSIONS_WORLD_RW</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RWX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_RWX'>FILE_PERMISSIONS_WORLD_RWX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RX.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_RX'>FILE_PERMISSIONS_WORLD_RX</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_WRITE.html'
+                                  title='lldb_sys::FILE_PERMISSIONS_WORLD_WRITE'>FILE_PERMISSIONS_WORLD_WRITE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_CLOSE_TTY_ON_EXIT.html'
+                                  title='lldb_sys::LAUNCH_FLAG_CLOSE_TTY_ON_EXIT'>LAUNCH_FLAG_CLOSE_TTY_ON_EXIT</a></td>
+                           <td class='docblock short'>
+                                <p>Close the open TTY on exit.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_DEBUG.html'
+                                  title='lldb_sys::LAUNCH_FLAG_DEBUG'>LAUNCH_FLAG_DEBUG</a></td>
+                           <td class='docblock short'>
+                                <p>Stop as soon as the process launches to allow the process to be debugged.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_DETACH_ON_ERRROR.html'
+                                  title='lldb_sys::LAUNCH_FLAG_DETACH_ON_ERRROR'>LAUNCH_FLAG_DETACH_ON_ERRROR</a></td>
+                           <td class='docblock short'>
+                                <p>If set, then the client stub should detach rather than
+killing the debugee.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_DISABLE_ASLR.html'
+                                  title='lldb_sys::LAUNCH_FLAG_DISABLE_ASLR'>LAUNCH_FLAG_DISABLE_ASLR</a></td>
+                           <td class='docblock short'>
+                                <p>Disable address space layout randomization (ASLR).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_DISABLE_STDIO.html'
+                                  title='lldb_sys::LAUNCH_FLAG_DISABLE_STDIO'>LAUNCH_FLAG_DISABLE_STDIO</a></td>
+                           <td class='docblock short'>
+                                <p>Disable stdio for the inferior process (e.g. for a GUI app).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_DONT_SET_EXIT_STATUS.html'
+                                  title='lldb_sys::LAUNCH_FLAG_DONT_SET_EXIT_STATUS'>LAUNCH_FLAG_DONT_SET_EXIT_STATUS</a></td>
+                           <td class='docblock short'>
+                                <p>If you are going to hand the process off (e.g. to debugserver),
+set this flag so that lldb and the handee don&#39;t race to set its
+exit status.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_EXEC.html'
+                                  title='lldb_sys::LAUNCH_FLAG_EXEC'>LAUNCH_FLAG_EXEC</a></td>
+                           <td class='docblock short'>
+                                <p>Exec when launching and turn the calling process into a new process.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP.html'
+                                  title='lldb_sys::LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP'>LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP</a></td>
+                           <td class='docblock short'>
+                                <p>Launch the process in a separate process group.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_SHELL.html'
+                                  title='lldb_sys::LAUNCH_FLAG_LAUNCH_IN_SHELL'>LAUNCH_FLAG_LAUNCH_IN_SHELL</a></td>
+                           <td class='docblock short'>
+                                <p>Launch the process inside a shell to get shell expansion.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_TTY.html'
+                                  title='lldb_sys::LAUNCH_FLAG_LAUNCH_IN_TTY'>LAUNCH_FLAG_LAUNCH_IN_TTY</a></td>
+                           <td class='docblock short'>
+                                <p>Launch the process in a new TTY if supported by the host.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS.html'
+                                  title='lldb_sys::LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS'>LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS</a></td>
+                           <td class='docblock short'>
+                                <p>Perform shell-style argument expansion.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.LAUNCH_FLAG_STOP_AT_ENTRY.html'
+                                  title='lldb_sys::LAUNCH_FLAG_STOP_AT_ENTRY'>LAUNCH_FLAG_STOP_AT_ENTRY</a></td>
+                           <td class='docblock short'>
+                                <p>Stop at the program entry point instead of auto-continuing when
+launching or attaching at entry point.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.PERMISSIONS_EXECUTABLE.html'
+                                  title='lldb_sys::PERMISSIONS_EXECUTABLE'>PERMISSIONS_EXECUTABLE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.PERMISSIONS_READABLE.html'
+                                  title='lldb_sys::PERMISSIONS_READABLE'>PERMISSIONS_READABLE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.PERMISSIONS_WRITABLE.html'
+                                  title='lldb_sys::PERMISSIONS_WRITABLE'>PERMISSIONS_WRITABLE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_BLOCK.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_BLOCK'>SYMBOL_CONTEXT_ITEM_BLOCK</a></td>
+                           <td class='docblock short'>
+                                <p>Set when the deepest block is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_COMPUNIT.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_COMPUNIT'>SYMBOL_CONTEXT_ITEM_COMPUNIT</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a compilation unit is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_EVERYTHING.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_EVERYTHING'>SYMBOL_CONTEXT_ITEM_EVERYTHING</a></td>
+                           <td class='docblock short'>
+                                <p>Indicates to try and look everything up during a routine symbol
+context query. This doesn&#39;t actually include looking up a variable.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_FUNCTION.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_FUNCTION'>SYMBOL_CONTEXT_ITEM_FUNCTION</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a function is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_LINE_ENTRY.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_LINE_ENTRY'>SYMBOL_CONTEXT_ITEM_LINE_ENTRY</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a line entry is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_MODULE.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_MODULE'>SYMBOL_CONTEXT_ITEM_MODULE</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a module is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_SYMBOL.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_SYMBOL'>SYMBOL_CONTEXT_ITEM_SYMBOL</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a symbol is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_TARGET.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_TARGET'>SYMBOL_CONTEXT_ITEM_TARGET</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a target is requested from a query or was located
+in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_VARIABLE.html'
+                                  title='lldb_sys::SYMBOL_CONTEXT_ITEM_VARIABLE'>SYMBOL_CONTEXT_ITEM_VARIABLE</a></td>
+                           <td class='docblock short'>
+                                <p>Set when a global or static variable is requested from a query,
+or was located in the query results.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_ANY.html'
+                                  title='lldb_sys::TYPE_CLASS_ANY'>TYPE_CLASS_ANY</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_ARRAY.html'
+                                  title='lldb_sys::TYPE_CLASS_ARRAY'>TYPE_CLASS_ARRAY</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_BLOCKPOINTER.html'
+                                  title='lldb_sys::TYPE_CLASS_BLOCKPOINTER'>TYPE_CLASS_BLOCKPOINTER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_BUILTIN.html'
+                                  title='lldb_sys::TYPE_CLASS_BUILTIN'>TYPE_CLASS_BUILTIN</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_CLASS.html'
+                                  title='lldb_sys::TYPE_CLASS_CLASS'>TYPE_CLASS_CLASS</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_COMPLEX_FLOAT.html'
+                                  title='lldb_sys::TYPE_CLASS_COMPLEX_FLOAT'>TYPE_CLASS_COMPLEX_FLOAT</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_COMPLEX_INTEGER.html'
+                                  title='lldb_sys::TYPE_CLASS_COMPLEX_INTEGER'>TYPE_CLASS_COMPLEX_INTEGER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_ENUMERATION.html'
+                                  title='lldb_sys::TYPE_CLASS_ENUMERATION'>TYPE_CLASS_ENUMERATION</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_FUNCTION.html'
+                                  title='lldb_sys::TYPE_CLASS_FUNCTION'>TYPE_CLASS_FUNCTION</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_INVALID.html'
+                                  title='lldb_sys::TYPE_CLASS_INVALID'>TYPE_CLASS_INVALID</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_MEMBER_POINTER.html'
+                                  title='lldb_sys::TYPE_CLASS_MEMBER_POINTER'>TYPE_CLASS_MEMBER_POINTER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_INTERFACE.html'
+                                  title='lldb_sys::TYPE_CLASS_OBJC_INTERFACE'>TYPE_CLASS_OBJC_INTERFACE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_OBJECT.html'
+                                  title='lldb_sys::TYPE_CLASS_OBJC_OBJECT'>TYPE_CLASS_OBJC_OBJECT</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_OBJECT_POINTER.html'
+                                  title='lldb_sys::TYPE_CLASS_OBJC_OBJECT_POINTER'>TYPE_CLASS_OBJC_OBJECT_POINTER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_OTHER.html'
+                                  title='lldb_sys::TYPE_CLASS_OTHER'>TYPE_CLASS_OTHER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_POINTER.html'
+                                  title='lldb_sys::TYPE_CLASS_POINTER'>TYPE_CLASS_POINTER</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_REFERENCE.html'
+                                  title='lldb_sys::TYPE_CLASS_REFERENCE'>TYPE_CLASS_REFERENCE</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_STRUCT.html'
+                                  title='lldb_sys::TYPE_CLASS_STRUCT'>TYPE_CLASS_STRUCT</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_TYPEDEF.html'
+                                  title='lldb_sys::TYPE_CLASS_TYPEDEF'>TYPE_CLASS_TYPEDEF</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_UNION.html'
+                                  title='lldb_sys::TYPE_CLASS_UNION'>TYPE_CLASS_UNION</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TYPE_CLASS_VECTOR.html'
+                                  title='lldb_sys::TYPE_CLASS_VECTOR'>TYPE_CLASS_VECTOR</a></td>
                            <td class='docblock short'>
                                 
                            </td>
@@ -1836,6 +2326,13 @@ actually did get resolved during query function calls.</p>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.DisposeSBSourceManager.html'
                                   title='lldb_sys::DisposeSBSourceManager'>DisposeSBSourceManager</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.DisposeSBStream.html'
+                                  title='lldb_sys::DisposeSBStream'>DisposeSBStream</a></td>
                            <td class='docblock short'>
                                 
                            </td>

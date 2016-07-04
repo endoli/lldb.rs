@@ -95,6 +95,15 @@
 <span id="51">51</span>
 <span id="52">52</span>
 <span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -102,12 +111,13 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>filespec</span>::<span class='ident'>SBFileSpec</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>LanguageType</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A compilation unit or compiled source file.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBCompileUnit</span> {
     <span class='doccomment'>/// The underlying raw `SBCompileUnitRef`.</span>
     <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitRef</span>,
@@ -141,6 +151,14 @@
     <span class='doccomment'>/// The language for the compile unit.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>language</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LanguageType</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitGetLanguage</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>SBCompileUnit</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fmt</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>SBStream</span>::<span class='ident'>new</span>();
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBCompileUnitGetDescription</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>stream</span>.<span class='ident'>raw</span>) };
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>fmt</span>, <span class='string'>&quot;SBCompileUnit {{ {} }}&quot;</span>, <span class='ident'>stream</span>.<span class='ident'>data</span>())
     }
 }
 

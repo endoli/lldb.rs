@@ -287,6 +287,33 @@
 <span id="243">243</span>
 <span id="244">244</span>
 <span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -307,7 +334,7 @@
 <span class='doccomment'>//! Add it to your `Cargo.toml` like so:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
-<span class='doccomment'>//! lldb = &quot;0.0.2&quot;</span>
+<span class='doccomment'>//! lldb = &quot;0.0.3&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ### Mac OS X Installation Notes</span>
@@ -370,23 +397,13 @@
 <span class='doccomment'>//!   instructions and a source file location. [`SBCompileUnit`] contains</span>
 <span class='doccomment'>//!   [`SBLineEntry`]s.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! ## Development Guidelines</span>
+<span class='doccomment'>//! ## Support and Maintenance</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The official LLDB bindings for C++ and Python maintain very</span>
-<span class='doccomment'>//! strict backwards compatibility. This has resulted in them</span>
-<span class='doccomment'>//! having methods that are considered to be deprecated in favor</span>
-<span class='doccomment'>//! of newer methods with more comprehensive arguments. The Rust</span>
-<span class='doccomment'>//! bindings don&#39;t have that problem (yet), so we should try to</span>
-<span class='doccomment'>//! only write bindings for the recommended usages and not the</span>
-<span class='doccomment'>//! deprecated methods.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! The documentation for the official bindings is also somewhat</span>
-<span class='doccomment'>//! spotty. While it would be great to contribute upstream to</span>
-<span class='doccomment'>//! improve that, we should seek to have these bindings be well</span>
-<span class='doccomment'>//! documented and with more examples.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! People should be jealous of the quality of our bindings.</span>
-<span class='doccomment'>//! Sic itur ad astra.</span>
+<span class='doccomment'>//! I am developing this library largely on my own so far. I am able</span>
+<span class='doccomment'>//! to offer support and maintenance, but would very much appreciate</span>
+<span class='doccomment'>//! donations via [Patreon](https://patreon.com/endoli). I can also</span>
+<span class='doccomment'>//! provide commercial support, so feel free to</span>
+<span class='doccomment'>//! [contact me](mailto:bruce.mitchener@gmail.com).</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! [LLDB]: http://lldb.llvm.org/</span>
 <span class='doccomment'>//! [LLVM project]: http://llvm.org/</span>
@@ -426,6 +443,39 @@
               <span class='ident'>TypeFlags</span>, <span class='ident'>TypeOptions</span>, <span class='ident'>TypeSummaryCapping</span>, <span class='ident'>ValueType</span>, <span class='ident'>WatchpointEventType</span>,
               <span class='ident'>WatchpointKind</span>};
 
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>sys</span>::{<span class='ident'>LAUNCH_FLAG_EXEC</span>, <span class='ident'>LAUNCH_FLAG_DEBUG</span>, <span class='ident'>LAUNCH_FLAG_STOP_AT_ENTRY</span>,
+              <span class='ident'>LAUNCH_FLAG_DISABLE_ASLR</span>, <span class='ident'>LAUNCH_FLAG_DISABLE_STDIO</span>, <span class='ident'>LAUNCH_FLAG_LAUNCH_IN_TTY</span>,
+              <span class='ident'>LAUNCH_FLAG_LAUNCH_IN_SHELL</span>, <span class='ident'>LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP</span>,
+              <span class='ident'>LAUNCH_FLAG_DONT_SET_EXIT_STATUS</span>, <span class='ident'>LAUNCH_FLAG_DETACH_ON_ERRROR</span>,
+              <span class='ident'>LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS</span>, <span class='ident'>LAUNCH_FLAG_CLOSE_TTY_ON_EXIT</span>};
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>sys</span>::{<span class='ident'>SYMBOL_CONTEXT_ITEM_TARGET</span>, <span class='ident'>SYMBOL_CONTEXT_ITEM_MODULE</span>,
+              <span class='ident'>SYMBOL_CONTEXT_ITEM_COMPUNIT</span>, <span class='ident'>SYMBOL_CONTEXT_ITEM_FUNCTION</span>,
+              <span class='ident'>SYMBOL_CONTEXT_ITEM_BLOCK</span>, <span class='ident'>SYMBOL_CONTEXT_ITEM_LINE_ENTRY</span>,
+              <span class='ident'>SYMBOL_CONTEXT_ITEM_SYMBOL</span>, <span class='ident'>SYMBOL_CONTEXT_ITEM_EVERYTHING</span>,
+              <span class='ident'>SYMBOL_CONTEXT_ITEM_VARIABLE</span>};
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>sys</span>::{<span class='ident'>PERMISSIONS_WRITABLE</span>, <span class='ident'>PERMISSIONS_READABLE</span>, <span class='ident'>PERMISSIONS_EXECUTABLE</span>};
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>sys</span>::{<span class='ident'>TYPE_CLASS_INVALID</span>, <span class='ident'>TYPE_CLASS_ARRAY</span>, <span class='ident'>TYPE_CLASS_BLOCKPOINTER</span>, <span class='ident'>TYPE_CLASS_BUILTIN</span>,
+              <span class='ident'>TYPE_CLASS_CLASS</span>, <span class='ident'>TYPE_CLASS_COMPLEX_FLOAT</span>, <span class='ident'>TYPE_CLASS_COMPLEX_INTEGER</span>,
+              <span class='ident'>TYPE_CLASS_ENUMERATION</span>, <span class='ident'>TYPE_CLASS_FUNCTION</span>, <span class='ident'>TYPE_CLASS_MEMBER_POINTER</span>,
+              <span class='ident'>TYPE_CLASS_OBJC_OBJECT</span>, <span class='ident'>TYPE_CLASS_OBJC_INTERFACE</span>, <span class='ident'>TYPE_CLASS_OBJC_OBJECT_POINTER</span>,
+              <span class='ident'>TYPE_CLASS_POINTER</span>, <span class='ident'>TYPE_CLASS_REFERENCE</span>, <span class='ident'>TYPE_CLASS_STRUCT</span>, <span class='ident'>TYPE_CLASS_TYPEDEF</span>,
+              <span class='ident'>TYPE_CLASS_UNION</span>, <span class='ident'>TYPE_CLASS_VECTOR</span>, <span class='ident'>TYPE_CLASS_OTHER</span>, <span class='ident'>TYPE_CLASS_ANY</span>};
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>sys</span>::{<span class='ident'>FILE_PERMISSIONS_WORLD_EXECUTE</span>, <span class='ident'>FILE_PERMISSIONS_WORLD_WRITE</span>,
+              <span class='ident'>FILE_PERMISSIONS_WORLD_READ</span>, <span class='ident'>FILE_PERMISSIONS_GROUP_EXECUTE</span>,
+              <span class='ident'>FILE_PERMISSIONS_GROUP_WRITE</span>, <span class='ident'>FILE_PERMISSIONS_GROUP_READ</span>,
+              <span class='ident'>FILE_PERMISSIONS_USER_EXECUTE</span>, <span class='ident'>FILE_PERMISSIONS_USER_WRITE</span>,
+              <span class='ident'>FILE_PERMISSIONS_USER_READ</span>, <span class='ident'>FILE_PERMISSIONS_WORLD_RX</span>, <span class='ident'>FILE_PERMISSIONS_WORLD_RW</span>,
+              <span class='ident'>FILE_PERMISSIONS_WORLD_RWX</span>, <span class='ident'>FILE_PERMISSIONS_GROUP_RX</span>, <span class='ident'>FILE_PERMISSIONS_GROUP_RW</span>,
+              <span class='ident'>FILE_PERMISSIONS_GROUP_RWX</span>, <span class='ident'>FILE_PERMISSIONS_USER_RX</span>, <span class='ident'>FILE_PERMISSIONS_USER_RW</span>,
+              <span class='ident'>FILE_PERMISSIONS_USER_RWX</span>, <span class='ident'>FILE_PERMISSIONS_EVERYONE_R</span>, <span class='ident'>FILE_PERMISSIONS_EVERYONE_W</span>,
+              <span class='ident'>FILE_PERMISSIONS_EVERYONE_X</span>, <span class='ident'>FILE_PERMISSIONS_EVERYONE_RW</span>,
+              <span class='ident'>FILE_PERMISSIONS_EVERYONE_RX</span>, <span class='ident'>FILE_PERMISSIONS_EVERYONE_RWX</span>,
+              <span class='ident'>FILE_PERMISSIONS_FILE_DEFAULT</span>, <span class='ident'>FILE_PERMISSIONS_DIRECTORY_DEFAULT</span>};
+
 <span class='kw'>mod</span> <span class='ident'>address</span>;
 <span class='kw'>mod</span> <span class='ident'>attachinfo</span>;
 <span class='kw'>mod</span> <span class='ident'>block</span>;
@@ -448,6 +498,8 @@
 <span class='kw'>mod</span> <span class='ident'>modulespec</span>;
 <span class='kw'>mod</span> <span class='ident'>platform</span>;
 <span class='kw'>mod</span> <span class='ident'>process</span>;
+<span class='kw'>mod</span> <span class='ident'>stream</span>;
+<span class='kw'>mod</span> <span class='ident'>stringlist</span>;
 <span class='kw'>mod</span> <span class='ident'>symbol</span>;
 <span class='kw'>mod</span> <span class='ident'>symbolcontext</span>;
 <span class='kw'>mod</span> <span class='ident'>target</span>;
@@ -468,7 +520,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>frame</span>::<span class='ident'>SBFrame</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>function</span>::<span class='ident'>SBFunction</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>instruction</span>::<span class='ident'>SBInstruction</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>instructionlist</span>::<span class='ident'>SBInstructionList</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>instructionlist</span>::{<span class='ident'>SBInstructionList</span>, <span class='ident'>SBInstructionListIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>launchinfo</span>::<span class='ident'>SBLaunchInfo</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>lineentry</span>::<span class='ident'>SBLineEntry</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>listener</span>::<span class='ident'>SBListener</span>;
@@ -476,6 +528,8 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>modulespec</span>::<span class='ident'>SBModuleSpec</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>platform</span>::<span class='ident'>SBPlatform</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>process</span>::<span class='ident'>SBProcess</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>stringlist</span>::{<span class='ident'>SBStringList</span>, <span class='ident'>SBStringListIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>symbol</span>::<span class='ident'>SBSymbol</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>symbolcontext</span>::<span class='ident'>SBSymbolContext</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;

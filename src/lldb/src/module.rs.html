@@ -105,6 +105,15 @@
 <span id="61">61</span>
 <span id="62">62</span>
 <span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -112,11 +121,12 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>filespec</span>::<span class='ident'>SBFileSpec</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// An executable image and its associated object and symbol files.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBModule</span> {
     <span class='doccomment'>/// The underlying raw `SBModuleRef`.</span>
     <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBModuleRef</span>,
@@ -161,6 +171,14 @@
     <span class='doccomment'>/// The file could also be cached in a local developer kit directory.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>platform_filespec</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBFileSpec</span> {
         <span class='ident'>SBFileSpec</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBModuleGetPlatformFileSpec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>SBModule</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fmt</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>SBStream</span>::<span class='ident'>new</span>();
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBModuleGetDescription</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>stream</span>.<span class='ident'>raw</span>) };
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>fmt</span>, <span class='string'>&quot;SBModule {{ {} }}&quot;</span>, <span class='ident'>stream</span>.<span class='ident'>data</span>())
     }
 }
 

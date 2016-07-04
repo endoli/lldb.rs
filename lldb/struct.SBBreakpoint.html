@@ -47,10 +47,45 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-153' class='srclink' href='../src/lldb/src/breakpoint.rs.html#11-14' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-168' class='srclink' href='../src/lldb/src/breakpoint.rs.html#62-65' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBBreakpoint {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBreakpointRef.html' title='lldb_sys::lldb_sys::SBBreakpointRef'>SBBreakpointRef</a>,
 }</pre><div class='docblock'><p>A logical breakpoint and its associated settings.</p>
+
+<h1 id='to-hit-or-not' class='section-header'><a href='#to-hit-or-not'>To Hit or Not</a></h1>
+<p>A breakpoint has multiple ways of controlling whether
+or not it should be considered active.</p>
+
+<ul>
+<li>Enabled. This is controlled via <a href="#method.is_enabled"><code>is_enabled</code></a> and
+<a href="#method.set_enabled"><code>set_enabled</code></a>.</li>
+<li>One shot. If set, this will be disabled once it has
+been hit. This is controlled via <a href="#method.is_oneshot"><code>is_oneshot</code></a> and
+<a href="#method.set_oneshot"><code>set_oneshot</code></a>.</li>
+<li>Ignore count. If set, this breakpoint will be ignored
+the first <em>ignore count</em> times that it is hit. This is
+controlled via <a href="#method.ignore_count"><code>ignore_count</code></a> and <a href="#method.set_ignore_count"><code>set_ignore_count</code></a>.</li>
+</ul>
+
+<p>A count of how many times a breakpoint has been it is
+available via <a href="#method.hit_count"><code>hit_count</code></a>.</p>
+
+<h1 id='breakpoint-names-and-aliases' class='section-header'><a href='#breakpoint-names-and-aliases'>Breakpoint Names and Aliases</a></h1>
+<p>Breakpoints can have names associated with them. These are
+actually more like tags in that the same name can be applied
+to multiple breakpoints so that a single command invocation
+can work on multiple breakpoints at once.</p>
+
+<p>A common use case for this is setting up families of breakpoints,
+for example on <code>malloc</code>, <code>realloc</code>, and <code>free</code> and giving them
+all a name of <code>memory</code>. Then, you can make it easy for the user
+enable or disable them all in a single shot.</p>
+
+<p>Names are managed via <a href="#method.add_name"><code>add_name</code></a>, <a href="#method.remove_name"><code>remove_name</code></a>,
+<a href="#method.matches_name"><code>matches_name</code></a> and <a href="#method.names"><code>names</code></a>.</p>
+
+<h1 id='breakpoint-locations' class='section-header'><a href='#breakpoint-locations'>Breakpoint Locations</a></h1>
+<p>...</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBBreakpointRef</code>.</p>
@@ -60,8 +95,20 @@
 <div class='docblock'><p>Construct a new <code>Some(SBBreakpoint)</code> or <code>None</code>.</p>
 </div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBBreakpoint</code> value.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBBreakpoint.html' title='lldb::SBBreakpoint'>SBBreakpoint</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBBreakpoint.html' title='lldb::SBBreakpoint'>SBBreakpoint</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.is_enabled' class='method'><code>fn <a href='#method.is_enabled' class='fnname'>is_enabled</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.set_enabled' class='method'><code>fn <a href='#method.set_enabled' class='fnname'>set_enabled</a>(&amp;self, enabled: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.is_oneshot' class='method'><code>fn <a href='#method.is_oneshot' class='fnname'>is_oneshot</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.set_oneshot' class='method'><code>fn <a href='#method.set_oneshot' class='fnname'>set_oneshot</a>(&amp;self, oneshot: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.is_internal' class='method'><code>fn <a href='#method.is_internal' class='fnname'>is_internal</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.hit_count' class='method'><code>fn <a href='#method.hit_count' class='fnname'>hit_count</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+<h4 id='method.ignore_count' class='method'><code>fn <a href='#method.ignore_count' class='fnname'>ignore_count</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+<h4 id='method.set_ignore_count' class='method'><code>fn <a href='#method.set_ignore_count' class='fnname'>set_ignore_count</a>(&amp;self, count: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
+<h4 id='method.add_name' class='method'><code>fn <a href='#method.add_name' class='fnname'>add_name</a>(&amp;self, name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.remove_name' class='method'><code>fn <a href='#method.remove_name' class='fnname'>remove_name</a>(&amp;self, name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.matches_name' class='method'><code>fn <a href='#method.matches_name' class='fnname'>matches_name</a>(&amp;self, name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.names' class='method'><code>fn <a href='#method.names' class='fnname'>names</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBStringList.html' title='lldb::SBStringList'>SBStringList</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBBreakpoint.html' title='lldb::SBBreakpoint'>SBBreakpoint</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBBreakpoint.html' title='lldb::SBBreakpoint'>SBBreakpoint</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

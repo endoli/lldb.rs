@@ -112,6 +112,15 @@
 <span id="68">68</span>
 <span id="69">69</span>
 <span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -119,14 +128,15 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>address</span>::<span class='ident'>SBAddress</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>data</span>::<span class='ident'>SBData</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>AddressClass</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A machine instruction.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBInstruction</span> {
     <span class='doccomment'>/// The underlying raw `SBInstructionRef`.</span>
     <span class='kw'>pub</span> <span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBInstructionRef</span>,
@@ -175,6 +185,14 @@
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_branch</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionDoesBranch</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>SBInstruction</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fmt</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>SBStream</span>::<span class='ident'>new</span>();
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBInstructionGetDescription</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>stream</span>.<span class='ident'>raw</span>) };
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>fmt</span>, <span class='string'>&quot;SBInstruction {{ {} }}&quot;</span>, <span class='ident'>stream</span>.<span class='ident'>data</span>())
     }
 }
 

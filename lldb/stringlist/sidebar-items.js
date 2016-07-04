@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SBStringList","A list of strings."],["SBStringListIter","An iterator over an `SBStringList`."]]});

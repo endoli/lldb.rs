@@ -79,6 +79,23 @@
 <span id="35">35</span>
 <span id="36">36</span>
 <span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -87,6 +104,7 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>LaunchFlags</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// Configuration for launching a process.</span>
@@ -109,6 +127,22 @@
     <span class='doccomment'>/// Construct a new `SBLaunchInfo`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wrap</span>(<span class='ident'>raw</span>: <span class='ident'>sys</span>::<span class='ident'>SBLaunchInfoRef</span>) <span class='op'>-&gt;</span> <span class='ident'>SBLaunchInfo</span> {
         <span class='ident'>SBLaunchInfo</span> { <span class='ident'>raw</span>: <span class='ident'>raw</span> }
+    }
+
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>launch_flags</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LaunchFlags</span> {
+        <span class='ident'>LaunchFlags</span>::<span class='ident'>from_bits_truncate</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLaunchInfoGetLaunchFlags</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
+    }
+
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_launch_flags</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>launch_flags</span>: <span class='ident'>LaunchFlags</span>) {
+        <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBLaunchInfoSetLaunchFlags</span>(<span class='self'>self</span>.<span class='ident'>raw</span>, <span class='ident'>launch_flags</span>.<span class='ident'>bits</span>()) }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>SBLaunchInfo</span> {
+    <span class='kw'>fn</span> <span class='ident'>default</span>() <span class='op'>-&gt;</span> <span class='ident'>SBLaunchInfo</span> {
+        <span class='ident'>SBLaunchInfo</span>::<span class='ident'>new</span>()
     }
 }
 
