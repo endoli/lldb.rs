@@ -31,6 +31,15 @@ use sys;
 /// Launching a process can be done by creating and filling
 /// out an [`SBLaunchInfo`] and calling [`launch`].
 ///
+/// ```no_run
+/// use lldb::*;
+/// fn launch_target(target: &SBTarget) -> Result<SBProcess, SBError> {
+///     let launch_info = SBLaunchInfo::new();
+///     launch_info.set_launch_flags(LAUNCH_FLAG_STOP_AT_ENTRY);
+///     // Probably want to set up a listener here.
+///     target.launch(launch_info)
+/// }
+/// ```
 ///
 /// ## Attaching
 ///
