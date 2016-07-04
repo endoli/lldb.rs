@@ -17,7 +17,7 @@
 //! Add it to your `Cargo.toml` like so:
 //!
 //! ```toml
-//! lldb = "0.0.2"
+//! lldb = "0.0.3"
 //! ```
 //!
 //! ### Mac OS X Installation Notes
