@@ -198,7 +198,7 @@ pub use self::breakpointlocation::SBBreakpointLocation;
 pub use self::broadcaster::SBBroadcaster;
 pub use self::compileunit::SBCompileUnit;
 pub use self::data::SBData;
-pub use self::debugger::SBDebugger;
+pub use self::debugger::{SBDebugger, SBDebuggerTargetIter};
 pub use self::error::SBError;
 pub use self::event::SBEvent;
 pub use self::filespec::SBFileSpec;
@@ -212,13 +212,13 @@ pub use self::listener::SBListener;
 pub use self::module::SBModule;
 pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
-pub use self::process::SBProcess;
+pub use self::process::{SBProcess, SBProcessThreadIter};
 pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};
 pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
 pub use self::target::SBTarget;
-pub use self::thread::SBThread;
+pub use self::thread::{SBThread, SBThreadFrameIter};
 pub use self::value::SBValue;
 
 /// Which syntax should be used in disassembly?

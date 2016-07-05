@@ -228,8 +228,8 @@ impl SBDebugger {
     /// Get an iterator over the [targets] known to this debugger instance.
     ///
     /// [targets]: struct.SBTarget.html
-    pub fn targets(&self) -> DebuggerTargetIter {
-        DebuggerTargetIter {
+    pub fn targets(&self) -> SBDebuggerTargetIter {
+        SBDebuggerTargetIter {
             debugger: self,
             idx: 0,
         }
@@ -250,13 +250,16 @@ impl SBDebugger {
     }
 }
 
-#[doc(hidden)]
-pub struct DebuggerTargetIter<'d> {
+/// Iterate over the [targets] known to a [debugger].
+///
+/// [targets]: struct.SBTarget.html
+/// [debugger]: struct.SBDebugger.html
+pub struct SBDebuggerTargetIter<'d> {
     debugger: &'d SBDebugger,
     idx: usize,
 }
 
-impl<'d> Iterator for DebuggerTargetIter<'d> {
+impl<'d> Iterator for SBDebuggerTargetIter<'d> {
     type Item = SBTarget;
 
     fn next(&mut self) -> Option<SBTarget> {

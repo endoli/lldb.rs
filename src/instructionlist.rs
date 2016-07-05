@@ -70,8 +70,9 @@ impl Drop for SBInstructionList {
     }
 }
 
-/// An iterator over an [`SBInstructionList`].
+/// An iterator over the [instructions] in an [`SBInstructionList`].
 ///
+/// [instructions]: struct.SBInstruction.html
 /// [`SBInstructionList`]: struct.SBInstructionList.html
 pub struct SBInstructionListIter<'d> {
     instruction_list: &'d SBInstructionList,

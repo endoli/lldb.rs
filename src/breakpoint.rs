@@ -196,8 +196,9 @@ impl Drop for SBBreakpoint {
     }
 }
 
-/// An iterator over an [`SBBreakpoint`].
+/// An iterator over the [locations] in an [`SBBreakpoint`].
 ///
+/// [locations]: struct.SBBreakpointLocation.html
 /// [`SBBreakpoint`]: struct.SBBreakpoint.html
 pub struct SBBreakpointLocationIter<'d> {
     breakpoint: &'d SBBreakpoint,

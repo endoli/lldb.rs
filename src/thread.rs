@@ -121,8 +121,8 @@ impl SBThread {
     /// Get an iterator over the [frames] known to this thread instance.
     ///
     /// [frames]: struct.SBFrame.html
-    pub fn frames(&self) -> ThreadFrameIter {
-        ThreadFrameIter {
+    pub fn frames(&self) -> SBThreadFrameIter {
+        SBThreadFrameIter {
             thread: self,
             idx: 0,
         }
@@ -144,13 +144,16 @@ impl SBThread {
     }
 }
 
-#[doc(hidden)]
-pub struct ThreadFrameIter<'d> {
+/// Iterate over the [frames] in a [thread].
+///
+/// [frames]: struct.SBFrame.html
+/// [thread]: struct.SBThread.html
+pub struct SBThreadFrameIter<'d> {
     thread: &'d SBThread,
     idx: usize,
 }
 
-impl<'d> Iterator for ThreadFrameIter<'d> {
+impl<'d> Iterator for SBThreadFrameIter<'d> {
     type Item = SBFrame;
 
     fn next(&mut self) -> Option<SBFrame> {

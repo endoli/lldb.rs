@@ -258,8 +258,8 @@ impl SBProcess {
     /// Get an iterator over the [threads] known to this process instance.
     ///
     /// [threads]: struct.SBThread.html
-    pub fn threads(&self) -> ProcessThreadIter {
-        ProcessThreadIter {
+    pub fn threads(&self) -> SBProcessThreadIter {
+        SBProcessThreadIter {
             process: self,
             idx: 0,
         }
@@ -296,13 +296,16 @@ impl SBProcess {
     }
 }
 
-#[doc(hidden)]
-pub struct ProcessThreadIter<'d> {
+/// Iterate over the [threads] in a [process].
+///
+/// [threads]: struct.SBThread.html
+/// [process]: struct.SBProcess.html
+pub struct SBProcessThreadIter<'d> {
     process: &'d SBProcess,
     idx: usize,
 }
 
-impl<'d> Iterator for ProcessThreadIter<'d> {
+impl<'d> Iterator for SBProcessThreadIter<'d> {
     type Item = SBThread;
 
     fn next(&mut self) -> Option<SBThread> {
