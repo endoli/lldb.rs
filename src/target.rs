@@ -191,11 +191,6 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
-    pub fn broadcaster(&self) -> SBBroadcaster {
-        SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
-    }
-
-    #[allow(missing_docs)]
     pub fn enable_all_watchpoints(&self) {
         unsafe { sys::SBTargetEnableAllWatchpoints(self.raw) };
     }
@@ -234,6 +229,11 @@ impl SBTarget {
             target: self,
             idx: 0,
         }
+    }
+
+    #[allow(missing_docs)]
+    pub fn broadcaster(&self) -> SBBroadcaster {
+        SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
     }
 }
 
