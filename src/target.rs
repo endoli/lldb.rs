@@ -6,6 +6,7 @@
 
 use std::fmt;
 use super::attachinfo::SBAttachInfo;
+use super::breakpoint::SBBreakpoint;
 use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
 use super::error::SBError;
@@ -172,6 +173,14 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
+    pub fn breakpoints(&self) -> SBTargetBreakpointIter {
+        SBTargetBreakpointIter {
+            target: self,
+            idx: 0,
+        }
+    }
+
+    #[allow(missing_docs)]
     pub fn delete_watchpoint(&self, watch_id: i32) {
         unsafe { sys::SBTargetDeleteWatchpoint(self.raw, watch_id) };
     }
@@ -218,6 +227,14 @@ impl SBTarget {
             Err(error)
         }
     }
+
+    #[allow(missing_docs)]
+    pub fn watchpoints(&self) -> SBTargetWatchpointIter {
+        SBTargetWatchpointIter {
+            target: self,
+            idx: 0,
+        }
+    }
 }
 
 impl fmt::Debug for SBTarget {
@@ -231,5 +248,55 @@ impl fmt::Debug for SBTarget {
 impl Drop for SBTarget {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBTarget(self.raw) };
+    }
+}
+
+/// Iterate over the [breakpoints] in a [target].
+///
+/// [breakpoints]: struct.SBBreakpoint.html
+/// [target]: struct.SBTarget.html
+pub struct SBTargetBreakpointIter<'d> {
+    target: &'d SBTarget,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBTargetBreakpointIter<'d> {
+    type Item = SBBreakpoint;
+
+    fn next(&mut self) -> Option<SBBreakpoint> {
+        if self.idx < unsafe { sys::SBTargetGetNumBreakpoints(self.target.raw) as usize } {
+            let r = Some(SBBreakpoint::wrap(unsafe {
+                sys::SBTargetGetBreakpointAtIndex(self.target.raw, self.idx as u32)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+}
+
+/// Iterate over the [watchpoints] in a [target].
+///
+/// [watchpoints]: struct.SBWatchpoint.html
+/// [target]: struct.SBTarget.html
+pub struct SBTargetWatchpointIter<'d> {
+    target: &'d SBTarget,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBTargetWatchpointIter<'d> {
+    type Item = SBWatchpoint;
+
+    fn next(&mut self) -> Option<SBWatchpoint> {
+        if self.idx < unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) as usize } {
+            let r = Some(SBWatchpoint::wrap(unsafe {
+                sys::SBTargetGetWatchpointAtIndex(self.target.raw, self.idx as u32)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
     }
 }
