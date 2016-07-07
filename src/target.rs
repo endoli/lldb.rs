@@ -16,7 +16,8 @@ use super::modulespec::SBModuleSpec;
 use super::platform::SBPlatform;
 use super::process::SBProcess;
 use super::stream::SBStream;
-use super::DescriptionLevel;
+use super::watchpoint::SBWatchpoint;
+use super::{DescriptionLevel, lldb_addr_t};
 use sys;
 
 /// The target program running under the debugger.
@@ -171,8 +172,51 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
+    pub fn delete_watchpoint(&self, watch_id: i32) {
+        unsafe { sys::SBTargetDeleteWatchpoint(self.raw, watch_id) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_watchpoint_by_id(&self, watch_id: i32) -> Option<SBWatchpoint> {
+        SBWatchpoint::maybe_wrap(unsafe { sys::SBTargetFindWatchpointByID(self.raw, watch_id) })
+    }
+
+    #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn enable_all_watchpoints(&self) {
+        unsafe { sys::SBTargetEnableAllWatchpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn disable_all_watchpoints(&self) {
+        unsafe { sys::SBTargetDisableAllWatchpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn delete_all_watchpoints(&self) {
+        unsafe { sys::SBTargetDeleteAllWatchpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn watch_address(&self,
+                         addr: lldb_addr_t,
+                         size: usize,
+                         read: bool,
+                         write: bool)
+                         -> Result<SBWatchpoint, SBError> {
+        let error: SBError = SBError::new();
+        let watchpoint = unsafe {
+            sys::SBTargetWatchAddress(self.raw, addr, size, read as u8, write as u8, error.raw)
+        };
+        if error.is_success() {
+            Ok(SBWatchpoint::wrap(watchpoint))
+        } else {
+            Err(error)
+        }
     }
 }
 
