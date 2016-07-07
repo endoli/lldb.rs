@@ -173,6 +173,31 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
+    pub fn delete_breakpoint(&self, break_id: i32) {
+        unsafe { sys::SBTargetBreakpointDelete(self.raw, break_id) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_breakpoint_by_id(&self, break_id: i32) -> Option<SBBreakpoint> {
+        SBBreakpoint::maybe_wrap(unsafe { sys::SBTargetFindBreakpointByID(self.raw, break_id) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn enable_all_breakpoints(&self) {
+        unsafe { sys::SBTargetEnableAllBreakpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn disable_all_breakpoints(&self) {
+        unsafe { sys::SBTargetDisableAllBreakpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn delete_all_breakpoints(&self) {
+        unsafe { sys::SBTargetDeleteAllBreakpoints(self.raw) };
+    }
+
+    #[allow(missing_docs)]
     pub fn breakpoints(&self) -> SBTargetBreakpointIter {
         SBTargetBreakpointIter {
             target: self,
