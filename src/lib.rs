@@ -190,6 +190,7 @@ mod symbolcontext;
 mod target;
 mod thread;
 mod value;
+mod valuelist;
 mod watchpoint;
 
 pub use self::address::SBAddress;
@@ -223,6 +224,7 @@ pub use self::symbolcontext::SBSymbolContext;
 pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetWatchpointIter};
 pub use self::thread::{SBThread, SBThreadFrameIter};
 pub use self::value::SBValue;
+pub use self::valuelist::SBValueList;
 pub use self::watchpoint::SBWatchpoint;
 
 /// Which syntax should be used in disassembly?
