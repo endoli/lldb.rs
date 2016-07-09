@@ -9,6 +9,7 @@ use std::fmt;
 use super::address::SBAddress;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
+use super::expressionoptions::SBExpressionOptions;
 use super::function::SBFunction;
 use super::lineentry::SBLineEntry;
 use super::module::SBModule;
@@ -152,6 +153,14 @@ impl SBFrame {
     /// Return `true` if this frame represents an inlined function.
     pub fn is_inlined(&self) -> bool {
         unsafe { sys::SBFrameIsInlined(self.raw) != 0 }
+    }
+
+    /// Evaluate an expression within the context of this frame.
+    pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
+        let expression = CString::new(expression).unwrap();
+        SBValue::wrap(unsafe {
+            sys::SBFrameEvaluateExpression4(self.raw, expression.as_ptr(), options.raw)
+        })
     }
 
     /// Gets the lexical block that defines the stack frame. Another way to think

@@ -4,12 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CString;
 use std::fmt;
 use super::attachinfo::SBAttachInfo;
 use super::breakpoint::SBBreakpoint;
 use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
 use super::error::SBError;
+use super::expressionoptions::SBExpressionOptions;
 use super::filespec::SBFileSpec;
 use super::launchinfo::SBLaunchInfo;
 use super::module::SBModule;
@@ -17,6 +19,7 @@ use super::modulespec::SBModuleSpec;
 use super::platform::SBPlatform;
 use super::process::SBProcess;
 use super::stream::SBStream;
+use super::value::SBValue;
 use super::watchpoint::SBWatchpoint;
 use super::{DescriptionLevel, lldb_addr_t};
 use sys;
@@ -259,6 +262,14 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
+    }
+
+    /// Evaluate an expression.
+    pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
+        let expression = CString::new(expression).unwrap();
+        SBValue::wrap(unsafe {
+            sys::SBTargetEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
+        })
     }
 }
 
