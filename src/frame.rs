@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
 use super::address::SBAddress;
 use super::block::SBBlock;
@@ -15,6 +15,10 @@ use super::module::SBModule;
 use super::stream::SBStream;
 use super::symbol::SBSymbol;
 use super::thread::SBThread;
+use super::value::SBValue;
+use super::valuelist::SBValueList;
+use super::variablesoptions::SBVariablesOptions;
+use super::lldb_addr_t;
 use sys;
 
 /// One of the stack frames associated with a thread.
@@ -46,6 +50,40 @@ impl SBFrame {
     /// The zero-based stack frame index for this frame.
     pub fn frame_id(&self) -> u32 {
         unsafe { sys::SBFrameGetFrameID(self.raw) }
+    }
+
+    /// Get the Canonical Frame Address for this stack frame.
+    ///
+    /// This is the DWARF standard's definition of a CFA, a
+    /// stack address that remains constant throughout the
+    /// lifetime of the function.
+    pub fn cfa(&self) -> Option<lldb_addr_t> {
+        let cfa = unsafe { sys::SBFrameGetCFA(self.raw) };
+        if cfa != u64::max_value() {
+            Some(cfa)
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn pc(&self) -> lldb_addr_t {
+        unsafe { sys::SBFrameGetPC(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_pc(&mut self, new_pc: lldb_addr_t) -> bool {
+        unsafe { sys::SBFrameSetPC(self.raw, new_pc) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn sp(&self) -> lldb_addr_t {
+        unsafe { sys::SBFrameGetSP(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn fp(&self) -> lldb_addr_t {
+        unsafe { sys::SBFrameGetFP(self.raw) }
     }
 
     /// The program counter (PC) as a section offset address (`SBAddress`).
@@ -140,6 +178,83 @@ impl SBFrame {
     /// The thread that is executing this stack frame.
     pub fn thread(&self) -> SBThread {
         SBThread::wrap(unsafe { sys::SBFrameGetThread(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn disassemble(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBFrameDisassemble(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn variables(&self, options: &SBVariablesOptions) -> SBValueList {
+        SBValueList::wrap(unsafe { sys::SBFrameGetVariables3(self.raw, options.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn all_variables(&self) -> SBValueList {
+        let mut options = SBVariablesOptions::new();
+        options.set_include_arguments(true);
+        options.set_include_locals(true);
+        options.set_include_statics(true);
+        options.set_in_scope_only(true);
+        self.variables(&options)
+    }
+
+    #[allow(missing_docs)]
+    pub fn arguments(&self) -> SBValueList {
+        let mut options = SBVariablesOptions::new();
+        options.set_include_arguments(true);
+        options.set_include_locals(false);
+        options.set_include_statics(false);
+        options.set_in_scope_only(false);
+        self.variables(&options)
+    }
+
+    #[allow(missing_docs)]
+    pub fn locals(&self) -> SBValueList {
+        let mut options = SBVariablesOptions::new();
+        options.set_include_arguments(false);
+        options.set_include_locals(true);
+        options.set_include_statics(false);
+        options.set_in_scope_only(false);
+        self.variables(&options)
+    }
+
+    #[allow(missing_docs)]
+    pub fn statics(&self) -> SBValueList {
+        let mut options = SBVariablesOptions::new();
+        options.set_include_arguments(false);
+        options.set_include_locals(false);
+        options.set_include_statics(true);
+        options.set_in_scope_only(false);
+        self.variables(&options)
+    }
+
+    #[allow(missing_docs)]
+    pub fn registers(&self) -> SBValueList {
+        SBValueList::wrap(unsafe { sys::SBFrameGetRegisters(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_register(&self, name: &str) -> Option<SBValue> {
+        let name = CString::new(name).unwrap();
+        SBValue::maybe_wrap(unsafe { sys::SBFrameFindRegister(self.raw, name.as_ptr()) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn parent_frame(&self) -> Option<SBFrame> {
+        let thread = self.thread();
+        let parent_idx = self.frame_id() + 1;
+        if parent_idx < unsafe { sys::SBThreadGetNumFrames(thread.raw) } {
+            SBFrame::maybe_wrap(unsafe { sys::SBThreadGetFrameAtIndex(thread.raw, parent_idx) })
+        } else {
+            None
+        }
     }
 }
 
