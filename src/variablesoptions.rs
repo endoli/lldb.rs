@@ -16,6 +16,11 @@ pub struct SBVariablesOptions {
 
 impl SBVariablesOptions {
     /// Construct a new `SBVariablesOptions`.
+    pub fn new() -> SBVariablesOptions {
+        SBVariablesOptions::wrap(unsafe { sys::CreateSBVariablesOptions() })
+    }
+
+    /// Construct a new `SBVariablesOptions`.
     pub fn wrap(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
         SBVariablesOptions { raw: raw }
     }
