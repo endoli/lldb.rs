@@ -5,7 +5,16 @@
 // except according to those terms.
 
 use std::fmt;
+use super::address::SBAddress;
+use super::data::SBData;
+use super::error::SBError;
+use super::frame::SBFrame;
+use super::process::SBProcess;
 use super::stream::SBStream;
+use super::target::SBTarget;
+use super::thread::SBThread;
+use super::watchpoint::SBWatchpoint;
+use super::lldb_addr_t;
 use sys;
 
 /// The value of a variable, register or expression.
@@ -32,6 +41,139 @@ impl SBValue {
     /// Check whether or not this is a valid `SBValue` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBValueIsValid(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn dereference(&self) -> Option<SBValue> {
+        SBValue::maybe_wrap(unsafe { sys::SBValueDereference(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn address_of(&self) -> Option<SBValue> {
+        SBValue::maybe_wrap(unsafe { sys::SBValueAddressOf(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn type_is_pointer_type(&self) -> bool {
+        unsafe { sys::SBValueTypeIsPointerType(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn target(&self) -> SBTarget {
+        SBTarget::wrap(unsafe { sys::SBValueGetTarget(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn process(&self) -> SBProcess {
+        SBProcess::wrap(unsafe { sys::SBValueGetProcess(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn thread(&self) -> SBThread {
+        SBThread::wrap(unsafe { sys::SBValueGetThread(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn frame(&self) -> SBFrame {
+        SBFrame::wrap(unsafe { sys::SBValueGetFrame(self.raw) })
+    }
+
+    /// Find and watch a variable.
+    pub fn watch(&self,
+                 resolve_location: bool,
+                 read: bool,
+                 write: bool)
+                 -> Result<SBWatchpoint, SBError> {
+        let error = SBError::new();
+        let wp = unsafe {
+            sys::SBValueWatch(self.raw,
+                              resolve_location as u8,
+                              read as u8,
+                              write as u8,
+                              error.raw)
+        };
+        if error.is_success() {
+            Ok(SBWatchpoint::wrap(wp))
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Find and watch the location pointed to by a variable.
+    pub fn watch_pointee(&self,
+                         resolve_location: bool,
+                         read: bool,
+                         write: bool)
+                         -> Result<SBWatchpoint, SBError> {
+        let error = SBError::new();
+        let wp = unsafe {
+            sys::SBValueWatchPointee(self.raw,
+                                     resolve_location as u8,
+                                     read as u8,
+                                     write as u8,
+                                     error.raw)
+        };
+        if error.is_success() {
+            Ok(SBWatchpoint::wrap(wp))
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Get an `SBData` wrapping what this `SBValue` points to.
+    ///
+    /// This method will dereference the current `SBValue`, if its
+    /// data type is a `T*` or `T[]`, and extract `item_count` elements
+    /// of type `T` from it, copying their contents into an `SBData`.
+    ///
+    /// `item_idx` is the index of the first item to retrieve. For an array
+    /// this is equivalent to `array[item_idx]`, for a pointer
+    /// to `*(pointer + item_idx)`. In either case, the measurement
+    /// unit for `item_idx` is the `sizeof(T)` rather than bytes.
+    ///
+    /// `item_count` is how many items should be copied into the output.
+    /// By default only one item is copied, but more can be asked for.
+    ///
+    /// Returns `Some(SBData)` with the contents of the copied items, on success.
+    /// `None` otherwise.
+    pub fn pointee_data(&self, item_idx: u32, item_count: u32) -> Option<SBData> {
+        SBData::maybe_wrap(unsafe { sys::SBValueGetPointeeData(self.raw, item_idx, item_count) })
+    }
+
+    /// Get an `SBData` wrapping the contents of this `SBValue`.
+    ///
+    /// This method will read the contents of this object in memory
+    /// and copy them into an `SBData` for future use.
+    ///
+    /// Returns `Some(SBData)` with the contents of this `SBValue`, on success.
+    /// `None` otherwise.
+    pub fn data(&self) -> Option<SBData> {
+        SBData::maybe_wrap(unsafe { sys::SBValueGetData(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_data(&self, data: &SBData) -> Result<(), SBError> {
+        let error = SBError::new();
+        if unsafe { sys::SBValueSetData(self.raw, data.raw, error.raw) != 0 } {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn load_address(&self) -> Option<lldb_addr_t> {
+        let load_address = unsafe { sys::SBValueGetLoadAddress(self.raw) };
+        if load_address != u64::max_value() {
+            Some(load_address)
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn address(&self) -> Option<SBAddress> {
+        SBAddress::maybe_wrap(unsafe { sys::SBValueGetAddress(self.raw) })
     }
 }
 
