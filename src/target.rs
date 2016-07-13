@@ -11,6 +11,7 @@ use super::breakpoint::SBBreakpoint;
 use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
 use super::error::SBError;
+use super::event::SBEvent;
 use super::expressionoptions::SBExpressionOptions;
 use super::filespec::SBFileSpec;
 use super::launchinfo::SBLaunchInfo;
@@ -271,6 +272,15 @@ impl SBTarget {
             sys::SBTargetEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
         })
     }
+
+    #[allow(missing_docs)]
+    pub fn event_as_target_event(event: &SBEvent) -> Option<SBTargetEvent> {
+        if unsafe { sys::SBTargetEventIsTargetEvent(event.raw) != 0 } {
+            Some(SBTargetEvent::new(event))
+        } else {
+            None
+        }
+    }
 }
 
 impl fmt::Debug for SBTarget {
@@ -328,6 +338,55 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
         if self.idx < unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) as usize } {
             let r = Some(SBWatchpoint::wrap(unsafe {
                 sys::SBTargetGetWatchpointAtIndex(self.target.raw, self.idx as u32)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+}
+
+#[allow(missing_docs)]
+pub struct SBTargetEvent<'e> {
+    event: &'e SBEvent,
+}
+
+#[allow(missing_docs)]
+impl<'e> SBTargetEvent<'e> {
+    pub fn new(event: &'e SBEvent) -> Self {
+        SBTargetEvent { event: event }
+    }
+
+    pub fn target(&self) -> SBTarget {
+        SBTarget::wrap(unsafe { sys::SBTargetGetTargetFromEvent(self.event.raw) })
+    }
+
+    pub fn modules(&self) -> SBTargetEventModuleIter {
+        SBTargetEventModuleIter {
+            event: self,
+            idx: 0,
+        }
+    }
+}
+
+/// Iterate over the [modules] referenced from a [target event].
+///
+/// [modules]: struct.SBModule.html
+/// [target event]: struct.SBTargetEvent.html
+pub struct SBTargetEventModuleIter<'d> {
+    event: &'d SBTargetEvent<'d>,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBTargetEventModuleIter<'d> {
+    type Item = SBModule;
+
+    fn next(&mut self) -> Option<SBModule> {
+        if self.idx <
+           unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize } {
+            let r = Some(SBModule::wrap(unsafe {
+                sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32, self.event.event.raw)
             }));
             self.idx += 1;
             r

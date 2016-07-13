@@ -225,7 +225,8 @@ pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};
 pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
-pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetWatchpointIter};
+pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
+                       SBTargetWatchpointIter};
 pub use self::thread::{SBThread, SBThreadFrameIter};
 pub use self::value::SBValue;
 pub use self::valuelist::SBValueList;
