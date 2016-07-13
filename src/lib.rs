@@ -219,7 +219,8 @@ pub use self::listener::SBListener;
 pub use self::module::SBModule;
 pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
-pub use self::process::{SBProcess, SBProcessThreadIter};
+pub use self::process::{SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter,
+                        SBProcessThreadIter};
 pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};
 pub use self::symbol::SBSymbol;

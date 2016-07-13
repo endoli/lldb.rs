@@ -8,6 +8,7 @@ use std::ffi::CStr;
 use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
+use super::event::SBEvent;
 use super::stream::SBStream;
 use super::thread::SBThread;
 use super::{lldb_pid_t, lldb_tid_t, StateType};
@@ -294,6 +295,15 @@ impl SBProcess {
     pub fn set_selected_thread_by_index_id(&self, thread_index_id: u32) -> bool {
         unsafe { sys::SBProcessSetSelectedThreadByIndexID(self.raw, thread_index_id) != 0 }
     }
+
+    #[allow(missing_docs)]
+    pub fn event_as_process_event(event: &SBEvent) -> Option<SBProcessEvent> {
+        if unsafe { sys::SBProcessEventIsProcessEvent(event.raw) != 0 } {
+            Some(SBProcessEvent::new(event))
+        } else {
+            None
+        }
+    }
 }
 
 /// Iterate over the [threads] in a [process].
@@ -332,5 +342,70 @@ impl fmt::Debug for SBProcess {
 impl Drop for SBProcess {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBProcess(self.raw) };
+    }
+}
+
+#[allow(missing_docs)]
+pub struct SBProcessEvent<'e> {
+    event: &'e SBEvent,
+}
+
+#[allow(missing_docs)]
+impl<'e> SBProcessEvent<'e> {
+    pub fn new(event: &'e SBEvent) -> Self {
+        SBProcessEvent { event: event }
+    }
+
+    pub fn process_state(&self) -> StateType {
+        unsafe { sys::SBProcessGetStateFromEvent(self.event.raw) }
+    }
+
+    pub fn process(&self) -> SBProcess {
+        SBProcess::wrap(unsafe { sys::SBProcessGetProcessFromEvent(self.event.raw) })
+    }
+
+    pub fn interrupted(&self) -> bool {
+        unsafe { sys::SBProcessGetInterruptedFromEvent(self.event.raw) != 0 }
+    }
+
+    pub fn restarted(&self) -> bool {
+        unsafe { sys::SBProcessGetRestartedFromEvent(self.event.raw) != 0 }
+    }
+
+    pub fn restarted_reasons(&self) -> SBProcessEventRestartedReasonIter {
+        SBProcessEventRestartedReasonIter {
+            event: self,
+            idx: 0,
+        }
+    }
+}
+
+/// Iterate over the restart reasons in a [process event].
+///
+/// [process event]: struct.SBProcessEvent.html
+pub struct SBProcessEventRestartedReasonIter<'d> {
+    event: &'d SBProcessEvent<'d>,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
+    type Item = &'d str;
+
+    fn next(&mut self) -> Option<&'d str> {
+        let raw = self.event.event.raw;
+        if self.idx < unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(raw) as usize } {
+            let r = unsafe {
+                let s = CStr::from_ptr(sys::SBProcessGetRestartedReasonAtIndexFromEvent(raw,
+                                                                                        self.idx));
+                match s.to_str() {
+                    Ok(s) => s,
+                    _ => panic!("Invalid string?"),
+                }
+            };
+            self.idx += 1;
+            Some(r)
+        } else {
+            None
+        }
     }
 }
