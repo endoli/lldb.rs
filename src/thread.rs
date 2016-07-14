@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use std::fmt;
+use super::event::SBEvent;
 use super::frame::SBFrame;
 use super::process::SBProcess;
 use super::stream::SBStream;
@@ -142,6 +143,16 @@ impl SBThread {
     pub fn process(&self) -> SBProcess {
         SBProcess::wrap(unsafe { sys::SBThreadGetProcess(self.raw) })
     }
+
+
+    #[allow(missing_docs)]
+    pub fn event_as_thread_event(event: &SBEvent) -> Option<SBThreadEvent> {
+        if unsafe { sys::SBThreadEventIsThreadEvent(event.raw) != 0 } {
+            Some(SBThreadEvent::new(event))
+        } else {
+            None
+        }
+    }
 }
 
 /// Iterate over the [frames] in a [thread].
@@ -180,5 +191,25 @@ impl fmt::Debug for SBThread {
 impl Drop for SBThread {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBThread(self.raw) };
+    }
+}
+
+#[allow(missing_docs)]
+pub struct SBThreadEvent<'e> {
+    event: &'e SBEvent,
+}
+
+#[allow(missing_docs)]
+impl<'e> SBThreadEvent<'e> {
+    pub fn new(event: &'e SBEvent) -> Self {
+        SBThreadEvent { event: event }
+    }
+
+    pub fn thread(&self) -> SBThread {
+        SBThread::wrap(unsafe { sys::SBThreadGetThreadFromEvent(self.event.raw) })
+    }
+
+    pub fn frame(&self) -> Option<SBFrame> {
+        SBFrame::maybe_wrap(unsafe { sys::SBThreadGetStackFrameFromEvent(self.event.raw) })
     }
 }

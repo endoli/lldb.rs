@@ -227,7 +227,7 @@ pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
 pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
                        SBTargetWatchpointIter};
-pub use self::thread::{SBThread, SBThreadFrameIter};
+pub use self::thread::{SBThread, SBThreadEvent, SBThreadFrameIter};
 pub use self::value::SBValue;
 pub use self::valuelist::SBValueList;
 pub use self::variablesoptions::SBVariablesOptions;
