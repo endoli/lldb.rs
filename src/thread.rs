@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CStr;
 use std::fmt;
 use super::event::SBEvent;
 use super::frame::SBFrame;
@@ -82,6 +83,16 @@ impl SBThread {
     /// Check whether or not this is a valid `SBThread` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBThreadIsValid(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn broadcaster_class_name() -> &'static str {
+        unsafe {
+            match CStr::from_ptr(sys::SBThreadGetBroadcasterClassName()).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
     }
 
     /// Get the stop reason for this thread.

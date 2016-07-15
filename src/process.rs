@@ -115,6 +115,16 @@ impl SBProcess {
         unsafe { sys::SBProcessIsValid(self.raw) != 0 }
     }
 
+    #[allow(missing_docs)]
+    pub fn broadcaster_class_name() -> &'static str {
+        unsafe {
+            match CStr::from_ptr(sys::SBProcessGetBroadcasterClassName()).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
     /// The current state of this process (running, stopped, exited, etc.).
     pub fn state(&self) -> StateType {
         unsafe { sys::SBProcessGetState(self.raw) }

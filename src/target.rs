@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
+use std::ffi::{CStr, CString};
 use std::fmt;
 use super::attachinfo::SBAttachInfo;
 use super::breakpoint::SBBreakpoint;
@@ -104,6 +104,16 @@ impl SBTarget {
     /// Check whether or not this is a valid `SBTarget` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBTargetIsValid(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn broadcaster_class_name() -> &'static str {
+        unsafe {
+            match CStr::from_ptr(sys::SBTargetGetBroadcasterClassName()).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
     }
 
     /// Get the [`SBPlatform`] associated with this target.
