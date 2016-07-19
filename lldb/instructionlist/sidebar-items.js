@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SBInstructionList","A list of [machine instructions]."],["SBInstructionListIter","An iterator over an [`SBInstructionList`]."]]});
+initSidebarItems({"struct":[["SBInstructionList","A list of [machine instructions]."],["SBInstructionListIter","An iterator over the [instructions] in an [`SBInstructionList`]."]]});

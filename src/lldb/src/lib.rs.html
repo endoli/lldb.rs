@@ -314,6 +314,20 @@
 <span id="270">270</span>
 <span id="271">271</span>
 <span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -334,7 +348,7 @@
 <span class='doccomment'>//! Add it to your `Cargo.toml` like so:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
-<span class='doccomment'>//! lldb = &quot;0.0.3&quot;</span>
+<span class='doccomment'>//! lldb = &quot;0.0.4&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ### Mac OS X Installation Notes</span>
@@ -480,13 +494,16 @@
 <span class='kw'>mod</span> <span class='ident'>attachinfo</span>;
 <span class='kw'>mod</span> <span class='ident'>block</span>;
 <span class='kw'>mod</span> <span class='ident'>breakpoint</span>;
+<span class='kw'>mod</span> <span class='ident'>breakpointlocation</span>;
 <span class='kw'>mod</span> <span class='ident'>broadcaster</span>;
 <span class='kw'>mod</span> <span class='ident'>compileunit</span>;
 <span class='kw'>mod</span> <span class='ident'>data</span>;
 <span class='kw'>mod</span> <span class='ident'>debugger</span>;
 <span class='kw'>mod</span> <span class='ident'>error</span>;
 <span class='kw'>mod</span> <span class='ident'>event</span>;
+<span class='kw'>mod</span> <span class='ident'>expressionoptions</span>;
 <span class='kw'>mod</span> <span class='ident'>filespec</span>;
+<span class='kw'>mod</span> <span class='ident'>filespeclist</span>;
 <span class='kw'>mod</span> <span class='ident'>frame</span>;
 <span class='kw'>mod</span> <span class='ident'>function</span>;
 <span class='kw'>mod</span> <span class='ident'>instruction</span>;
@@ -505,18 +522,24 @@
 <span class='kw'>mod</span> <span class='ident'>target</span>;
 <span class='kw'>mod</span> <span class='ident'>thread</span>;
 <span class='kw'>mod</span> <span class='ident'>value</span>;
+<span class='kw'>mod</span> <span class='ident'>valuelist</span>;
+<span class='kw'>mod</span> <span class='ident'>variablesoptions</span>;
+<span class='kw'>mod</span> <span class='ident'>watchpoint</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>address</span>::<span class='ident'>SBAddress</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>attachinfo</span>::<span class='ident'>SBAttachInfo</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>block</span>::<span class='ident'>SBBlock</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>breakpoint</span>::<span class='ident'>SBBreakpoint</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>breakpoint</span>::{<span class='ident'>SBBreakpoint</span>, <span class='ident'>SBBreakpointLocationIter</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>breakpointlocation</span>::<span class='ident'>SBBreakpointLocation</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>broadcaster</span>::<span class='ident'>SBBroadcaster</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>compileunit</span>::<span class='ident'>SBCompileUnit</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>data</span>::<span class='ident'>SBData</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>debugger</span>::<span class='ident'>SBDebugger</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>debugger</span>::{<span class='ident'>SBDebugger</span>, <span class='ident'>SBDebuggerTargetIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>error</span>::<span class='ident'>SBError</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>event</span>::<span class='ident'>SBEvent</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>expressionoptions</span>::<span class='ident'>SBExpressionOptions</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>filespec</span>::<span class='ident'>SBFileSpec</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>filespeclist</span>::<span class='ident'>SBFileSpecList</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>frame</span>::<span class='ident'>SBFrame</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>function</span>::<span class='ident'>SBFunction</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>instruction</span>::<span class='ident'>SBInstruction</span>;
@@ -527,14 +550,19 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>module</span>::<span class='ident'>SBModule</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>modulespec</span>::<span class='ident'>SBModuleSpec</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>platform</span>::<span class='ident'>SBPlatform</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>process</span>::<span class='ident'>SBProcess</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>process</span>::{<span class='ident'>SBProcess</span>, <span class='ident'>SBProcessEvent</span>, <span class='ident'>SBProcessEventRestartedReasonIter</span>,
+                        <span class='ident'>SBProcessThreadIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>stringlist</span>::{<span class='ident'>SBStringList</span>, <span class='ident'>SBStringListIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>symbol</span>::<span class='ident'>SBSymbol</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>symbolcontext</span>::<span class='ident'>SBSymbolContext</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>target</span>::<span class='ident'>SBTarget</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>thread</span>::<span class='ident'>SBThread</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>target</span>::{<span class='ident'>SBTarget</span>, <span class='ident'>SBTargetBreakpointIter</span>, <span class='ident'>SBTargetEvent</span>, <span class='ident'>SBTargetEventModuleIter</span>,
+                       <span class='ident'>SBTargetWatchpointIter</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>thread</span>::{<span class='ident'>SBThread</span>, <span class='ident'>SBThreadEvent</span>, <span class='ident'>SBThreadFrameIter</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>value</span>::<span class='ident'>SBValue</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>valuelist</span>::<span class='ident'>SBValueList</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>variablesoptions</span>::<span class='ident'>SBVariablesOptions</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>watchpoint</span>::<span class='ident'>SBWatchpoint</span>;
 
 <span class='doccomment'>/// Which syntax should be used in disassembly?</span>
 <span class='doccomment'>///</span>
@@ -611,6 +639,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

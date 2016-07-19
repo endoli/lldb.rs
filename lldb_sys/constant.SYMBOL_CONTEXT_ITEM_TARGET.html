@@ -48,7 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span></span></h1>
-<pre class='rust const'>pub const SYMBOL_CONTEXT_ITEM_TARGET: <a class='struct' href='../lldb_sys/struct.SymbolContextItem.html' title='lldb_sys::SymbolContextItem'>SymbolContextItem</a></pre><div class='docblock'><p>Set when a target is requested from a query or was located
+<pre class='rust const'>pub const SYMBOL_CONTEXT_ITEM_TARGET: <a class='struct' href='../lldb_sys/struct.SymbolContextItem.html' title='lldb_sys::SymbolContextItem'>SymbolContextItem</a><code> = </code><code>SymbolContextItem{bits: 1,}</code></pre><div class='docblock'><p>Set when a target is requested from a query or was located
 in the query results.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
@@ -73,6 +73,8 @@ in the query results.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

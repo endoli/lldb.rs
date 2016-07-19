@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/lldb/src/lib.rs.html#7-272' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/lldb/src/lib.rs.html#7-286' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id='lldb' class='section-header'><a href='#lldb'>LLDB</a></h1>
 <p>This crate provides a safe binding to the public API for <a href="http://lldb.llvm.org/">LLDB</a>, the
@@ -59,7 +59,7 @@ and iOS.</p>
 <p>This crate works with Cargo and is on <a href="https://crates.io/crates/lldb">crates.io</a>.
 Add it to your <code>Cargo.toml</code> like so:</p>
 
-<pre><code class="language-toml">lldb = &quot;0.0.3&quot;
+<pre><code class="language-toml">lldb = &quot;0.0.4&quot;
 </code></pre>
 
 <h3 id='mac-os-x-installation-notes' class='section-header'><a href='#mac-os-x-installation-notes'>Mac OS X Installation Notes</a></h3>
@@ -176,6 +176,20 @@ provide commercial support, so feel free to
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBBreakpointLocation.html'
+                                  title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></td>
+                           <td class='docblock short'>
+                                <p>One unique instance (by address) of a logical breakpoint.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBBreakpointLocationIter.html'
+                                  title='lldb::SBBreakpointLocationIter'>SBBreakpointLocationIter</a></td>
+                           <td class='docblock short'>
+                                <p>An iterator over the <a href="struct.SBBreakpointLocation.html">locations</a> in an <a href="struct.SBBreakpoint.html"><code>SBBreakpoint</code></a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBBroadcaster.html'
                                   title='lldb::SBBroadcaster'>SBBroadcaster</a></td>
                            <td class='docblock short'>
@@ -205,6 +219,13 @@ the overall debugging experience.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBDebuggerTargetIter.html'
+                                  title='lldb::SBDebuggerTargetIter'>SBDebuggerTargetIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBTarget.html">targets</a> known to a <a href="struct.SBDebugger.html">debugger</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBError.html'
                                   title='lldb::SBError'>SBError</a></td>
                            <td class='docblock short'>
@@ -219,11 +240,25 @@ the overall debugging experience.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBExpressionOptions.html'
+                                  title='lldb::SBExpressionOptions'>SBExpressionOptions</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBFileSpec.html'
                                   title='lldb::SBFileSpec'>SBFileSpec</a></td>
                            <td class='docblock short'>
                                 <p>A file specification that divides the path into a
 directory and basename.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBFileSpecList.html'
+                                  title='lldb::SBFileSpecList'>SBFileSpecList</a></td>
+                           <td class='docblock short'>
+                                <p>A list of <a href="struct.SBFileSpec.html">filespecs</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -258,7 +293,7 @@ directory and basename.</p>
                            <td><a class='struct' href='struct.SBInstructionListIter.html'
                                   title='lldb::SBInstructionListIter'>SBInstructionListIter</a></td>
                            <td class='docblock short'>
-                                <p>An iterator over an <a href="struct.SBInstructionList.html"><code>SBInstructionList</code></a>.</p>
+                                <p>An iterator over the <a href="struct.SBInstruction.html">instructions</a> in an <a href="struct.SBInstructionList.html"><code>SBInstructionList</code></a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -313,6 +348,27 @@ remote host debug platform.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBProcessEvent.html'
+                                  title='lldb::SBProcessEvent'>SBProcessEvent</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBProcessEventRestartedReasonIter.html'
+                                  title='lldb::SBProcessEventRestartedReasonIter'>SBProcessEventRestartedReasonIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the restart reasons in a <a href="struct.SBProcessEvent.html">process event</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBProcessThreadIter.html'
+                                  title='lldb::SBProcessThreadIter'>SBProcessThreadIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBThread.html">threads</a> in a <a href="struct.SBProcess.html">process</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBStream.html'
                                   title='lldb::SBStream'>SBStream</a></td>
                            <td class='docblock short'>
@@ -356,6 +412,34 @@ a string stream, but it can be redirected to a file.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBTargetBreakpointIter.html'
+                                  title='lldb::SBTargetBreakpointIter'>SBTargetBreakpointIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBBreakpoint.html">breakpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBTargetEvent.html'
+                                  title='lldb::SBTargetEvent'>SBTargetEvent</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBTargetEventModuleIter.html'
+                                  title='lldb::SBTargetEventModuleIter'>SBTargetEventModuleIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBModule.html">modules</a> referenced from a <a href="struct.SBTargetEvent.html">target event</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBTargetWatchpointIter.html'
+                                  title='lldb::SBTargetWatchpointIter'>SBTargetWatchpointIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBWatchpoint.html">watchpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBThread.html'
                                   title='lldb::SBThread'>SBThread</a></td>
                            <td class='docblock short'>
@@ -363,10 +447,45 @@ a string stream, but it can be redirected to a file.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBThreadEvent.html'
+                                  title='lldb::SBThreadEvent'>SBThreadEvent</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBThreadFrameIter.html'
+                                  title='lldb::SBThreadFrameIter'>SBThreadFrameIter</a></td>
+                           <td class='docblock short'>
+                                <p>Iterate over the <a href="struct.SBFrame.html">frames</a> in a <a href="struct.SBThread.html">thread</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='struct' href='struct.SBValue.html'
                                   title='lldb::SBValue'>SBValue</a></td>
                            <td class='docblock short'>
                                 <p>The value of a variable, register or expression.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBValueList.html'
+                                  title='lldb::SBValueList'>SBValueList</a></td>
+                           <td class='docblock short'>
+                                <p>A list of <a href="struct.SBValue.html">values</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBVariablesOptions.html'
+                                  title='lldb::SBVariablesOptions'>SBVariablesOptions</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SBWatchpoint.html'
+                                  title='lldb::SBWatchpoint'>SBWatchpoint</a></td>
+                           <td class='docblock short'>
+                                <p>An instance of a watch point for a specific target program.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -1264,6 +1383,8 @@ or was located in the query results.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

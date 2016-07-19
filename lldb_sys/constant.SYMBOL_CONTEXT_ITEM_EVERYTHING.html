@@ -48,7 +48,14 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span></span></h1>
-<pre class='rust const'>pub const SYMBOL_CONTEXT_ITEM_EVERYTHING: <a class='struct' href='../lldb_sys/struct.SymbolContextItem.html' title='lldb_sys::SymbolContextItem'>SymbolContextItem</a></pre><div class='docblock'><p>Indicates to try and look everything up during a routine symbol
+<pre class='rust const'>pub const SYMBOL_CONTEXT_ITEM_EVERYTHING: <a class='struct' href='../lldb_sys/struct.SymbolContextItem.html' title='lldb_sys::SymbolContextItem'>SymbolContextItem</a><code> = </code><code>SymbolContextItem{bits:
+                      SYMBOL_CONTEXT_ITEM_TARGET.bits |
+                          SYMBOL_CONTEXT_ITEM_MODULE.bits |
+                          SYMBOL_CONTEXT_ITEM_COMPUNIT.bits |
+                          SYMBOL_CONTEXT_ITEM_FUNCTION.bits |
+                          SYMBOL_CONTEXT_ITEM_BLOCK.bits |
+                          SYMBOL_CONTEXT_ITEM_LINE_ENTRY.bits |
+                          SYMBOL_CONTEXT_ITEM_SYMBOL.bits,}</code></pre><div class='docblock'><p>Indicates to try and look everything up during a routine symbol
 context query. This doesn&#39;t actually include looking up a variable.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
@@ -73,6 +80,8 @@ context query. This doesn&#39;t actually include looking up a variable.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

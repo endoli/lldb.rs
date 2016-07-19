@@ -225,9 +225,9 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CStr</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>error</span>::<span class='ident'>SBError</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>launchinfo</span>::<span class='ident'>SBLaunchInfo</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>lldb_pid_t</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>error</span>::<span class='ident'>SBError</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>launchinfo</span>::<span class='ident'>SBLaunchInfo</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>lldb_pid_t</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A platform that can represent the current host or a</span>
@@ -417,6 +417,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

@@ -223,6 +223,51 @@
 <span id="179">179</span>
 <span id="180">180</span>
 <span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -230,12 +275,14 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CStr</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>frame</span>::<span class='ident'>SBFrame</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>process</span>::<span class='ident'>SBProcess</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>value</span>::<span class='ident'>SBValue</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>lldb_tid_t</span>, <span class='ident'>StopReason</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>event</span>::<span class='ident'>SBEvent</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>frame</span>::<span class='ident'>SBFrame</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>process</span>::<span class='ident'>SBProcess</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>stream</span>::<span class='ident'>SBStream</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>value</span>::<span class='ident'>SBValue</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>lldb_tid_t</span>, <span class='ident'>StopReason</span>};
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// A thread of execution.</span>
@@ -309,6 +356,16 @@
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadIsValid</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> }
     }
 
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>broadcaster_class_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>match</span> <span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>sys</span>::<span class='ident'>SBThreadGetBroadcasterClassName</span>()).<span class='ident'>to_str</span>() {
+                <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>,
+                _ <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid string?&quot;</span>),
+            }
+        }
+    }
+
     <span class='doccomment'>/// Get the stop reason for this thread.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>stop_reason</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>StopReason</span> {
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetStopReason</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) }
@@ -347,8 +404,8 @@
     <span class='doccomment'>/// Get an iterator over the [frames] known to this thread instance.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// [frames]: struct.SBFrame.html</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>frames</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>ThreadFrameIter</span> {
-        <span class='ident'>ThreadFrameIter</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>frames</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBThreadFrameIter</span> {
+        <span class='ident'>SBThreadFrameIter</span> {
             <span class='ident'>thread</span>: <span class='self'>self</span>,
             <span class='ident'>idx</span>: <span class='number'>0</span>,
         }
@@ -368,15 +425,28 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>process</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBProcess</span> {
         <span class='ident'>SBProcess</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetProcess</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) })
     }
+
+
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>event_as_thread_event</span>(<span class='ident'>event</span>: <span class='kw-2'>&amp;</span><span class='ident'>SBEvent</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBThreadEvent</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadEventIsThreadEvent</span>(<span class='ident'>event</span>.<span class='ident'>raw</span>) <span class='op'>!=</span> <span class='number'>0</span> } {
+            <span class='prelude-val'>Some</span>(<span class='ident'>SBThreadEvent</span>::<span class='ident'>new</span>(<span class='ident'>event</span>))
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
 }
 
-<span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ThreadFrameIter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
+<span class='doccomment'>/// Iterate over the [frames] in a [thread].</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// [frames]: struct.SBFrame.html</span>
+<span class='doccomment'>/// [thread]: struct.SBThread.html</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBThreadFrameIter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
     <span class='ident'>thread</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;d</span> <span class='ident'>SBThread</span>,
     <span class='ident'>idx</span>: <span class='ident'>usize</span>,
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>ThreadFrameIter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>SBThreadFrameIter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;d</span><span class='op'>&gt;</span> {
     <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>SBFrame</span>;
 
     <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBFrame</span><span class='op'>&gt;</span> {
@@ -405,6 +475,26 @@
         <span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>DisposeSBThread</span>(<span class='self'>self</span>.<span class='ident'>raw</span>) };
     }
 }
+
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SBThreadEvent</span><span class='op'>&lt;</span><span class='lifetime'>&#39;e</span><span class='op'>&gt;</span> {
+    <span class='ident'>event</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;e</span> <span class='ident'>SBEvent</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;e</span><span class='op'>&gt;</span> <span class='ident'>SBThreadEvent</span><span class='op'>&lt;</span><span class='lifetime'>&#39;e</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>event</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;e</span> <span class='ident'>SBEvent</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
+        <span class='ident'>SBThreadEvent</span> { <span class='ident'>event</span>: <span class='ident'>event</span> }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>thread</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBThread</span> {
+        <span class='ident'>SBThread</span>::<span class='ident'>wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetThreadFromEvent</span>(<span class='self'>self</span>.<span class='ident'>event</span>.<span class='ident'>raw</span>) })
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>frame</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SBFrame</span><span class='op'>&gt;</span> {
+        <span class='ident'>SBFrame</span>::<span class='ident'>maybe_wrap</span>(<span class='kw'>unsafe</span> { <span class='ident'>sys</span>::<span class='ident'>SBThreadGetStackFrameFromEvent</span>(<span class='self'>self</span>.<span class='ident'>event</span>.<span class='ident'>raw</span>) })
+    }
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
@@ -429,6 +519,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

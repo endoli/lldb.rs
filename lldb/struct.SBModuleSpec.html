@@ -47,14 +47,15 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-899' class='srclink' href='../src/lldb/src/modulespec.rs.html#13-16' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-1178' class='srclink' href='../src/lldb/src/modulespec.rs.html#13-16' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBModuleSpec {
     pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleSpecRef.html' title='lldb_sys::lldb_sys::SBModuleSpecRef'>SBModuleSpecRef</a>,
 }</pre><div class='docblock'><p>A description of an <code>SBModule</code>.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBModuleSpecRef</code>.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></h3><div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleSpecRef.html' title='lldb_sys::lldb_sys::SBModuleSpecRef'>SBModuleSpecRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1180' class='srclink' href='../src/lldb/src/modulespec.rs.html#18-109' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleSpecRef.html' title='lldb_sys::lldb_sys::SBModuleSpecRef'>SBModuleSpecRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></h4>
 <div class='docblock'><p>Construct a new <code>SBModuleSpec</code>.</p>
 </div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleSpecRef.html' title='lldb_sys::lldb_sys::SBModuleSpecRef'>SBModuleSpecRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a>&gt;</code></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBModuleSpec)</code> or <code>None</code>.</p>
@@ -88,9 +89,13 @@ is being debugged.</p>
 <h4 id='method.set_triple' class='method'><code>fn <a href='#method.set_triple' class='fnname'>set_triple</a>(&amp;self, _object_name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <h4 id='method.uuid_bytes' class='method'><code>fn <a href='#method.uuid_bytes' class='fnname'>uuid_bytes</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.set_uuid_bytes' class='method'><code>fn <a href='#method.set_uuid_bytes' class='fnname'>set_uuid_bytes</a>(&amp;self, _object_name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1223' class='srclink' href='../src/lldb/src/modulespec.rs.html#111-117' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBModuleSpec.html' title='lldb::SBModuleSpec'>SBModuleSpec</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1230' class='srclink' href='../src/lldb/src/modulespec.rs.html#119-123' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -113,6 +118,8 @@ is being debugged.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

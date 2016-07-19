@@ -56,7 +56,8 @@
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                              <td id='structfield.raw'><code>raw</code></td><td><div class='docblock'><p>The underlying raw <code>SBAttachInfoRef</code>.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-80' class='srclink' href='../src/lldb/src/attachinfo.rs.html#22-57' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
 <div class='docblock'><p>Construct a new <code>SBAttachInfo</code>.</p>
 </div><h4 id='method.new_with_pid' class='method'><code>fn <a href='#method.new_with_pid' class='fnname'>new_with_pid</a>(pid: <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a>) -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
 <div class='docblock'><p>Construct a new <code>SBAttachInfo</code> for a given process ID (pid).</p>
@@ -66,10 +67,16 @@
 <h4 id='method.set_process_id' class='method'><code>fn <a href='#method.set_process_id' class='fnname'>set_process_id</a>(&amp;mut self, pid: <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a>)</code></h4>
 <h4 id='method.listener' class='method'><code>fn <a href='#method.listener' class='fnname'>listener</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a></code></h4>
 <h4 id='method.set_listener' class='method'><code>fn <a href='#method.set_listener' class='fnname'>set_listener</a>(&amp;mut self, listener: <a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a>)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-96' class='srclink' href='../src/lldb/src/attachinfo.rs.html#59-63' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+<div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-98' class='srclink' href='../src/lldb/src/attachinfo.rs.html#65-69' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-74' class='srclink' href='../src/lldb/src/attachinfo.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -92,6 +99,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

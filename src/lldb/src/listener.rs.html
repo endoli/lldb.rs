@@ -244,9 +244,9 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CString</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>broadcaster</span>::<span class='ident'>SBBroadcaster</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>debugger</span>::<span class='ident'>SBDebugger</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>event</span>::<span class='ident'>SBEvent</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>broadcaster</span>::<span class='ident'>SBBroadcaster</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>debugger</span>::<span class='ident'>SBDebugger</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>event</span>::<span class='ident'>SBEvent</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>;
 
 <span class='doccomment'>/// Listen for debugger events.</span>
@@ -455,6 +455,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

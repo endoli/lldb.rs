@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SBProcess","The process associated with the target program."]]});
+initSidebarItems({"struct":[["SBProcess","The process associated with the target program."],["SBProcessEvent",""],["SBProcessEventRestartedReasonIter","Iterate over the restart reasons in a [process event]."],["SBProcessThreadIter","Iterate over the [threads] in a [process]."]]});

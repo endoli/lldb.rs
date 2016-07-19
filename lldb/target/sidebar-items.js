@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SBTarget","The target program running under the debugger."]]});
+initSidebarItems({"struct":[["SBTarget","The target program running under the debugger."],["SBTargetBreakpointIter","Iterate over the [breakpoints] in a [target]."],["SBTargetEvent",""],["SBTargetEventModuleIter","Iterate over the [modules] referenced from a [target event]."],["SBTargetWatchpointIter","Iterate over the [watchpoints] in a [target]."]]});
