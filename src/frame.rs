@@ -159,7 +159,7 @@ impl SBFrame {
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
         SBValue::wrap(unsafe {
-            sys::SBFrameEvaluateExpression4(self.raw, expression.as_ptr(), options.raw)
+            sys::SBFrameEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
         })
     }
 
@@ -201,7 +201,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn variables(&self, options: &SBVariablesOptions) -> SBValueList {
-        SBValueList::wrap(unsafe { sys::SBFrameGetVariables3(self.raw, options.raw) })
+        SBValueList::wrap(unsafe { sys::SBFrameGetVariables(self.raw, options.raw) })
     }
 
     #[allow(missing_docs)]

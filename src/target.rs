@@ -168,7 +168,7 @@ impl SBTarget {
 
     /// Add a module to the target using an `SBModuleSpec`.
     pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> Option<SBModule> {
-        SBModule::maybe_wrap(unsafe { sys::SBTargetAddModule4(self.raw, module_spec.raw) })
+        SBModule::maybe_wrap(unsafe { sys::SBTargetAddModuleSpec(self.raw, module_spec.raw) })
     }
 
     /// Remove a module from the target.
