@@ -155,8 +155,8 @@ impl SBThread {
         SBProcess::wrap(unsafe { sys::SBThreadGetProcess(self.raw) })
     }
 
-
-    #[allow(missing_docs)]
+    /// If the given event is a thread event, return it as an
+    /// `SBThreadEvent`. Otherwise, return `None`.
     pub fn event_as_thread_event(event: &SBEvent) -> Option<SBThreadEvent> {
         if unsafe { sys::SBThreadEventIsThreadEvent(event.raw) != 0 } {
             Some(SBThreadEvent::new(event))
@@ -205,21 +205,23 @@ impl Drop for SBThread {
     }
 }
 
-#[allow(missing_docs)]
+/// A thread event.
 pub struct SBThreadEvent<'e> {
     event: &'e SBEvent,
 }
 
-#[allow(missing_docs)]
 impl<'e> SBThreadEvent<'e> {
+    /// Construct a new `SBThreadEvent`.
     pub fn new(event: &'e SBEvent) -> Self {
         SBThreadEvent { event: event }
     }
 
+    /// Get the thread from this thread event.
     pub fn thread(&self) -> SBThread {
         SBThread::wrap(unsafe { sys::SBThreadGetThreadFromEvent(self.event.raw) })
     }
 
+    /// Get the frame from this thread event.
     pub fn frame(&self) -> Option<SBFrame> {
         SBFrame::maybe_wrap(unsafe { sys::SBThreadGetStackFrameFromEvent(self.event.raw) })
     }
