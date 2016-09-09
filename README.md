@@ -24,7 +24,7 @@ Add it to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-lldb = "0.0.4"
+lldb = "0.0.5"
 ```
 
 On Mac OS X, the `LLDB.framework` requires that an `@rpath`
