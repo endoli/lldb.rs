@@ -9,10 +9,9 @@ keywords = ["lldb", "debugger"]
 documentation = "https://endoli.github.io/lldb.rs/"
 homepage = "https://github.com/endoli/lldb.rs"
 repository = "https://github.com/endoli/lldb.rs"
-build = "build.rs"
 
 [[example]]
 name = "basic_synchronous"
 
 [dependencies]
-lldb-sys = "0.0.10"
+lldb-sys = "0.0.11"
