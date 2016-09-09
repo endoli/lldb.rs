@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBSymbol","The symbol possibly associated with a stack frame."]]});

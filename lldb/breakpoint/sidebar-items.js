@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBBreakpoint","A logical breakpoint and its associated settings."],["SBBreakpointLocationIter","An iterator over the [locations] in an [`SBBreakpoint`]."]]});

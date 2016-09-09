@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBCompileUnit","A compilation unit or compiled source file."]]});

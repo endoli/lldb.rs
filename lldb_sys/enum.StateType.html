@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-154' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#165-192' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-173' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#165-192' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum StateType {
     Invalid,
     Unloaded,
@@ -63,27 +63,27 @@
     Suspended,
 }</pre><div class='docblock'><p>Process and thread states.</p>
 </div><h2 class='variants'>Variants</h2>
-<table class='variants_table'><tr><td id='variant.Invalid'><code>Invalid</code></td><td></td><td></td></tr><tr><td id='variant.Unloaded'><code>Unloaded</code></td><td><div class='docblock'><p>Process object is valid, but not currently loaded.</p>
-</div></td><td></td></tr><tr><td id='variant.Connected'><code>Connected</code></td><td><div class='docblock'><p>Process is connected to remote debug services, but not launched
+<span id='variant.Invalid' class='variant'><code>Invalid</code></span><span id='variant.Unloaded' class='variant'><code>Unloaded</code></span><div class='docblock'><p>Process object is valid, but not currently loaded.</p>
+</div><span id='variant.Connected' class='variant'><code>Connected</code></span><div class='docblock'><p>Process is connected to remote debug services, but not launched
 or attached to anything yet.</p>
-</div></td><td></td></tr><tr><td id='variant.Attaching'><code>Attaching</code></td><td><div class='docblock'><p>Process is currently trying to attach.</p>
-</div></td><td></td></tr><tr><td id='variant.Launching'><code>Launching</code></td><td><div class='docblock'><p>Process is currently trying to launch.</p>
-</div></td><td></td></tr><tr><td id='variant.Stopped'><code>Stopped</code></td><td><div class='docblock'><p>Process or thread is stopped and can be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Running'><code>Running</code></td><td><div class='docblock'><p>Process or thread is running and can&#39;t be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Stepping'><code>Stepping</code></td><td><div class='docblock'><p>Process or thread is in the process of stepping and can&#39;t be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Crashed'><code>Crashed</code></td><td><div class='docblock'><p>Process or thread has crashed and can be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Detached'><code>Detached</code></td><td><div class='docblock'><p>Process has been detached and can&#39;t be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Exited'><code>Exited</code></td><td><div class='docblock'><p>Process has exited and can&#39;t be examined.</p>
-</div></td><td></td></tr><tr><td id='variant.Suspended'><code>Suspended</code></td><td><div class='docblock'><p>Process or thread is in a suspended state as far as the
+</div><span id='variant.Attaching' class='variant'><code>Attaching</code></span><div class='docblock'><p>Process is currently trying to attach.</p>
+</div><span id='variant.Launching' class='variant'><code>Launching</code></span><div class='docblock'><p>Process is currently trying to launch.</p>
+</div><span id='variant.Stopped' class='variant'><code>Stopped</code></span><div class='docblock'><p>Process or thread is stopped and can be examined.</p>
+</div><span id='variant.Running' class='variant'><code>Running</code></span><div class='docblock'><p>Process or thread is running and can&#39;t be examined.</p>
+</div><span id='variant.Stepping' class='variant'><code>Stepping</code></span><div class='docblock'><p>Process or thread is in the process of stepping and can&#39;t be examined.</p>
+</div><span id='variant.Crashed' class='variant'><code>Crashed</code></span><div class='docblock'><p>Process or thread has crashed and can be examined.</p>
+</div><span id='variant.Detached' class='variant'><code>Detached</code></span><div class='docblock'><p>Process has been detached and can&#39;t be examined.</p>
+</div><span id='variant.Exited' class='variant'><code>Exited</code></span><div class='docblock'><p>Process has exited and can&#39;t be examined.</p>
+</div><span id='variant.Suspended' class='variant'><code>Suspended</code></span><div class='docblock'><p>Process or thread is in a suspended state as far as the
 debugger is concerned while other processes or threads
 get the chance to run.</p>
-</div></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-179' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#162' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-153' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#162' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
 </div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-182' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#162' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-183' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#164' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-156' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#162' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb_sys/enum.StateType.html' title='lldb_sys::StateType'>StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-157' class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#164' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>

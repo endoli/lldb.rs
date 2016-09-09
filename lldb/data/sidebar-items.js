@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBData","A block of data."]]});

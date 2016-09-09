@@ -605,8 +605,8 @@
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span>() {
             <span class='ident'>StateType</span>::<span class='ident'>Attaching</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Launching</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Stopped</span> <span class='op'>|</span>
             <span class='ident'>StateType</span>::<span class='ident'>Running</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Stepping</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Crashed</span> <span class='op'>|</span>
-            <span class='ident'>StateType</span>::<span class='ident'>Suspended</span> <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>StateType</span>::<span class='ident'>Suspended</span> <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
@@ -616,8 +616,8 @@
     <span class='doccomment'>/// or `Stepping` states.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_running</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span>() {
-            <span class='ident'>StateType</span>::<span class='ident'>Running</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Stepping</span> <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>StateType</span>::<span class='ident'>Running</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Stepping</span> <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
@@ -627,8 +627,8 @@
     <span class='doccomment'>/// or `Suspended` states.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_stopped</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span>() {
-            <span class='ident'>StateType</span>::<span class='ident'>Stopped</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Crashed</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Suspended</span> <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>StateType</span>::<span class='ident'>Stopped</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Crashed</span> <span class='op'>|</span> <span class='ident'>StateType</span>::<span class='ident'>Suspended</span> <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 

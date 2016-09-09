@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBPlatform","A platform that can represent the current host or a remote host debug platform."]]});

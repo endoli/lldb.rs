@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBFileSpecList","A list of [filespecs]."]]});

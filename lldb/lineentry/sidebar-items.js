@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBLineEntry","Specifies an association with a contiguous range of instructions and a source file location."]]});

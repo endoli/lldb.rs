@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBWatchpoint","An instance of a watch point for a specific target program."]]});

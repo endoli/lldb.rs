@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBEvent","An event."]]});

@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBInstruction","A machine instruction."]]});

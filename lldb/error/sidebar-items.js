@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SBError","A container for holding any error code."]]});

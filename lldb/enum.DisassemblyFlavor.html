@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-2099' class='srclink' href='../src/lldb/src/lib.rs.html#242-280' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-2075' class='srclink' href='../src/lldb/src/lib.rs.html#242-280' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum DisassemblyFlavor {
     ATT,
     Default,
@@ -58,7 +58,7 @@
 architectures need not be concerned by this and can just
 use <code>DisassemblyFlavor::Default</code> all the time.</p>
 </div><h2 class='variants'>Variants</h2>
-<table class='variants_table'><tr><td id='variant.ATT'><code>ATT</code></td><td><div class='docblock'><p>The primary syntax used by the GNU Assembler and in the
+<span id='variant.ATT' class='variant'><code>ATT</code></span><div class='docblock'><p>The primary syntax used by the GNU Assembler and in the
 Linux world.</p>
 
 <p>AT&amp;T syntax:</p>
@@ -76,8 +76,8 @@ Linux world.</p>
 </code></pre>
 
 <p>This syntax is described in detail in <a href="https://en.wikibooks.org/wiki/X86_Assembly/GAS_Syntax">GAS Syntax</a>.</p>
-</div></td><td></td></tr><tr><td id='variant.Default'><code>Default</code></td><td><div class='docblock'><p>The default syntax.</p>
-</div></td><td></td></tr><tr><td id='variant.Intel'><code>Intel</code></td><td><div class='docblock'><p>The primary syntax used on Windows.</p>
+</div><span id='variant.Default' class='variant'><code>Default</code></span><div class='docblock'><p>The default syntax.</p>
+</div><span id='variant.Intel' class='variant'><code>Intel</code></span><div class='docblock'><p>The primary syntax used on Windows.</p>
 
 <p>This differs from AT&amp;T syntax in that:</p>
 
@@ -91,11 +91,11 @@ Linux world.</p>
 
 <pre><code class="language-asm">mov al, 05h
 </code></pre>
-</div></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2103' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2064' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2110' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2111' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2071' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2072' class='srclink' href='../src/lldb/src/lib.rs.html#241' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.DisassemblyFlavor.html' title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></code></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
 </div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>

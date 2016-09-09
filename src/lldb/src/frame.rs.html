@@ -534,40 +534,40 @@
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>all_variables</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBValueList</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>options</span> <span class='op'>=</span> <span class='ident'>SBVariablesOptions</span>::<span class='ident'>new</span>();
-        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='boolvalue'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='bool-val'>true</span>);
         <span class='self'>self</span>.<span class='ident'>variables</span>(<span class='kw-2'>&amp;</span><span class='ident'>options</span>)
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>arguments</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBValueList</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>options</span> <span class='op'>=</span> <span class='ident'>SBVariablesOptions</span>::<span class='ident'>new</span>();
-        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='boolvalue'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='bool-val'>false</span>);
         <span class='self'>self</span>.<span class='ident'>variables</span>(<span class='kw-2'>&amp;</span><span class='ident'>options</span>)
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>locals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBValueList</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>options</span> <span class='op'>=</span> <span class='ident'>SBVariablesOptions</span>::<span class='ident'>new</span>();
-        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='boolvalue'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='bool-val'>false</span>);
         <span class='self'>self</span>.<span class='ident'>variables</span>(<span class='kw-2'>&amp;</span><span class='ident'>options</span>)
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>statics</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SBValueList</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>options</span> <span class='op'>=</span> <span class='ident'>SBVariablesOptions</span>::<span class='ident'>new</span>();
-        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='boolvalue'>false</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='boolvalue'>true</span>);
-        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='boolvalue'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_arguments</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_locals</span>(<span class='bool-val'>false</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_include_statics</span>(<span class='bool-val'>true</span>);
+        <span class='ident'>options</span>.<span class='ident'>set_in_scope_only</span>(<span class='bool-val'>false</span>);
         <span class='self'>self</span>.<span class='ident'>variables</span>(<span class='kw-2'>&amp;</span><span class='ident'>options</span>)
     }
 
