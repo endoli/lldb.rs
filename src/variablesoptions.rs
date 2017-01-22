@@ -100,6 +100,12 @@ impl SBVariablesOptions {
     }
 }
 
+impl Default for SBVariablesOptions {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Drop for SBVariablesOptions {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBVariablesOptions(self.raw) };

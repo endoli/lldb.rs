@@ -45,6 +45,12 @@ impl SBExpressionOptions {
     }
 }
 
+impl Default for SBExpressionOptions {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Drop for SBExpressionOptions {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBExpressionOptions(self.raw) };

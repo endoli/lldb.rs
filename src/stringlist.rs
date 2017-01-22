@@ -68,6 +68,12 @@ impl SBStringList {
     }
 }
 
+impl Default for SBStringList {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Drop for SBStringList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBStringList(self.raw) };
