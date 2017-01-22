@@ -20,7 +20,7 @@ use sys;
 ///
 /// `SBBreakpoint` contains `SBBreakpointLocation`(s).
 /// See [`SBBreakpoint`] for retrieval of an `SBBreakpointLocation`
-/// from an SBBreakpoint.
+/// from an `SBBreakpoint`.
 ///
 /// [`SBBreakpoint`]: struct.SBBreakpoint.html
 pub struct SBBreakpointLocation {
