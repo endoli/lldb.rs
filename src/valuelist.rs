@@ -99,8 +99,9 @@ impl<'d> Iterator for SBValueListIter<'d> {
     fn next(&mut self) -> Option<SBValue> {
         if self.idx < unsafe { sys::SBValueListGetSize(self.value_list.raw) as usize } {
             let r = SBValue::wrap(unsafe {
-                sys::SBValueListGetValueAtIndex(self.value_list.raw, self.idx as u32)
-            });
+                                      sys::SBValueListGetValueAtIndex(self.value_list.raw,
+                                                                      self.idx as u32)
+                                  });
             self.idx += 1;
             Some(r)
         } else {

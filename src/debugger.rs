@@ -265,8 +265,10 @@ impl<'d> Iterator for SBDebuggerTargetIter<'d> {
     fn next(&mut self) -> Option<SBTarget> {
         if self.idx < unsafe { sys::SBDebuggerGetNumTargets(self.debugger.raw) as usize } {
             let r = Some(SBTarget {
-                raw: unsafe { sys::SBDebuggerGetTargetAtIndex(self.debugger.raw, self.idx as u32) },
-            });
+                             raw: unsafe {
+                                 sys::SBDebuggerGetTargetAtIndex(self.debugger.raw, self.idx as u32)
+                             },
+                         });
             self.idx += 1;
             r
         } else {

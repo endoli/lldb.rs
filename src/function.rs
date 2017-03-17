@@ -81,10 +81,11 @@ impl SBFunction {
             DisassemblyFlavor::Intel => CString::new("intel").ok(),
         };
         SBInstructionList::wrap(unsafe {
-            sys::SBFunctionGetInstructions2(self.raw,
-                                            target.raw,
-                                            flavor.map_or(ptr::null(), |s| s.as_ptr()))
-        })
+                                    sys::SBFunctionGetInstructions2(self.raw,
+                                                                    target.raw,
+                                                                    flavor.map_or(ptr::null(),
+                                                                                  |s| s.as_ptr()))
+                                })
     }
 
     /// Get the address of the start of this function.

@@ -122,9 +122,8 @@ pub use sys::{AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrde
               InputReaderGranularity, InstrumentationRuntimeType, LanguageType, LaunchFlags,
               MatchType, MemberFunctionKind, PathType, Permissions, QueueItemKind, QueueKind,
               RegisterKind, ReturnStatus, RunMode, ScriptLanguage, SectionType, StateType,
-              StopReason, SymbolContextItem, SymbolType, TemplateArgumentKind, TypeClass,
-              TypeFlags, TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType,
-              WatchpointKind};
+              StopReason, SymbolContextItem, SymbolType, TemplateArgumentKind, TypeClass, TypeFlags,
+              TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType, WatchpointKind};
 
 pub use sys::{LAUNCH_FLAG_EXEC, LAUNCH_FLAG_DEBUG, LAUNCH_FLAG_STOP_AT_ENTRY,
               LAUNCH_FLAG_DISABLE_ASLR, LAUNCH_FLAG_DISABLE_STDIO, LAUNCH_FLAG_LAUNCH_IN_TTY,
@@ -132,11 +131,10 @@ pub use sys::{LAUNCH_FLAG_EXEC, LAUNCH_FLAG_DEBUG, LAUNCH_FLAG_STOP_AT_ENTRY,
               LAUNCH_FLAG_DONT_SET_EXIT_STATUS, LAUNCH_FLAG_DETACH_ON_ERRROR,
               LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS, LAUNCH_FLAG_CLOSE_TTY_ON_EXIT};
 
-pub use sys::{SYMBOL_CONTEXT_ITEM_TARGET, SYMBOL_CONTEXT_ITEM_MODULE,
-              SYMBOL_CONTEXT_ITEM_COMPUNIT, SYMBOL_CONTEXT_ITEM_FUNCTION,
-              SYMBOL_CONTEXT_ITEM_BLOCK, SYMBOL_CONTEXT_ITEM_LINE_ENTRY,
-              SYMBOL_CONTEXT_ITEM_SYMBOL, SYMBOL_CONTEXT_ITEM_EVERYTHING,
-              SYMBOL_CONTEXT_ITEM_VARIABLE};
+pub use sys::{SYMBOL_CONTEXT_ITEM_TARGET, SYMBOL_CONTEXT_ITEM_MODULE, SYMBOL_CONTEXT_ITEM_COMPUNIT,
+              SYMBOL_CONTEXT_ITEM_FUNCTION, SYMBOL_CONTEXT_ITEM_BLOCK,
+              SYMBOL_CONTEXT_ITEM_LINE_ENTRY, SYMBOL_CONTEXT_ITEM_SYMBOL,
+              SYMBOL_CONTEXT_ITEM_EVERYTHING, SYMBOL_CONTEXT_ITEM_VARIABLE};
 
 pub use sys::{PERMISSIONS_WRITABLE, PERMISSIONS_READABLE, PERMISSIONS_EXECUTABLE};
 

@@ -159,8 +159,9 @@ impl SBBreakpoint {
     #[allow(missing_docs)]
     pub fn find_location_by_address(&self, address: lldb_addr_t) -> Option<SBBreakpointLocation> {
         SBBreakpointLocation::maybe_wrap(unsafe {
-            sys::SBBreakpointFindLocationByAddress(self.raw, address)
-        })
+                                             sys::SBBreakpointFindLocationByAddress(self.raw,
+                                                                                    address)
+                                         })
     }
 
     #[allow(missing_docs)]

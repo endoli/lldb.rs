@@ -279,8 +279,10 @@ impl SBTarget {
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
         SBValue::wrap(unsafe {
-            sys::SBTargetEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
-        })
+                          sys::SBTargetEvaluateExpression(self.raw,
+                                                          expression.as_ptr(),
+                                                          options.raw)
+                      })
     }
 
     #[allow(missing_docs)]
@@ -321,9 +323,11 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
 
     fn next(&mut self) -> Option<SBBreakpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumBreakpoints(self.target.raw) as usize } {
-            let r = Some(SBBreakpoint::wrap(unsafe {
-                sys::SBTargetGetBreakpointAtIndex(self.target.raw, self.idx as u32)
-            }));
+            let r =
+                Some(SBBreakpoint::wrap(unsafe {
+                                            sys::SBTargetGetBreakpointAtIndex(self.target.raw,
+                                                                              self.idx as u32)
+                                        }));
             self.idx += 1;
             r
         } else {
@@ -346,9 +350,11 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
 
     fn next(&mut self) -> Option<SBWatchpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) as usize } {
-            let r = Some(SBWatchpoint::wrap(unsafe {
-                sys::SBTargetGetWatchpointAtIndex(self.target.raw, self.idx as u32)
-            }));
+            let r =
+                Some(SBWatchpoint::wrap(unsafe {
+                                            sys::SBTargetGetWatchpointAtIndex(self.target.raw,
+                                                                              self.idx as u32)
+                                        }));
             self.idx += 1;
             r
         } else {
@@ -395,9 +401,11 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     fn next(&mut self) -> Option<SBModule> {
         if self.idx <
            unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize } {
-            let r = Some(SBModule::wrap(unsafe {
-                sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32, self.event.event.raw)
-            }));
+            let r =
+                Some(SBModule::wrap(unsafe {
+                                        sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32,
+                                                                               self.event.event.raw)
+                                    }));
             self.idx += 1;
             r
         } else {

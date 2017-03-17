@@ -159,8 +159,8 @@ impl SBFrame {
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
         SBValue::wrap(unsafe {
-            sys::SBFrameEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
-        })
+                          sys::SBFrameEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
+                      })
     }
 
     /// Gets the lexical block that defines the stack frame. Another way to think

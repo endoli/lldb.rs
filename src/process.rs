@@ -331,8 +331,9 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
     fn next(&mut self) -> Option<SBThread> {
         if self.idx < unsafe { sys::SBProcessGetNumThreads(self.process.raw) as usize } {
             let r = Some(SBThread::wrap(unsafe {
-                sys::SBProcessGetThreadAtIndex(self.process.raw, self.idx)
-            }));
+                                            sys::SBProcessGetThreadAtIndex(self.process.raw,
+                                                                           self.idx)
+                                        }));
             self.idx += 1;
             r
         } else {

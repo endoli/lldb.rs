@@ -181,8 +181,9 @@ impl<'d> Iterator for SBThreadFrameIter<'d> {
     fn next(&mut self) -> Option<SBFrame> {
         if self.idx < unsafe { sys::SBThreadGetNumFrames(self.thread.raw) as usize } {
             let r = Some(SBFrame::wrap(unsafe {
-                sys::SBThreadGetFrameAtIndex(self.thread.raw, self.idx as u32)
-            }));
+                                           sys::SBThreadGetFrameAtIndex(self.thread.raw,
+                                                                        self.idx as u32)
+                                       }));
             self.idx += 1;
             r
         } else {
