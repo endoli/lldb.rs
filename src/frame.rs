@@ -280,3 +280,83 @@ impl Drop for SBFrame {
         unsafe { sys::DisposeSBFrame(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBFrame: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm): This should be u32
+    field frame_id() -> i64 {
+        self.frame_id() as i64
+    }
+
+    // TODO(bm) This should be u64
+    field cfa() -> Option<i64> {
+        self.cfa().map(|i| i as i64)
+    }
+
+    // TODO(bm) This should be u64
+    field pc() -> i64 {
+        self.pc() as i64
+    }
+
+    // TODO(bm) This should be u64
+    field sp() -> i64 {
+        self.sp() as i64
+    }
+
+    // TODO(bm) This should be u64
+    field fp() -> i64 {
+        self.fp() as i64
+    }
+
+    field pc_address() -> SBAddress {
+        self.pc_address()
+    }
+
+    field module() -> SBModule {
+        self.module()
+    }
+
+    field compile_unit() -> SBCompileUnit {
+        self.compile_unit()
+    }
+
+    field function() -> SBFunction {
+        self.function()
+    }
+
+    field symbol() -> SBSymbol {
+        self.symbol()
+    }
+
+    field block() -> SBBlock {
+        self.block()
+    }
+
+    field function_name() -> Option<&str> {
+        self.function_name()
+    }
+
+    field display_function_name() -> Option<&str> {
+        self.display_function_name()
+    }
+
+    field is_inlined() -> bool {
+        self.is_inlined()
+    }
+
+    field frame_block() -> SBBlock {
+        self.frame_block()
+    }
+
+    field line_entry() -> Option<SBLineEntry> {
+        self.line_entry()
+    }
+
+    field thread() -> SBThread {
+        self.thread()
+    }
+});

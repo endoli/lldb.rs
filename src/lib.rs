@@ -112,6 +112,10 @@
 
 extern crate lldb_sys as sys;
 
+#[cfg(feature = "graphql")]
+#[macro_use]
+extern crate juniper;
+
 pub use sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
 
 pub use sys::{AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrder,

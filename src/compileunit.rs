@@ -60,3 +60,14 @@ impl Drop for SBCompileUnit {
         unsafe { sys::DisposeSBCompileUnit(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBCompileUnit: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field filespec() -> SBFileSpec {
+        self.filespec()
+    }
+});

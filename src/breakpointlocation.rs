@@ -109,3 +109,41 @@ impl Drop for SBBreakpointLocation {
         unsafe { sys::DisposeSBBreakpointLocation(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm) This should be i32
+    field id() -> i64 {
+        self.id() as i64
+    }
+
+    field address() -> Option<SBAddress> {
+        self.address()
+    }
+
+    // TODO(bm) This should be u64
+    field load_address() -> i64 {
+        self.load_address() as i64
+    }
+
+    field is_enabled() -> bool {
+        self.is_enabled()
+    }
+
+    // TODO(bm) This should be u32
+    field ignore_count() -> i64 {
+        self.ignore_count() as i64
+    }
+
+    field is_resolved() -> bool {
+        self.is_resolved()
+    }
+
+    field breakpoint() -> SBBreakpoint {
+        self.breakpoint()
+    }
+});

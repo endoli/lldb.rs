@@ -221,3 +221,45 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
         }
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBBreakpoint: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field is_enabled() -> bool {
+        self.is_enabled()
+    }
+
+    field is_oneshot() -> bool {
+        self.is_oneshot()
+    }
+
+    field is_internal() -> bool {
+        self.is_internal()
+    }
+
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm) This should be u32
+    field ignore_count() -> i64 {
+        self.ignore_count() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field hit_count() -> i64 {
+        self.hit_count() as i64
+    }
+
+    // TODO(bm) Make this work. (Lifetimes.)
+    // field names() -> Vec<&str> {
+    //     self.names().iter().collect()
+    // }
+
+    field locations() -> Vec<SBBreakpointLocation> {
+        self.locations().collect()
+    }
+});

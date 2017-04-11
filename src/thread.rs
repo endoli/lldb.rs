@@ -227,3 +227,32 @@ impl<'e> SBThreadEvent<'e> {
         SBFrame::maybe_wrap(unsafe { sys::SBThreadGetStackFrameFromEvent(self.event.raw) })
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBThread: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm): This should be u64
+    field thread_id() -> i64 {
+        self.thread_id() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field index_id() -> i64 {
+        self.index_id() as i64
+    }
+
+    field frames() -> Vec<SBFrame> {
+        self.frames().collect()
+    }
+
+    field selected_frame() -> SBFrame {
+        self.selected_frame()
+    }
+
+    field process() -> SBProcess {
+        self.process()
+    }
+});

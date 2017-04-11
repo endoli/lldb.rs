@@ -82,3 +82,32 @@ impl Drop for SBLineEntry {
         unsafe { sys::DisposeSBLineEntry(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBLineEntry: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field start_address() -> SBAddress {
+        self.start_address()
+    }
+
+    field end_address() -> SBAddress {
+        self.end_address()
+    }
+
+    field filespec() -> SBFileSpec {
+        self.filespec()
+    }
+
+    // TODO(bm) This should be u32
+    field line() -> i64 {
+        self.line() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field column() -> i64 {
+        self.column() as i64
+    }
+});

@@ -413,3 +413,34 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
         }
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBTarget: SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field platform() -> SBPlatform {
+        self.platform()
+    }
+
+    field process() -> SBProcess {
+        self.process()
+    }
+
+    field executable() -> Option<SBFileSpec> {
+        self.executable()
+    }
+
+    field debugger() -> SBDebugger {
+        self.debugger()
+    }
+
+    field breakpoints() -> Vec<SBBreakpoint> {
+        self.breakpoints().collect()
+    }
+
+    field watchpoints() -> Vec<SBWatchpoint> {
+        self.watchpoints().collect()
+    }
+});

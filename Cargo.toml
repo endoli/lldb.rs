@@ -13,5 +13,9 @@ repository = "https://github.com/endoli/lldb.rs"
 [[example]]
 name = "basic_synchronous"
 
+[features]
+graphql = ["juniper"]
+
 [dependencies]
 lldb-sys = "0.0.11"
+juniper = { version = "0.7", optional = true }

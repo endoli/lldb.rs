@@ -173,3 +173,49 @@ impl Drop for SBPlatform {
         unsafe { sys::DisposeSBPlatform(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBPlatform: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field working_directory() -> &str {
+        self.working_directory()
+    }
+
+    field name() -> &str {
+        self.name()
+    }
+
+    field triple() -> &str {
+        self.triple()
+    }
+
+    field hostname() -> &str {
+        self.hostname()
+    }
+
+    field os_build() -> &str {
+        self.os_build()
+    }
+
+    field os_description() -> &str {
+        self.os_description()
+    }
+
+    // TODO(bm) This should be u32
+    field os_major_version() -> i64 {
+        self.os_major_version() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field os_minor_version() -> i64 {
+        self.os_minor_version() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field os_update_version() -> i64 {
+        self.os_update_version() as i64
+    }
+});

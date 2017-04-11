@@ -70,3 +70,18 @@ impl Drop for SBModule {
         unsafe { sys::DisposeSBModule(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBModule: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field filespec() -> SBFileSpec {
+        self.filespec()
+    }
+
+    field platform_filespec() -> SBFileSpec {
+        self.platform_filespec()
+    }
+});

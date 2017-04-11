@@ -125,3 +125,44 @@ impl Drop for SBWatchpoint {
         unsafe { sys::DisposeSBWatchpoint(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBWatchpoint: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm) This should be i32
+    field id() -> i64 {
+        self.id() as i64
+    }
+
+    // TODO(bm) This should be `Option<i32>`.
+    field hardware_index() -> Option<i64> {
+        self.hardware_index().map(|i| i as i64)
+    }
+
+    // TODO(bm) This should be u64
+    field watch_address() -> i64 {
+        self.watch_address() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field watch_size() -> i64 {
+        self.watch_size() as i64
+    }
+
+    field is_enabled() -> bool {
+        self.is_enabled()
+    }
+
+    // TODO(bm) This should be u32
+    field hit_count() -> i64 {
+        self.hit_count() as i64
+    }
+
+    // TODO(bm) This should be u32
+    field ignore_count() -> i64 {
+        self.ignore_count() as i64
+    }
+});

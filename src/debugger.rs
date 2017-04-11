@@ -291,6 +291,19 @@ impl Drop for SBDebugger {
     }
 }
 
+impl ::juniper::Context for SBDebugger {}
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBDebugger: SBDebugger | &self | {
+    field targets() -> Vec<SBTarget> {
+        self.targets().collect()
+    }
+
+    field selected_platform() -> SBPlatform {
+        self.selected_platform()
+    }
+});
+
 #[cfg(test)]
 mod tests {
     use super::SBDebugger;

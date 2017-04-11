@@ -78,3 +78,22 @@ impl Drop for SBFileSpec {
         unsafe { sys::DisposeSBFileSpec(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBFileSpec: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field exists() -> bool {
+        self.exists()
+    }
+
+    field filename() -> &str {
+        self.filename()
+    }
+
+    field directory() -> &str {
+        self.directory()
+    }
+});

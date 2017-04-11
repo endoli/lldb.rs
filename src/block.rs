@@ -123,3 +123,32 @@ impl Drop for SBBlock {
         unsafe { sys::DisposeSBBlock(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBBlock: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field is_inlined() -> bool {
+        self.is_inlined()
+    }
+
+    field inlined_name() -> &str {
+        self.inlined_name()
+    }
+
+    field inlined_call_site_file() -> Option<SBFileSpec> {
+        self.inlined_call_site_file()
+    }
+
+    // TODO(bm) This should be u32
+    field inlined_call_site_line() -> Option<i64> {
+        self.inlined_call_site_line().map(|i| i as i64)
+    }
+
+    // TODO(bm) This should be u32
+    field inlined_call_site_column() -> Option<i64> {
+        self.inlined_call_site_column().map(|i| i as i64)
+    }
+});

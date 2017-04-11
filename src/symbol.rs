@@ -140,3 +140,43 @@ impl Drop for SBSymbol {
         unsafe { sys::DisposeSBSymbol(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBSymbol: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field name() -> &str {
+        self.name()
+    }
+
+    field display_name() -> &str {
+        self.display_name()
+    }
+
+    field mangled_name() -> &str {
+        self.mangled_name()
+    }
+
+    field start_address() -> Option<SBAddress> {
+        self.start_address()
+    }
+
+    field end_address() -> Option<SBAddress> {
+        self.end_address()
+    }
+
+    // TODO(bm) This should be a u32
+    field prologue_byte_size() -> i64 {
+        self.prologue_byte_size() as i64
+    }
+
+    field is_external() -> bool {
+        self.is_external()
+    }
+
+    field is_synthetic() -> bool {
+        self.is_synthetic()
+    }
+});

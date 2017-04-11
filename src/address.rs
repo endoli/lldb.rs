@@ -245,3 +245,39 @@ impl Drop for SBAddress {
         unsafe { sys::DisposeSBAddress(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm) This should be u64
+    field file_address() -> i64 {
+        self.file_address() as i64
+    }
+
+    field module() -> Option<SBModule> {
+        self.module()
+    }
+
+    field compile_unit() -> Option<SBCompileUnit> {
+        self.compile_unit()
+    }
+
+    field function() -> Option<SBFunction> {
+        self.function()
+    }
+
+    field block() -> Option<SBBlock> {
+        self.block()
+    }
+
+    field symbol() -> Option<SBSymbol> {
+        self.symbol()
+    }
+
+    field line_entry() -> Option<SBLineEntry> {
+        self.line_entry()
+    }
+});
