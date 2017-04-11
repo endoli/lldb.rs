@@ -235,6 +235,20 @@ impl SBDebugger {
         }
     }
 
+    /// Get the currently selected [`SBTarget`].
+    ///
+    /// [SBTarget]: struct.SBTarget.html
+    pub fn selected_target(&self) -> Option<SBTarget> {
+        SBTarget::maybe_wrap(unsafe { sys::SBDebuggerGetSelectedTarget(self.raw) })
+    }
+
+    /// Set the selected [`SBTarget`].
+    ///
+    /// [SBTarget]: struct.SBTarget.html
+    pub fn set_selected_target(&mut self, target: &SBTarget) {
+        unsafe { sys::SBDebuggerSetSelectedTarget(self.raw, target.raw) };
+    }
+
     /// Get the currently selected [`SBPlatform`].
     ///
     /// [`SBPlatform`]: struct.SBPlatform.html
@@ -297,6 +311,10 @@ impl ::juniper::Context for SBDebugger {}
 graphql_object!(SBDebugger: SBDebugger | &self | {
     field targets() -> Vec<SBTarget> {
         self.targets().collect()
+    }
+
+    field selected_target() -> Option<SBTarget> {
+        self.selected_target()
     }
 
     field selected_platform() -> SBPlatform {
