@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
@@ -312,6 +312,17 @@ impl SBProcess {
             Some(SBProcessEvent::new(event))
         } else {
             None
+        }
+    }
+
+    /// Save the state of the process in a core file (or mini dump on Windows).
+    pub fn save_core(&self, file_name: &str) -> Result<(), SBError> {
+        let f = CString::new(file_name).unwrap();
+        let error = SBError::wrap(unsafe { sys::SBProcessSaveCore(self.raw, f.as_ptr()) });
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
         }
     }
 }
