@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CStr;
 use std::fmt;
 use super::address::SBAddress;
 use super::data::SBData;
@@ -49,6 +50,36 @@ impl SBInstruction {
     }
 
     #[allow(missing_docs)]
+    pub fn mnemonic(&self, target: &SBTarget) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBInstructionGetMnemonic(self.raw, target.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn operands(&self, target: &SBTarget) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBInstructionGetOperands(self.raw, target.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn comment(&self, target: &SBTarget) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBInstructionGetComment(self.raw, target.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
     pub fn data(&self, target: &SBTarget) -> SBData {
         SBData::wrap(unsafe { sys::SBInstructionGetData(self.raw, target.raw) })
     }
@@ -61,6 +92,11 @@ impl SBInstruction {
     #[allow(missing_docs)]
     pub fn is_branch(&self) -> bool {
         unsafe { sys::SBInstructionDoesBranch(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn has_delay_slot(&self) -> bool {
+        unsafe { sys::SBInstructionHasDelaySlot(self.raw) != 0 }
     }
 }
 

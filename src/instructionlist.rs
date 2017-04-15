@@ -47,6 +47,11 @@ impl SBInstructionList {
         unsafe { sys::SBInstructionListClear(self.raw) };
     }
 
+    /// Append an instruction to this list.
+    pub fn append_instruction(&mut self, instruction: SBInstruction) {
+        unsafe { sys::SBInstructionListAppendInstruction(self.raw, instruction.raw) };
+    }
+
     /// Iterate over this instruction list.
     pub fn iter(&self) -> SBInstructionListIter {
         SBInstructionListIter {
