@@ -4,6 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CString;
+use super::filespec::SBFileSpec;
 use super::listener::SBListener;
 use super::lldb_pid_t;
 use sys;
@@ -30,6 +32,29 @@ impl SBAttachInfo {
         SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo2(pid) })
     }
 
+    /// Attach to a process by name.
+    ///
+    /// Future calls to `SBTarget::attach(...)` will be synchronous or
+    /// asynchronous depending on the `async` argument.
+    ///
+    /// * `path`: A full or partial name for the process to attach to.
+    /// * `wait_for`: If `false`, attach to an existing process whose name
+    ///   matches. If `true`, then wait for the next process whose name
+    ///   matches.
+    /// * `async`: If `false`, then the `SBTarget::attach` call will be
+    ///   synchronous with no way to cancel the attach while it is in
+    ///   progress. If `true`, then the `SBTarget::attach` call will return
+    ///   immediately and clients are expected to wait for a process
+    ///   `eStateStopped` event if a suitable process is eventually found.
+    ///   If the client wants to cancel the event, `SBProcess::stop` can be
+    ///   called and an `eStateExited` process event will be delivered.
+    pub fn new_with_path(path: &str, wait_for: bool, async: bool) -> SBAttachInfo {
+        let p = CString::new(path).unwrap();
+        SBAttachInfo::wrap(unsafe {
+                               sys::CreateSBAttachInfo4(p.as_ptr(), wait_for as u8, async as u8)
+                           })
+    }
+
     /// Construct a new `SBAttachInfo`.
     pub fn wrap(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
         SBAttachInfo { raw: raw }
@@ -46,11 +71,55 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
+    pub fn set_executable_path(&mut self, path: &str) {
+        let p = CString::new(path).unwrap();
+        unsafe { sys::SBAttachInfoSetExecutable(self.raw, p.as_ptr()) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_executable_filespec(&mut self, exe_file: SBFileSpec) {
+        unsafe { sys::SBAttachInfoSetExecutable2(self.raw, exe_file.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn ignore_existing(&self) -> bool {
+        unsafe { sys::SBAttachInfoGetIgnoreExisting(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_ignore_existing(&mut self, b: bool) {
+        unsafe { sys::SBAttachInfoSetIgnoreExisting(self.raw, b as u8) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn resume_count(&self) -> u32 {
+        unsafe { sys::SBAttachInfoGetResumeCount(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_resume_count(&mut self, c: u32) {
+        unsafe { sys::SBAttachInfoSetResumeCount(self.raw, c) }
+    }
+
+    /// Get the listener that will be used to receive process events.
+    ///
+    /// If no listener has been set via a call to
+    /// `SBAttachInfo::set_listener()`, then an invalid `SBListener` will be
+    /// returned (`SBListener::is_valid()` will return `false`). If a listener
+    /// has been set, then the valid listener object will be returned.
     pub fn listener(&self) -> SBListener {
         SBListener::wrap(unsafe { sys::SBAttachInfoGetListener(self.raw) })
     }
 
-    #[allow(missing_docs)]
+    /// Set the listener that will be used to receive process events.
+    ///
+    /// By default the [`SBDebugger`], which has a listener,
+    /// that the [`SBTarget`] belongs to will listen for the
+    /// process events. Calling this function allows a different
+    /// listener to be used to listen for process events.
+    ///
+    /// [`SBDebugger`]: struct.SBDebugger.html
+    /// [`SBTarget`]: struct.SBTarget.html
     pub fn set_listener(&mut self, listener: SBListener) {
         unsafe { sys::SBAttachInfoSetListener(self.raw, listener.raw) };
     }
