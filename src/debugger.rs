@@ -305,6 +305,7 @@ impl Drop for SBDebugger {
     }
 }
 
+#[cfg(feature = "graphql")]
 impl ::juniper::Context for SBDebugger {}
 
 #[cfg(feature = "graphql")]
