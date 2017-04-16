@@ -44,18 +44,18 @@ impl SBStringList {
     }
 
     /// Clear this string list.
-    pub fn clear(&self) {
+    pub fn clear(&mut self) {
         unsafe { sys::SBStringListClear(self.raw) };
     }
 
     /// Append another string to this list.
-    pub fn append_string(&self, string: &str) {
+    pub fn append_string(&mut self, string: &str) {
         let string = CString::new(string).unwrap();
         unsafe { sys::SBStringListAppendString(self.raw, string.as_ptr()) };
     }
 
     /// Append another string list to this one.
-    pub fn append_list(&self, other: &SBStringList) {
+    pub fn append_list(&mut self, other: &SBStringList) {
         unsafe { sys::SBStringListAppendList2(self.raw, other.raw) };
     }
 

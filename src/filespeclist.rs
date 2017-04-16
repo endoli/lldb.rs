@@ -24,12 +24,12 @@ impl SBFileSpecList {
     }
 
     #[allow(missing_docs)]
-    pub fn append(&self, file: &SBFileSpec) {
+    pub fn append(&mut self, file: &SBFileSpec) {
         unsafe { sys::SBFileSpecListAppend(self.raw, file.raw) };
     }
 
     #[allow(missing_docs)]
-    pub fn append_if_unique(&self, file: &SBFileSpec) {
+    pub fn append_if_unique(&mut self, file: &SBFileSpec) {
         unsafe { sys::SBFileSpecListAppendIfUnique(self.raw, file.raw) };
     }
 
@@ -39,7 +39,7 @@ impl SBFileSpecList {
     }
 
     /// Clear this filespec list.
-    pub fn clear(&self) {
+    pub fn clear(&mut self) {
         unsafe { sys::SBFileSpecListClear(self.raw) };
     }
 

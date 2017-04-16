@@ -39,12 +39,12 @@ impl SBValueList {
     }
 
     #[allow(missing_docs)]
-    pub fn append(&self, value: &SBValue) {
+    pub fn append(&mut self, value: &SBValue) {
         unsafe { sys::SBValueListAppend(self.raw, value.raw) };
     }
 
     #[allow(missing_docs)]
-    pub fn append_list(&self, values: &SBValueList) {
+    pub fn append_list(&mut self, values: &SBValueList) {
         unsafe { sys::SBValueListAppend2(self.raw, values.raw) };
     }
 
@@ -54,7 +54,7 @@ impl SBValueList {
     }
 
     /// Clear this value list.
-    pub fn clear(&self) {
+    pub fn clear(&mut self) {
         unsafe { sys::SBValueListClear(self.raw) };
     }
 

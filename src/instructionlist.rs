@@ -43,7 +43,7 @@ impl SBInstructionList {
     }
 
     /// Clear this instruction list.
-    pub fn clear(&self) {
+    pub fn clear(&mut self) {
         unsafe { sys::SBInstructionListClear(self.raw) };
     }
 
