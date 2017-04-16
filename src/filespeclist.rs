@@ -18,6 +18,11 @@ pub struct SBFileSpecList {
 }
 
 impl SBFileSpecList {
+    /// Construct a new `SBFileSpecList`
+    pub fn new() -> SBFileSpecList {
+        SBFileSpecList::wrap(unsafe { sys::CreateSBFileSpecList() })
+    }
+
     /// Construct a new `SBFileSpecList`.
     pub fn wrap(raw: sys::SBFileSpecListRef) -> SBFileSpecList {
         SBFileSpecList { raw: raw }
@@ -57,6 +62,12 @@ impl fmt::Debug for SBFileSpecList {
         let stream = SBStream::new();
         unsafe { sys::SBFileSpecListGetDescription(self.raw, stream.raw) };
         write!(fmt, "SBFileSpecList {{ {} }}", stream.data())
+    }
+}
+
+impl Default for SBFileSpecList {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
