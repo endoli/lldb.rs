@@ -87,6 +87,11 @@ impl SBBreakpoint {
     }
 
     #[allow(missing_docs)]
+    pub fn id(&self) -> i32 {
+        unsafe { sys::SBBreakpointGetID(self.raw) }
+    }
+
+    #[allow(missing_docs)]
     pub fn is_enabled(&self) -> bool {
         unsafe { sys::SBBreakpointIsEnabled(self.raw) != 0 }
     }
@@ -226,6 +231,11 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
 graphql_object!(SBBreakpoint: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
+    }
+
+    // TODO(bm) This should be i32
+    field id() -> i64 {
+        self.id() as i64
     }
 
     field is_enabled() -> bool {
