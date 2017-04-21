@@ -193,6 +193,8 @@ mod symbol;
 mod symbolcontext;
 mod target;
 mod thread;
+mod types;
+mod typelist;
 mod value;
 mod valuelist;
 mod variablesoptions;
@@ -232,6 +234,8 @@ pub use self::symbolcontext::SBSymbolContext;
 pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
                        SBTargetWatchpointIter};
 pub use self::thread::{SBThread, SBThreadEvent, SBThreadFrameIter};
+pub use self::types::SBType;
+pub use self::typelist::SBTypeList;
 pub use self::value::SBValue;
 pub use self::valuelist::SBValueList;
 pub use self::variablesoptions::SBVariablesOptions;
