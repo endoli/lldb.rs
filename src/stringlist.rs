@@ -105,4 +105,9 @@ impl<'d> Iterator for SBStringListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBStringListGetSize(self.string_list.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }

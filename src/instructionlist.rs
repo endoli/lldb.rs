@@ -99,4 +99,9 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }

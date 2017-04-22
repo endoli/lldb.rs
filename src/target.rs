@@ -334,6 +334,11 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBTargetGetNumBreakpoints(self.target.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
 
 /// Iterate over the [watchpoints] in a [target].
@@ -360,6 +365,11 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
         } else {
             None
         }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) } as usize;
+        (sz - self.idx, Some(sz))
     }
 }
 
@@ -411,6 +421,11 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
         } else {
             None
         }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) } as usize;
+        (sz - self.idx, Some(sz))
     }
 }
 

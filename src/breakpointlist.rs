@@ -95,4 +95,9 @@ impl<'d> Iterator for SBBreakpointListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBBreakpointListGetSize(self.breakpoint_list.raw) };
+        (sz - self.idx, Some(sz))
+    }
 }

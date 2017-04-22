@@ -225,6 +225,11 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
 
 #[cfg(feature = "graphql")]

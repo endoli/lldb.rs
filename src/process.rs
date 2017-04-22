@@ -351,6 +351,11 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBProcessGetNumThreads(self.process.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
 
 impl fmt::Debug for SBProcess {
@@ -429,6 +434,12 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
         } else {
             None
         }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) } as
+                 usize;
+        (sz - self.idx, Some(sz))
     }
 }
 

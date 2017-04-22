@@ -100,4 +100,9 @@ impl<'d> Iterator for SBFileSpecListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBFileSpecListGetSize(self.filespec_list.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }

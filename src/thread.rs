@@ -190,6 +190,11 @@ impl<'d> Iterator for SBThreadFrameIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBThreadGetNumFrames(self.thread.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
 
 impl fmt::Debug for SBThread {

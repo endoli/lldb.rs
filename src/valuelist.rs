@@ -108,4 +108,9 @@ impl<'d> Iterator for SBValueListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBValueListGetSize(self.value_list.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }

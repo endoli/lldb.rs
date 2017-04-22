@@ -70,4 +70,9 @@ impl<'d> Iterator for SBTypeListIter<'d> {
             None
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBTypeListGetSize(self.type_list.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
