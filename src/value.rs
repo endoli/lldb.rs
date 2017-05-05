@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CStr;
 use std::fmt;
 use super::address::SBAddress;
 use super::data::SBData;
@@ -14,7 +15,7 @@ use super::stream::SBStream;
 use super::target::SBTarget;
 use super::thread::SBThread;
 use super::watchpoint::SBWatchpoint;
-use super::lldb_addr_t;
+use super::{lldb_addr_t, lldb_user_id_t, Format};
 use sys;
 
 /// The value of a variable, register or expression.
@@ -41,6 +42,81 @@ impl SBValue {
     /// Check whether or not this is a valid `SBValue` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBValueIsValid(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn clear(&self) {
+        unsafe { sys::SBValueClear(self.raw) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn error(&self) -> Option<SBError> {
+        SBError::maybe_wrap(unsafe { sys::SBValueGetError(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn id(&self) -> lldb_user_id_t {
+        unsafe { sys::SBValueGetID(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBValueGetName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn type_name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBValueGetTypeName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn display_type_name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBValueGetDisplayTypeName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn byte_size(&self) -> usize {
+        unsafe { sys::SBValueGetByteSize(self.raw) as usize }
+    }
+
+    #[allow(missing_docs)]
+    pub fn is_in_scope(&self) -> bool {
+        unsafe { sys::SBValueIsInScope(self.raw) != 0 }
+    }
+
+    #[allow(missing_docs)]
+    pub fn format(&self) -> Format {
+        unsafe { sys::SBValueGetFormat(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_format(&mut self, format: Format) {
+        unsafe { sys::SBValueSetFormat(self.raw, format) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn value(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBValueGetValue(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
     }
 
     #[allow(missing_docs)]
@@ -190,3 +266,36 @@ impl Drop for SBValue {
         unsafe { sys::DisposeSBValue(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBValue: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    // TODO(bm): This should be u64
+    field id() -> i64 {
+        self.id() as i64
+    }
+
+    field name() -> &str {
+        self.name()
+    }
+
+    field type_name() -> &str {
+        self.type_name()
+    }
+
+    field display_type_name() -> &str {
+        self.display_type_name()
+    }
+
+    // TODO(bm): This should be usize.
+    field byte_size() -> i64 {
+        self.byte_size() as i64
+    }
+
+    field is_in_scope() -> bool {
+        self.is_in_scope()
+    }
+});
