@@ -169,7 +169,7 @@ impl SBDebugger {
     /// When in async mode, the debugger returns immediately when
     /// stepping or continuing without waiting for the process
     /// to change state.
-    pub fn set_async(&mut self, async: bool) {
+    pub fn set_async(&self, async: bool) {
         unsafe { sys::SBDebuggerSetAsync(self.raw, async as u8) }
     }
 
@@ -245,7 +245,7 @@ impl SBDebugger {
     /// Set the selected [`SBTarget`].
     ///
     /// [SBTarget]: struct.SBTarget.html
-    pub fn set_selected_target(&mut self, target: &SBTarget) {
+    pub fn set_selected_target(&self, target: &SBTarget) {
         unsafe { sys::SBDebuggerSetSelectedTarget(self.raw, target.raw) };
     }
 
@@ -259,7 +259,7 @@ impl SBDebugger {
     /// Set the selected [`SBPlatform`].
     ///
     /// [`SBPlatform`]: struct.SBPlatform.html
-    pub fn set_selected_platform(&mut self, platform: &SBPlatform) {
+    pub fn set_selected_platform(&self, platform: &SBPlatform) {
         unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw, platform.raw) };
     }
 }

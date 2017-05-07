@@ -5,7 +5,7 @@ use lldb::*;
 fn main() {
     SBDebugger::initialize();
 
-    let mut debugger = SBDebugger::create(false);
+    let debugger = SBDebugger::create(false);
     debugger.set_async(false);
     println!("{:?}", debugger);
 

@@ -66,18 +66,18 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn set_process_id(&mut self, pid: lldb_pid_t) {
+    pub fn set_process_id(&self, pid: lldb_pid_t) {
         unsafe { sys::SBAttachInfoSetProcessID(self.raw, pid) };
     }
 
     #[allow(missing_docs)]
-    pub fn set_executable_path(&mut self, path: &str) {
+    pub fn set_executable_path(&self, path: &str) {
         let p = CString::new(path).unwrap();
         unsafe { sys::SBAttachInfoSetExecutable(self.raw, p.as_ptr()) }
     }
 
     #[allow(missing_docs)]
-    pub fn set_executable_filespec(&mut self, exe_file: SBFileSpec) {
+    pub fn set_executable_filespec(&self, exe_file: SBFileSpec) {
         unsafe { sys::SBAttachInfoSetExecutable2(self.raw, exe_file.raw) }
     }
 
@@ -87,7 +87,7 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn set_ignore_existing(&mut self, b: bool) {
+    pub fn set_ignore_existing(&self, b: bool) {
         unsafe { sys::SBAttachInfoSetIgnoreExisting(self.raw, b as u8) }
     }
 
@@ -97,7 +97,7 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn set_resume_count(&mut self, c: u32) {
+    pub fn set_resume_count(&self, c: u32) {
         unsafe { sys::SBAttachInfoSetResumeCount(self.raw, c) }
     }
 
@@ -120,7 +120,7 @@ impl SBAttachInfo {
     ///
     /// [`SBDebugger`]: struct.SBDebugger.html
     /// [`SBTarget`]: struct.SBTarget.html
-    pub fn set_listener(&mut self, listener: SBListener) {
+    pub fn set_listener(&self, listener: SBListener) {
         unsafe { sys::SBAttachInfoSetListener(self.raw, listener.raw) };
     }
 }

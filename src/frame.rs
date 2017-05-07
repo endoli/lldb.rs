@@ -73,7 +73,7 @@ impl SBFrame {
     }
 
     #[allow(missing_docs)]
-    pub fn set_pc(&mut self, new_pc: lldb_addr_t) -> bool {
+    pub fn set_pc(&self, new_pc: lldb_addr_t) -> bool {
         unsafe { sys::SBFrameSetPC(self.raw, new_pc) != 0 }
     }
 
@@ -206,7 +206,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn all_variables(&self) -> SBValueList {
-        let mut options = SBVariablesOptions::new();
+        let options = SBVariablesOptions::new();
         options.set_include_arguments(true);
         options.set_include_locals(true);
         options.set_include_statics(true);
@@ -216,7 +216,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn arguments(&self) -> SBValueList {
-        let mut options = SBVariablesOptions::new();
+        let options = SBVariablesOptions::new();
         options.set_include_arguments(true);
         options.set_include_locals(false);
         options.set_include_statics(false);
@@ -226,7 +226,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn locals(&self) -> SBValueList {
-        let mut options = SBVariablesOptions::new();
+        let options = SBVariablesOptions::new();
         options.set_include_arguments(false);
         options.set_include_locals(true);
         options.set_include_statics(false);
@@ -236,7 +236,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn statics(&self) -> SBValueList {
-        let mut options = SBVariablesOptions::new();
+        let options = SBVariablesOptions::new();
         options.set_include_arguments(false);
         options.set_include_locals(false);
         options.set_include_statics(true);

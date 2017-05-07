@@ -33,17 +33,17 @@ impl SBBreakpointList {
     }
 
     #[allow(missing_docs)]
-    pub fn append(&mut self, bkpt: &SBBreakpoint) {
+    pub fn append(&self, bkpt: &SBBreakpoint) {
         unsafe { sys::SBBreakpointListAppend(self.raw, bkpt.raw) };
     }
 
     #[allow(missing_docs)]
-    pub fn append_by_id(&mut self, bkpt_id: i32) {
+    pub fn append_by_id(&self, bkpt_id: i32) {
         unsafe { sys::SBBreakpointListAppendByID(self.raw, bkpt_id) };
     }
 
     #[allow(missing_docs)]
-    pub fn append_if_unique(&mut self, bkpt: &SBBreakpoint) {
+    pub fn append_if_unique(&self, bkpt: &SBBreakpoint) {
         unsafe { sys::SBBreakpointListAppendIfUnique(self.raw, bkpt.raw) };
     }
 
@@ -53,7 +53,7 @@ impl SBBreakpointList {
     }
 
     /// Clear this breakpoint list.
-    pub fn clear(&mut self) {
+    pub fn clear(&self) {
         unsafe { sys::SBBreakpointListClear(self.raw) };
     }
 

@@ -105,7 +105,7 @@ impl SBValue {
     }
 
     #[allow(missing_docs)]
-    pub fn set_format(&mut self, format: Format) {
+    pub fn set_format(&self, format: Format) {
         unsafe { sys::SBValueSetFormat(self.raw, format) }
     }
 

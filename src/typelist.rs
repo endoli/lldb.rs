@@ -22,7 +22,7 @@ impl SBTypeList {
     }
 
     #[allow(missing_docs)]
-    pub fn append(&mut self, t: &SBType) {
+    pub fn append(&self, t: &SBType) {
         unsafe { sys::SBTypeListAppend(self.raw, t.raw) };
     }
 

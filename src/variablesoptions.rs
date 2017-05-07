@@ -45,7 +45,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_include_arguments(&mut self, arguments: bool) {
+    pub fn set_include_arguments(&self, arguments: bool) {
         unsafe { sys::SBVariablesOptionsSetIncludeArguments(self.raw, arguments as u8) };
     }
 
@@ -55,7 +55,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_include_locals(&mut self, locals: bool) {
+    pub fn set_include_locals(&self, locals: bool) {
         unsafe { sys::SBVariablesOptionsSetIncludeLocals(self.raw, locals as u8) };
     }
 
@@ -65,7 +65,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_include_statics(&mut self, statics: bool) {
+    pub fn set_include_statics(&self, statics: bool) {
         unsafe { sys::SBVariablesOptionsSetIncludeStatics(self.raw, statics as u8) };
     }
 
@@ -75,7 +75,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_in_scope_only(&mut self, in_scope_only: bool) {
+    pub fn set_in_scope_only(&self, in_scope_only: bool) {
         unsafe { sys::SBVariablesOptionsSetInScopeOnly(self.raw, in_scope_only as u8) };
     }
 
@@ -85,7 +85,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_include_runtime_support_values(&mut self, include: bool) {
+    pub fn set_include_runtime_support_values(&self, include: bool) {
         unsafe { sys::SBVariablesOptionsSetIncludeRuntimeSupportValues(self.raw, include as u8) };
     }
 
@@ -95,7 +95,7 @@ impl SBVariablesOptions {
     }
 
     #[allow(missing_docs)]
-    pub fn set_use_dynamic(&mut self, use_dynamic: DynamicValueType) {
+    pub fn set_use_dynamic(&self, use_dynamic: DynamicValueType) {
         unsafe { sys::SBVariablesOptionsSetUseDynamic(self.raw, use_dynamic) };
     }
 }

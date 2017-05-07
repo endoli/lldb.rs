@@ -43,12 +43,12 @@ impl SBInstructionList {
     }
 
     /// Clear this instruction list.
-    pub fn clear(&mut self) {
+    pub fn clear(&self) {
         unsafe { sys::SBInstructionListClear(self.raw) };
     }
 
     /// Append an instruction to this list.
-    pub fn append_instruction(&mut self, instruction: SBInstruction) {
+    pub fn append_instruction(&self, instruction: SBInstruction) {
         unsafe { sys::SBInstructionListAppendInstruction(self.raw, instruction.raw) };
     }
 
