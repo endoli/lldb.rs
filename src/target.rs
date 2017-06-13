@@ -181,6 +181,16 @@ impl SBTarget {
         SBDebugger { raw: unsafe { sys::SBTargetGetDebugger(self.raw) } }
     }
 
+    /// Get an iterator over the [modules] known to this target instance.
+    ///
+    /// [modules]: struct.SBModule.html
+    pub fn modules(&self) -> SBTargetModuleIter {
+        SBTargetModuleIter {
+            target: self,
+            idx: 0,
+        }
+    }
+
     /// Find the module for the given `SBFileSpec`.
     pub fn find_module(&self, file_spec: &SBFileSpec) -> Option<SBModule> {
         SBModule::maybe_wrap(unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) })
@@ -426,6 +436,36 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     fn size_hint(&self) -> (usize, Option<usize>) {
         let sz = unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) } as usize;
         (sz - self.idx, Some(sz))
+    }
+}
+
+/// Iterate over the [modules] in a [target].
+///
+/// [modules]: struct.SBModule.html
+/// [target]: struct.SBTarget.html
+pub struct SBTargetModuleIter<'d> {
+    target: &'d SBTarget,
+    idx: u32,
+}
+
+impl<'d> Iterator for SBTargetModuleIter<'d> {
+    type Item = SBModule;
+
+    fn next(&mut self) -> Option<SBModule> {
+        if self.idx < unsafe { sys::SBTargetGetNumModules(self.target.raw) } {
+            let r = Some(SBModule::wrap(unsafe {
+                                            sys::SBTargetGetModuleAtIndex(self.target.raw, self.idx)
+                                        }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBTargetGetNumModules(self.target.raw) } as usize;
+        (sz - self.idx as usize, Some(sz))
     }
 }
 

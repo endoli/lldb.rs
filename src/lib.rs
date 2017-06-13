@@ -187,6 +187,7 @@ mod module;
 mod modulespec;
 mod platform;
 mod process;
+mod section;
 mod stream;
 mod stringlist;
 mod symbol;
@@ -227,6 +228,7 @@ pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::{SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter,
                         SBProcessThreadIter};
+pub use self::section::SBSection;
 pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};
 pub use self::symbol::SBSymbol;

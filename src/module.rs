@@ -4,8 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use std::ffi::CString;
 use std::fmt;
 use super::filespec::SBFileSpec;
+use super::section::SBSection;
 use super::stream::SBStream;
 use sys;
 
@@ -55,6 +57,53 @@ impl SBModule {
     pub fn platform_filespec(&self) -> SBFileSpec {
         SBFileSpec::wrap(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
+
+    #[allow(missing_docs)]
+    pub fn find_section(&self, name: &str) -> Option<SBSection> {
+        let name = CString::new(name).unwrap();
+        SBSection::maybe_wrap(unsafe { sys::SBModuleFindSection(self.raw, name.as_ptr()) })
+    }
+
+    /// Get an iterator over the [sections] known to this module instance.
+    ///
+    /// [sections]: struct.SBSection.html
+    pub fn sections(&self) -> SBModuleSectionIter {
+        SBModuleSectionIter {
+            module: self,
+            idx: 0,
+        }
+    }
+}
+
+/// Iterate over the [sections] in a [module].
+///
+/// [sections]: struct.SBSection.html
+/// [module]: struct.SBModule.html
+pub struct SBModuleSectionIter<'d> {
+    module: &'d SBModule,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBModuleSectionIter<'d> {
+    type Item = SBSection;
+
+    fn next(&mut self) -> Option<SBSection> {
+        if self.idx < unsafe { sys::SBModuleGetNumSections(self.module.raw) as usize } {
+            let r = Some(SBSection::wrap(unsafe {
+                                             sys::SBModuleGetSectionAtIndex(self.module.raw,
+                                                                            self.idx)
+                                         }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBModuleGetNumSections(self.module.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
 }
 
 impl fmt::Debug for SBModule {
@@ -83,5 +132,9 @@ graphql_object!(SBModule: super::debugger::SBDebugger | &self | {
 
     field platform_filespec() -> SBFileSpec {
         self.platform_filespec()
+    }
+
+    field sections() -> Vec<SBSection> {
+        self.sections().collect()
     }
 });
