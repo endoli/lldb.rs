@@ -8,10 +8,12 @@ use std::ffi::{CStr, CString};
 use std::fmt;
 use std::ptr;
 use super::address::SBAddress;
+use super::block::SBBlock;
 use super::instructionlist::SBInstructionList;
 use super::stream::SBStream;
 use super::target::SBTarget;
-use super::DisassemblyFlavor;
+use super::types::SBType;
+use super::{DisassemblyFlavor, LanguageType};
 use sys;
 
 /// A generic function, which can be inlined or not.
@@ -103,6 +105,21 @@ impl SBFunction {
         unsafe { sys::SBFunctionGetPrologueByteSize(self.raw) }
     }
 
+    /// The return type for this function.
+    pub fn return_type(&self) -> SBType {
+        SBType::wrap(unsafe { sys::SBFunctionGetType(self.raw) })
+    }
+
+    /// Get the top level lexical block for this function.
+    pub fn block(&self) -> SBBlock {
+        SBBlock::wrap(unsafe { sys::SBFunctionGetBlock(self.raw) })
+    }
+
+    /// The language that this function was written in.
+    pub fn language(&self) -> LanguageType {
+        unsafe { sys::SBFunctionGetLanguage(self.raw) }
+    }
+
     /// Returns true if the function was compiled with optimization.
     ///
     /// Optimization, in this case, is meant to indicate that the debugger
@@ -158,6 +175,14 @@ graphql_object!(SBFunction: super::debugger::SBDebugger | &self | {
     // TODO(bm) This should be a u32
     field prologue_byte_size() -> i64 {
         self.prologue_byte_size() as i64
+    }
+
+    field return_type() -> SBType {
+        self.return_type()
+    }
+
+    field block() -> SBBlock {
+        self.block()
     }
 
     field is_optimized() -> bool {
