@@ -5,7 +5,14 @@
 // except according to those terms.
 
 use std::fmt;
+use super::address::SBAddress;
+use super::block::SBBlock;
+use super::compileunit::SBCompileUnit;
+use super::function::SBFunction;
+use super::lineentry::SBLineEntry;
+use super::module::SBModule;
 use super::stream::SBStream;
+use super::symbol::SBSymbol;
 use sys;
 
 /// A container that stores various debugger related info.
@@ -33,6 +40,46 @@ impl SBSymbolContext {
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBSymbolContextIsValid(self.raw) != 0 }
     }
+
+    #[allow(missing_docs)]
+    pub fn module(&self) -> SBModule {
+        SBModule::wrap(unsafe { sys::SBSymbolContextGetModule(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn compile_unit(&self) -> SBCompileUnit {
+        SBCompileUnit::wrap(unsafe { sys::SBSymbolContextGetCompileUnit(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn function(&self) -> SBFunction {
+        SBFunction::wrap(unsafe { sys::SBSymbolContextGetFunction(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn block(&self) -> SBBlock {
+        SBBlock::wrap(unsafe { sys::SBSymbolContextGetBlock(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn line_entry(&self) -> Option<SBLineEntry> {
+        SBLineEntry::maybe_wrap(unsafe { sys::SBSymbolContextGetLineEntry(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn symbol(&self) -> SBSymbol {
+        SBSymbol::wrap(unsafe { sys::SBSymbolContextGetSymbol(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn parent_of_inlined_scope(&self,
+                                   curr_frame_pc: &SBAddress,
+                                   parent_frame_addr: &SBAddress)
+                                   -> SBSymbolContext {
+        SBSymbolContext::wrap(unsafe { sys::SBSymbolContextGetParentOfInlinedScope(self.raw,
+                                           curr_frame_pc.raw,
+                                           parent_frame_addr.raw) })
+    }
 }
 
 impl fmt::Debug for SBSymbolContext {
@@ -48,3 +95,34 @@ impl Drop for SBSymbolContext {
         unsafe { sys::DisposeSBSymbolContext(self.raw) };
     }
 }
+
+#[cfg(feature = "graphql")]
+graphql_object!(SBSymbolContext: super::debugger::SBDebugger | &self | {
+    field is_valid() -> bool {
+        self.is_valid()
+    }
+
+    field module() -> SBModule {
+        self.module()
+    }
+
+    field compile_unit() -> SBCompileUnit {
+        self.compile_unit()
+    }
+
+    field function() -> SBFunction {
+        self.function()
+    }
+
+    field block() -> SBBlock {
+        self.block()
+    }
+
+    field line_entry() -> Option<SBLineEntry> {
+        self.line_entry()
+    }
+
+    field symbol() -> SBSymbol {
+        self.symbol()
+    }
+});

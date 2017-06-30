@@ -15,6 +15,7 @@ use super::lineentry::SBLineEntry;
 use super::module::SBModule;
 use super::stream::SBStream;
 use super::symbol::SBSymbol;
+use super::symbolcontext::SBSymbolContext;
 use super::thread::SBThread;
 use super::value::SBValue;
 use super::valuelist::SBValueList;
@@ -90,6 +91,19 @@ impl SBFrame {
     /// The program counter (PC) as a section offset address (`SBAddress`).
     pub fn pc_address(&self) -> SBAddress {
         SBAddress::wrap(unsafe { sys::SBFrameGetPCAddress(self.raw) })
+    }
+
+    /// The symbol context for this frame's current pc value.
+    ///
+    /// The frame maintains this symbol context and adds information to
+    /// it as needed. This helps avoid repeated lookups of the same
+    /// information.
+    ///
+    /// * `resolve_scope`: Flags that specify what type of symbol context
+    ///   is needed by the caller. These flags have constants starting
+    ///   with `SYMBOL_CONTEXT_ITEM_`.
+    pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
+        SBSymbolContext::wrap(unsafe { sys::SBFrameGetSymbolContext(self.raw, resolve_scope) })
     }
 
     /// The `SBModule` for this stack frame.
