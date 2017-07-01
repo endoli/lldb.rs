@@ -9,6 +9,7 @@ use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
 use super::event::SBEvent;
+use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::thread::SBThread;
 use super::{lldb_pid_t, lldb_tid_t, StateType};
@@ -64,6 +65,25 @@ use sys;
 /// retrieved via [`selected_thread`] and set via [`set_selected_thread`],
 /// [`set_selected_thread_by_id`], or [`set_selected_thread_by_index_id`].
 ///
+/// # Queues
+///
+/// A process may also have a set of queues associated with it. This is used
+/// on macOS, iOS and other Apple operating systems to support debugger
+/// integration with `libdispatch`, also known as GCD or "Grand Central
+/// Dispatch".
+///
+/// The active queues can be iterated over with [`queues`]:
+///
+/// ```no_run
+/// # use lldb::{SBProcess, SBQueue};
+/// # fn look_at_queues(process: SBProcess) {
+/// // Iterate over the queues...
+/// for queue in process.queues() {
+///     println!("Hello {}!", queue.queue_id());
+/// }
+/// # }
+/// ```
+///
 /// # Events
 ///
 /// ... to be written ...
@@ -90,6 +110,7 @@ use sys;
 /// [`set_selected_thread`]: #method.set_selected_thread
 /// [`set_selected_thread_by_id`]: #method.set_selected_thread_by_id
 /// [`set_selected_thread_by_index_id`]: #method.set_selected_thread_by_index_id
+/// [`queues`]: #method.queues
 pub struct SBProcess {
     /// The underlying raw `SBProcessRef`.
     pub raw: sys::SBProcessRef,
@@ -276,6 +297,16 @@ impl SBProcess {
         }
     }
 
+    /// Get an iterator over the [queues] known to this process instance.
+    ///
+    /// [queues]: struct.SBQueue.html
+    pub fn queues(&self) -> SBProcessQueueIter {
+        SBProcessQueueIter {
+            process: self,
+            idx: 0,
+        }
+    }
+
     /// Returns the thread with the given thread ID.
     pub fn thread_by_id(&self, thread_id: lldb_tid_t) -> Option<SBThread> {
         SBThread::maybe_wrap(unsafe { sys::SBProcessGetThreadByID(self.raw, thread_id) })
@@ -354,6 +385,36 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
 
     fn size_hint(&self) -> (usize, Option<usize>) {
         let sz = unsafe { sys::SBProcessGetNumThreads(self.process.raw) } as usize;
+        (sz - self.idx, Some(sz))
+    }
+}
+
+/// Iterate over the [queues] in a [process].
+///
+/// [queues]: struct.SBQueue.html
+/// [process]: struct.SBProcess.html
+pub struct SBProcessQueueIter<'d> {
+    process: &'d SBProcess,
+    idx: usize,
+}
+
+impl<'d> Iterator for SBProcessQueueIter<'d> {
+    type Item = SBQueue;
+
+    fn next(&mut self) -> Option<SBQueue> {
+        if self.idx < unsafe { sys::SBProcessGetNumQueues(self.process.raw) as usize } {
+            let r = Some(SBQueue::wrap(unsafe {
+                                           sys::SBProcessGetQueueAtIndex(self.process.raw, self.idx)
+                                       }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBProcessGetNumQueues(self.process.raw) } as usize;
         (sz - self.idx, Some(sz))
     }
 }
@@ -487,6 +548,10 @@ graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
 
     field threads() -> Vec<SBThread> {
         self.threads().collect()
+    }
+
+    field queues() -> Vec<SBQueue> {
+        self.queues().collect()
     }
 
     field selected_thread() -> SBThread {

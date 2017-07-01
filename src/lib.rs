@@ -187,6 +187,8 @@ mod module;
 mod modulespec;
 mod platform;
 mod process;
+mod queue;
+mod queueitem;
 mod section;
 mod stream;
 mod stringlist;
@@ -228,6 +230,8 @@ pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::{SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter,
                         SBProcessThreadIter};
+pub use self::queue::SBQueue;
+pub use self::queueitem::SBQueueItem;
 pub use self::section::SBSection;
 pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};

@@ -9,6 +9,7 @@ use std::fmt;
 use super::event::SBEvent;
 use super::frame::SBFrame;
 use super::process::SBProcess;
+use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::value::SBValue;
 use super::{lldb_tid_t, StopReason};
@@ -128,6 +129,81 @@ impl SBThread {
     /// with the same thread.  See related `SBThread::thread_id`.
     pub fn index_id(&self) -> u32 {
         unsafe { sys::SBThreadGetIndexID(self.raw) }
+    }
+
+    /// The name associated with the thread, if any.
+    pub fn name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBThreadGetName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    /// Return the queue associated with this thread, if any.
+    ///
+    /// If this `SBThread` is actually a history thread, then there may be
+    /// a queue ID and name available, but not a full `SBQueue` as the
+    /// individual attributes may have been saved, but without enough
+    /// information to reconstitute the entire `SBQueue` at that time.
+    pub fn queue(&self) -> Option<SBQueue> {
+        SBQueue::maybe_wrap(unsafe { sys::SBThreadGetQueue(self.raw) })
+    }
+
+    /// Return the queue name associated with this thread, if any.
+    ///
+    /// For example, this would report a libdispatch (Grand Central Dispatch)
+    /// queue name.
+    pub fn queue_name(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBThreadGetQueueName(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
+
+    /// Return the `dispatch_queue_id` for this thread, if any.
+    ///
+    /// For example, this would report a libdispatch (Grand Central Dispatch)
+    /// queue ID.
+    pub fn queue_id(&self) -> u64 {
+        unsafe { sys::SBThreadGetQueueID(self.raw) }
+    }
+
+    /// Set the user resume state for this thread to suspend.
+    ///
+    /// LLDB currently supports process centric debugging which means when any
+    /// thread in a process stops, all other threads are stopped. The `suspend`
+    /// call here tells our process to suspend a thread and not let it run when
+    /// the other threads in a process are allowed to run. So when
+    /// `SBProcess::continue()` is called, any threads that aren't suspended will
+    /// be allowed to run. If any of the `SBThread` functions for stepping are
+    /// called (`step_over`, `step_into`, `step_out`, `step_instruction`,
+    /// `run_to_address`), the thread will not be allowed to run and these
+    /// functions will simply return.
+    pub fn suspend(&self) -> u8 {
+        unsafe { sys::SBThreadSuspend(self.raw) }
+    }
+
+    /// Set the user resume state for this to allow it to run again.
+    ///
+    /// See the discussion on `suspend` for further details.
+    pub fn resume(&self) -> u8 {
+        unsafe { sys::SBThreadResume(self.raw) }
+    }
+
+    /// Is this thread set to the suspended user resume state?
+    ///
+    /// See the discussion on `suspend` for further details.
+    pub fn is_suspended(&self) -> bool {
+        unsafe { sys::SBThreadIsSuspended(self.raw) != 0 }
+    }
+
+    /// Is this thread stopped?
+    pub fn is_stopped(&self) -> bool {
+        unsafe { sys::SBThreadIsStopped(self.raw) != 0 }
     }
 
     /// Get an iterator over the [frames] known to this thread instance.
