@@ -50,6 +50,9 @@ impl SBFrame {
     }
 
     /// The zero-based stack frame index for this frame.
+    ///
+    /// This can be used to locate adjacent frames in the
+    /// thread's stack frames.
     pub fn frame_id(&self) -> u32 {
         unsafe { sys::SBFrameGetFrameID(self.raw) }
     }
@@ -68,7 +71,7 @@ impl SBFrame {
         }
     }
 
-    #[allow(missing_docs)]
+    /// The program counter (PC) as an unsigned integer.
     pub fn pc(&self) -> lldb_addr_t {
         unsafe { sys::SBFrameGetPC(self.raw) }
     }
@@ -78,12 +81,12 @@ impl SBFrame {
         unsafe { sys::SBFrameSetPC(self.raw, new_pc) != 0 }
     }
 
-    #[allow(missing_docs)]
+    /// The stack pointer address as an unsigned integer.
     pub fn sp(&self) -> lldb_addr_t {
         unsafe { sys::SBFrameGetSP(self.raw) }
     }
 
-    #[allow(missing_docs)]
+    /// The frame pointer address as an unsigned integer.
     pub fn fp(&self) -> lldb_addr_t {
         unsafe { sys::SBFrameGetFP(self.raw) }
     }
@@ -203,7 +206,7 @@ impl SBFrame {
         SBThread::wrap(unsafe { sys::SBFrameGetThread(self.raw) })
     }
 
-    #[allow(missing_docs)]
+    /// The disassembly of this function, presented as a string.
     pub fn disassemble(&self) -> &str {
         unsafe {
             match CStr::from_ptr(sys::SBFrameDisassemble(self.raw)).to_str() {
@@ -218,12 +221,12 @@ impl SBFrame {
         unsafe { sys::SBFrameClear(self.raw) }
     }
 
-    #[allow(missing_docs)]
+    /// The values for variables matching the specified options.
     pub fn variables(&self, options: &SBVariablesOptions) -> SBValueList {
         SBValueList::wrap(unsafe { sys::SBFrameGetVariables(self.raw, options.raw) })
     }
 
-    #[allow(missing_docs)]
+    /// The values for all variables in this stack frame.
     pub fn all_variables(&self) -> SBValueList {
         let options = SBVariablesOptions::new();
         options.set_include_arguments(true);
@@ -233,7 +236,7 @@ impl SBFrame {
         self.variables(&options)
     }
 
-    #[allow(missing_docs)]
+    /// The values for the argument variables in this stack frame.
     pub fn arguments(&self) -> SBValueList {
         let options = SBVariablesOptions::new();
         options.set_include_arguments(true);
@@ -243,7 +246,7 @@ impl SBFrame {
         self.variables(&options)
     }
 
-    #[allow(missing_docs)]
+    /// The values for the local variables in this stack frame.
     pub fn locals(&self) -> SBValueList {
         let options = SBVariablesOptions::new();
         options.set_include_arguments(false);
@@ -253,7 +256,7 @@ impl SBFrame {
         self.variables(&options)
     }
 
-    #[allow(missing_docs)]
+    /// The values for the static variables in this stack frame.
     pub fn statics(&self) -> SBValueList {
         let options = SBVariablesOptions::new();
         options.set_include_arguments(false);
@@ -263,18 +266,18 @@ impl SBFrame {
         self.variables(&options)
     }
 
-    #[allow(missing_docs)]
+    /// The values for the CPU registers for this stack frame.
     pub fn registers(&self) -> SBValueList {
         SBValueList::wrap(unsafe { sys::SBFrameGetRegisters(self.raw) })
     }
 
-    #[allow(missing_docs)]
+    /// The value for a particular register, if present.
     pub fn find_register(&self, name: &str) -> Option<SBValue> {
         let name = CString::new(name).unwrap();
         SBValue::maybe_wrap(unsafe { sys::SBFrameFindRegister(self.raw, name.as_ptr()) })
     }
 
-    #[allow(missing_docs)]
+    /// The parent frame that invoked this frame, if available.
     pub fn parent_frame(&self) -> Option<SBFrame> {
         let thread = self.thread();
         let parent_idx = self.frame_id() + 1;
