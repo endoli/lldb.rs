@@ -216,11 +216,6 @@ impl SBFrame {
         }
     }
 
-    #[allow(missing_docs)]
-    pub fn clear(&self) {
-        unsafe { sys::SBFrameClear(self.raw) }
-    }
-
     /// The values for variables matching the specified options.
     pub fn variables(&self, options: &SBVariablesOptions) -> SBValueList {
         SBValueList::wrap(unsafe { sys::SBFrameGetVariables(self.raw, options.raw) })
