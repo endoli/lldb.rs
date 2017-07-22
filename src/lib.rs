@@ -194,6 +194,7 @@ mod queueitem;
 mod section;
 mod stream;
 mod stringlist;
+mod structureddata;
 mod symbol;
 mod symbolcontext;
 mod target;
@@ -237,6 +238,7 @@ pub use self::queueitem::SBQueueItem;
 pub use self::section::SBSection;
 pub use self::stream::SBStream;
 pub use self::stringlist::{SBStringList, SBStringListIter};
+pub use self::structureddata::SBStructuredData;
 pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
 pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
