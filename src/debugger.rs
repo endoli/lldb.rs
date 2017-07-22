@@ -187,23 +187,26 @@ impl SBDebugger {
     ///
     /// The executable name may be an empty string to create
     /// an empty target.
-    pub fn create_target(&self,
-                         executable: &str,
-                         target_triple: Option<&str>,
-                         platform_name: Option<&str>,
-                         add_dependent_modules: bool)
-                         -> Result<SBTarget, SBError> {
+    pub fn create_target(
+        &self,
+        executable: &str,
+        target_triple: Option<&str>,
+        platform_name: Option<&str>,
+        add_dependent_modules: bool,
+    ) -> Result<SBTarget, SBError> {
         let executable = CString::new(executable).unwrap();
         let target_triple = target_triple.map(|s| CString::new(s).unwrap());
         let platform_name = platform_name.map(|s| CString::new(s).unwrap());
         let error = SBError::new();
         let target = unsafe {
-            sys::SBDebuggerCreateTarget(self.raw,
-                                        executable.as_ptr(),
-                                        target_triple.map_or(ptr::null(), |s| s.as_ptr()),
-                                        platform_name.map_or(ptr::null(), |s| s.as_ptr()),
-                                        add_dependent_modules as u8,
-                                        error.raw)
+            sys::SBDebuggerCreateTarget(
+                self.raw,
+                executable.as_ptr(),
+                target_triple.map_or(ptr::null(), |s| s.as_ptr()),
+                platform_name.map_or(ptr::null(), |s| s.as_ptr()),
+                add_dependent_modules as u8,
+                error.raw,
+            )
         };
         if error.is_success() {
             Ok(SBTarget::wrap(target))
@@ -222,7 +225,9 @@ impl SBDebugger {
     /// about what might have gone wrong.
     pub fn create_target_simple(&self, executable: &str) -> Option<SBTarget> {
         let executable = CString::new(executable).unwrap();
-        SBTarget::maybe_wrap(unsafe { sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr()) })
+        SBTarget::maybe_wrap(unsafe {
+            sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr())
+        })
     }
 
     /// Get an iterator over the [targets] known to this debugger instance.
@@ -279,10 +284,8 @@ impl<'d> Iterator for SBDebuggerTargetIter<'d> {
     fn next(&mut self) -> Option<SBTarget> {
         if self.idx < unsafe { sys::SBDebuggerGetNumTargets(self.debugger.raw) as usize } {
             let r = Some(SBTarget {
-                             raw: unsafe {
-                                 sys::SBDebuggerGetTargetAtIndex(self.debugger.raw, self.idx as u32)
-                             },
-                         });
+                raw: unsafe { sys::SBDebuggerGetTargetAtIndex(self.debugger.raw, self.idx as u32) },
+            });
             self.idx += 1;
             r
         } else {

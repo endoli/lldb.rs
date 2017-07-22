@@ -61,9 +61,8 @@ impl<'d> Iterator for SBTypeListIter<'d> {
     fn next(&mut self) -> Option<SBType> {
         if self.idx < unsafe { sys::SBTypeListGetSize(self.type_list.raw) as usize } {
             let r = SBType::wrap(unsafe {
-                                     sys::SBTypeListGetTypeAtIndex(self.type_list.raw,
-                                                                   self.idx as u32)
-                                 });
+                sys::SBTypeListGetTypeAtIndex(self.type_list.raw, self.idx as u32)
+            });
             self.idx += 1;
             Some(r)
         } else {

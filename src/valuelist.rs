@@ -60,13 +60,17 @@ impl SBValueList {
 
     #[allow(missing_docs)]
     pub fn find_value_by_uid(&self, uid: lldb_user_id_t) -> Option<SBValue> {
-        SBValue::maybe_wrap(unsafe { sys::SBValueListFindValueObjectByUID(self.raw, uid) })
+        SBValue::maybe_wrap(unsafe {
+            sys::SBValueListFindValueObjectByUID(self.raw, uid)
+        })
     }
 
     #[allow(missing_docs)]
     pub fn get_first_value_by_name(&self, name: &str) -> Option<SBValue> {
         let name = CString::new(name).unwrap();
-        SBValue::maybe_wrap(unsafe { sys::SBValueListGetFirstValueByName(self.raw, name.as_ptr()) })
+        SBValue::maybe_wrap(unsafe {
+            sys::SBValueListGetFirstValueByName(self.raw, name.as_ptr())
+        })
     }
 
     /// Iterate over this value list.
@@ -99,9 +103,8 @@ impl<'d> Iterator for SBValueListIter<'d> {
     fn next(&mut self) -> Option<SBValue> {
         if self.idx < unsafe { sys::SBValueListGetSize(self.value_list.raw) as usize } {
             let r = SBValue::wrap(unsafe {
-                                      sys::SBValueListGetValueAtIndex(self.value_list.raw,
-                                                                      self.idx as u32)
-                                  });
+                sys::SBValueListGetValueAtIndex(self.value_list.raw, self.idx as u32)
+            });
             self.idx += 1;
             Some(r)
         } else {

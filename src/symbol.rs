@@ -71,21 +71,23 @@ impl SBSymbol {
     }
 
     ///
-    pub fn get_instructions(&self,
-                            target: &SBTarget,
-                            flavor: DisassemblyFlavor)
-                            -> SBInstructionList {
+    pub fn get_instructions(
+        &self,
+        target: &SBTarget,
+        flavor: DisassemblyFlavor,
+    ) -> SBInstructionList {
         let flavor = match flavor {
             DisassemblyFlavor::ATT => CString::new("att").ok(),
             DisassemblyFlavor::Default => None,
             DisassemblyFlavor::Intel => CString::new("intel").ok(),
         };
         SBInstructionList::wrap(unsafe {
-                                    sys::SBSymbolGetInstructions2(self.raw,
-                                                                  target.raw,
-                                                                  flavor.map_or(ptr::null(),
-                                                                                |s| s.as_ptr()))
-                                })
+            sys::SBSymbolGetInstructions2(
+                self.raw,
+                target.raw,
+                flavor.map_or(ptr::null(), |s| s.as_ptr()),
+            )
+        })
     }
 
     /// Get the address that this symbol refers to, if present.

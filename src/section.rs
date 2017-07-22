@@ -55,7 +55,9 @@ impl SBSection {
     #[allow(missing_docs)]
     pub fn find_subsection(&self, name: &str) -> Option<SBSection> {
         let name = CString::new(name).unwrap();
-        SBSection::maybe_wrap(unsafe { sys::SBSectionFindSubSection(self.raw, name.as_ptr()) })
+        SBSection::maybe_wrap(unsafe {
+            sys::SBSectionFindSubSection(self.raw, name.as_ptr())
+        })
     }
 
     /// Get an iterator over the [subsections] known to this section instance.
@@ -100,7 +102,9 @@ impl SBSection {
 
     #[allow(missing_docs)]
     pub fn section_data_slice(&self, offset: u64, size: u64) -> SBData {
-        SBData::wrap(unsafe { sys::SBSectionGetSectionData2(self.raw, offset, size) })
+        SBData::wrap(unsafe {
+            sys::SBSectionGetSectionData2(self.raw, offset, size)
+        })
     }
 
     #[allow(missing_docs)]
@@ -128,11 +132,9 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
 
     fn next(&mut self) -> Option<SBSection> {
         if self.idx < unsafe { sys::SBSectionGetNumSubSections(self.section.raw) as usize } {
-            let r =
-                Some(SBSection::wrap(unsafe {
-                                         sys::SBSectionGetSubSectionAtIndex(self.section.raw,
-                                                                            self.idx)
-                                     }));
+            let r = Some(SBSection::wrap(unsafe {
+                sys::SBSectionGetSubSectionAtIndex(self.section.raw, self.idx)
+            }));
             self.idx += 1;
             r
         } else {

@@ -29,7 +29,9 @@ impl SBBreakpointList {
 
     #[allow(missing_docs)]
     pub fn find_breakpoint_by_id(&self, id: i32) -> Option<SBBreakpoint> {
-        SBBreakpoint::maybe_wrap(unsafe { sys::SBBreakpointListFindBreakpointByID(self.raw, id) })
+        SBBreakpoint::maybe_wrap(unsafe {
+            sys::SBBreakpointListFindBreakpointByID(self.raw, id)
+        })
     }
 
     #[allow(missing_docs)]

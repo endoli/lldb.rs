@@ -141,9 +141,8 @@ impl<'d> Iterator for SBQueueThreadIter<'d> {
     fn next(&mut self) -> Option<SBThread> {
         if self.idx < unsafe { sys::SBQueueGetNumThreads(self.queue.raw) as usize } {
             let r = Some(SBThread::wrap(unsafe {
-                                            sys::SBQueueGetThreadAtIndex(self.queue.raw,
-                                                                         self.idx as u32)
-                                        }));
+                sys::SBQueueGetThreadAtIndex(self.queue.raw, self.idx as u32)
+            }));
             self.idx += 1;
             r
         } else {
@@ -171,11 +170,9 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
 
     fn next(&mut self) -> Option<SBQueueItem> {
         if self.idx < unsafe { sys::SBQueueGetNumPendingItems(self.queue.raw) as usize } {
-            let r =
-                Some(SBQueueItem::wrap(unsafe {
-                                           sys::SBQueueGetPendingItemAtIndex(self.queue.raw,
-                                                                             self.idx as u32)
-                                       }));
+            let r = Some(SBQueueItem::wrap(unsafe {
+                sys::SBQueueGetPendingItemAtIndex(self.queue.raw, self.idx as u32)
+            }));
             self.idx += 1;
             r
         } else {

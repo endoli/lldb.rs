@@ -67,7 +67,8 @@ impl SBQueueItem {
     pub fn extended_backtrace_thread(&self, thread_type: &str) -> Option<SBThread> {
         let thread_type = CString::new(thread_type).unwrap();
         SBThread::maybe_wrap(unsafe {
-            sys::SBQueueItemGetExtendedBacktraceThread(self.raw, thread_type.as_ptr()) })
+            sys::SBQueueItemGetExtendedBacktraceThread(self.raw, thread_type.as_ptr())
+        })
     }
 }
 

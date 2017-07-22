@@ -51,8 +51,8 @@ impl SBAttachInfo {
     pub fn new_with_path(path: &str, wait_for: bool, async: bool) -> SBAttachInfo {
         let p = CString::new(path).unwrap();
         SBAttachInfo::wrap(unsafe {
-                               sys::CreateSBAttachInfo4(p.as_ptr(), wait_for as u8, async as u8)
-                           })
+            sys::CreateSBAttachInfo4(p.as_ptr(), wait_for as u8, async as u8)
+        })
     }
 
     /// Construct a new `SBAttachInfo`.

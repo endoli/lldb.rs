@@ -314,7 +314,9 @@ impl SBProcess {
 
     /// Returns the thread with the given thread index ID.
     pub fn thread_by_index_id(&self, thread_index_id: u32) -> Option<SBThread> {
-        SBThread::maybe_wrap(unsafe { sys::SBProcessGetThreadByIndexID(self.raw, thread_index_id) })
+        SBThread::maybe_wrap(unsafe {
+            sys::SBProcessGetThreadByIndexID(self.raw, thread_index_id)
+        })
     }
 
     /// Returns the currently selected thread.
@@ -373,9 +375,8 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
     fn next(&mut self) -> Option<SBThread> {
         if self.idx < unsafe { sys::SBProcessGetNumThreads(self.process.raw) as usize } {
             let r = Some(SBThread::wrap(unsafe {
-                                            sys::SBProcessGetThreadAtIndex(self.process.raw,
-                                                                           self.idx)
-                                        }));
+                sys::SBProcessGetThreadAtIndex(self.process.raw, self.idx)
+            }));
             self.idx += 1;
             r
         } else {
@@ -404,8 +405,8 @@ impl<'d> Iterator for SBProcessQueueIter<'d> {
     fn next(&mut self) -> Option<SBQueue> {
         if self.idx < unsafe { sys::SBProcessGetNumQueues(self.process.raw) as usize } {
             let r = Some(SBQueue::wrap(unsafe {
-                                           sys::SBProcessGetQueueAtIndex(self.process.raw, self.idx)
-                                       }));
+                sys::SBProcessGetQueueAtIndex(self.process.raw, self.idx)
+            }));
             self.idx += 1;
             r
         } else {
@@ -483,8 +484,10 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
         let raw = self.event.event.raw;
         if self.idx < unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(raw) as usize } {
             let r = unsafe {
-                let s = CStr::from_ptr(sys::SBProcessGetRestartedReasonAtIndexFromEvent(raw,
-                                                                                        self.idx));
+                let s = CStr::from_ptr(sys::SBProcessGetRestartedReasonAtIndexFromEvent(
+                    raw,
+                    self.idx,
+                ));
                 match s.to_str() {
                     Ok(s) => s,
                     _ => panic!("Invalid string?"),
@@ -499,7 +502,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
 
     fn size_hint(&self) -> (usize, Option<usize>) {
         let sz = unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) } as
-                 usize;
+            usize;
         (sz - self.idx, Some(sz))
     }
 }

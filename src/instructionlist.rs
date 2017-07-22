@@ -90,8 +90,10 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
     fn next(&mut self) -> Option<SBInstruction> {
         if self.idx < unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) as usize } {
             let r = SBInstruction::wrap(unsafe {
-                sys::SBInstructionListGetInstructionAtIndex(self.instruction_list.raw,
-                                                            self.idx as u32)
+                sys::SBInstructionListGetInstructionAtIndex(
+                    self.instruction_list.raw,
+                    self.idx as u32,
+                )
             });
             self.idx += 1;
             Some(r)

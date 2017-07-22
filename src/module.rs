@@ -90,9 +90,8 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
     fn next(&mut self) -> Option<SBSection> {
         if self.idx < unsafe { sys::SBModuleGetNumSections(self.module.raw) as usize } {
             let r = Some(SBSection::wrap(unsafe {
-                                             sys::SBModuleGetSectionAtIndex(self.module.raw,
-                                                                            self.idx)
-                                         }));
+                sys::SBModuleGetSectionAtIndex(self.module.raw, self.idx)
+            }));
             self.idx += 1;
             r
         } else {

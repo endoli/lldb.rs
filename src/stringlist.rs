@@ -92,9 +92,10 @@ impl<'d> Iterator for SBStringListIter<'d> {
     fn next(&mut self) -> Option<&'d str> {
         if self.idx < unsafe { sys::SBStringListGetSize(self.string_list.raw) as usize } {
             let r = unsafe {
-                match CStr::from_ptr(sys::SBStringListGetStringAtIndex(self.string_list.raw,
-                                                                       self.idx))
-                    .to_str() {
+                match CStr::from_ptr(sys::SBStringListGetStringAtIndex(
+                    self.string_list.raw,
+                    self.idx,
+                )).to_str() {
                     Ok(s) => s,
                     _ => panic!("Invalid string?"),
                 }

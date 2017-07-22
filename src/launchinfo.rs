@@ -198,11 +198,13 @@ impl SBLaunchInfo {
     pub fn add_open_file_action(&self, fd: i32, path: &str, read: bool, write: bool) -> bool {
         let path = CString::new(path).unwrap();
         unsafe {
-            sys::SBLaunchInfoAddOpenFileAction(self.raw,
-                                               fd,
-                                               path.as_ptr(),
-                                               read as u8,
-                                               write as u8) != 0
+            sys::SBLaunchInfoAddOpenFileAction(
+                self.raw,
+                fd,
+                path.as_ptr(),
+                read as u8,
+                write as u8,
+            ) != 0
         }
     }
 

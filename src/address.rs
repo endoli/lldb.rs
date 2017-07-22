@@ -100,7 +100,9 @@ impl SBAddress {
     ///   is needed by the caller. These flags have constants starting
     ///   with `SYMBOL_CONTEXT_ITEM_`.
     pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
-        SBSymbolContext::wrap(unsafe { sys::SBAddressGetSymbolContext(self.raw, resolve_scope) })
+        SBSymbolContext::wrap(unsafe {
+            sys::SBAddressGetSymbolContext(self.raw, resolve_scope)
+        })
     }
 
     /// Get the `SBModule` for a given address.

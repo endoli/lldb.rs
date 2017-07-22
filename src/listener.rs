@@ -43,32 +43,38 @@ impl SBListener {
     }
 
     #[allow(missing_docs)]
-    pub fn start_listening_for_event_class(&self,
-                                           debugger: &SBDebugger,
-                                           broadcaster_class: &str,
-                                           event_mask: u32)
-                                           -> u32 {
+    pub fn start_listening_for_event_class(
+        &self,
+        debugger: &SBDebugger,
+        broadcaster_class: &str,
+        event_mask: u32,
+    ) -> u32 {
         let bc = CString::new(broadcaster_class).unwrap();
         unsafe {
-            sys::SBListenerStartListeningForEventClass(self.raw,
-                                                       debugger.raw,
-                                                       bc.as_ptr(),
-                                                       event_mask)
+            sys::SBListenerStartListeningForEventClass(
+                self.raw,
+                debugger.raw,
+                bc.as_ptr(),
+                event_mask,
+            )
         }
     }
 
     #[allow(missing_docs)]
-    pub fn stop_listening_for_event_class(&self,
-                                          debugger: &SBDebugger,
-                                          broadcaster_class: &str,
-                                          event_mask: u32)
-                                          -> bool {
+    pub fn stop_listening_for_event_class(
+        &self,
+        debugger: &SBDebugger,
+        broadcaster_class: &str,
+        event_mask: u32,
+    ) -> bool {
         let bc = CString::new(broadcaster_class).unwrap();
         unsafe {
-            sys::SBListenerStopListeningForEventClass(self.raw,
-                                                      debugger.raw,
-                                                      bc.as_ptr(),
-                                                      event_mask) != 0
+            sys::SBListenerStopListeningForEventClass(
+                self.raw,
+                debugger.raw,
+                bc.as_ptr(),
+                event_mask,
+            ) != 0
         }
     }
 
@@ -88,32 +94,38 @@ impl SBListener {
     }
 
     #[allow(missing_docs)]
-    pub fn wait_for_event_for_broadcaster(&self,
-                                          num_seconds: u32,
-                                          broadcaster: &SBBroadcaster,
-                                          event: &mut SBEvent)
-                                          -> bool {
+    pub fn wait_for_event_for_broadcaster(
+        &self,
+        num_seconds: u32,
+        broadcaster: &SBBroadcaster,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
-            sys::SBListenerWaitForEventForBroadcaster(self.raw,
-                                                      num_seconds,
-                                                      broadcaster.raw,
-                                                      event.raw) != 0
+            sys::SBListenerWaitForEventForBroadcaster(
+                self.raw,
+                num_seconds,
+                broadcaster.raw,
+                event.raw,
+            ) != 0
         }
     }
 
     #[allow(missing_docs)]
-    pub fn wait_for_event_for_broadcaster_with_type(&self,
-                                                    num_seconds: u32,
-                                                    broadcaster: &SBBroadcaster,
-                                                    event_type_mask: u32,
-                                                    event: &mut SBEvent)
-                                                    -> bool {
+    pub fn wait_for_event_for_broadcaster_with_type(
+        &self,
+        num_seconds: u32,
+        broadcaster: &SBBroadcaster,
+        event_type_mask: u32,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
-            sys::SBListenerWaitForEventForBroadcasterWithType(self.raw,
-                                                              num_seconds,
-                                                              broadcaster.raw,
-                                                              event_type_mask,
-                                                              event.raw) != 0
+            sys::SBListenerWaitForEventForBroadcasterWithType(
+                self.raw,
+                num_seconds,
+                broadcaster.raw,
+                event_type_mask,
+                event.raw,
+            ) != 0
         }
     }
 
@@ -123,26 +135,30 @@ impl SBListener {
     }
 
     #[allow(missing_docs)]
-    pub fn peek_at_next_event_for_broadcaster(&self,
-                                              broadcaster: &SBBroadcaster,
-                                              event: &mut SBEvent)
-                                              -> bool {
+    pub fn peek_at_next_event_for_broadcaster(
+        &self,
+        broadcaster: &SBBroadcaster,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
             sys::SBListenerPeekAtNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw) != 0
         }
     }
 
     #[allow(missing_docs)]
-    pub fn peek_at_next_event_for_broadcaster_with_type(&self,
-                                                        broadcaster: &SBBroadcaster,
-                                                        event_type_mask: u32,
-                                                        event: &mut SBEvent)
-                                                        -> bool {
+    pub fn peek_at_next_event_for_broadcaster_with_type(
+        &self,
+        broadcaster: &SBBroadcaster,
+        event_type_mask: u32,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
-            sys::SBListenerPeekAtNextEventForBroadcasterWithType(self.raw,
-                                                                 broadcaster.raw,
-                                                                 event_type_mask,
-                                                                 event.raw) != 0
+            sys::SBListenerPeekAtNextEventForBroadcasterWithType(
+                self.raw,
+                broadcaster.raw,
+                event_type_mask,
+                event.raw,
+            ) != 0
         }
     }
 
@@ -152,26 +168,30 @@ impl SBListener {
     }
 
     #[allow(missing_docs)]
-    pub fn get_next_event_for_broadcaster(&self,
-                                          broadcaster: &SBBroadcaster,
-                                          event: &mut SBEvent)
-                                          -> bool {
+    pub fn get_next_event_for_broadcaster(
+        &self,
+        broadcaster: &SBBroadcaster,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
             sys::SBListenerGetNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw) != 0
         }
     }
 
     #[allow(missing_docs)]
-    pub fn get_next_event_for_broadcaster_with_type(&self,
-                                                    broadcaster: &SBBroadcaster,
-                                                    event_type_mask: u32,
-                                                    event: &mut SBEvent)
-                                                    -> bool {
+    pub fn get_next_event_for_broadcaster_with_type(
+        &self,
+        broadcaster: &SBBroadcaster,
+        event_type_mask: u32,
+        event: &mut SBEvent,
+    ) -> bool {
         unsafe {
-            sys::SBListenerGetNextEventForBroadcasterWithType(self.raw,
-                                                              broadcaster.raw,
-                                                              event_type_mask,
-                                                              event.raw) != 0
+            sys::SBListenerGetNextEventForBroadcasterWithType(
+                self.raw,
+                broadcaster.raw,
+                event_type_mask,
+                event.raw,
+            ) != 0
         }
     }
 

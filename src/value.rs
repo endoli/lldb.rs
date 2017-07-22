@@ -155,18 +155,21 @@ impl SBValue {
     }
 
     /// Find and watch a variable.
-    pub fn watch(&self,
-                 resolve_location: bool,
-                 read: bool,
-                 write: bool)
-                 -> Result<SBWatchpoint, SBError> {
+    pub fn watch(
+        &self,
+        resolve_location: bool,
+        read: bool,
+        write: bool,
+    ) -> Result<SBWatchpoint, SBError> {
         let error = SBError::new();
         let wp = unsafe {
-            sys::SBValueWatch(self.raw,
-                              resolve_location as u8,
-                              read as u8,
-                              write as u8,
-                              error.raw)
+            sys::SBValueWatch(
+                self.raw,
+                resolve_location as u8,
+                read as u8,
+                write as u8,
+                error.raw,
+            )
         };
         if error.is_success() {
             Ok(SBWatchpoint::wrap(wp))
@@ -176,18 +179,21 @@ impl SBValue {
     }
 
     /// Find and watch the location pointed to by a variable.
-    pub fn watch_pointee(&self,
-                         resolve_location: bool,
-                         read: bool,
-                         write: bool)
-                         -> Result<SBWatchpoint, SBError> {
+    pub fn watch_pointee(
+        &self,
+        resolve_location: bool,
+        read: bool,
+        write: bool,
+    ) -> Result<SBWatchpoint, SBError> {
         let error = SBError::new();
         let wp = unsafe {
-            sys::SBValueWatchPointee(self.raw,
-                                     resolve_location as u8,
-                                     read as u8,
-                                     write as u8,
-                                     error.raw)
+            sys::SBValueWatchPointee(
+                self.raw,
+                resolve_location as u8,
+                read as u8,
+                write as u8,
+                error.raw,
+            )
         };
         if error.is_success() {
             Ok(SBWatchpoint::wrap(wp))
@@ -213,7 +219,9 @@ impl SBValue {
     /// Returns `Some(SBData)` with the contents of the copied items, on success.
     /// `None` otherwise.
     pub fn pointee_data(&self, item_idx: u32, item_count: u32) -> Option<SBData> {
-        SBData::maybe_wrap(unsafe { sys::SBValueGetPointeeData(self.raw, item_idx, item_count) })
+        SBData::maybe_wrap(unsafe {
+            sys::SBValueGetPointeeData(self.raw, item_idx, item_count)
+        })
     }
 
     /// Get an `SBData` wrapping the contents of this `SBValue`.

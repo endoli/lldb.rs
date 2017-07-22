@@ -72,13 +72,18 @@ impl SBSymbolContext {
     }
 
     #[allow(missing_docs)]
-    pub fn parent_of_inlined_scope(&self,
-                                   curr_frame_pc: &SBAddress,
-                                   parent_frame_addr: &SBAddress)
-                                   -> SBSymbolContext {
-        SBSymbolContext::wrap(unsafe { sys::SBSymbolContextGetParentOfInlinedScope(self.raw,
-                                           curr_frame_pc.raw,
-                                           parent_frame_addr.raw) })
+    pub fn parent_of_inlined_scope(
+        &self,
+        curr_frame_pc: &SBAddress,
+        parent_frame_addr: &SBAddress,
+    ) -> SBSymbolContext {
+        SBSymbolContext::wrap(unsafe {
+            sys::SBSymbolContextGetParentOfInlinedScope(
+                self.raw,
+                curr_frame_pc.raw,
+                parent_frame_addr.raw,
+            )
+        })
     }
 }
 

@@ -135,8 +135,9 @@ impl SBTarget {
     /// Launch a target for debugging.
     pub fn launch(&self, launch_info: SBLaunchInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::new();
-        let process =
-            SBProcess::wrap(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
+        let process = SBProcess::wrap(unsafe {
+            sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw)
+        });
         if error.is_success() {
             Ok(process)
         } else {
@@ -147,8 +148,9 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::new();
-        let process =
-            SBProcess::wrap(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
+        let process = SBProcess::wrap(unsafe {
+            sys::SBTargetAttach(self.raw, attach_info.raw, error.raw)
+        });
         if error.is_success() {
             Ok(process)
         } else {
@@ -168,7 +170,9 @@ impl SBTarget {
 
     /// Add a module to the target using an `SBModuleSpec`.
     pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> Option<SBModule> {
-        SBModule::maybe_wrap(unsafe { sys::SBTargetAddModuleSpec(self.raw, module_spec.raw) })
+        SBModule::maybe_wrap(unsafe {
+            sys::SBTargetAddModuleSpec(self.raw, module_spec.raw)
+        })
     }
 
     /// Remove a module from the target.
@@ -203,7 +207,9 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn find_breakpoint_by_id(&self, break_id: i32) -> Option<SBBreakpoint> {
-        SBBreakpoint::maybe_wrap(unsafe { sys::SBTargetFindBreakpointByID(self.raw, break_id) })
+        SBBreakpoint::maybe_wrap(unsafe {
+            sys::SBTargetFindBreakpointByID(self.raw, break_id)
+        })
     }
 
     #[allow(missing_docs)]
@@ -236,7 +242,9 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn find_watchpoint_by_id(&self, watch_id: i32) -> Option<SBWatchpoint> {
-        SBWatchpoint::maybe_wrap(unsafe { sys::SBTargetFindWatchpointByID(self.raw, watch_id) })
+        SBWatchpoint::maybe_wrap(unsafe {
+            sys::SBTargetFindWatchpointByID(self.raw, watch_id)
+        })
     }
 
     #[allow(missing_docs)]
@@ -255,12 +263,13 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
-    pub fn watch_address(&self,
-                         addr: lldb_addr_t,
-                         size: usize,
-                         read: bool,
-                         write: bool)
-                         -> Result<SBWatchpoint, SBError> {
+    pub fn watch_address(
+        &self,
+        addr: lldb_addr_t,
+        size: usize,
+        read: bool,
+        write: bool,
+    ) -> Result<SBWatchpoint, SBError> {
         let error: SBError = SBError::new();
         let watchpoint = unsafe {
             sys::SBTargetWatchAddress(self.raw, addr, size, read as u8, write as u8, error.raw)
@@ -289,10 +298,8 @@ impl SBTarget {
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
         SBValue::wrap(unsafe {
-                          sys::SBTargetEvaluateExpression(self.raw,
-                                                          expression.as_ptr(),
-                                                          options.raw)
-                      })
+            sys::SBTargetEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
+        })
     }
 
     #[allow(missing_docs)]
@@ -333,11 +340,9 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
 
     fn next(&mut self) -> Option<SBBreakpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumBreakpoints(self.target.raw) as usize } {
-            let r =
-                Some(SBBreakpoint::wrap(unsafe {
-                                            sys::SBTargetGetBreakpointAtIndex(self.target.raw,
-                                                                              self.idx as u32)
-                                        }));
+            let r = Some(SBBreakpoint::wrap(unsafe {
+                sys::SBTargetGetBreakpointAtIndex(self.target.raw, self.idx as u32)
+            }));
             self.idx += 1;
             r
         } else {
@@ -365,11 +370,9 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
 
     fn next(&mut self) -> Option<SBWatchpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) as usize } {
-            let r =
-                Some(SBWatchpoint::wrap(unsafe {
-                                            sys::SBTargetGetWatchpointAtIndex(self.target.raw,
-                                                                              self.idx as u32)
-                                        }));
+            let r = Some(SBWatchpoint::wrap(unsafe {
+                sys::SBTargetGetWatchpointAtIndex(self.target.raw, self.idx as u32)
+            }));
             self.idx += 1;
             r
         } else {
@@ -420,12 +423,11 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
 
     fn next(&mut self) -> Option<SBModule> {
         if self.idx <
-           unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize } {
-            let r =
-                Some(SBModule::wrap(unsafe {
-                                        sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32,
-                                                                               self.event.event.raw)
-                                    }));
+            unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize }
+        {
+            let r = Some(SBModule::wrap(unsafe {
+                sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32, self.event.event.raw)
+            }));
             self.idx += 1;
             r
         } else {
@@ -454,8 +456,8 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
     fn next(&mut self) -> Option<SBModule> {
         if self.idx < unsafe { sys::SBTargetGetNumModules(self.target.raw) } {
             let r = Some(SBModule::wrap(unsafe {
-                                            sys::SBTargetGetModuleAtIndex(self.target.raw, self.idx)
-                                        }));
+                sys::SBTargetGetModuleAtIndex(self.target.raw, self.idx)
+            }));
             self.idx += 1;
             r
         } else {
