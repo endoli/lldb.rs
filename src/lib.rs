@@ -44,7 +44,7 @@
 //!
 //! ### Windows Installation Notes
 //!
-//! Support for building this has not yet been provided for Linux.
+//! Support for building this has not yet been provided for Windows.
 //! Contributions are welcome!
 //!
 //! ## Usage
