@@ -8,7 +8,7 @@
 //!
 //! This crate provides a safe binding to the public API for [LLDB], the
 //! debugger provided by the [LLVM project]. LLDB provides a modern, high
-//! performance debugger framework and is the default debugger for Mac OS X
+//! performance debugger framework and is the default debugger for macOS
 //! and iOS.
 //!
 //! ## Installation
@@ -20,9 +20,9 @@
 //! lldb = "0.0.7"
 //! ```
 //!
-//! ### Mac OS X Installation Notes
+//! ### macOS Installation Notes
 //!
-//! On Mac OS X, this library relies upon being able to find
+//! On macOS, this library relies upon being able to find
 //! the `LLDB.framework` that is provided by Xcode.app.
 //!
 //! In your own application, you will need to configure the

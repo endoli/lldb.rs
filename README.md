@@ -4,7 +4,7 @@
 
 This crate provides a safe binding to the public API for [LLDB], the
 debugger provided by the [LLVM project]. LLDB provides a modern, high
-performance debugger framework and is the default debugger for Mac OS X
+performance debugger framework and is the default debugger for macOS
 and iOS.
 
 This builds upon a lower level crate [`lldb-sys`](https://github.com/endoli/lldb-sys.rs/).
@@ -27,7 +27,7 @@ Add it to your `Cargo.toml` like so:
 lldb = "0.0.7"
 ```
 
-On Mac OS X, the `LLDB.framework` requires that an `@rpath`
+On macOS, the `LLDB.framework` requires that an `@rpath`
 be configured for your application so that the `LLDB.framework`
 can be found. This isn't directly supported by Cargo today, but
 for local work and development, you can do this:
