@@ -9,6 +9,7 @@
 
     <title>lldb::SymbolType - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc enum">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SymbolType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum SymbolType</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SymbolType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,13 +43,14 @@
         </form>
     </nav>
 
-    <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>lldb</a>::<wbr><a class='enum' href=''>SymbolType</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>lldb</a>::<wbr><a class="enum" href=''>SymbolType</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1984' class='srclink' href='../lldb_sys/lldb_sys/enum.SymbolType.html?gotosrc=1984' title='goto source code'>[src]</a></span></h1>
-<pre class='rust enum'>pub enum SymbolType {
+               </span><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#677-707' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'><div class="docblock attributes">#[repr(u32)]
+</div>pub enum SymbolType {
     Any,
     Absolute,
     Code,
@@ -78,17 +80,26 @@
     ObjCMetaClass,
     ObjCIVar,
     ReExported,
-}</pre><h2 class='variants'>Variants</h2>
-<span id='variant.Any' class='variant'><code>Any</code></span><span id='variant.Absolute' class='variant'><code>Absolute</code></span><span id='variant.Code' class='variant'><code>Code</code></span><span id='variant.Resolver' class='variant'><code>Resolver</code></span><span id='variant.Data' class='variant'><code>Data</code></span><span id='variant.Trampoline' class='variant'><code>Trampoline</code></span><span id='variant.Runtime' class='variant'><code>Runtime</code></span><span id='variant.Exception' class='variant'><code>Exception</code></span><span id='variant.SourceFile' class='variant'><code>SourceFile</code></span><span id='variant.HeaderFile' class='variant'><code>HeaderFile</code></span><span id='variant.ObjectFile' class='variant'><code>ObjectFile</code></span><span id='variant.CommonBlock' class='variant'><code>CommonBlock</code></span><span id='variant.Block' class='variant'><code>Block</code></span><span id='variant.Local' class='variant'><code>Local</code></span><span id='variant.Param' class='variant'><code>Param</code></span><span id='variant.Variable' class='variant'><code>Variable</code></span><span id='variant.VariableType' class='variant'><code>VariableType</code></span><span id='variant.LineEntry' class='variant'><code>LineEntry</code></span><span id='variant.LineHeader' class='variant'><code>LineHeader</code></span><span id='variant.ScopeBegin' class='variant'><code>ScopeBegin</code></span><span id='variant.ScopeEnd' class='variant'><code>ScopeEnd</code></span><span id='variant.Additional' class='variant'><code>Additional</code></span><span id='variant.Compiler' class='variant'><code>Compiler</code></span><span id='variant.Instrumentation' class='variant'><code>Instrumentation</code></span><span id='variant.Undefined' class='variant'><code>Undefined</code></span><span id='variant.ObjCClass' class='variant'><code>ObjCClass</code></span><span id='variant.ObjCMetaClass' class='variant'><code>ObjCMetaClass</code></span><span id='variant.ObjCIVar' class='variant'><code>ObjCIVar</code></span><span id='variant.ReExported' class='variant'><code>ReExported</code></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lldb/enum.SymbolType.html' title='lldb::SymbolType'>SymbolType</a></code></span><span class='out-of-band'></span></h3>
-<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.SymbolType.html' title='lldb::SymbolType'>SymbolType</a></code></h4>
+}</pre><h2 id='variants' class='variants small-section-header'>
+                   Variants<a href='#variants' class='anchor'></a></h2>
+<span id='variant.Any' class='variant'><span id='Any.v' class='invisible'><code>Any</code></span></span><span id='variant.Absolute' class='variant'><span id='Absolute.v' class='invisible'><code>Absolute</code></span></span><span id='variant.Code' class='variant'><span id='Code.v' class='invisible'><code>Code</code></span></span><span id='variant.Resolver' class='variant'><span id='Resolver.v' class='invisible'><code>Resolver</code></span></span><span id='variant.Data' class='variant'><span id='Data.v' class='invisible'><code>Data</code></span></span><span id='variant.Trampoline' class='variant'><span id='Trampoline.v' class='invisible'><code>Trampoline</code></span></span><span id='variant.Runtime' class='variant'><span id='Runtime.v' class='invisible'><code>Runtime</code></span></span><span id='variant.Exception' class='variant'><span id='Exception.v' class='invisible'><code>Exception</code></span></span><span id='variant.SourceFile' class='variant'><span id='SourceFile.v' class='invisible'><code>SourceFile</code></span></span><span id='variant.HeaderFile' class='variant'><span id='HeaderFile.v' class='invisible'><code>HeaderFile</code></span></span><span id='variant.ObjectFile' class='variant'><span id='ObjectFile.v' class='invisible'><code>ObjectFile</code></span></span><span id='variant.CommonBlock' class='variant'><span id='CommonBlock.v' class='invisible'><code>CommonBlock</code></span></span><span id='variant.Block' class='variant'><span id='Block.v' class='invisible'><code>Block</code></span></span><span id='variant.Local' class='variant'><span id='Local.v' class='invisible'><code>Local</code></span></span><span id='variant.Param' class='variant'><span id='Param.v' class='invisible'><code>Param</code></span></span><span id='variant.Variable' class='variant'><span id='Variable.v' class='invisible'><code>Variable</code></span></span><span id='variant.VariableType' class='variant'><span id='VariableType.v' class='invisible'><code>VariableType</code></span></span><span id='variant.LineEntry' class='variant'><span id='LineEntry.v' class='invisible'><code>LineEntry</code></span></span><span id='variant.LineHeader' class='variant'><span id='LineHeader.v' class='invisible'><code>LineHeader</code></span></span><span id='variant.ScopeBegin' class='variant'><span id='ScopeBegin.v' class='invisible'><code>ScopeBegin</code></span></span><span id='variant.ScopeEnd' class='variant'><span id='ScopeEnd.v' class='invisible'><code>ScopeEnd</code></span></span><span id='variant.Additional' class='variant'><span id='Additional.v' class='invisible'><code>Additional</code></span></span><span id='variant.Compiler' class='variant'><span id='Compiler.v' class='invisible'><code>Compiler</code></span></span><span id='variant.Instrumentation' class='variant'><span id='Instrumentation.v' class='invisible'><code>Instrumentation</code></span></span><span id='variant.Undefined' class='variant'><span id='Undefined.v' class='invisible'><code>Undefined</code></span></span><span id='variant.ObjCClass' class='variant'><span id='ObjCClass.v' class='invisible'><code>ObjCClass</code></span></span><span id='variant.ObjCMetaClass' class='variant'><span id='ObjCMetaClass.v' class='invisible'><code>ObjCMetaClass</code></span></span><span id='variant.ObjCIVar' class='variant'><span id='ObjCIVar.v' class='invisible'><code>ObjCIVar</code></span></span><span id='variant.ReExported' class='variant'><span id='ReExported.v' class='invisible'><code>ReExported</code></span></span>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../lldb/enum.SymbolType.html' title='lldb::SymbolType'>SymbolType</a></code></span><span class='out-of-band'></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../lldb/enum.SymbolType.html' title='lldb::SymbolType'>SymbolType</a></code></span><span class='out-of-band'></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div></div><h3 id='impl-Copy' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code><a href='#impl-Copy' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html" title="struct core::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div></section>
+</div></div><h3 id='impl-PartialEq&lt;SymbolType&gt;' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&lt;<a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a>&gt; for <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code><a href='#impl-PartialEq&lt;SymbolType&gt;' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h4>
+</div><h3 id='impl-PartialOrd&lt;SymbolType&gt;' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html" title="trait core::cmp::PartialOrd">PartialOrd</a>&lt;<a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a>&gt; for <a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a></code><a href='#impl-PartialOrd&lt;SymbolType&gt;' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.partial_cmp' class="method"><span id='partial_cmp.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#tymethod.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../lldb/enum.SymbolType.html" title="enum lldb::SymbolType">SymbolType</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html" title="enum core::cmp::Ordering">Ordering</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb_sys/lldb_sys.rs.html#675' title='goto source code'>[src]</a></span></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -144,11 +155,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

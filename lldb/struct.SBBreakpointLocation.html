@@ -9,6 +9,7 @@
 
     <title>lldb::SBBreakpointLocation - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBBreakpointLocation', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBBreakpointLocation</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBBreakpointLocation', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,14 +43,14 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBBreakpointLocation</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBBreakpointLocation</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-249' class='srclink' href='../src/lldb/src/breakpointlocation.rs.html#26-29' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#26-29' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBBreakpointLocation {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html' title='lldb_sys::lldb_sys::SBBreakpointLocationRef'>SBBreakpointLocationRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html" title="type lldb_sys::lldb_sys::SBBreakpointLocationRef">SBBreakpointLocationRef</a>,
 }</pre><div class='docblock'><p>One unique instance (by address) of a logical breakpoint.</p>
 
 <p>A breakpoint location is defined by the breakpoint that
@@ -59,31 +60,42 @@ its settable options.</p>
 
 <p><code>SBBreakpoint</code> contains <code>SBBreakpointLocation</code>(s).
 See <a href="struct.SBBreakpoint.html"><code>SBBreakpoint</code></a> for retrieval of an <code>SBBreakpointLocation</code>
-from an SBBreakpoint.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html' title='lldb_sys::lldb_sys::SBBreakpointLocationRef'>SBBreakpointLocationRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBBreakpointLocationRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBBreakpointLocation.html' title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-251' class='srclink' href='../src/lldb/src/breakpointlocation.rs.html#31-95' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html' title='lldb_sys::lldb_sys::SBBreakpointLocationRef'>SBBreakpointLocationRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBBreakpointLocation.html' title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></code></h4>
+from an <code>SBBreakpoint</code>.</p>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html" title="type lldb_sys::lldb_sys::SBBreakpointLocationRef">SBBreakpointLocationRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBBreakpointLocationRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBBreakpointLocation.html" title="struct lldb::SBBreakpointLocation">SBBreakpointLocation</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#31-95' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html" title="type lldb_sys::lldb_sys::SBBreakpointLocationRef">SBBreakpointLocationRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBBreakpointLocation.html" title="struct lldb::SBBreakpointLocation">SBBreakpointLocation</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#33-35' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBBreakpointLocation</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html' title='lldb_sys::lldb_sys::SBBreakpointLocationRef'>SBBreakpointLocationRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBBreakpointLocation.html' title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBreakpointLocationRef.html" title="type lldb_sys::lldb_sys::SBBreakpointLocationRef">SBBreakpointLocationRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBBreakpointLocation.html" title="struct lldb::SBBreakpointLocation">SBBreakpointLocation</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#38-44' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBBreakpointLocation)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#47-49' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBBreakpointLocation</code> value.</p>
-</div><h4 id='method.id' class='method'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></h4>
-<h4 id='method.address' class='method'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBAddress.html' title='lldb::SBAddress'>SBAddress</a>&gt;</code></h4>
-<h4 id='method.load_address' class='method'><code>fn <a href='#method.load_address' class='fnname'>load_address</a>(&amp;self) -&gt; <a class='type' href='../lldb/type.lldb_addr_t.html' title='lldb::lldb_addr_t'>lldb_addr_t</a></code></h4>
-<h4 id='method.is_enabled' class='method'><code>fn <a href='#method.is_enabled' class='fnname'>is_enabled</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_enabled' class='method'><code>fn <a href='#method.set_enabled' class='fnname'>set_enabled</a>(&amp;self, enabled: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.ignore_count' class='method'><code>fn <a href='#method.ignore_count' class='fnname'>ignore_count</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<h4 id='method.set_ignore_count' class='method'><code>fn <a href='#method.set_ignore_count' class='fnname'>set_ignore_count</a>(&amp;self, count: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
-<h4 id='method.is_resolved' class='method'><code>fn <a href='#method.is_resolved' class='fnname'>is_resolved</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.breakpoint' class='method'><code>fn <a href='#method.breakpoint' class='fnname'>breakpoint</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBreakpoint.html' title='lldb::SBBreakpoint'>SBBreakpoint</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBBreakpointLocation.html' title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-278' class='srclink' href='../src/lldb/src/breakpointlocation.rs.html#97-105' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.id' class="method"><span id='id.v' class='invisible'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#52-54' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.address' class="method"><span id='address.v' class='invisible'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBAddress.html" title="struct lldb::SBAddress">SBAddress</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#57-59' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.load_address' class="method"><span id='load_address.v' class='invisible'><code>fn <a href='#method.load_address' class='fnname'>load_address</a>(&amp;self) -&gt; <a class="type" href="../lldb/type.lldb_addr_t.html" title="type lldb::lldb_addr_t">lldb_addr_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#62-64' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_enabled' class="method"><span id='is_enabled.v' class='invisible'><code>fn <a href='#method.is_enabled' class='fnname'>is_enabled</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#67-69' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_enabled' class="method"><span id='set_enabled.v' class='invisible'><code>fn <a href='#method.set_enabled' class='fnname'>set_enabled</a>(&amp;self, enabled: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#72-74' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.ignore_count' class="method"><span id='ignore_count.v' class='invisible'><code>fn <a href='#method.ignore_count' class='fnname'>ignore_count</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#77-79' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_ignore_count' class="method"><span id='set_ignore_count.v' class='invisible'><code>fn <a href='#method.set_ignore_count' class='fnname'>set_ignore_count</a>(&amp;self, count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#82-84' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_resolved' class="method"><span id='is_resolved.v' class='invisible'><code>fn <a href='#method.is_resolved' class='fnname'>is_resolved</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#87-89' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.breakpoint' class="method"><span id='breakpoint.v' class='invisible'><code>fn <a href='#method.breakpoint' class='fnname'>breakpoint</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBBreakpoint.html" title="struct lldb::SBBreakpoint">SBBreakpoint</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#92-94' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBBreakpointLocation.html" title="struct lldb::SBBreakpointLocation">SBBreakpointLocation</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#97-105' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#98-104' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBBreakpointLocation.html' title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-285' class='srclink' href='../src/lldb/src/breakpointlocation.rs.html#107-111' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBBreakpointLocation.html" title="struct lldb::SBBreakpointLocation">SBBreakpointLocation</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#107-111' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/breakpointlocation.rs.html#108-110' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -140,11 +152,8 @@ from an SBBreakpoint.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

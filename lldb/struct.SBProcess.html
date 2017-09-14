@@ -9,6 +9,7 @@
 
     <title>lldb::SBProcess - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBProcess', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBProcess</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBProcess', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,14 +43,14 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBProcess</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBProcess</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1282' class='srclink' href='../src/lldb/src/process.rs.html#93-96' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/process.rs.html#114-117' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBProcess {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBProcessRef.html' title='lldb_sys::lldb_sys::SBProcessRef'>SBProcessRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBProcessRef.html" title="type lldb_sys::lldb_sys::SBProcessRef">SBProcessRef</a>,
 }</pre><div class='docblock'><p>The process associated with the target program.</p>
 
 <p>You get a process by attaching to or launching a target program.
@@ -80,13 +81,13 @@ just check to see if the process <a href="#method.is_alive"><code>is_alive</code
 <p>The process contains the <a href="struct.SBThread.html">threads of execution</a> for the <a href="struct.SBTarget.html">target</a>. The
 available threads can be iterated over with <a href="#method.threads"><code>threads</code></a>:</p>
 
-<pre class='rust rust-example-rendered'>
-<span class='comment'>// Iterate over the threads...</span>
-<span class='kw'>for</span> <span class='ident'>thread</span> <span class='kw'>in</span> <span class='ident'>process</span>.<span class='ident'>threads</span>() {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello {}!&quot;</span>, <span class='ident'>thread</span>.<span class='ident'>thread_id</span>());
+<pre class="rust rust-example-rendered">
+<span class="comment">// Iterate over the threads...</span>
+<span class="kw">for</span> <span class="ident">thread</span> <span class="kw">in</span> <span class="ident">process</span>.<span class="ident">threads</span>() {
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello {}!&quot;</span>, <span class="ident">thread</span>.<span class="ident">thread_id</span>());
 }
-<span class='comment'>// Or collect them into a vector!</span>
-<span class='kw'>let</span> <span class='ident'>threads</span> <span class='op'>=</span> <span class='ident'>process</span>.<span class='ident'>threads</span>().<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>SBThread</span><span class='op'>&gt;&gt;</span>();</pre>
+<span class="comment">// Or collect them into a vector!</span>
+<span class="kw">let</span> <span class="ident">threads</span> <span class="op">=</span> <span class="ident">process</span>.<span class="ident">threads</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SBThread</span><span class="op">&gt;&gt;</span>();</pre>
 
 <p>Specific individual threads can be looked up via <a href="#method.thread_by_id"><code>thread_by_id</code></a>
 and <a href="#method.thread_by_index_id"><code>thread_by_index_id</code></a> methods.</p>
@@ -95,82 +96,111 @@ and <a href="#method.thread_by_index_id"><code>thread_by_index_id</code></a> met
 retrieved via <a href="#method.selected_thread"><code>selected_thread</code></a> and set via <a href="#method.set_selected_thread"><code>set_selected_thread</code></a>,
 <a href="#method.set_selected_thread_by_id"><code>set_selected_thread_by_id</code></a>, or <a href="#method.set_selected_thread_by_index_id"><code>set_selected_thread_by_index_id</code></a>.</p>
 
+<h1 id='queues' class='section-header'><a href='#queues'>Queues</a></h1>
+<p>A process may also have a set of queues associated with it. This is used
+on macOS, iOS and other Apple operating systems to support debugger
+integration with <code>libdispatch</code>, also known as GCD or &quot;Grand Central
+Dispatch&quot;.</p>
+
+<p>The active queues can be iterated over with <a href="#method.queues"><code>queues</code></a>:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="comment">// Iterate over the queues...</span>
+<span class="kw">for</span> <span class="ident">queue</span> <span class="kw">in</span> <span class="ident">process</span>.<span class="ident">queues</span>() {
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello {}!&quot;</span>, <span class="ident">queue</span>.<span class="ident">queue_id</span>());
+}</pre>
+
 <h1 id='events' class='section-header'><a href='#events'>Events</a></h1>
 <p>... to be written ...</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBProcessRef.html' title='lldb_sys::lldb_sys::SBProcessRef'>SBProcessRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBProcessRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1284' class='srclink' href='../src/lldb/src/process.rs.html#98-317' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBProcessRef.html' title='lldb_sys::lldb_sys::SBProcessRef'>SBProcessRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBProcessRef.html" title="type lldb_sys::lldb_sys::SBProcessRef">SBProcessRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBProcessRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#119-361' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBProcessRef.html" title="type lldb_sys::lldb_sys::SBProcessRef">SBProcessRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#121-123' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBProcess</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBProcessRef.html' title='lldb_sys::lldb_sys::SBProcessRef'>SBProcessRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBProcessRef.html" title="type lldb_sys::lldb_sys::SBProcessRef">SBProcessRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#126-132' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBProcess)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#135-137' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBProcess</code> value.</p>
-</div><h4 id='method.broadcaster_class_name' class='method'><code>fn <a href='#method.broadcaster_class_name' class='fnname'>broadcaster_class_name</a>() -&gt; &amp;'static <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
-<h4 id='method.state' class='method'><code>fn <a href='#method.state' class='fnname'>state</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.StateType.html' title='lldb::StateType'>StateType</a></code></h4>
+</div><h4 id='method.broadcaster_class_name' class="method"><span id='broadcaster_class_name.v' class='invisible'><code>fn <a href='#method.broadcaster_class_name' class='fnname'>broadcaster_class_name</a>() -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#140-147' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.state' class="method"><span id='state.v' class='invisible'><code>fn <a href='#method.state' class='fnname'>state</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.StateType.html" title="enum lldb::StateType">StateType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#150-152' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The current state of this process (running, stopped, exited, etc.).</p>
-</div><h4 id='method.is_alive' class='method'><code>fn <a href='#method.is_alive' class='fnname'>is_alive</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_alive' class="method"><span id='is_alive.v' class='invisible'><code>fn <a href='#method.is_alive' class='fnname'>is_alive</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#159-166' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently alive.</p>
 
 <p>This corresponds to the process being in the <code>Attaching</code>,
 <code>Launching</code>, <code>Stopped</code>, <code>Running</code>, <code>Stepping</code>, <code>Crashed</code>
 or <code>Suspended</code> states.</p>
-</div><h4 id='method.is_running' class='method'><code>fn <a href='#method.is_running' class='fnname'>is_running</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_running' class="method"><span id='is_running.v' class='invisible'><code>fn <a href='#method.is_running' class='fnname'>is_running</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#172-177' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently running.</p>
 
 <p>This corresponds to the process being in the <code>Running</code>
 or <code>Stepping</code> states.</p>
-</div><h4 id='method.is_stopped' class='method'><code>fn <a href='#method.is_stopped' class='fnname'>is_stopped</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_stopped' class="method"><span id='is_stopped.v' class='invisible'><code>fn <a href='#method.is_stopped' class='fnname'>is_stopped</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#183-188' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the process is currently stopped.</p>
 
 <p>This corresponds to the process being in the <code>Stopped</code>, <code>Crashed</code>,
 or <code>Suspended</code> states.</p>
-</div><h4 id='method.exit_status' class='method'><code>fn <a href='#method.exit_status' class='fnname'>exit_status</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></h4>
+</div><h4 id='method.exit_status' class="method"><span id='exit_status.v' class='invisible'><code>fn <a href='#method.exit_status' class='fnname'>exit_status</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#192-194' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The exit status of the process when the process state is
 <code>Exited</code>.</p>
-</div><h4 id='method.exit_description' class='method'><code>fn <a href='#method.exit_description' class='fnname'>exit_description</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+</div><h4 id='method.exit_description' class="method"><span id='exit_description.v' class='invisible'><code>fn <a href='#method.exit_description' class='fnname'>exit_description</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#198-205' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The exit description of the process when the process state
 is <code>Exited</code>.</p>
-</div><h4 id='method.process_id' class='method'><code>fn <a href='#method.process_id' class='fnname'>process_id</a>(&amp;self) -&gt; <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a></code></h4>
+</div><h4 id='method.process_id' class="method"><span id='process_id.v' class='invisible'><code>fn <a href='#method.process_id' class='fnname'>process_id</a>(&amp;self) -&gt; <a class="type" href="../lldb/type.lldb_pid_t.html" title="type lldb::lldb_pid_t">lldb_pid_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#208-210' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the process ID of the process.</p>
-</div><h4 id='method.unique_id' class='method'><code>fn <a href='#method.unique_id' class='fnname'>unique_id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+</div><h4 id='method.unique_id' class="method"><span id='unique_id.v' class='invisible'><code>fn <a href='#method.unique_id' class='fnname'>unique_id</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#215-217' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns an integer ID that is guaranteed to be unique across all
 process instances. This is not the process ID, just a unique
 integer for comparison and caching purposes.</p>
-</div><h4 id='method.address_byte_size' class='method'><code>fn <a href='#method.address_byte_size' class='fnname'>address_byte_size</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+</div><h4 id='method.address_byte_size' class="method"><span id='address_byte_size.v' class='invisible'><code>fn <a href='#method.address_byte_size' class='fnname'>address_byte_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#220-222' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Get the size, in bytes, of an address.</p>
-</div><h4 id='method.destroy' class='method'><code>fn <a href='#method.destroy' class='fnname'>destroy</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
+</div><h4 id='method.destroy' class="method"><span id='destroy.v' class='invisible'><code>fn <a href='#method.destroy' class='fnname'>destroy</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#226-233' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Kills the process and shuts down all threads that were spawned to
 track and monitor the process.</p>
-</div><h4 id='method.continue_execution' class='method'><code>fn <a href='#method.continue_execution' class='fnname'>continue_execution</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
-<h4 id='method.stop' class='method'><code>fn <a href='#method.stop' class='fnname'>stop</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
-<h4 id='method.kill' class='method'><code>fn <a href='#method.kill' class='fnname'>kill</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
+</div><h4 id='method.continue_execution' class="method"><span id='continue_execution.v' class='invisible'><code>fn <a href='#method.continue_execution' class='fnname'>continue_execution</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#236-243' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.stop' class="method"><span id='stop.v' class='invisible'><code>fn <a href='#method.stop' class='fnname'>stop</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#246-253' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.kill' class="method"><span id='kill.v' class='invisible'><code>fn <a href='#method.kill' class='fnname'>kill</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#256-263' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Same as calling <code>destroy</code>.</p>
-</div><h4 id='method.detach' class='method'><code>fn <a href='#method.detach' class='fnname'>detach</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
-<h4 id='method.signal' class='method'><code>fn <a href='#method.signal' class='fnname'>signal</a>(&amp;self, signal: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
+</div><h4 id='method.detach' class="method"><span id='detach.v' class='invisible'><code>fn <a href='#method.detach' class='fnname'>detach</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#266-273' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.signal' class="method"><span id='signal.v' class='invisible'><code>fn <a href='#method.signal' class='fnname'>signal</a>(&amp;self, signal: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#276-283' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Send the process a Unix signal.</p>
-</div><h4 id='method.broadcaster' class='method'><code>fn <a href='#method.broadcaster' class='fnname'>broadcaster</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></h4>
-<h4 id='method.threads' class='method'><code>fn <a href='#method.threads' class='fnname'>threads</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBProcessThreadIter.html' title='lldb::SBProcessThreadIter'>SBProcessThreadIter</a></code></h4>
+</div><h4 id='method.broadcaster' class="method"><span id='broadcaster.v' class='invisible'><code>fn <a href='#method.broadcaster' class='fnname'>broadcaster</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#286-288' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.threads' class="method"><span id='threads.v' class='invisible'><code>fn <a href='#method.threads' class='fnname'>threads</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBProcessThreadIter.html" title="struct lldb::SBProcessThreadIter">SBProcessThreadIter</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#293-298' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Get an iterator over the <a href="struct.SBThread.html">threads</a> known to this process instance.</p>
-</div><h4 id='method.thread_by_id' class='method'><code>fn <a href='#method.thread_by_id' class='fnname'>thread_by_id</a>(&amp;self, thread_id: <a class='type' href='../lldb/type.lldb_tid_t.html' title='lldb::lldb_tid_t'>lldb_tid_t</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>&gt;</code></h4>
+</div><h4 id='method.queues' class="method"><span id='queues.v' class='invisible'><code>fn <a href='#method.queues' class='fnname'>queues</a>(&amp;self) -&gt; SBProcessQueueIter</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#303-308' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBQueue.html">queues</a> known to this process instance.</p>
+</div><h4 id='method.thread_by_id' class="method"><span id='thread_by_id.v' class='invisible'><code>fn <a href='#method.thread_by_id' class='fnname'>thread_by_id</a>(&amp;self, thread_id: <a class="type" href="../lldb/type.lldb_tid_t.html" title="type lldb::lldb_tid_t">lldb_tid_t</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBThread.html" title="struct lldb::SBThread">SBThread</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#311-313' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the thread with the given thread ID.</p>
-</div><h4 id='method.thread_by_index_id' class='method'><code>fn <a href='#method.thread_by_index_id' class='fnname'>thread_by_index_id</a>(&amp;self, thread_index_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>&gt;</code></h4>
+</div><h4 id='method.thread_by_index_id' class="method"><span id='thread_by_index_id.v' class='invisible'><code>fn <a href='#method.thread_by_index_id' class='fnname'>thread_by_index_id</a>(&amp;self, thread_index_id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBThread.html" title="struct lldb::SBThread">SBThread</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#316-320' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the thread with the given thread index ID.</p>
-</div><h4 id='method.selected_thread' class='method'><code>fn <a href='#method.selected_thread' class='fnname'>selected_thread</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a></code></h4>
+</div><h4 id='method.selected_thread' class="method"><span id='selected_thread.v' class='invisible'><code>fn <a href='#method.selected_thread' class='fnname'>selected_thread</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBThread.html" title="struct lldb::SBThread">SBThread</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#323-325' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the currently selected thread.</p>
-</div><h4 id='method.set_selected_thread' class='method'><code>fn <a href='#method.set_selected_thread' class='fnname'>set_selected_thread</a>(&amp;self, thread: &amp;<a class='struct' href='../lldb/struct.SBThread.html' title='lldb::SBThread'>SBThread</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.set_selected_thread' class="method"><span id='set_selected_thread.v' class='invisible'><code>fn <a href='#method.set_selected_thread' class='fnname'>set_selected_thread</a>(&amp;self, thread: &amp;<a class="struct" href="../lldb/struct.SBThread.html" title="struct lldb::SBThread">SBThread</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#328-330' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Set the selected thread.</p>
-</div><h4 id='method.set_selected_thread_by_id' class='method'><code>fn <a href='#method.set_selected_thread_by_id' class='fnname'>set_selected_thread_by_id</a>(&amp;self, thread_id: <a class='type' href='../lldb/type.lldb_tid_t.html' title='lldb::lldb_tid_t'>lldb_tid_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.set_selected_thread_by_id' class="method"><span id='set_selected_thread_by_id.v' class='invisible'><code>fn <a href='#method.set_selected_thread_by_id' class='fnname'>set_selected_thread_by_id</a>(&amp;self, thread_id: <a class="type" href="../lldb/type.lldb_tid_t.html" title="type lldb::lldb_tid_t">lldb_tid_t</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#333-335' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Set the selected thread by ID.</p>
-</div><h4 id='method.set_selected_thread_by_index_id' class='method'><code>fn <a href='#method.set_selected_thread_by_index_id' class='fnname'>set_selected_thread_by_index_id</a>(&amp;self, thread_index_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.set_selected_thread_by_index_id' class="method"><span id='set_selected_thread_by_index_id.v' class='invisible'><code>fn <a href='#method.set_selected_thread_by_index_id' class='fnname'>set_selected_thread_by_index_id</a>(&amp;self, thread_index_id: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#338-340' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Set the selected thread by index ID.</p>
-</div><h4 id='method.event_as_process_event' class='method'><code>fn <a href='#method.event_as_process_event' class='fnname'>event_as_process_event</a>(event: &amp;<a class='struct' href='../lldb/struct.SBEvent.html' title='lldb::SBEvent'>SBEvent</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBProcessEvent.html' title='lldb::SBProcessEvent'>SBProcessEvent</a>&gt;</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1366' class='srclink' href='../src/lldb/src/process.rs.html#344-350' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.event_as_process_event' class="method"><span id='event_as_process_event.v' class='invisible'><code>fn <a href='#method.event_as_process_event' class='fnname'>event_as_process_event</a>(event: &amp;<a class="struct" href="../lldb/struct.SBEvent.html" title="struct lldb::SBEvent">SBEvent</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBProcessEvent.html" title="struct lldb::SBProcessEvent">SBProcessEvent</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#343-349' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.save_core' class="method"><span id='save_core.v' class='invisible'><code>fn <a href='#method.save_core' class='fnname'>save_core</a>(&amp;self, file_name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#352-360' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Save the state of the process in a core file (or mini dump on Windows).</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#423-429' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#424-428' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBProcess.html' title='lldb::SBProcess'>SBProcess</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1373' class='srclink' href='../src/lldb/src/process.rs.html#352-356' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#431-435' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/process.rs.html#432-434' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -227,11 +257,8 @@ track and monitor the process.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBQueue` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBQueue">
+
+    <title>lldb::SBQueue - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct SBQueue</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBQueue', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBQueue</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/lldb/queue.rs.html#40-43' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBQueue {
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBQueueRef.html" title="type lldb_sys::lldb_sys::SBQueueRef">SBQueueRef</a>,
+}</pre><div class='docblock'><p>A <code>libdispatch</code> (aka Grand Central Dispatch) queue.</p>
+
+<p>A program using <code>libdispatch</code> will create queues, put work items
+(functions, blocks) on the queues.  The system will create /
+reassign pthreads to execute the work items for the queues.  A
+serial queue will be associated with a single thread (or possibly
+no thread, if it is not doing any work).  A concurrent queue may
+be associated with multiple threads.</p>
+
+<p>The available queues within a process can be found discovered by
+inspecting the <a href="struct.SBProcess.html"><code>process</code></a>:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="comment">// Iterate over the queues...</span>
+<span class="kw">for</span> <span class="ident">queue</span> <span class="kw">in</span> <span class="ident">process</span>.<span class="ident">queues</span>() {
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello {}!&quot;</span>, <span class="ident">queue</span>.<span class="ident">queue_id</span>());
+}</pre>
+
+<p>If a queue is associated with a thread, it can be discovered
+from the thread via <a href="struct.SBThread.html#method.queue"><code>SBThread::queue()</code></a>.</p>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBQueueRef.html" title="type lldb_sys::lldb_sys::SBQueueRef">SBQueueRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBQueueRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBQueue.html" title="struct lldb::SBQueue">SBQueue</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#45-121' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBQueueRef.html" title="type lldb_sys::lldb_sys::SBQueueRef">SBQueueRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBQueue.html" title="struct lldb::SBQueue">SBQueue</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#47-49' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>SBQueue</code>.</p>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBQueueRef.html" title="type lldb_sys::lldb_sys::SBQueueRef">SBQueueRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBQueue.html" title="struct lldb::SBQueue">SBQueue</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#52-58' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBQueue)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#61-63' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBQueue</code> value.</p>
+</div><h4 id='method.process' class="method"><span id='process.v' class='invisible'><code>fn <a href='#method.process' class='fnname'>process</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBProcess.html" title="struct lldb::SBProcess">SBProcess</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#66-68' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.queue_id' class="method"><span id='queue_id.v' class='invisible'><code>fn <a href='#method.queue_id' class='fnname'>queue_id</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#75-77' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a unique identifying number for this queue that will not
+be used by any other queue during this process&#39; execution.</p>
+
+<p>These ID numbers often start at 1 with the first system-created
+queues and increment from there.</p>
+</div><h4 id='method.name' class="method"><span id='name.v' class='invisible'><code>fn <a href='#method.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#80-87' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>The name of this queue.</p>
+</div><h4 id='method.threads' class="method"><span id='threads.v' class='invisible'><code>fn <a href='#method.threads' class='fnname'>threads</a>(&amp;self) -&gt; SBQueueThreadIter</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#92-97' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBThread.html">threads</a> associated with this queue.</p>
+</div><h4 id='method.pending_items' class="method"><span id='pending_items.v' class='invisible'><code>fn <a href='#method.pending_items' class='fnname'>pending_items</a>(&amp;self) -&gt; SBQueueQueueItemIter</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#102-107' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBQueueItem.html">pending items</a> known to this queue.</p>
+</div><h4 id='method.num_running_items' class="method"><span id='num_running_items.v' class='invisible'><code>fn <a href='#method.num_running_items' class='fnname'>num_running_items</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#113-115' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>The number of work items that this queue is currently running.</p>
+
+<p>For a serial queue, this will be <code>0</code> or <code>1</code>.  For a concurrent
+queue, this may be any number.</p>
+</div><h4 id='method.kind' class="method"><span id='kind.v' class='invisible'><code>fn <a href='#method.kind' class='fnname'>kind</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.QueueKind.html" title="enum lldb::QueueKind">QueueKind</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#118-120' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>The kind of this queue, serial or concurrent.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBQueue.html" title="struct lldb::SBQueue">SBQueue</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#123-127' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/queue.rs.html#124-126' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

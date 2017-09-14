@@ -9,6 +9,7 @@
 
     <title>lldb - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc mod">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'lldb', ty: 'mod', relpath: '../'};</script>
+        <p class='location'>Crate lldb</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'lldb', ty: 'mod', relpath: '../'};</script>
     </nav>
 
     <nav class="sub">
@@ -42,12 +43,12 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>lldb</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>lldb</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/lldb/src/lib.rs.html#7-286' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/lib.rs.html#7-271' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id='lldb' class='section-header'><a href='#lldb'>LLDB</a></h1>
 <p>This crate provides a safe binding to the public API for <a href="http://lldb.llvm.org/">LLDB</a>, the
@@ -59,7 +60,7 @@ and iOS.</p>
 <p>This crate works with Cargo and is on <a href="https://crates.io/crates/lldb">crates.io</a>.
 Add it to your <code>Cargo.toml</code> like so:</p>
 
-<pre><code class="language-toml">lldb = &quot;0.0.5&quot;
+<pre><code class="language-toml">lldb = &quot;0.0.7&quot;
 </code></pre>
 
 <h3 id='mac-os-x-installation-notes' class='section-header'><a href='#mac-os-x-installation-notes'>Mac OS X Installation Notes</a></h3>
@@ -127,371 +128,421 @@ provide commercial support, so feel free to
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.FilePermissions.html'
-                                  title='lldb::FilePermissions'>FilePermissions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.FilePermissions.html"
+                                  title='struct lldb::FilePermissions'>FilePermissions</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.LaunchFlags.html'
-                                  title='lldb::LaunchFlags'>LaunchFlags</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.LaunchFlags.html"
+                                  title='struct lldb::LaunchFlags'>LaunchFlags</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.Permissions.html'
-                                  title='lldb::Permissions'>Permissions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.Permissions.html"
+                                  title='struct lldb::Permissions'>Permissions</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBAddress.html'
-                                  title='lldb::SBAddress'>SBAddress</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBAddress.html"
+                                  title='struct lldb::SBAddress'>SBAddress</a></td>
+                           <td class='docblock-short'>
                                 <p>A section + offset based address class.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBAttachInfo.html'
-                                  title='lldb::SBAttachInfo'>SBAttachInfo</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBAttachInfo.html"
+                                  title='struct lldb::SBAttachInfo'>SBAttachInfo</a></td>
+                           <td class='docblock-short'>
                                 <p>Configuration for attaching to a process.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBBlock.html'
-                                  title='lldb::SBBlock'>SBBlock</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBBlock.html"
+                                  title='struct lldb::SBBlock'>SBBlock</a></td>
+                           <td class='docblock-short'>
                                 <p>A lexical block.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBBreakpoint.html'
-                                  title='lldb::SBBreakpoint'>SBBreakpoint</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBBreakpoint.html"
+                                  title='struct lldb::SBBreakpoint'>SBBreakpoint</a></td>
+                           <td class='docblock-short'>
                                 <p>A logical breakpoint and its associated settings.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBBreakpointLocation.html'
-                                  title='lldb::SBBreakpointLocation'>SBBreakpointLocation</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBBreakpointList.html"
+                                  title='struct lldb::SBBreakpointList'>SBBreakpointList</a></td>
+                           <td class='docblock-short'>
+                                <p>A list of <a href="struct.SBBreakpoint.html">breakpoints</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBBreakpointLocation.html"
+                                  title='struct lldb::SBBreakpointLocation'>SBBreakpointLocation</a></td>
+                           <td class='docblock-short'>
                                 <p>One unique instance (by address) of a logical breakpoint.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBBreakpointLocationIter.html'
-                                  title='lldb::SBBreakpointLocationIter'>SBBreakpointLocationIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBBreakpointLocationIter.html"
+                                  title='struct lldb::SBBreakpointLocationIter'>SBBreakpointLocationIter</a></td>
+                           <td class='docblock-short'>
                                 <p>An iterator over the <a href="struct.SBBreakpointLocation.html">locations</a> in an <a href="struct.SBBreakpoint.html"><code>SBBreakpoint</code></a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBBroadcaster.html'
-                                  title='lldb::SBBroadcaster'>SBBroadcaster</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBBroadcaster.html"
+                                  title='struct lldb::SBBroadcaster'>SBBroadcaster</a></td>
+                           <td class='docblock-short'>
                                 <p>An entity which can broadcast events.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBCompileUnit.html'
-                                  title='lldb::SBCompileUnit'>SBCompileUnit</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBCompileUnit.html"
+                                  title='struct lldb::SBCompileUnit'>SBCompileUnit</a></td>
+                           <td class='docblock-short'>
                                 <p>A compilation unit or compiled source file.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBData.html'
-                                  title='lldb::SBData'>SBData</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBData.html"
+                                  title='struct lldb::SBData'>SBData</a></td>
+                           <td class='docblock-short'>
                                 <p>A block of data.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBDebugger.html'
-                                  title='lldb::SBDebugger'>SBDebugger</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBDebugger.html"
+                                  title='struct lldb::SBDebugger'>SBDebugger</a></td>
+                           <td class='docblock-short'>
                                 <p>Creates <a href="struct.SBTarget.html"><code>SBTarget</code></a>s, provides access to them and manages
 the overall debugging experience.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBDebuggerTargetIter.html'
-                                  title='lldb::SBDebuggerTargetIter'>SBDebuggerTargetIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBDebuggerTargetIter.html"
+                                  title='struct lldb::SBDebuggerTargetIter'>SBDebuggerTargetIter</a></td>
+                           <td class='docblock-short'>
                                 <p>Iterate over the <a href="struct.SBTarget.html">targets</a> known to a <a href="struct.SBDebugger.html">debugger</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBError.html'
-                                  title='lldb::SBError'>SBError</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBError.html"
+                                  title='struct lldb::SBError'>SBError</a></td>
+                           <td class='docblock-short'>
                                 <p>A container for holding any error code.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBEvent.html'
-                                  title='lldb::SBEvent'>SBEvent</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBEvent.html"
+                                  title='struct lldb::SBEvent'>SBEvent</a></td>
+                           <td class='docblock-short'>
                                 <p>An event.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBExpressionOptions.html'
-                                  title='lldb::SBExpressionOptions'>SBExpressionOptions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBExpressionOptions.html"
+                                  title='struct lldb::SBExpressionOptions'>SBExpressionOptions</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBFileSpec.html'
-                                  title='lldb::SBFileSpec'>SBFileSpec</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBFileSpec.html"
+                                  title='struct lldb::SBFileSpec'>SBFileSpec</a></td>
+                           <td class='docblock-short'>
                                 <p>A file specification that divides the path into a
 directory and basename.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBFileSpecList.html'
-                                  title='lldb::SBFileSpecList'>SBFileSpecList</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBFileSpecList.html"
+                                  title='struct lldb::SBFileSpecList'>SBFileSpecList</a></td>
+                           <td class='docblock-short'>
                                 <p>A list of <a href="struct.SBFileSpec.html">filespecs</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBFrame.html'
-                                  title='lldb::SBFrame'>SBFrame</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBFrame.html"
+                                  title='struct lldb::SBFrame'>SBFrame</a></td>
+                           <td class='docblock-short'>
                                 <p>One of the stack frames associated with a thread.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBFunction.html'
-                                  title='lldb::SBFunction'>SBFunction</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBFunction.html"
+                                  title='struct lldb::SBFunction'>SBFunction</a></td>
+                           <td class='docblock-short'>
                                 <p>A generic function, which can be inlined or not.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBInstruction.html'
-                                  title='lldb::SBInstruction'>SBInstruction</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBInstruction.html"
+                                  title='struct lldb::SBInstruction'>SBInstruction</a></td>
+                           <td class='docblock-short'>
                                 <p>A machine instruction.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBInstructionList.html'
-                                  title='lldb::SBInstructionList'>SBInstructionList</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBInstructionList.html"
+                                  title='struct lldb::SBInstructionList'>SBInstructionList</a></td>
+                           <td class='docblock-short'>
                                 <p>A list of <a href="struct.SBInstruction.html">machine instructions</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBInstructionListIter.html'
-                                  title='lldb::SBInstructionListIter'>SBInstructionListIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBInstructionListIter.html"
+                                  title='struct lldb::SBInstructionListIter'>SBInstructionListIter</a></td>
+                           <td class='docblock-short'>
                                 <p>An iterator over the <a href="struct.SBInstruction.html">instructions</a> in an <a href="struct.SBInstructionList.html"><code>SBInstructionList</code></a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBLaunchInfo.html'
-                                  title='lldb::SBLaunchInfo'>SBLaunchInfo</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBLaunchInfo.html"
+                                  title='struct lldb::SBLaunchInfo'>SBLaunchInfo</a></td>
+                           <td class='docblock-short'>
                                 <p>Configuration for launching a process.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBLineEntry.html'
-                                  title='lldb::SBLineEntry'>SBLineEntry</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBLineEntry.html"
+                                  title='struct lldb::SBLineEntry'>SBLineEntry</a></td>
+                           <td class='docblock-short'>
                                 <p>Specifies an association with a contiguous range of
 instructions and a source file location.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBListener.html'
-                                  title='lldb::SBListener'>SBListener</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBListener.html"
+                                  title='struct lldb::SBListener'>SBListener</a></td>
+                           <td class='docblock-short'>
                                 <p>Listen for debugger events.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBModule.html'
-                                  title='lldb::SBModule'>SBModule</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBModule.html"
+                                  title='struct lldb::SBModule'>SBModule</a></td>
+                           <td class='docblock-short'>
                                 <p>An executable image and its associated object and symbol files.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBModuleSpec.html'
-                                  title='lldb::SBModuleSpec'>SBModuleSpec</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBModuleSpec.html"
+                                  title='struct lldb::SBModuleSpec'>SBModuleSpec</a></td>
+                           <td class='docblock-short'>
                                 <p>A description of an <code>SBModule</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBPlatform.html'
-                                  title='lldb::SBPlatform'>SBPlatform</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBPlatform.html"
+                                  title='struct lldb::SBPlatform'>SBPlatform</a></td>
+                           <td class='docblock-short'>
                                 <p>A platform that can represent the current host or a
 remote host debug platform.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBProcess.html'
-                                  title='lldb::SBProcess'>SBProcess</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBProcess.html"
+                                  title='struct lldb::SBProcess'>SBProcess</a></td>
+                           <td class='docblock-short'>
                                 <p>The process associated with the target program.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBProcessEvent.html'
-                                  title='lldb::SBProcessEvent'>SBProcessEvent</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBProcessEvent.html"
+                                  title='struct lldb::SBProcessEvent'>SBProcessEvent</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBProcessEventRestartedReasonIter.html'
-                                  title='lldb::SBProcessEventRestartedReasonIter'>SBProcessEventRestartedReasonIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBProcessEventRestartedReasonIter.html"
+                                  title='struct lldb::SBProcessEventRestartedReasonIter'>SBProcessEventRestartedReasonIter</a></td>
+                           <td class='docblock-short'>
                                 <p>Iterate over the restart reasons in a <a href="struct.SBProcessEvent.html">process event</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBProcessThreadIter.html'
-                                  title='lldb::SBProcessThreadIter'>SBProcessThreadIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBProcessThreadIter.html"
+                                  title='struct lldb::SBProcessThreadIter'>SBProcessThreadIter</a></td>
+                           <td class='docblock-short'>
                                 <p>Iterate over the <a href="struct.SBThread.html">threads</a> in a <a href="struct.SBProcess.html">process</a>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBStream.html'
-                                  title='lldb::SBStream'>SBStream</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBQueue.html"
+                                  title='struct lldb::SBQueue'>SBQueue</a></td>
+                           <td class='docblock-short'>
+                                <p>A <code>libdispatch</code> (aka Grand Central Dispatch) queue.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBQueueItem.html"
+                                  title='struct lldb::SBQueueItem'>SBQueueItem</a></td>
+                           <td class='docblock-short'>
+                                <p>A work item enqueued on a libdispatch aka Grand Central
+Dispatch (GCD) queue.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBSection.html"
+                                  title='struct lldb::SBSection'>SBSection</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBStream.html"
+                                  title='struct lldb::SBStream'>SBStream</a></td>
+                           <td class='docblock-short'>
                                 <p>A destination for streaming data output. By default, this is
 a string stream, but it can be redirected to a file.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBStringList.html'
-                                  title='lldb::SBStringList'>SBStringList</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBStringList.html"
+                                  title='struct lldb::SBStringList'>SBStringList</a></td>
+                           <td class='docblock-short'>
                                 <p>A list of strings.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBStringListIter.html'
-                                  title='lldb::SBStringListIter'>SBStringListIter</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBStringListIter.html"
+                                  title='struct lldb::SBStringListIter'>SBStringListIter</a></td>
+                           <td class='docblock-short'>
                                 <p>An iterator over an <code>SBStringList</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBSymbol.html'
-                                  title='lldb::SBSymbol'>SBSymbol</a></td>
-                           <td class='docblock short'>
-                                <p>The symbol possibly associated with a stack frame.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBSymbolContext.html'
-                                  title='lldb::SBSymbolContext'>SBSymbolContext</a></td>
-                           <td class='docblock short'>
-                                <p>A container that stores various debugger related info.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBTarget.html'
-                                  title='lldb::SBTarget'>SBTarget</a></td>
-                           <td class='docblock short'>
-                                <p>The target program running under the debugger.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBTargetBreakpointIter.html'
-                                  title='lldb::SBTargetBreakpointIter'>SBTargetBreakpointIter</a></td>
-                           <td class='docblock short'>
-                                <p>Iterate over the <a href="struct.SBBreakpoint.html">breakpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBTargetEvent.html'
-                                  title='lldb::SBTargetEvent'>SBTargetEvent</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBTargetEventModuleIter.html'
-                                  title='lldb::SBTargetEventModuleIter'>SBTargetEventModuleIter</a></td>
-                           <td class='docblock short'>
-                                <p>Iterate over the <a href="struct.SBModule.html">modules</a> referenced from a <a href="struct.SBTargetEvent.html">target event</a>.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBTargetWatchpointIter.html'
-                                  title='lldb::SBTargetWatchpointIter'>SBTargetWatchpointIter</a></td>
-                           <td class='docblock short'>
-                                <p>Iterate over the <a href="struct.SBWatchpoint.html">watchpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBThread.html'
-                                  title='lldb::SBThread'>SBThread</a></td>
-                           <td class='docblock short'>
-                                <p>A thread of execution.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBThreadEvent.html'
-                                  title='lldb::SBThreadEvent'>SBThreadEvent</a></td>
-                           <td class='docblock short'>
-                                <p>A thread event.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBThreadFrameIter.html'
-                                  title='lldb::SBThreadFrameIter'>SBThreadFrameIter</a></td>
-                           <td class='docblock short'>
-                                <p>Iterate over the <a href="struct.SBFrame.html">frames</a> in a <a href="struct.SBThread.html">thread</a>.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBValue.html'
-                                  title='lldb::SBValue'>SBValue</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBStructuredData.html"
+                                  title='struct lldb::SBStructuredData'>SBStructuredData</a></td>
+                           <td class='docblock-short'>
                                 <p>The value of a variable, register or expression.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBValueList.html'
-                                  title='lldb::SBValueList'>SBValueList</a></td>
-                           <td class='docblock short'>
-                                <p>A list of <a href="struct.SBValue.html">values</a>.</p>
+                           <td><a class="struct" href="struct.SBSymbol.html"
+                                  title='struct lldb::SBSymbol'>SBSymbol</a></td>
+                           <td class='docblock-short'>
+                                <p>The symbol possibly associated with a stack frame.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBVariablesOptions.html'
-                                  title='lldb::SBVariablesOptions'>SBVariablesOptions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBSymbolContext.html"
+                                  title='struct lldb::SBSymbolContext'>SBSymbolContext</a></td>
+                           <td class='docblock-short'>
+                                <p>A container that stores various debugger related info.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBTarget.html"
+                                  title='struct lldb::SBTarget'>SBTarget</a></td>
+                           <td class='docblock-short'>
+                                <p>The target program running under the debugger.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBTargetBreakpointIter.html"
+                                  title='struct lldb::SBTargetBreakpointIter'>SBTargetBreakpointIter</a></td>
+                           <td class='docblock-short'>
+                                <p>Iterate over the <a href="struct.SBBreakpoint.html">breakpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBTargetEvent.html"
+                                  title='struct lldb::SBTargetEvent'>SBTargetEvent</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SBWatchpoint.html'
-                                  title='lldb::SBWatchpoint'>SBWatchpoint</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SBTargetEventModuleIter.html"
+                                  title='struct lldb::SBTargetEventModuleIter'>SBTargetEventModuleIter</a></td>
+                           <td class='docblock-short'>
+                                <p>Iterate over the <a href="struct.SBModule.html">modules</a> referenced from a <a href="struct.SBTargetEvent.html">target event</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBTargetWatchpointIter.html"
+                                  title='struct lldb::SBTargetWatchpointIter'>SBTargetWatchpointIter</a></td>
+                           <td class='docblock-short'>
+                                <p>Iterate over the <a href="struct.SBWatchpoint.html">watchpoints</a> in a <a href="struct.SBTarget.html">target</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBThread.html"
+                                  title='struct lldb::SBThread'>SBThread</a></td>
+                           <td class='docblock-short'>
+                                <p>A thread of execution.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBThreadEvent.html"
+                                  title='struct lldb::SBThreadEvent'>SBThreadEvent</a></td>
+                           <td class='docblock-short'>
+                                <p>A thread event.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBThreadFrameIter.html"
+                                  title='struct lldb::SBThreadFrameIter'>SBThreadFrameIter</a></td>
+                           <td class='docblock-short'>
+                                <p>Iterate over the <a href="struct.SBFrame.html">frames</a> in a <a href="struct.SBThread.html">thread</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBType.html"
+                                  title='struct lldb::SBType'>SBType</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBTypeList.html"
+                                  title='struct lldb::SBTypeList'>SBTypeList</a></td>
+                           <td class='docblock-short'>
+                                <p>A list of <a href="struct.SBType.html">types</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBValue.html"
+                                  title='struct lldb::SBValue'>SBValue</a></td>
+                           <td class='docblock-short'>
+                                <p>The value of a variable, register or expression.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBValueList.html"
+                                  title='struct lldb::SBValueList'>SBValueList</a></td>
+                           <td class='docblock-short'>
+                                <p>A list of <a href="struct.SBValue.html">values</a>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBVariablesOptions.html"
+                                  title='struct lldb::SBVariablesOptions'>SBVariablesOptions</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.SBWatchpoint.html"
+                                  title='struct lldb::SBWatchpoint'>SBWatchpoint</a></td>
+                           <td class='docblock-short'>
                                 <p>An instance of a watch point for a specific target program.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.SymbolContextItem.html'
-                                  title='lldb::SymbolContextItem'>SymbolContextItem</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.SymbolContextItem.html"
+                                  title='struct lldb::SymbolContextItem'>SymbolContextItem</a></td>
+                           <td class='docblock-short'>
                                 <p>These mask bits allow a common interface for queries that can
 limit the amount of information that gets parsed to only the
 information that is requested. These bits also can indicate what
@@ -499,866 +550,355 @@ actually did get resolved during query function calls.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.TypeClass.html'
-                                  title='lldb::TypeClass'>TypeClass</a></td>
-                           <td class='docblock short'>
+                           <td><a class="struct" href="struct.TypeClass.html"
+                                  title='struct lldb::TypeClass'>TypeClass</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.AccessType.html'
-                                  title='lldb::AccessType'>AccessType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.AccessType.html"
+                                  title='enum lldb::AccessType'>AccessType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.AddressClass.html'
-                                  title='lldb::AddressClass'>AddressClass</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.AddressClass.html"
+                                  title='enum lldb::AddressClass'>AddressClass</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.BasicType.html'
-                                  title='lldb::BasicType'>BasicType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.BasicType.html"
+                                  title='enum lldb::BasicType'>BasicType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.BreakpointEventType.html'
-                                  title='lldb::BreakpointEventType'>BreakpointEventType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.BreakpointEventType.html"
+                                  title='enum lldb::BreakpointEventType'>BreakpointEventType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ByteOrder.html'
-                                  title='lldb::ByteOrder'>ByteOrder</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ByteOrder.html"
+                                  title='enum lldb::ByteOrder'>ByteOrder</a></td>
+                           <td class='docblock-short'>
                                 <p>Byte order definitions.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.CommandArgumentType.html'
-                                  title='lldb::CommandArgumentType'>CommandArgumentType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.CommandArgumentType.html"
+                                  title='enum lldb::CommandArgumentType'>CommandArgumentType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.CommandFlags.html'
-                                  title='lldb::CommandFlags'>CommandFlags</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.CommandFlags.html"
+                                  title='enum lldb::CommandFlags'>CommandFlags</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ConnectionStatus.html'
-                                  title='lldb::ConnectionStatus'>ConnectionStatus</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ConnectionStatus.html"
+                                  title='enum lldb::ConnectionStatus'>ConnectionStatus</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.DescriptionLevel.html'
-                                  title='lldb::DescriptionLevel'>DescriptionLevel</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.DescriptionLevel.html"
+                                  title='enum lldb::DescriptionLevel'>DescriptionLevel</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.DisassemblyFlavor.html'
-                                  title='lldb::DisassemblyFlavor'>DisassemblyFlavor</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.DisassemblyFlavor.html"
+                                  title='enum lldb::DisassemblyFlavor'>DisassemblyFlavor</a></td>
+                           <td class='docblock-short'>
                                 <p>Which syntax should be used in disassembly?</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.DynamicValueType.html'
-                                  title='lldb::DynamicValueType'>DynamicValueType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.DynamicValueType.html"
+                                  title='enum lldb::DynamicValueType'>DynamicValueType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.EmulateInstructionOptions.html'
-                                  title='lldb::EmulateInstructionOptions'>EmulateInstructionOptions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.EmulateInstructionOptions.html"
+                                  title='enum lldb::EmulateInstructionOptions'>EmulateInstructionOptions</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.Encoding.html'
-                                  title='lldb::Encoding'>Encoding</a></td>
-                           <td class='docblock short'>
-                                <p>Register encoding defintions.</p>
+                           <td><a class="enum" href="enum.Encoding.html"
+                                  title='enum lldb::Encoding'>Encoding</a></td>
+                           <td class='docblock-short'>
+                                <p>Register encoding definitions.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ErrorType.html'
-                                  title='lldb::ErrorType'>ErrorType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ErrorType.html"
+                                  title='enum lldb::ErrorType'>ErrorType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ExpressionEvaluationPhase.html'
-                                  title='lldb::ExpressionEvaluationPhase'>ExpressionEvaluationPhase</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ExpressionEvaluationPhase.html"
+                                  title='enum lldb::ExpressionEvaluationPhase'>ExpressionEvaluationPhase</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ExpressionResults.html'
-                                  title='lldb::ExpressionResults'>ExpressionResults</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ExpressionResults.html"
+                                  title='enum lldb::ExpressionResults'>ExpressionResults</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.Format.html'
-                                  title='lldb::Format'>Format</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.Format.html"
+                                  title='enum lldb::Format'>Format</a></td>
+                           <td class='docblock-short'>
                                 <p>Display format definitions.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.FrameComparison.html'
-                                  title='lldb::FrameComparison'>FrameComparison</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.FrameComparison.html"
+                                  title='enum lldb::FrameComparison'>FrameComparison</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.FunctionNameType.html'
-                                  title='lldb::FunctionNameType'>FunctionNameType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.FunctionNameType.html"
+                                  title='enum lldb::FunctionNameType'>FunctionNameType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.GdbSignal.html'
-                                  title='lldb::GdbSignal'>GdbSignal</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.GdbSignal.html"
+                                  title='enum lldb::GdbSignal'>GdbSignal</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.InputReaderAction.html'
-                                  title='lldb::InputReaderAction'>InputReaderAction</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.InputReaderAction.html"
+                                  title='enum lldb::InputReaderAction'>InputReaderAction</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.InputReaderGranularity.html'
-                                  title='lldb::InputReaderGranularity'>InputReaderGranularity</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.InputReaderGranularity.html"
+                                  title='enum lldb::InputReaderGranularity'>InputReaderGranularity</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.InstrumentationRuntimeType.html'
-                                  title='lldb::InstrumentationRuntimeType'>InstrumentationRuntimeType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.InstrumentationRuntimeType.html"
+                                  title='enum lldb::InstrumentationRuntimeType'>InstrumentationRuntimeType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.LanguageType.html'
-                                  title='lldb::LanguageType'>LanguageType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.LanguageType.html"
+                                  title='enum lldb::LanguageType'>LanguageType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.MatchType.html'
-                                  title='lldb::MatchType'>MatchType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.MatchType.html"
+                                  title='enum lldb::MatchType'>MatchType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.MemberFunctionKind.html'
-                                  title='lldb::MemberFunctionKind'>MemberFunctionKind</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.MemberFunctionKind.html"
+                                  title='enum lldb::MemberFunctionKind'>MemberFunctionKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.PathType.html'
-                                  title='lldb::PathType'>PathType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.PathType.html"
+                                  title='enum lldb::PathType'>PathType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.QueueItemKind.html'
-                                  title='lldb::QueueItemKind'>QueueItemKind</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.QueueItemKind.html"
+                                  title='enum lldb::QueueItemKind'>QueueItemKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.QueueKind.html'
-                                  title='lldb::QueueKind'>QueueKind</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.QueueKind.html"
+                                  title='enum lldb::QueueKind'>QueueKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.RegisterKind.html'
-                                  title='lldb::RegisterKind'>RegisterKind</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.RegisterKind.html"
+                                  title='enum lldb::RegisterKind'>RegisterKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ReturnStatus.html'
-                                  title='lldb::ReturnStatus'>ReturnStatus</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ReturnStatus.html"
+                                  title='enum lldb::ReturnStatus'>ReturnStatus</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.RunMode.html'
-                                  title='lldb::RunMode'>RunMode</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.RunMode.html"
+                                  title='enum lldb::RunMode'>RunMode</a></td>
+                           <td class='docblock-short'>
                                 <p>Thread run modes.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ScriptLanguage.html'
-                                  title='lldb::ScriptLanguage'>ScriptLanguage</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ScriptLanguage.html"
+                                  title='enum lldb::ScriptLanguage'>ScriptLanguage</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.SectionType.html'
-                                  title='lldb::SectionType'>SectionType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.SectionType.html"
+                                  title='enum lldb::SectionType'>SectionType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.StateType.html'
-                                  title='lldb::StateType'>StateType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.StateType.html"
+                                  title='enum lldb::StateType'>StateType</a></td>
+                           <td class='docblock-short'>
                                 <p>Process and thread states.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.StopReason.html'
-                                  title='lldb::StopReason'>StopReason</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.StopReason.html"
+                                  title='enum lldb::StopReason'>StopReason</a></td>
+                           <td class='docblock-short'>
                                 <p>Thread stop reasons.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.SymbolType.html'
-                                  title='lldb::SymbolType'>SymbolType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.SymbolType.html"
+                                  title='enum lldb::SymbolType'>SymbolType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.TemplateArgumentKind.html'
-                                  title='lldb::TemplateArgumentKind'>TemplateArgumentKind</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.TemplateArgumentKind.html"
+                                  title='enum lldb::TemplateArgumentKind'>TemplateArgumentKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.TypeFlags.html'
-                                  title='lldb::TypeFlags'>TypeFlags</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.TypeFlags.html"
+                                  title='enum lldb::TypeFlags'>TypeFlags</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.TypeOptions.html'
-                                  title='lldb::TypeOptions'>TypeOptions</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.TypeOptions.html"
+                                  title='enum lldb::TypeOptions'>TypeOptions</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.TypeSummaryCapping.html'
-                                  title='lldb::TypeSummaryCapping'>TypeSummaryCapping</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.TypeSummaryCapping.html"
+                                  title='enum lldb::TypeSummaryCapping'>TypeSummaryCapping</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.ValueType.html'
-                                  title='lldb::ValueType'>ValueType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.ValueType.html"
+                                  title='enum lldb::ValueType'>ValueType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.WatchpointEventType.html'
-                                  title='lldb::WatchpointEventType'>WatchpointEventType</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.WatchpointEventType.html"
+                                  title='enum lldb::WatchpointEventType'>WatchpointEventType</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='enum' href='enum.WatchpointKind.html'
-                                  title='lldb::WatchpointKind'>WatchpointKind</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_DIRECTORY_DEFAULT.html'
-                                  title='lldb::FILE_PERMISSIONS_DIRECTORY_DEFAULT'>FILE_PERMISSIONS_DIRECTORY_DEFAULT</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_R.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_R'>FILE_PERMISSIONS_EVERYONE_R</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RW.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_RW'>FILE_PERMISSIONS_EVERYONE_RW</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RWX.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_RWX'>FILE_PERMISSIONS_EVERYONE_RWX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_RX.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_RX'>FILE_PERMISSIONS_EVERYONE_RX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_W.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_W'>FILE_PERMISSIONS_EVERYONE_W</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_EVERYONE_X.html'
-                                  title='lldb::FILE_PERMISSIONS_EVERYONE_X'>FILE_PERMISSIONS_EVERYONE_X</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_FILE_DEFAULT.html'
-                                  title='lldb::FILE_PERMISSIONS_FILE_DEFAULT'>FILE_PERMISSIONS_FILE_DEFAULT</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_EXECUTE.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_EXECUTE'>FILE_PERMISSIONS_GROUP_EXECUTE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_READ.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_READ'>FILE_PERMISSIONS_GROUP_READ</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RW.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_RW'>FILE_PERMISSIONS_GROUP_RW</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RWX.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_RWX'>FILE_PERMISSIONS_GROUP_RWX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_RX.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_RX'>FILE_PERMISSIONS_GROUP_RX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_GROUP_WRITE.html'
-                                  title='lldb::FILE_PERMISSIONS_GROUP_WRITE'>FILE_PERMISSIONS_GROUP_WRITE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_EXECUTE.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_EXECUTE'>FILE_PERMISSIONS_USER_EXECUTE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_READ.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_READ'>FILE_PERMISSIONS_USER_READ</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RW.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_RW'>FILE_PERMISSIONS_USER_RW</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RWX.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_RWX'>FILE_PERMISSIONS_USER_RWX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_RX.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_RX'>FILE_PERMISSIONS_USER_RX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_USER_WRITE.html'
-                                  title='lldb::FILE_PERMISSIONS_USER_WRITE'>FILE_PERMISSIONS_USER_WRITE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_EXECUTE.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_EXECUTE'>FILE_PERMISSIONS_WORLD_EXECUTE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_READ.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_READ'>FILE_PERMISSIONS_WORLD_READ</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RW.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_RW'>FILE_PERMISSIONS_WORLD_RW</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RWX.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_RWX'>FILE_PERMISSIONS_WORLD_RWX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_RX.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_RX'>FILE_PERMISSIONS_WORLD_RX</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FILE_PERMISSIONS_WORLD_WRITE.html'
-                                  title='lldb::FILE_PERMISSIONS_WORLD_WRITE'>FILE_PERMISSIONS_WORLD_WRITE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_CLOSE_TTY_ON_EXIT.html'
-                                  title='lldb::LAUNCH_FLAG_CLOSE_TTY_ON_EXIT'>LAUNCH_FLAG_CLOSE_TTY_ON_EXIT</a></td>
-                           <td class='docblock short'>
-                                <p>Close the open TTY on exit.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_DEBUG.html'
-                                  title='lldb::LAUNCH_FLAG_DEBUG'>LAUNCH_FLAG_DEBUG</a></td>
-                           <td class='docblock short'>
-                                <p>Stop as soon as the process launches to allow the process to be debugged.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_DETACH_ON_ERRROR.html'
-                                  title='lldb::LAUNCH_FLAG_DETACH_ON_ERRROR'>LAUNCH_FLAG_DETACH_ON_ERRROR</a></td>
-                           <td class='docblock short'>
-                                <p>If set, then the client stub should detach rather than
-killing the debugee.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_DISABLE_ASLR.html'
-                                  title='lldb::LAUNCH_FLAG_DISABLE_ASLR'>LAUNCH_FLAG_DISABLE_ASLR</a></td>
-                           <td class='docblock short'>
-                                <p>Disable address space layout randomization (ASLR).</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_DISABLE_STDIO.html'
-                                  title='lldb::LAUNCH_FLAG_DISABLE_STDIO'>LAUNCH_FLAG_DISABLE_STDIO</a></td>
-                           <td class='docblock short'>
-                                <p>Disable stdio for the inferior process (e.g. for a GUI app).</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_DONT_SET_EXIT_STATUS.html'
-                                  title='lldb::LAUNCH_FLAG_DONT_SET_EXIT_STATUS'>LAUNCH_FLAG_DONT_SET_EXIT_STATUS</a></td>
-                           <td class='docblock short'>
-                                <p>If you are going to hand the process off (e.g. to debugserver),
-set this flag so that lldb and the handee don&#39;t race to set its
-exit status.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_EXEC.html'
-                                  title='lldb::LAUNCH_FLAG_EXEC'>LAUNCH_FLAG_EXEC</a></td>
-                           <td class='docblock short'>
-                                <p>Exec when launching and turn the calling process into a new process.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP.html'
-                                  title='lldb::LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP'>LAUNCH_FLAG_LAUNCH_IN_SEPARATE_PROCESS_GROUP</a></td>
-                           <td class='docblock short'>
-                                <p>Launch the process in a separate process group.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_SHELL.html'
-                                  title='lldb::LAUNCH_FLAG_LAUNCH_IN_SHELL'>LAUNCH_FLAG_LAUNCH_IN_SHELL</a></td>
-                           <td class='docblock short'>
-                                <p>Launch the process inside a shell to get shell expansion.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_LAUNCH_IN_TTY.html'
-                                  title='lldb::LAUNCH_FLAG_LAUNCH_IN_TTY'>LAUNCH_FLAG_LAUNCH_IN_TTY</a></td>
-                           <td class='docblock short'>
-                                <p>Launch the process in a new TTY if supported by the host.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS.html'
-                                  title='lldb::LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS'>LAUNCH_FLAG_SHELL_EXPAND_ARGUMENTS</a></td>
-                           <td class='docblock short'>
-                                <p>Perform shell-style argument expansion.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.LAUNCH_FLAG_STOP_AT_ENTRY.html'
-                                  title='lldb::LAUNCH_FLAG_STOP_AT_ENTRY'>LAUNCH_FLAG_STOP_AT_ENTRY</a></td>
-                           <td class='docblock short'>
-                                <p>Stop at the program entry point instead of auto-continuing when
-launching or attaching at entry point.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.PERMISSIONS_EXECUTABLE.html'
-                                  title='lldb::PERMISSIONS_EXECUTABLE'>PERMISSIONS_EXECUTABLE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.PERMISSIONS_READABLE.html'
-                                  title='lldb::PERMISSIONS_READABLE'>PERMISSIONS_READABLE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.PERMISSIONS_WRITABLE.html'
-                                  title='lldb::PERMISSIONS_WRITABLE'>PERMISSIONS_WRITABLE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_BLOCK.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_BLOCK'>SYMBOL_CONTEXT_ITEM_BLOCK</a></td>
-                           <td class='docblock short'>
-                                <p>Set when the deepest block is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_COMPUNIT.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_COMPUNIT'>SYMBOL_CONTEXT_ITEM_COMPUNIT</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a compilation unit is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_EVERYTHING.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_EVERYTHING'>SYMBOL_CONTEXT_ITEM_EVERYTHING</a></td>
-                           <td class='docblock short'>
-                                <p>Indicates to try and look everything up during a routine symbol
-context query. This doesn&#39;t actually include looking up a variable.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_FUNCTION.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_FUNCTION'>SYMBOL_CONTEXT_ITEM_FUNCTION</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a function is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_LINE_ENTRY.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_LINE_ENTRY'>SYMBOL_CONTEXT_ITEM_LINE_ENTRY</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a line entry is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_MODULE.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_MODULE'>SYMBOL_CONTEXT_ITEM_MODULE</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a module is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_SYMBOL.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_SYMBOL'>SYMBOL_CONTEXT_ITEM_SYMBOL</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a symbol is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_TARGET.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_TARGET'>SYMBOL_CONTEXT_ITEM_TARGET</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a target is requested from a query or was located
-in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.SYMBOL_CONTEXT_ITEM_VARIABLE.html'
-                                  title='lldb::SYMBOL_CONTEXT_ITEM_VARIABLE'>SYMBOL_CONTEXT_ITEM_VARIABLE</a></td>
-                           <td class='docblock short'>
-                                <p>Set when a global or static variable is requested from a query,
-or was located in the query results.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_ANY.html'
-                                  title='lldb::TYPE_CLASS_ANY'>TYPE_CLASS_ANY</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_ARRAY.html'
-                                  title='lldb::TYPE_CLASS_ARRAY'>TYPE_CLASS_ARRAY</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_BLOCKPOINTER.html'
-                                  title='lldb::TYPE_CLASS_BLOCKPOINTER'>TYPE_CLASS_BLOCKPOINTER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_BUILTIN.html'
-                                  title='lldb::TYPE_CLASS_BUILTIN'>TYPE_CLASS_BUILTIN</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_CLASS.html'
-                                  title='lldb::TYPE_CLASS_CLASS'>TYPE_CLASS_CLASS</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_COMPLEX_FLOAT.html'
-                                  title='lldb::TYPE_CLASS_COMPLEX_FLOAT'>TYPE_CLASS_COMPLEX_FLOAT</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_COMPLEX_INTEGER.html'
-                                  title='lldb::TYPE_CLASS_COMPLEX_INTEGER'>TYPE_CLASS_COMPLEX_INTEGER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_ENUMERATION.html'
-                                  title='lldb::TYPE_CLASS_ENUMERATION'>TYPE_CLASS_ENUMERATION</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_FUNCTION.html'
-                                  title='lldb::TYPE_CLASS_FUNCTION'>TYPE_CLASS_FUNCTION</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_INVALID.html'
-                                  title='lldb::TYPE_CLASS_INVALID'>TYPE_CLASS_INVALID</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_MEMBER_POINTER.html'
-                                  title='lldb::TYPE_CLASS_MEMBER_POINTER'>TYPE_CLASS_MEMBER_POINTER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_INTERFACE.html'
-                                  title='lldb::TYPE_CLASS_OBJC_INTERFACE'>TYPE_CLASS_OBJC_INTERFACE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_OBJECT.html'
-                                  title='lldb::TYPE_CLASS_OBJC_OBJECT'>TYPE_CLASS_OBJC_OBJECT</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_OBJC_OBJECT_POINTER.html'
-                                  title='lldb::TYPE_CLASS_OBJC_OBJECT_POINTER'>TYPE_CLASS_OBJC_OBJECT_POINTER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_OTHER.html'
-                                  title='lldb::TYPE_CLASS_OTHER'>TYPE_CLASS_OTHER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_POINTER.html'
-                                  title='lldb::TYPE_CLASS_POINTER'>TYPE_CLASS_POINTER</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_REFERENCE.html'
-                                  title='lldb::TYPE_CLASS_REFERENCE'>TYPE_CLASS_REFERENCE</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_STRUCT.html'
-                                  title='lldb::TYPE_CLASS_STRUCT'>TYPE_CLASS_STRUCT</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_TYPEDEF.html'
-                                  title='lldb::TYPE_CLASS_TYPEDEF'>TYPE_CLASS_TYPEDEF</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_UNION.html'
-                                  title='lldb::TYPE_CLASS_UNION'>TYPE_CLASS_UNION</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class='constant' href='constant.TYPE_CLASS_VECTOR.html'
-                                  title='lldb::TYPE_CLASS_VECTOR'>TYPE_CLASS_VECTOR</a></td>
-                           <td class='docblock short'>
+                           <td><a class="enum" href="enum.WatchpointKind.html"
+                                  title='enum lldb::WatchpointKind'>WatchpointKind</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='type' href='type.lldb_addr_t.html'
-                                  title='lldb::lldb_addr_t'>lldb_addr_t</a></td>
-                           <td class='docblock short'>
-                                
+                           <td><a class="type" href="type.lldb_addr_t.html"
+                                  title='type lldb::lldb_addr_t'>lldb_addr_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Storage for the value of an address.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='type' href='type.lldb_offset_t.html'
-                                  title='lldb::lldb_offset_t'>lldb_offset_t</a></td>
-                           <td class='docblock short'>
-                                
+                           <td><a class="type" href="type.lldb_offset_t.html"
+                                  title='type lldb::lldb_offset_t'>lldb_offset_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Storage for an offset between 2 addresses in memory.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='type' href='type.lldb_pid_t.html'
-                                  title='lldb::lldb_pid_t'>lldb_pid_t</a></td>
-                           <td class='docblock short'>
-                                
+                           <td><a class="type" href="type.lldb_pid_t.html"
+                                  title='type lldb::lldb_pid_t'>lldb_pid_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Storage for an OS process ID.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='type' href='type.lldb_tid_t.html'
-                                  title='lldb::lldb_tid_t'>lldb_tid_t</a></td>
-                           <td class='docblock short'>
-                                
+                           <td><a class="type" href="type.lldb_tid_t.html"
+                                  title='type lldb::lldb_tid_t'>lldb_tid_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Storage for an OS thread ID.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='type' href='type.lldb_user_id_t.html'
-                                  title='lldb::lldb_user_id_t'>lldb_user_id_t</a></td>
-                           <td class='docblock short'>
-                                
+                           <td><a class="type" href="type.lldb_user_id_t.html"
+                                  title='type lldb::lldb_user_id_t'>lldb_user_id_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Storage for an OS user ID.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -1416,11 +956,8 @@ or was located in the query results.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBSection` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBSection">
+
+    <title>lldb::SBSection - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct SBSection</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBSection', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBSection</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/lldb/section.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBSection {
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSectionRef.html" title="type lldb_sys::lldb_sys::SBSectionRef">SBSectionRef</a>,
+}</pre><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSectionRef.html" title="type lldb_sys::lldb_sys::SBSectionRef">SBSectionRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBSectionRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#20-119' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSectionRef.html" title="type lldb_sys::lldb_sys::SBSectionRef">SBSectionRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#22-24' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>SBSection</code>.</p>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSectionRef.html" title="type lldb_sys::lldb_sys::SBSectionRef">SBSectionRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#27-33' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBSection)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#36-38' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBSection</code> value.</p>
+</div><h4 id='method.name' class="method"><span id='name.v' class='invisible'><code>fn <a href='#method.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#41-48' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>The section name.</p>
+</div><h4 id='method.parent' class="method"><span id='parent.v' class='invisible'><code>fn <a href='#method.parent' class='fnname'>parent</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#51-53' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>The section parent, if there is one.</p>
+</div><h4 id='method.find_subsection' class="method"><span id='find_subsection.v' class='invisible'><code>fn <a href='#method.find_subsection' class='fnname'>find_subsection</a>(&amp;self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#56-61' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.subsections' class="method"><span id='subsections.v' class='invisible'><code>fn <a href='#method.subsections' class='fnname'>subsections</a>(&amp;self) -&gt; SBSectionSubSectionIter</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#66-71' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBSection.html">subsections</a> known to this section instance.</p>
+</div><h4 id='method.file_address' class="method"><span id='file_address.v' class='invisible'><code>fn <a href='#method.file_address' class='fnname'>file_address</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#74-76' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.load_address' class="method"><span id='load_address.v' class='invisible'><code>fn <a href='#method.load_address' class='fnname'>load_address</a>(&amp;self, target: &amp;<a class="struct" href="../lldb/struct.SBTarget.html" title="struct lldb::SBTarget">SBTarget</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#79-81' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.byte_size' class="method"><span id='byte_size.v' class='invisible'><code>fn <a href='#method.byte_size' class='fnname'>byte_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#84-86' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.file_offset' class="method"><span id='file_offset.v' class='invisible'><code>fn <a href='#method.file_offset' class='fnname'>file_offset</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#89-91' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.file_byte_size' class="method"><span id='file_byte_size.v' class='invisible'><code>fn <a href='#method.file_byte_size' class='fnname'>file_byte_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#94-96' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.section_data' class="method"><span id='section_data.v' class='invisible'><code>fn <a href='#method.section_data' class='fnname'>section_data</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBData.html" title="struct lldb::SBData">SBData</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#99-101' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.section_data_slice' class="method"><span id='section_data_slice.v' class='invisible'><code>fn <a href='#method.section_data_slice' class='fnname'>section_data_slice</a>(&amp;self, offset: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>, size: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>) -&gt; <a class="struct" href="../lldb/struct.SBData.html" title="struct lldb::SBData">SBData</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#104-108' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.section_type' class="method"><span id='section_type.v' class='invisible'><code>fn <a href='#method.section_type' class='fnname'>section_type</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.SectionType.html" title="enum lldb::SectionType">SectionType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#111-113' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.target_byte_size' class="method"><span id='target_byte_size.v' class='invisible'><code>fn <a href='#method.target_byte_size' class='fnname'>target_byte_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#116-118' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#151-157' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#152-156' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#159-163' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/section.rs.html#160-162' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

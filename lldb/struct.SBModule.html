@@ -9,6 +9,7 @@
 
     <title>lldb::SBModule - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBModule', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBModule</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBModule', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,30 +43,37 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBModule</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBModule</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1127' class='srclink' href='../src/lldb/src/module.rs.html#13-16' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/module.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBModule {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleRef.html' title='lldb_sys::lldb_sys::SBModuleRef'>SBModuleRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBModuleRef.html" title="type lldb_sys::lldb_sys::SBModuleRef">SBModuleRef</a>,
 }</pre><div class='docblock'><p>An executable image and its associated object and symbol files.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleRef.html' title='lldb_sys::lldb_sys::SBModuleRef'>SBModuleRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBModuleRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1129' class='srclink' href='../src/lldb/src/module.rs.html#18-58' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleRef.html' title='lldb_sys::lldb_sys::SBModuleRef'>SBModuleRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBModuleRef.html" title="type lldb_sys::lldb_sys::SBModuleRef">SBModuleRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBModuleRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#20-76' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBModuleRef.html" title="type lldb_sys::lldb_sys::SBModuleRef">SBModuleRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#22-24' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBModule</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBModuleRef.html' title='lldb_sys::lldb_sys::SBModuleRef'>SBModuleRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBModuleRef.html" title="type lldb_sys::lldb_sys::SBModuleRef">SBModuleRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#27-33' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBModule)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#36-38' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBModule</code> value.</p>
-</div><h4 id='method.filespec' class='method'><code>fn <a href='#method.filespec' class='fnname'>filespec</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBFileSpec.html' title='lldb::SBFileSpec'>SBFileSpec</a></code></h4>
+</div><h4 id='method.filespec' class="method"><span id='filespec.v' class='invisible'><code>fn <a href='#method.filespec' class='fnname'>filespec</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBFileSpec.html" title="struct lldb::SBFileSpec">SBFileSpec</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#44-46' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The file for the module on the host system that is running LLDB.</p>
 
 <p>This can differ from the path on the platform since we might
 be doing remote debugging.</p>
-</div><h4 id='method.platform_filespec' class='method'><code>fn <a href='#method.platform_filespec' class='fnname'>platform_filespec</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBFileSpec.html' title='lldb::SBFileSpec'>SBFileSpec</a></code></h4>
+</div><h4 id='method.platform_filespec' class="method"><span id='platform_filespec.v' class='invisible'><code>fn <a href='#method.platform_filespec' class='fnname'>platform_filespec</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBFileSpec.html" title="struct lldb::SBFileSpec">SBFileSpec</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#57-59' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The file for the module as it is known on the remote system on
 which it is being debugged.</p>
 
@@ -75,12 +83,19 @@ which might be locally downloaded and cached. In this case the
 platform file could be something like:
 <code>/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib</code>
 The file could also be cached in a local developer kit directory.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1140' class='srclink' href='../src/lldb/src/module.rs.html#60-66' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.find_section' class="method"><span id='find_section.v' class='invisible'><code>fn <a href='#method.find_section' class='fnname'>find_section</a>(&amp;self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBSection.html" title="struct lldb::SBSection">SBSection</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#62-65' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.sections' class="method"><span id='sections.v' class='invisible'><code>fn <a href='#method.sections' class='fnname'>sections</a>(&amp;self) -&gt; SBModuleSectionIter</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#70-75' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get an iterator over the <a href="struct.SBSection.html">sections</a> known to this module instance.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#108-114' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#109-113' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBModule.html' title='lldb::SBModule'>SBModule</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1147' class='srclink' href='../src/lldb/src/module.rs.html#68-72' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#116-120' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/module.rs.html#117-119' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -137,11 +152,8 @@ The file could also be cached in a local developer kit directory.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

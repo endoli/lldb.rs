@@ -9,6 +9,7 @@
 
     <title>lldb::SBBroadcaster - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBBroadcaster', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBBroadcaster</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBBroadcaster', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,46 +43,57 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBBroadcaster</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBBroadcaster</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-298' class='srclink' href='../src/lldb/src/broadcaster.rs.html#18-21' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/broadcaster.rs.html#18-21' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBBroadcaster {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBroadcasterRef.html' title='lldb_sys::lldb_sys::SBBroadcasterRef'>SBBroadcasterRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBroadcasterRef.html" title="type lldb_sys::lldb_sys::SBBroadcasterRef">SBBroadcasterRef</a>,
 }</pre><div class='docblock'><p>An entity which can broadcast events.</p>
 
 <p>A default broadcaster is associated with an <code>SBCommandInterpreter</code>,
 <code>SBProcess</code>, and <code>SBTarget</code>.</p>
 
 <p>Use an <code>SBListener</code> to listen for events.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBroadcasterRef.html' title='lldb_sys::lldb_sys::SBBroadcasterRef'>SBBroadcasterRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBBroadcasterRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-300' class='srclink' href='../src/lldb/src/broadcaster.rs.html#23-79' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBroadcasterRef.html" title="type lldb_sys::lldb_sys::SBBroadcasterRef">SBBroadcasterRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBBroadcasterRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#23-79' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#25-27' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBBroadcaster</code>.</p>
-</div><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBroadcasterRef.html' title='lldb_sys::lldb_sys::SBBroadcasterRef'>SBBroadcasterRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></h4>
+</div><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBroadcasterRef.html" title="type lldb_sys::lldb_sys::SBBroadcasterRef">SBBroadcasterRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#30-32' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBBroadcaster</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBBroadcasterRef.html' title='lldb_sys::lldb_sys::SBBroadcasterRef'>SBBroadcasterRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBBroadcasterRef.html" title="type lldb_sys::lldb_sys::SBBroadcasterRef">SBBroadcasterRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#35-41' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBBroadcaster)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#44-46' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBBroadcaster</code> value.</p>
-</div><h4 id='method.broadcast_event_by_type' class='method'><code>fn <a href='#method.broadcast_event_by_type' class='fnname'>broadcast_event_by_type</a>(&amp;self, event_type: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, unique: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.broadcast_event' class='method'><code>fn <a href='#method.broadcast_event' class='fnname'>broadcast_event</a>(&amp;self, event: &amp;<a class='struct' href='../lldb/struct.SBEvent.html' title='lldb::SBEvent'>SBEvent</a>, unique: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.add_initial_events_to_listener' class='method'><code>fn <a href='#method.add_initial_events_to_listener' class='fnname'>add_initial_events_to_listener</a>(&amp;self, listener: &amp;<a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a>, requested_events: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
-<h4 id='method.add_listener' class='method'><code>fn <a href='#method.add_listener' class='fnname'>add_listener</a>(&amp;self, listener: &amp;<a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a>, event_mask: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<h4 id='method.event_type_has_listeners' class='method'><code>fn <a href='#method.event_type_has_listeners' class='fnname'>event_type_has_listeners</a>(&amp;self, event_type: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.remove_listener' class='method'><code>fn <a href='#method.remove_listener' class='fnname'>remove_listener</a>(&amp;self, listener: &amp;<a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a>, event_mask: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-292' class='srclink' href='../src/lldb/src/broadcaster.rs.html#17' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.broadcast_event_by_type' class="method"><span id='broadcast_event_by_type.v' class='invisible'><code>fn <a href='#method.broadcast_event_by_type' class='fnname'>broadcast_event_by_type</a>(&amp;self, event_type: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>, unique: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#49-51' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.broadcast_event' class="method"><span id='broadcast_event.v' class='invisible'><code>fn <a href='#method.broadcast_event' class='fnname'>broadcast_event</a>(&amp;self, event: &amp;<a class="struct" href="../lldb/struct.SBEvent.html" title="struct lldb::SBEvent">SBEvent</a>, unique: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#54-56' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.add_initial_events_to_listener' class="method"><span id='add_initial_events_to_listener.v' class='invisible'><code>fn <a href='#method.add_initial_events_to_listener' class='fnname'>add_initial_events_to_listener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;listener: &amp;<a class="struct" href="../lldb/struct.SBListener.html" title="struct lldb::SBListener">SBListener</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;requested_events: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a><br>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#59-63' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.add_listener' class="method"><span id='add_listener.v' class='invisible'><code>fn <a href='#method.add_listener' class='fnname'>add_listener</a>(&amp;self, listener: &amp;<a class="struct" href="../lldb/struct.SBListener.html" title="struct lldb::SBListener">SBListener</a>, event_mask: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#66-68' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.event_type_has_listeners' class="method"><span id='event_type_has_listeners.v' class='invisible'><code>fn <a href='#method.event_type_has_listeners' class='fnname'>event_type_has_listeners</a>(&amp;self, event_type: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#71-73' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.remove_listener' class="method"><span id='remove_listener.v' class='invisible'><code>fn <a href='#method.remove_listener' class='fnname'>remove_listener</a>(&amp;self, listener: &amp;<a class="struct" href="../lldb/struct.SBListener.html" title="struct lldb::SBListener">SBListener</a>, event_mask: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#76-78' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#17' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#17' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-331' class='srclink' href='../src/lldb/src/broadcaster.rs.html#81-85' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></h4>
+</div></div><h3 id='impl-Default' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code><a href='#impl-Default' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#81-85' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#82-84' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBBroadcaster.html' title='lldb::SBBroadcaster'>SBBroadcaster</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-333' class='srclink' href='../src/lldb/src/broadcaster.rs.html#87-91' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBBroadcaster.html" title="struct lldb::SBBroadcaster">SBBroadcaster</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#87-91' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/broadcaster.rs.html#88-90' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -138,11 +150,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

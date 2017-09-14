@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBType` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBType">
+
+    <title>lldb::SBType - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct SBType</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBType', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBType</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/lldb/types.rs.html#14-17' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBType {
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBTypeRef.html" title="type lldb_sys::lldb_sys::SBTypeRef">SBTypeRef</a>,
+}</pre><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBTypeRef.html" title="type lldb_sys::lldb_sys::SBTypeRef">SBTypeRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBTypeRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#19-143' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBTypeRef.html" title="type lldb_sys::lldb_sys::SBTypeRef">SBTypeRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#21-23' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>SBType</code>.</p>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBTypeRef.html" title="type lldb_sys::lldb_sys::SBTypeRef">SBTypeRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#26-32' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBType)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#35-37' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBType</code> value.</p>
+</div><h4 id='method.is_pointer_type' class="method"><span id='is_pointer_type.v' class='invisible'><code>fn <a href='#method.is_pointer_type' class='fnname'>is_pointer_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#40-42' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_reference_type' class="method"><span id='is_reference_type.v' class='invisible'><code>fn <a href='#method.is_reference_type' class='fnname'>is_reference_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#45-47' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_function_type' class="method"><span id='is_function_type.v' class='invisible'><code>fn <a href='#method.is_function_type' class='fnname'>is_function_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#50-52' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_polymorphic_class' class="method"><span id='is_polymorphic_class.v' class='invisible'><code>fn <a href='#method.is_polymorphic_class' class='fnname'>is_polymorphic_class</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#55-57' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_array_type' class="method"><span id='is_array_type.v' class='invisible'><code>fn <a href='#method.is_array_type' class='fnname'>is_array_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#60-62' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_vector_type' class="method"><span id='is_vector_type.v' class='invisible'><code>fn <a href='#method.is_vector_type' class='fnname'>is_vector_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#65-67' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_typedef_type' class="method"><span id='is_typedef_type.v' class='invisible'><code>fn <a href='#method.is_typedef_type' class='fnname'>is_typedef_type</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#70-72' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.pointer_type' class="method"><span id='pointer_type.v' class='invisible'><code>fn <a href='#method.pointer_type' class='fnname'>pointer_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#75-77' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.pointee_type' class="method"><span id='pointee_type.v' class='invisible'><code>fn <a href='#method.pointee_type' class='fnname'>pointee_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#80-82' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.reference_type' class="method"><span id='reference_type.v' class='invisible'><code>fn <a href='#method.reference_type' class='fnname'>reference_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#85-87' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.typedefed_type' class="method"><span id='typedefed_type.v' class='invisible'><code>fn <a href='#method.typedefed_type' class='fnname'>typedefed_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#90-92' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.dereferenced_type' class="method"><span id='dereferenced_type.v' class='invisible'><code>fn <a href='#method.dereferenced_type' class='fnname'>dereferenced_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#95-97' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.unqualified_type' class="method"><span id='unqualified_type.v' class='invisible'><code>fn <a href='#method.unqualified_type' class='fnname'>unqualified_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#100-102' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.array_element_type' class="method"><span id='array_element_type.v' class='invisible'><code>fn <a href='#method.array_element_type' class='fnname'>array_element_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#105-107' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.vector_element_type' class="method"><span id='vector_element_type.v' class='invisible'><code>fn <a href='#method.vector_element_type' class='fnname'>vector_element_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#110-112' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.canonical_type' class="method"><span id='canonical_type.v' class='invisible'><code>fn <a href='#method.canonical_type' class='fnname'>canonical_type</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#115-117' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.basic_type' class="method"><span id='basic_type.v' class='invisible'><code>fn <a href='#method.basic_type' class='fnname'>basic_type</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.BasicType.html" title="enum lldb::BasicType">BasicType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#120-122' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.name' class="method"><span id='name.v' class='invisible'><code>fn <a href='#method.name' class='fnname'>name</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#125-132' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.display_type_name' class="method"><span id='display_type_name.v' class='invisible'><code>fn <a href='#method.display_type_name' class='fnname'>display_type_name</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#135-142' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#145-151' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#146-150' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBType.html" title="struct lldb::SBType">SBType</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#153-157' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/types.rs.html#154-156' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

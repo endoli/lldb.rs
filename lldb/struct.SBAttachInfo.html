@@ -9,6 +9,7 @@
 
     <title>lldb::SBAttachInfo - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBAttachInfo', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBAttachInfo</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBAttachInfo', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,39 +43,87 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBAttachInfo</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBAttachInfo</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-76' class='srclink' href='../src/lldb/src/attachinfo.rs.html#17-20' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/attachinfo.rs.html#19-22' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBAttachInfo {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAttachInfoRef.html' title='lldb_sys::lldb_sys::SBAttachInfoRef'>SBAttachInfoRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBAttachInfoRef.html" title="type lldb_sys::lldb_sys::SBAttachInfoRef">SBAttachInfoRef</a>,
 }</pre><div class='docblock'><p>Configuration for attaching to a process.</p>
 
 <p>See <a href="struct.SBTarget.html#method.attach"><code>SBTarget::attach</code></a>.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAttachInfoRef.html' title='lldb_sys::lldb_sys::SBAttachInfoRef'>SBAttachInfoRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBAttachInfoRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-78' class='srclink' href='../src/lldb/src/attachinfo.rs.html#22-57' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBAttachInfoRef.html" title="type lldb_sys::lldb_sys::SBAttachInfoRef">SBAttachInfoRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBAttachInfoRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#24-126' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#26-28' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBAttachInfo</code>.</p>
-</div><h4 id='method.new_with_pid' class='method'><code>fn <a href='#method.new_with_pid' class='fnname'>new_with_pid</a>(pid: <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a>) -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+</div><h4 id='method.new_with_pid' class="method"><span id='new_with_pid.v' class='invisible'><code>fn <a href='#method.new_with_pid' class='fnname'>new_with_pid</a>(pid: <a class="type" href="../lldb/type.lldb_pid_t.html" title="type lldb::lldb_pid_t">lldb_pid_t</a>) -&gt; <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#31-33' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBAttachInfo</code> for a given process ID (pid).</p>
-</div><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBAttachInfoRef.html' title='lldb_sys::lldb_sys::SBAttachInfoRef'>SBAttachInfoRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+</div><h4 id='method.new_with_path' class="method"><span id='new_with_path.v' class='invisible'><code>fn <a href='#method.new_with_path' class='fnname'>new_with_path</a>(path: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, wait_for: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>, async: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#51-56' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Attach to a process by name.</p>
+
+<p>Future calls to <code>SBTarget::attach(...)</code> will be synchronous or
+asynchronous depending on the <code>async</code> argument.</p>
+
+<ul>
+<li><code>path</code>: A full or partial name for the process to attach to.</li>
+<li><code>wait_for</code>: If <code>false</code>, attach to an existing process whose name
+matches. If <code>true</code>, then wait for the next process whose name
+matches.</li>
+<li><code>async</code>: If <code>false</code>, then the <code>SBTarget::attach</code> call will be
+synchronous with no way to cancel the attach while it is in
+progress. If <code>true</code>, then the <code>SBTarget::attach</code> call will return
+immediately and clients are expected to wait for a process
+<code>eStateStopped</code> event if a suitable process is eventually found.
+If the client wants to cancel the event, <code>SBProcess::stop</code> can be
+called and an <code>eStateExited</code> process event will be delivered.</li>
+</ul>
+</div><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBAttachInfoRef.html" title="type lldb_sys::lldb_sys::SBAttachInfoRef">SBAttachInfoRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#59-61' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBAttachInfo</code>.</p>
-</div><h4 id='method.process_id' class='method'><code>fn <a href='#method.process_id' class='fnname'>process_id</a>(&amp;self) -&gt; <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a></code></h4>
-<h4 id='method.set_process_id' class='method'><code>fn <a href='#method.set_process_id' class='fnname'>set_process_id</a>(&amp;mut self, pid: <a class='type' href='../lldb/type.lldb_pid_t.html' title='lldb::lldb_pid_t'>lldb_pid_t</a>)</code></h4>
-<h4 id='method.listener' class='method'><code>fn <a href='#method.listener' class='fnname'>listener</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a></code></h4>
-<h4 id='method.set_listener' class='method'><code>fn <a href='#method.set_listener' class='fnname'>set_listener</a>(&amp;mut self, listener: <a class='struct' href='../lldb/struct.SBListener.html' title='lldb::SBListener'>SBListener</a>)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-70' class='srclink' href='../src/lldb/src/attachinfo.rs.html#16' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.process_id' class="method"><span id='process_id.v' class='invisible'><code>fn <a href='#method.process_id' class='fnname'>process_id</a>(&amp;self) -&gt; <a class="type" href="../lldb/type.lldb_pid_t.html" title="type lldb::lldb_pid_t">lldb_pid_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#64-66' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_process_id' class="method"><span id='set_process_id.v' class='invisible'><code>fn <a href='#method.set_process_id' class='fnname'>set_process_id</a>(&amp;self, pid: <a class="type" href="../lldb/type.lldb_pid_t.html" title="type lldb::lldb_pid_t">lldb_pid_t</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#69-71' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_executable_path' class="method"><span id='set_executable_path.v' class='invisible'><code>fn <a href='#method.set_executable_path' class='fnname'>set_executable_path</a>(&amp;self, path: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#74-77' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_executable_filespec' class="method"><span id='set_executable_filespec.v' class='invisible'><code>fn <a href='#method.set_executable_filespec' class='fnname'>set_executable_filespec</a>(&amp;self, exe_file: <a class="struct" href="../lldb/struct.SBFileSpec.html" title="struct lldb::SBFileSpec">SBFileSpec</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#80-82' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.ignore_existing' class="method"><span id='ignore_existing.v' class='invisible'><code>fn <a href='#method.ignore_existing' class='fnname'>ignore_existing</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#85-87' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_ignore_existing' class="method"><span id='set_ignore_existing.v' class='invisible'><code>fn <a href='#method.set_ignore_existing' class='fnname'>set_ignore_existing</a>(&amp;self, b: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#90-92' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.resume_count' class="method"><span id='resume_count.v' class='invisible'><code>fn <a href='#method.resume_count' class='fnname'>resume_count</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#95-97' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_resume_count' class="method"><span id='set_resume_count.v' class='invisible'><code>fn <a href='#method.set_resume_count' class='fnname'>set_resume_count</a>(&amp;self, c: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#100-102' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.listener' class="method"><span id='listener.v' class='invisible'><code>fn <a href='#method.listener' class='fnname'>listener</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBListener.html" title="struct lldb::SBListener">SBListener</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#110-112' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Get the listener that will be used to receive process events.</p>
+
+<p>If no listener has been set via a call to
+<code>SBAttachInfo::set_listener()</code>, then an invalid <code>SBListener</code> will be
+returned (<code>SBListener::is_valid()</code> will return <code>false</code>). If a listener
+has been set, then the valid listener object will be returned.</p>
+</div><h4 id='method.set_listener' class="method"><span id='set_listener.v' class='invisible'><code>fn <a href='#method.set_listener' class='fnname'>set_listener</a>(&amp;self, listener: <a class="struct" href="../lldb/struct.SBListener.html" title="struct lldb::SBListener">SBListener</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#123-125' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Set the listener that will be used to receive process events.</p>
+
+<p>By default the <a href="struct.SBDebugger.html"><code>SBDebugger</code></a>, which has a listener,
+that the <a href="struct.SBTarget.html"><code>SBTarget</code></a> belongs to will listen for the
+process events. Calling this function allows a different
+listener to be used to listen for process events.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#18' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#18' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-94' class='srclink' href='../src/lldb/src/attachinfo.rs.html#59-63' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></h4>
+</div></div><h3 id='impl-Default' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code><a href='#impl-Default' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#128-132' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#129-131' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBAttachInfo.html' title='lldb::SBAttachInfo'>SBAttachInfo</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-96' class='srclink' href='../src/lldb/src/attachinfo.rs.html#65-69' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBAttachInfo.html" title="struct lldb::SBAttachInfo">SBAttachInfo</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#134-138' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/attachinfo.rs.html#135-137' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -131,11 +180,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

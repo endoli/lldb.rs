@@ -9,6 +9,7 @@
 
     <title>lldb::SBTargetEvent - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBTargetEvent', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBTargetEvent</p><div class="block items"><ul><li><a href="#methods">Methods</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBTargetEvent', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,18 +43,20 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBTargetEvent</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBTargetEvent</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1709' class='srclink' href='../src/lldb/src/target.rs.html#361-363' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct SBTargetEvent&lt;'e&gt; {
-    // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'e&gt; <a class='struct' href='../lldb/struct.SBTargetEvent.html' title='lldb::SBTargetEvent'>SBTargetEvent</a>&lt;'e&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1712' class='srclink' href='../src/lldb/src/target.rs.html#366-381' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(event: &amp;'e <a class='struct' href='../lldb/struct.SBEvent.html' title='lldb::SBEvent'>SBEvent</a>) -&gt; Self</code></h4>
-<h4 id='method.target' class='method'><code>fn <a href='#method.target' class='fnname'>target</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBTarget.html' title='lldb::SBTarget'>SBTarget</a></code></h4>
-<h4 id='method.modules' class='method'><code>fn <a href='#method.modules' class='fnname'>modules</a>(&amp;self) -&gt; <a class='struct' href='../lldb/struct.SBTargetEventModuleIter.html' title='lldb::SBTargetEventModuleIter'>SBTargetEventModuleIter</a></code></h4>
+               </span><a class='srclink' href='../src/lldb/target.rs.html#390-392' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBTargetEvent&lt;'e&gt; { /* fields omitted */ }</pre>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;'e&gt; <a class="struct" href="../lldb/struct.SBTargetEvent.html" title="struct lldb::SBTargetEvent">SBTargetEvent</a>&lt;'e&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/target.rs.html#395-410' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(event: &amp;'e <a class="struct" href="../lldb/struct.SBEvent.html" title="struct lldb::SBEvent">SBEvent</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/target.rs.html#396-398' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.target' class="method"><span id='target.v' class='invisible'><code>fn <a href='#method.target' class='fnname'>target</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBTarget.html" title="struct lldb::SBTarget">SBTarget</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/target.rs.html#400-402' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.modules' class="method"><span id='modules.v' class='invisible'><code>fn <a href='#method.modules' class='fnname'>modules</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBTargetEventModuleIter.html" title="struct lldb::SBTargetEventModuleIter">SBTargetEventModuleIter</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/target.rs.html#404-409' title='goto source code'>[src]</a></span></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -110,11 +113,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

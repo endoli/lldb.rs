@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SBStructuredData` struct in crate `lldb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SBStructuredData">
+
+    <title>lldb::SBStructuredData - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct SBStructuredData</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBStructuredData', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBStructuredData</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/lldb/structureddata.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SBStructuredData {
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBStructuredDataRef.html" title="type lldb_sys::lldb_sys::SBStructuredDataRef">SBStructuredDataRef</a>,
+}</pre><div class='docblock'><p>The value of a variable, register or expression.</p>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBStructuredDataRef.html" title="type lldb_sys::lldb_sys::SBStructuredDataRef">SBStructuredDataRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBStructuredDataRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#20-135' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBStructuredDataRef.html" title="type lldb_sys::lldb_sys::SBStructuredDataRef">SBStructuredDataRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#22-24' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>SBStructuredData</code>.</p>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBStructuredDataRef.html" title="type lldb_sys::lldb_sys::SBStructuredDataRef">SBStructuredDataRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#27-33' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Construct a new <code>Some(SBStructuredData)</code> or <code>None</code>.</p>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#36-38' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Check whether or not this is a valid <code>SBStructuredData</code> value.</p>
+</div><h4 id='method.clear' class="method"><span id='clear.v' class='invisible'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#41-43' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_from_json' class="method"><span id='set_from_json.v' class='invisible'><code>fn <a href='#method.set_from_json' class='fnname'>set_from_json</a>(&amp;self, stream: &amp;<a class="struct" href="../lldb/struct.SBStream.html" title="struct lldb::SBStream">SBStream</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#46-51' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.get_as_json' class="method"><span id='get_as_json.v' class='invisible'><code>fn <a href='#method.get_as_json' class='fnname'>get_as_json</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../lldb/struct.SBStream.html" title="struct lldb::SBStream">SBStream</a>, <a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#54-60' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.data_type' class="method"><span id='data_type.v' class='invisible'><code>fn <a href='#method.data_type' class='fnname'>data_type</a>(&amp;self) -&gt; <a class="enum" href="../lldb_sys/lldb_sys/enum.StructuredDataType.html" title="enum lldb_sys::lldb_sys::StructuredDataType">StructuredDataType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#63-65' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the type of data in this data structure.</p>
+</div><h4 id='method.size' class="method"><span id='size.v' class='invisible'><code>fn <a href='#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#70-72' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the size (number of elements) in this data structure
+if it is an array or dictionary type. For other types,
+<code>0</code> will be returned.</p>
+</div><h4 id='method.value_for_key' class="method"><span id='value_for_key.v' class='invisible'><code>fn <a href='#method.value_for_key' class='fnname'>value_for_key</a>(&amp;self, key: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#76-81' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the value corresponding to a key if this data structure
+is a dictionary type.</p>
+</div><h4 id='method.item_at_index' class="method"><span id='item_at_index.v' class='invisible'><code>fn <a href='#method.item_at_index' class='fnname'>item_at_index</a>(&amp;self, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#85-89' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the value corresponding to an index if this data structure
+is array.</p>
+</div><h4 id='method.integer_value' class="method"><span id='integer_value.v' class='invisible'><code>fn <a href='#method.integer_value' class='fnname'>integer_value</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#92-98' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the integer value if this data structure is an integer type.</p>
+</div><h4 id='method.float_value' class="method"><span id='float_value.v' class='invisible'><code>fn <a href='#method.float_value' class='fnname'>float_value</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f64.html">f64</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#102-108' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the floating point value if this data structure is a floating
+type.</p>
+</div><h4 id='method.boolean_value' class="method"><span id='boolean_value.v' class='invisible'><code>fn <a href='#method.boolean_value' class='fnname'>boolean_value</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#111-119' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Return the boolean value if this data structure is a boolean type.</p>
+</div><h4 id='method.string_value' class="method"><span id='string_value.v' class='invisible'><code>fn <a href='#method.string_value' class='fnname'>string_value</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#122-134' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Provides the string value if this data structure is a string type.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#137-143' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#138-142' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBStructuredData.html" title="struct lldb::SBStructuredData">SBStructuredData</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#145-149' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/structureddata.rs.html#146-148' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lldb";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

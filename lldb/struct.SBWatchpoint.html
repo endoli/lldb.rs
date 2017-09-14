@@ -9,6 +9,7 @@
 
     <title>lldb::SBWatchpoint - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBWatchpoint', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBWatchpoint</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBWatchpoint', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,14 +43,14 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBWatchpoint</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBWatchpoint</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1987' class='srclink' href='../src/lldb/src/watchpoint.rs.html#38-41' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/watchpoint.rs.html#38-41' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBWatchpoint {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBWatchpointRef.html' title='lldb_sys::lldb_sys::SBWatchpointRef'>SBWatchpointRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBWatchpointRef.html" title="type lldb_sys::lldb_sys::SBWatchpointRef">SBWatchpointRef</a>,
 }</pre><div class='docblock'><p>An instance of a watch point for a specific target program.</p>
 
 <p>A watchpoint is determined by the address the byte size that
@@ -70,31 +71,42 @@ controlled via <a href="#method.ignore_count"><code>ignore_count</code></a> and 
 
 <p>A count of how many times a watchpoint has been it is
 available via <a href="#method.hit_count"><code>hit_count</code></a>.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBWatchpointRef.html' title='lldb_sys::lldb_sys::SBWatchpointRef'>SBWatchpointRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBWatchpointRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBWatchpoint.html' title='lldb::SBWatchpoint'>SBWatchpoint</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1989' class='srclink' href='../src/lldb/src/watchpoint.rs.html#43-117' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBWatchpointRef.html' title='lldb_sys::lldb_sys::SBWatchpointRef'>SBWatchpointRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBWatchpoint.html' title='lldb::SBWatchpoint'>SBWatchpoint</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBWatchpointRef.html" title="type lldb_sys::lldb_sys::SBWatchpointRef">SBWatchpointRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBWatchpointRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBWatchpoint.html" title="struct lldb::SBWatchpoint">SBWatchpoint</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#43-113' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBWatchpointRef.html" title="type lldb_sys::lldb_sys::SBWatchpointRef">SBWatchpointRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBWatchpoint.html" title="struct lldb::SBWatchpoint">SBWatchpoint</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#45-47' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBWatchpoint</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBWatchpointRef.html' title='lldb_sys::lldb_sys::SBWatchpointRef'>SBWatchpointRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBWatchpoint.html' title='lldb::SBWatchpoint'>SBWatchpoint</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBWatchpointRef.html" title="type lldb_sys::lldb_sys::SBWatchpointRef">SBWatchpointRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBWatchpoint.html" title="struct lldb::SBWatchpoint">SBWatchpoint</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#50-56' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBWatchpoint)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#59-61' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBWatchpoint</code> value.</p>
-</div><h4 id='method.error' class='method'><code>fn <a href='#method.error' class='fnname'>error</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBError.html' title='lldb::SBError'>SBError</a>&gt;</code></h4>
-<h4 id='method.id' class='method'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></h4>
-<h4 id='method.hardware_index' class='method'><code>fn <a href='#method.hardware_index' class='fnname'>hardware_index</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h4>
-<h4 id='method.watch_address' class='method'><code>fn <a href='#method.watch_address' class='fnname'>watch_address</a>(&amp;self) -&gt; <a class='type' href='../lldb/type.lldb_addr_t.html' title='lldb::lldb_addr_t'>lldb_addr_t</a></code></h4>
-<h4 id='method.watch_size' class='method'><code>fn <a href='#method.watch_size' class='fnname'>watch_size</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<h4 id='method.is_enabled' class='method'><code>fn <a href='#method.is_enabled' class='fnname'>is_enabled</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_enabled' class='method'><code>fn <a href='#method.set_enabled' class='fnname'>set_enabled</a>(&amp;self, enabled: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.hit_count' class='method'><code>fn <a href='#method.hit_count' class='fnname'>hit_count</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<h4 id='method.ignore_count' class='method'><code>fn <a href='#method.ignore_count' class='fnname'>ignore_count</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<h4 id='method.set_ignore_count' class='method'><code>fn <a href='#method.set_ignore_count' class='fnname'>set_ignore_count</a>(&amp;self, count: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBWatchpoint.html' title='lldb::SBWatchpoint'>SBWatchpoint</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2019' class='srclink' href='../src/lldb/src/watchpoint.rs.html#119-125' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.error' class="method"><span id='error.v' class='invisible'><code>fn <a href='#method.error' class='fnname'>error</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBError.html" title="struct lldb::SBError">SBError</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#64-66' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.id' class="method"><span id='id.v' class='invisible'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#69-71' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.hardware_index' class="method"><span id='hardware_index.v' class='invisible'><code>fn <a href='#method.hardware_index' class='fnname'>hardware_index</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#74-77' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.watch_address' class="method"><span id='watch_address.v' class='invisible'><code>fn <a href='#method.watch_address' class='fnname'>watch_address</a>(&amp;self) -&gt; <a class="type" href="../lldb/type.lldb_addr_t.html" title="type lldb::lldb_addr_t">lldb_addr_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#80-82' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.watch_size' class="method"><span id='watch_size.v' class='invisible'><code>fn <a href='#method.watch_size' class='fnname'>watch_size</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#85-87' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.is_enabled' class="method"><span id='is_enabled.v' class='invisible'><code>fn <a href='#method.is_enabled' class='fnname'>is_enabled</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#90-92' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_enabled' class="method"><span id='set_enabled.v' class='invisible'><code>fn <a href='#method.set_enabled' class='fnname'>set_enabled</a>(&amp;self, enabled: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#95-97' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.hit_count' class="method"><span id='hit_count.v' class='invisible'><code>fn <a href='#method.hit_count' class='fnname'>hit_count</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#100-102' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.ignore_count' class="method"><span id='ignore_count.v' class='invisible'><code>fn <a href='#method.ignore_count' class='fnname'>ignore_count</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#105-107' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_ignore_count' class="method"><span id='set_ignore_count.v' class='invisible'><code>fn <a href='#method.set_ignore_count' class='fnname'>set_ignore_count</a>(&amp;self, count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#110-112' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBWatchpoint.html" title="struct lldb::SBWatchpoint">SBWatchpoint</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#115-121' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#116-120' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBWatchpoint.html' title='lldb::SBWatchpoint'>SBWatchpoint</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2026' class='srclink' href='../src/lldb/src/watchpoint.rs.html#127-131' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBWatchpoint.html" title="struct lldb::SBWatchpoint">SBWatchpoint</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#123-127' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/watchpoint.rs.html#124-126' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -151,11 +163,8 @@ available via <a href="#method.hit_count"><code>hit_count</code></a>.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

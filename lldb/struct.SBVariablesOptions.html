@@ -9,6 +9,7 @@
 
     <title>lldb::SBVariablesOptions - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBVariablesOptions', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBVariablesOptions</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBVariablesOptions', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,43 +43,57 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBVariablesOptions</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBVariablesOptions</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1938' class='srclink' href='../src/lldb/src/variablesoptions.rs.html#12-15' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/variablesoptions.rs.html#12-15' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBVariablesOptions {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html' title='lldb_sys::lldb_sys::SBVariablesOptionsRef'>SBVariablesOptionsRef</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html' title='lldb_sys::lldb_sys::SBVariablesOptionsRef'>SBVariablesOptionsRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBVariablesOptionsRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1940' class='srclink' href='../src/lldb/src/variablesoptions.rs.html#17-101' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a></code></h4>
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html" title="type lldb_sys::lldb_sys::SBVariablesOptionsRef">SBVariablesOptionsRef</a>,
+}</pre><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html" title="type lldb_sys::lldb_sys::SBVariablesOptionsRef">SBVariablesOptionsRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBVariablesOptionsRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#17-101' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#19-21' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBVariablesOptions</code>.</p>
-</div><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html' title='lldb_sys::lldb_sys::SBVariablesOptionsRef'>SBVariablesOptionsRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a></code></h4>
+</div><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html" title="type lldb_sys::lldb_sys::SBVariablesOptionsRef">SBVariablesOptionsRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#24-26' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBVariablesOptions</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html' title='lldb_sys::lldb_sys::SBVariablesOptionsRef'>SBVariablesOptionsRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBVariablesOptionsRef.html" title="type lldb_sys::lldb_sys::SBVariablesOptionsRef">SBVariablesOptionsRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#29-35' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBVariablesOptions)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#38-40' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBVariablesOptions</code> value.</p>
-</div><h4 id='method.include_arguments' class='method'><code>fn <a href='#method.include_arguments' class='fnname'>include_arguments</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_include_arguments' class='method'><code>fn <a href='#method.set_include_arguments' class='fnname'>set_include_arguments</a>(&amp;mut self, arguments: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.include_locals' class='method'><code>fn <a href='#method.include_locals' class='fnname'>include_locals</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_include_locals' class='method'><code>fn <a href='#method.set_include_locals' class='fnname'>set_include_locals</a>(&amp;mut self, locals: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.include_statics' class='method'><code>fn <a href='#method.include_statics' class='fnname'>include_statics</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_include_statics' class='method'><code>fn <a href='#method.set_include_statics' class='fnname'>set_include_statics</a>(&amp;mut self, statics: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.in_scope_only' class='method'><code>fn <a href='#method.in_scope_only' class='fnname'>in_scope_only</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_in_scope_only' class='method'><code>fn <a href='#method.set_in_scope_only' class='fnname'>set_in_scope_only</a>(&amp;mut self, in_scope_only: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.include_runtime_support_values' class='method'><code>fn <a href='#method.include_runtime_support_values' class='fnname'>include_runtime_support_values</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.set_include_runtime_support_values' class='method'><code>fn <a href='#method.set_include_runtime_support_values' class='fnname'>set_include_runtime_support_values</a>(&amp;mut self, include: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.use_dynamic' class='method'><code>fn <a href='#method.use_dynamic' class='fnname'>use_dynamic</a>(&amp;self) -&gt; <a class='enum' href='../lldb/enum.DynamicValueType.html' title='lldb::DynamicValueType'>DynamicValueType</a></code></h4>
-<h4 id='method.set_use_dynamic' class='method'><code>fn <a href='#method.set_use_dynamic' class='fnname'>set_use_dynamic</a>(&amp;mut self, use_dynamic: <a class='enum' href='../lldb/enum.DynamicValueType.html' title='lldb::DynamicValueType'>DynamicValueType</a>)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1932' class='srclink' href='../src/lldb/src/variablesoptions.rs.html#11' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.include_arguments' class="method"><span id='include_arguments.v' class='invisible'><code>fn <a href='#method.include_arguments' class='fnname'>include_arguments</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#43-45' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_include_arguments' class="method"><span id='set_include_arguments.v' class='invisible'><code>fn <a href='#method.set_include_arguments' class='fnname'>set_include_arguments</a>(&amp;self, arguments: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#48-50' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.include_locals' class="method"><span id='include_locals.v' class='invisible'><code>fn <a href='#method.include_locals' class='fnname'>include_locals</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#53-55' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_include_locals' class="method"><span id='set_include_locals.v' class='invisible'><code>fn <a href='#method.set_include_locals' class='fnname'>set_include_locals</a>(&amp;self, locals: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#58-60' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.include_statics' class="method"><span id='include_statics.v' class='invisible'><code>fn <a href='#method.include_statics' class='fnname'>include_statics</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#63-65' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_include_statics' class="method"><span id='set_include_statics.v' class='invisible'><code>fn <a href='#method.set_include_statics' class='fnname'>set_include_statics</a>(&amp;self, statics: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#68-70' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.in_scope_only' class="method"><span id='in_scope_only.v' class='invisible'><code>fn <a href='#method.in_scope_only' class='fnname'>in_scope_only</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#73-75' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_in_scope_only' class="method"><span id='set_in_scope_only.v' class='invisible'><code>fn <a href='#method.set_in_scope_only' class='fnname'>set_in_scope_only</a>(&amp;self, in_scope_only: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#78-80' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.include_runtime_support_values' class="method"><span id='include_runtime_support_values.v' class='invisible'><code>fn <a href='#method.include_runtime_support_values' class='fnname'>include_runtime_support_values</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#83-85' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_include_runtime_support_values' class="method"><span id='set_include_runtime_support_values.v' class='invisible'><code>fn <a href='#method.set_include_runtime_support_values' class='fnname'>set_include_runtime_support_values</a>(&amp;self, include: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#88-90' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.use_dynamic' class="method"><span id='use_dynamic.v' class='invisible'><code>fn <a href='#method.use_dynamic' class='fnname'>use_dynamic</a>(&amp;self) -&gt; <a class="enum" href="../lldb/enum.DynamicValueType.html" title="enum lldb::DynamicValueType">DynamicValueType</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#93-95' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.set_use_dynamic' class="method"><span id='set_use_dynamic.v' class='invisible'><code>fn <a href='#method.set_use_dynamic' class='fnname'>set_use_dynamic</a>(&amp;self, use_dynamic: <a class="enum" href="../lldb/enum.DynamicValueType.html" title="enum lldb::DynamicValueType">DynamicValueType</a>)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#98-100' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#11' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBVariablesOptions.html' title='lldb::SBVariablesOptions'>SBVariablesOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1978' class='srclink' href='../src/lldb/src/variablesoptions.rs.html#103-107' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Default' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code><a href='#impl-Default' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#103-107' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#104-106' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBVariablesOptions.html" title="struct lldb::SBVariablesOptions">SBVariablesOptions</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#109-113' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/variablesoptions.rs.html#110-112' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -135,11 +150,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

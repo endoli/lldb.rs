@@ -9,6 +9,7 @@
 
     <title>lldb::SBSymbolContext - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
     
@@ -16,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -28,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBSymbolContext', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct SBSymbolContext</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='index.html'>lldb</a></p><script>window.sidebarCurrent = {name: 'SBSymbolContext', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,30 +43,48 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class='struct' href=''>SBSymbolContext</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>lldb</a>::<wbr><a class="struct" href=''>SBSymbolContext</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1552' class='srclink' href='../src/lldb/src/symbolcontext.rs.html#12-15' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/lldb/symbolcontext.rs.html#19-22' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SBSymbolContext {
-    pub raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBSymbolContextRef.html' title='lldb_sys::lldb_sys::SBSymbolContextRef'>SBSymbolContextRef</a>,
+    pub raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSymbolContextRef.html" title="type lldb_sys::lldb_sys::SBSymbolContextRef">SBSymbolContextRef</a>,
 }</pre><div class='docblock'><p>A container that stores various debugger related info.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.raw' class='structfield'><code>raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBSymbolContextRef.html' title='lldb_sys::lldb_sys::SBSymbolContextRef'>SBSymbolContextRef</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The underlying raw <code>SBSymbolContextRef</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1554' class='srclink' href='../src/lldb/src/symbolcontext.rs.html#17-36' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.wrap' class='method'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBSymbolContextRef.html' title='lldb_sys::lldb_sys::SBSymbolContextRef'>SBSymbolContextRef</a>) -&gt; <a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a></code></h4>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id='structfield.raw' class="structfield">
+                           <span id='raw.v' class='invisible'>
+                           <code>raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSymbolContextRef.html" title="type lldb_sys::lldb_sys::SBSymbolContextRef">SBSymbolContextRef</a></code>
+                           </span></span><div class='docblock'><p>The underlying raw <code>SBSymbolContextRef</code>.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#24-88' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.wrap' class="method"><span id='wrap.v' class='invisible'><code>fn <a href='#method.wrap' class='fnname'>wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSymbolContextRef.html" title="type lldb_sys::lldb_sys::SBSymbolContextRef">SBSymbolContextRef</a>) -&gt; <a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#26-28' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>SBSymbolContext</code>.</p>
-</div><h4 id='method.maybe_wrap' class='method'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class='type' href='../lldb_sys/lldb_sys/type.SBSymbolContextRef.html' title='lldb_sys::lldb_sys::SBSymbolContextRef'>SBSymbolContextRef</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a>&gt;</code></h4>
+</div><h4 id='method.maybe_wrap' class="method"><span id='maybe_wrap.v' class='invisible'><code>fn <a href='#method.maybe_wrap' class='fnname'>maybe_wrap</a>(raw: <a class="type" href="../lldb_sys/lldb_sys/type.SBSymbolContextRef.html" title="type lldb_sys::lldb_sys::SBSymbolContextRef">SBSymbolContextRef</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#31-37' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Construct a new <code>Some(SBSymbolContext)</code> or <code>None</code>.</p>
-</div><h4 id='method.is_valid' class='method'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_valid' class="method"><span id='is_valid.v' class='invisible'><code>fn <a href='#method.is_valid' class='fnname'>is_valid</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#40-42' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Check whether or not this is a valid <code>SBSymbolContext</code> value.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1561' class='srclink' href='../src/lldb/src/symbolcontext.rs.html#38-44' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h4 id='method.module' class="method"><span id='module.v' class='invisible'><code>fn <a href='#method.module' class='fnname'>module</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBModule.html" title="struct lldb::SBModule">SBModule</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#45-47' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.compile_unit' class="method"><span id='compile_unit.v' class='invisible'><code>fn <a href='#method.compile_unit' class='fnname'>compile_unit</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBCompileUnit.html" title="struct lldb::SBCompileUnit">SBCompileUnit</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#50-52' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.function' class="method"><span id='function.v' class='invisible'><code>fn <a href='#method.function' class='fnname'>function</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBFunction.html" title="struct lldb::SBFunction">SBFunction</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#55-57' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.block' class="method"><span id='block.v' class='invisible'><code>fn <a href='#method.block' class='fnname'>block</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBBlock.html" title="struct lldb::SBBlock">SBBlock</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#60-62' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.line_entry' class="method"><span id='line_entry.v' class='invisible'><code>fn <a href='#method.line_entry' class='fnname'>line_entry</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../lldb/struct.SBLineEntry.html" title="struct lldb::SBLineEntry">SBLineEntry</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#65-67' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.symbol' class="method"><span id='symbol.v' class='invisible'><code>fn <a href='#method.symbol' class='fnname'>symbol</a>(&amp;self) -&gt; <a class="struct" href="../lldb/struct.SBSymbol.html" title="struct lldb::SBSymbol">SBSymbol</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#70-72' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.parent_of_inlined_scope' class="method"><span id='parent_of_inlined_scope.v' class='invisible'><code>fn <a href='#method.parent_of_inlined_scope' class='fnname'>parent_of_inlined_scope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;curr_frame_pc: &amp;<a class="struct" href="../lldb/struct.SBAddress.html" title="struct lldb::SBAddress">SBAddress</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;parent_frame_addr: &amp;<a class="struct" href="../lldb/struct.SBAddress.html" title="struct lldb::SBAddress">SBAddress</a><br>) -&gt; <a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#75-87' title='goto source code'>[src]</a></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#90-96' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#91-95' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../lldb/struct.SBSymbolContext.html' title='lldb::SBSymbolContext'>SBSymbolContext</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1568' class='srclink' href='../src/lldb/src/symbolcontext.rs.html#46-50' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../lldb/struct.SBSymbolContext.html" title="struct lldb::SBSymbolContext">SBSymbolContext</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#98-102' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/lldb/symbolcontext.rs.html#99-101' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 
@@ -122,11 +141,8 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "lldb";
-        window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>
