@@ -26,7 +26,7 @@
 //! the `LLDB.framework` that is provided by Xcode.app.
 //!
 //! In your own application, you will need to configure the
-//! `@rpath` for your execuable to point to the location
+//! `@rpath` for your executable to point to the location
 //! of the `LLDB.framework` that you are using. Doing this
 //! automatically is not currently supported by Cargo.
 //!
