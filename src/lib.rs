@@ -39,8 +39,9 @@
 //!
 //! ### Linux Installation Notes
 //!
-//! Support for building this has not yet been provided for Linux.
-//! Contributions are welcome!
+//! Install the `lldb` and `lldb-dev` packages for your platform so that
+//! you have both LLDB itself installed as well as the headers and
+//! other support files required.
 //!
 //! ### Windows Installation Notes
 //!
