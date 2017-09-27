@@ -356,6 +356,8 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBTargetBreakpointIter<'d> {}
+
 /// Iterate over the [watchpoints] in a [target].
 ///
 /// [watchpoints]: struct.SBWatchpoint.html
@@ -385,6 +387,8 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBTargetWatchpointIter<'d> {}
 
 #[allow(missing_docs)]
 pub struct SBTargetEvent<'e> {
@@ -441,6 +445,8 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBTargetEventModuleIter<'d> {}
+
 /// Iterate over the [modules] in a [target].
 ///
 /// [modules]: struct.SBModule.html
@@ -470,6 +476,8 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
         (sz - self.idx as usize, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBTargetModuleIter<'d> {}
 
 #[cfg(feature = "graphql")]
 graphql_object!(SBTarget: SBDebugger | &self | {

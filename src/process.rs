@@ -507,6 +507,8 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

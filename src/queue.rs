@@ -156,6 +156,8 @@ impl<'d> Iterator for SBQueueThreadIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBQueueThreadIter<'d> {}
+
 /// Iterate over the [queue items] in a [queue].
 ///
 /// [queue items]: struct.SBQueueItem.html
@@ -185,6 +187,8 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
 
 #[cfg(feature = "graphql")]
 graphql_object!(SBQueue: super::debugger::SBDebugger | &self | {

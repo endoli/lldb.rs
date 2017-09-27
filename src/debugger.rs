@@ -299,6 +299,8 @@ impl<'d> Iterator for SBDebuggerTargetIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBDebuggerTargetIter<'d> {}
+
 impl fmt::Debug for SBDebugger {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

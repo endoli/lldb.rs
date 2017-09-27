@@ -105,6 +105,8 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
+
 impl fmt::Debug for SBModule {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

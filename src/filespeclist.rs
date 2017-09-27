@@ -106,3 +106,5 @@ impl<'d> Iterator for SBFileSpecListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBFileSpecListIter<'d> {}

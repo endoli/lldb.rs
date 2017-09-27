@@ -75,3 +75,5 @@ impl<'d> Iterator for SBTypeListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBTypeListIter<'d> {}

@@ -148,6 +148,8 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBSectionSubSectionIter<'d> {}
+
 impl fmt::Debug for SBSection {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

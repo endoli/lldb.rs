@@ -112,3 +112,5 @@ impl<'d> Iterator for SBStringListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBStringListIter<'d> {}

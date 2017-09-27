@@ -117,3 +117,5 @@ impl<'d> Iterator for SBValueListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBValueListIter<'d> {}

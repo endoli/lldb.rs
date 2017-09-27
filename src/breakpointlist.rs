@@ -103,3 +103,5 @@ impl<'d> Iterator for SBBreakpointListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBBreakpointListIter<'d> {}

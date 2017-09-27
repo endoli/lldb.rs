@@ -231,6 +231,8 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
     }
 }
 
+impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBBreakpoint: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

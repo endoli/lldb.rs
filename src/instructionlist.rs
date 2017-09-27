@@ -107,3 +107,5 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+impl<'d> ExactSizeIterator for SBInstructionListIter<'d> {}
