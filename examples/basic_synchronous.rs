@@ -13,7 +13,7 @@ fn main() {
         println!("{:?}", target);
 
         let launchinfo = SBLaunchInfo::new();
-        launchinfo.set_launch_flags(LAUNCH_FLAG_STOP_AT_ENTRY);
+        launchinfo.set_launch_flags(LaunchFlags::STOP_AT_ENTRY);
         match target.launch(launchinfo) {
             Ok(process) => {
                 println!("{:?}", process);

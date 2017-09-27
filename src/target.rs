@@ -41,7 +41,7 @@ use sys;
 /// use lldb::*;
 /// fn launch_target(target: &SBTarget) -> Result<SBProcess, SBError> {
 ///     let launch_info = SBLaunchInfo::new();
-///     launch_info.set_launch_flags(LAUNCH_FLAG_STOP_AT_ENTRY);
+///     launch_info.set_launch_flags(LaunchFlags::STOP_AT_ENTRY);
 ///     // Probably want to set up a listener here.
 ///     target.launch(launch_info)
 /// }
