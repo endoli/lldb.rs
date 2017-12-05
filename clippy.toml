@@ -1,1 +1,1 @@
-doc-valid-idents = ["iOS"]
+doc-valid-idents = ["iOS", "macOS"]
