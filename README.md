@@ -2,8 +2,8 @@
 
 [![](http://meritbadge.herokuapp.com/lldb)](https://crates.io/crates/lldb)
 
-This crate provides a safe binding to the public API for [LLDB], the
-debugger provided by the [LLVM project]. LLDB provides a modern, high
+This crate provides a safe binding to the public API for [LLDB](https://lldb.llvm.org/) the
+debugger provided by the [LLVM project](https://llvm.org/). LLDB provides a modern, high
 performance debugger framework and is the default debugger for macOS
 and iOS.
 
