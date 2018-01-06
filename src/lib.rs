@@ -89,8 +89,8 @@
 //! provide commercial support, so feel free to
 //! [contact me](mailto:bruce.mitchener@gmail.com).
 //!
-//! [LLDB]: http://lldb.llvm.org/
-//! [LLVM project]: http://llvm.org/
+//! [LLDB]: https://lldb.llvm.org/
+//! [LLVM project]: https://llvm.org/
 //! [crates.io]: https://crates.io/crates/lldb
 //! [`SBDebugger`]: struct.SBDebugger.html
 //! [`SBTarget`]: struct.SBTarget.html
