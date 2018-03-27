@@ -219,9 +219,7 @@ impl SBValue {
     /// Returns `Some(SBData)` with the contents of the copied items, on success.
     /// `None` otherwise.
     pub fn pointee_data(&self, item_idx: u32, item_count: u32) -> Option<SBData> {
-        SBData::maybe_wrap(unsafe {
-            sys::SBValueGetPointeeData(self.raw, item_idx, item_count)
-        })
+        SBData::maybe_wrap(unsafe { sys::SBValueGetPointeeData(self.raw, item_idx, item_count) })
     }
 
     /// Get an `SBData` wrapping the contents of this `SBValue`.

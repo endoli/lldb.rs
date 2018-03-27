@@ -223,9 +223,7 @@ impl SBThread {
 
     /// Set the currently selected frame for this thread. This takes a frame index.
     pub fn set_selected_frame(&self, frame_index: u32) -> Option<SBFrame> {
-        SBFrame::maybe_wrap(unsafe {
-            sys::SBThreadSetSelectedFrame(self.raw, frame_index)
-        })
+        SBFrame::maybe_wrap(unsafe { sys::SBThreadSetSelectedFrame(self.raw, frame_index) })
     }
 
     /// Get the process in which this thread is running.
@@ -308,9 +306,7 @@ impl<'e> SBThreadEvent<'e> {
 
     /// Get the frame from this thread event.
     pub fn frame(&self) -> Option<SBFrame> {
-        SBFrame::maybe_wrap(unsafe {
-            sys::SBThreadGetStackFrameFromEvent(self.event.raw)
-        })
+        SBFrame::maybe_wrap(unsafe { sys::SBThreadGetStackFrameFromEvent(self.event.raw) })
     }
 }
 

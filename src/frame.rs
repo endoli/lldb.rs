@@ -106,9 +106,7 @@ impl SBFrame {
     ///   is needed by the caller. These flags have constants starting
     ///   with `SYMBOL_CONTEXT_ITEM_`.
     pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
-        SBSymbolContext::wrap(unsafe {
-            sys::SBFrameGetSymbolContext(self.raw, resolve_scope)
-        })
+        SBSymbolContext::wrap(unsafe { sys::SBFrameGetSymbolContext(self.raw, resolve_scope) })
     }
 
     /// The `SBModule` for this stack frame.
@@ -279,9 +277,7 @@ impl SBFrame {
         let thread = self.thread();
         let parent_idx = self.frame_id() + 1;
         if parent_idx < unsafe { sys::SBThreadGetNumFrames(thread.raw) } {
-            SBFrame::maybe_wrap(unsafe {
-                sys::SBThreadGetFrameAtIndex(thread.raw, parent_idx)
-            })
+            SBFrame::maybe_wrap(unsafe { sys::SBThreadGetFrameAtIndex(thread.raw, parent_idx) })
         } else {
             None
         }

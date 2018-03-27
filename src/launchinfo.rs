@@ -8,7 +8,7 @@ use std::ffi::{CStr, CString};
 use std::ptr;
 use super::filespec::SBFileSpec;
 use super::listener::SBListener;
-use super::{LaunchFlags, lldb_pid_t};
+use super::{lldb_pid_t, LaunchFlags};
 use sys;
 
 /// Configuration for launching a process.
@@ -198,13 +198,8 @@ impl SBLaunchInfo {
     pub fn add_open_file_action(&self, fd: i32, path: &str, read: bool, write: bool) -> bool {
         let path = CString::new(path).unwrap();
         unsafe {
-            sys::SBLaunchInfoAddOpenFileAction(
-                self.raw,
-                fd,
-                path.as_ptr(),
-                read as u8,
-                write as u8,
-            ) != 0
+            sys::SBLaunchInfoAddOpenFileAction(self.raw, fd, path.as_ptr(), read as u8, write as u8)
+                != 0
         }
     }
 

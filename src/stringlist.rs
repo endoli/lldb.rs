@@ -95,7 +95,8 @@ impl<'d> Iterator for SBStringListIter<'d> {
                 match CStr::from_ptr(sys::SBStringListGetStringAtIndex(
                     self.string_list.raw,
                     self.idx,
-                )).to_str() {
+                )).to_str()
+                {
                     Ok(s) => s,
                     _ => panic!("Invalid string?"),
                 }

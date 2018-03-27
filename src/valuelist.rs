@@ -60,17 +60,13 @@ impl SBValueList {
 
     #[allow(missing_docs)]
     pub fn find_value_by_uid(&self, uid: lldb_user_id_t) -> Option<SBValue> {
-        SBValue::maybe_wrap(unsafe {
-            sys::SBValueListFindValueObjectByUID(self.raw, uid)
-        })
+        SBValue::maybe_wrap(unsafe { sys::SBValueListFindValueObjectByUID(self.raw, uid) })
     }
 
     #[allow(missing_docs)]
     pub fn get_first_value_by_name(&self, name: &str) -> Option<SBValue> {
         let name = CString::new(name).unwrap();
-        SBValue::maybe_wrap(unsafe {
-            sys::SBValueListGetFirstValueByName(self.raw, name.as_ptr())
-        })
+        SBValue::maybe_wrap(unsafe { sys::SBValueListGetFirstValueByName(self.raw, name.as_ptr()) })
     }
 
     /// Iterate over this value list.

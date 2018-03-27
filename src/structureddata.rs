@@ -44,19 +44,23 @@ impl SBStructuredData {
 
     #[allow(missing_docs)]
     pub fn set_from_json(&self, stream: &SBStream) -> Result<(), SBError> {
-        let e = SBError::wrap(unsafe {
-            sys::SBStructuredDataSetFromJSON(self.raw, stream.raw)
-        });
-        if e.is_success() { Ok(()) } else { Err(e) }
+        let e = SBError::wrap(unsafe { sys::SBStructuredDataSetFromJSON(self.raw, stream.raw) });
+        if e.is_success() {
+            Ok(())
+        } else {
+            Err(e)
+        }
     }
 
     #[allow(missing_docs)]
     pub fn get_as_json(&self) -> Result<SBStream, SBError> {
         let stream = SBStream::new();
-        let e = SBError::wrap(unsafe {
-            sys::SBStructuredDataGetAsJSON(self.raw, stream.raw)
-        });
-        if e.is_success() { Ok(stream) } else { Err(e) }
+        let e = SBError::wrap(unsafe { sys::SBStructuredDataGetAsJSON(self.raw, stream.raw) });
+        if e.is_success() {
+            Ok(stream)
+        } else {
+            Err(e)
+        }
     }
 
     /// Return the type of data in this data structure.
@@ -83,9 +87,7 @@ impl SBStructuredData {
     /// Return the value corresponding to an index if this data structure
     /// is array.
     pub fn item_at_index(&self, idx: usize) -> Option<SBStructuredData> {
-        SBStructuredData::maybe_wrap(unsafe {
-            sys::SBStructuredDataGetItemAtIndex(self.raw, idx)
-        })
+        SBStructuredData::maybe_wrap(unsafe { sys::SBStructuredDataGetItemAtIndex(self.raw, idx) })
     }
 
     /// Return the integer value if this data structure is an integer type.
@@ -110,9 +112,7 @@ impl SBStructuredData {
     /// Return the boolean value if this data structure is a boolean type.
     pub fn boolean_value(&self) -> Option<bool> {
         if self.data_type() == sys::StructuredDataType::Boolean {
-            Some(unsafe {
-                sys::SBStructuredDataGetBooleanValue(self.raw, false as u8) != 0
-            })
+            Some(unsafe { sys::SBStructuredDataGetBooleanValue(self.raw, false as u8) != 0 })
         } else {
             None
         }

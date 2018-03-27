@@ -108,8 +108,7 @@
 //! [`SBLineEntry`]: struct.SBLineEntry.html
 
 #![warn(missing_docs)]
-#![deny(trivial_numeric_casts, unstable_features,
-        unused_import_braces, unused_qualifications)]
+#![deny(trivial_numeric_casts, unstable_features, unused_import_braces, unused_qualifications)]
 
 extern crate lldb_sys as sys;
 

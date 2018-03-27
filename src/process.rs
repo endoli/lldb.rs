@@ -158,9 +158,13 @@ impl SBProcess {
     /// or `Suspended` states.
     pub fn is_alive(&self) -> bool {
         match self.state() {
-            StateType::Attaching | StateType::Launching | StateType::Stopped |
-            StateType::Running | StateType::Stepping | StateType::Crashed |
-            StateType::Suspended => true,
+            StateType::Attaching
+            | StateType::Launching
+            | StateType::Stopped
+            | StateType::Running
+            | StateType::Stepping
+            | StateType::Crashed
+            | StateType::Suspended => true,
             _ => false,
         }
     }
@@ -314,9 +318,7 @@ impl SBProcess {
 
     /// Returns the thread with the given thread index ID.
     pub fn thread_by_index_id(&self, thread_index_id: u32) -> Option<SBThread> {
-        SBThread::maybe_wrap(unsafe {
-            sys::SBProcessGetThreadByIndexID(self.raw, thread_index_id)
-        })
+        SBThread::maybe_wrap(unsafe { sys::SBProcessGetThreadByIndexID(self.raw, thread_index_id) })
     }
 
     /// Returns the currently selected thread.
@@ -501,8 +503,8 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz = unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) } as
-            usize;
+        let sz =
+            unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) } as usize;
         (sz - self.idx, Some(sz))
     }
 }

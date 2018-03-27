@@ -7,7 +7,7 @@
 use std::fmt;
 use super::error::SBError;
 use super::stream::SBStream;
-use super::{DescriptionLevel, lldb_addr_t};
+use super::{lldb_addr_t, DescriptionLevel};
 use sys;
 
 /// An instance of a watch point for a specific target program.
@@ -73,7 +73,11 @@ impl SBWatchpoint {
     #[allow(missing_docs)]
     pub fn hardware_index(&self) -> Option<i32> {
         let idx = unsafe { sys::SBWatchpointGetHardwareIndex(self.raw) };
-        if idx == -1 { None } else { Some(idx) }
+        if idx == -1 {
+            None
+        } else {
+            Some(idx)
+        }
     }
 
     #[allow(missing_docs)]

@@ -60,13 +60,21 @@ impl SBBlock {
     /// Get the call site line number if this block represents an inlined function.
     pub fn inlined_call_site_line(&self) -> Option<u32> {
         let line = unsafe { sys::SBBlockGetInlinedCallSiteLine(self.raw) };
-        if line > 0 { Some(line) } else { None }
+        if line > 0 {
+            Some(line)
+        } else {
+            None
+        }
     }
 
     /// Get the call site column number if this block represents an inlined function.
     pub fn inlined_call_site_column(&self) -> Option<u32> {
         let column = unsafe { sys::SBBlockGetInlinedCallSiteColumn(self.raw) };
-        if column > 0 { Some(column) } else { None }
+        if column > 0 {
+            Some(column)
+        } else {
+            None
+        }
     }
 
     /// Get the parent block
@@ -96,12 +104,16 @@ impl SBBlock {
 
     /// Get the start address of an address range.
     pub fn range_start_address(&self, idx: u32) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBBlockGetRangeStartAddress(self.raw, idx) } }
+        SBAddress {
+            raw: unsafe { sys::SBBlockGetRangeStartAddress(self.raw, idx) },
+        }
     }
 
     /// Get the end address of an address range.
     pub fn range_end_address(&self, idx: u32) -> SBAddress {
-        SBAddress { raw: unsafe { sys::SBBlockGetRangeEndAddress(self.raw, idx) } }
+        SBAddress {
+            raw: unsafe { sys::SBBlockGetRangeEndAddress(self.raw, idx) },
+        }
     }
 
     /// Given an address, find out which address range it is part of.

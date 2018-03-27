@@ -22,7 +22,7 @@ use super::process::SBProcess;
 use super::stream::SBStream;
 use super::value::SBValue;
 use super::watchpoint::SBWatchpoint;
-use super::{DescriptionLevel, lldb_addr_t};
+use super::{lldb_addr_t, DescriptionLevel};
 use sys;
 
 /// The target program running under the debugger.
@@ -122,22 +122,29 @@ impl SBTarget {
     ///
     /// [`SBPlatform`]: strut.SBPlatform.html
     pub fn platform(&self) -> SBPlatform {
-        unsafe { SBPlatform { raw: sys::SBTargetGetPlatform(self.raw) } }
+        unsafe {
+            SBPlatform {
+                raw: sys::SBTargetGetPlatform(self.raw),
+            }
+        }
     }
 
     /// Get the [`SBProcess`] associated with this target.
     ///
     /// [`SBProcess`]: strut.SBProcess.html
     pub fn process(&self) -> SBProcess {
-        unsafe { SBProcess { raw: sys::SBTargetGetProcess(self.raw) } }
+        unsafe {
+            SBProcess {
+                raw: sys::SBTargetGetProcess(self.raw),
+            }
+        }
     }
 
     /// Launch a target for debugging.
     pub fn launch(&self, launch_info: SBLaunchInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::new();
-        let process = SBProcess::wrap(unsafe {
-            sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw)
-        });
+        let process =
+            SBProcess::wrap(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
         if error.is_success() {
             Ok(process)
         } else {
@@ -148,9 +155,8 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::new();
-        let process = SBProcess::wrap(unsafe {
-            sys::SBTargetAttach(self.raw, attach_info.raw, error.raw)
-        });
+        let process =
+            SBProcess::wrap(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
         if error.is_success() {
             Ok(process)
         } else {
@@ -170,9 +176,7 @@ impl SBTarget {
 
     /// Add a module to the target using an `SBModuleSpec`.
     pub fn add_module_spec(&self, module_spec: &SBModuleSpec) -> Option<SBModule> {
-        SBModule::maybe_wrap(unsafe {
-            sys::SBTargetAddModuleSpec(self.raw, module_spec.raw)
-        })
+        SBModule::maybe_wrap(unsafe { sys::SBTargetAddModuleSpec(self.raw, module_spec.raw) })
     }
 
     /// Remove a module from the target.
@@ -182,7 +186,9 @@ impl SBTarget {
 
     /// Get the debugger controlling this target.
     pub fn debugger(&self) -> SBDebugger {
-        SBDebugger { raw: unsafe { sys::SBTargetGetDebugger(self.raw) } }
+        SBDebugger {
+            raw: unsafe { sys::SBTargetGetDebugger(self.raw) },
+        }
     }
 
     /// Get an iterator over the [modules] known to this target instance.
@@ -207,9 +213,7 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn find_breakpoint_by_id(&self, break_id: i32) -> Option<SBBreakpoint> {
-        SBBreakpoint::maybe_wrap(unsafe {
-            sys::SBTargetFindBreakpointByID(self.raw, break_id)
-        })
+        SBBreakpoint::maybe_wrap(unsafe { sys::SBTargetFindBreakpointByID(self.raw, break_id) })
     }
 
     #[allow(missing_docs)]
@@ -242,9 +246,7 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn find_watchpoint_by_id(&self, watch_id: i32) -> Option<SBWatchpoint> {
-        SBWatchpoint::maybe_wrap(unsafe {
-            sys::SBTargetFindWatchpointByID(self.raw, watch_id)
-        })
+        SBWatchpoint::maybe_wrap(unsafe { sys::SBTargetFindWatchpointByID(self.raw, watch_id) })
     }
 
     #[allow(missing_docs)]
@@ -426,8 +428,7 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     type Item = SBModule;
 
     fn next(&mut self) -> Option<SBModule> {
-        if self.idx <
-            unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize }
+        if self.idx < unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize }
         {
             let r = Some(SBModule::wrap(unsafe {
                 sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32, self.event.event.raw)

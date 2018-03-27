@@ -8,7 +8,7 @@ use std::fmt;
 use super::address::SBAddress;
 use super::breakpoint::SBBreakpoint;
 use super::stream::SBStream;
-use super::{DescriptionLevel, lldb_addr_t};
+use super::{lldb_addr_t, DescriptionLevel};
 use sys;
 
 /// One unique instance (by address) of a logical breakpoint.

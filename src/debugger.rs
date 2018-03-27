@@ -152,7 +152,9 @@ impl SBDebugger {
     /// If `source_init_files` is `true`, then `~/.lldbinit` will
     /// be processed.
     pub fn create(source_init_files: bool) -> SBDebugger {
-        SBDebugger { raw: unsafe { sys::SBDebuggerCreate2(source_init_files as u8) } }
+        SBDebugger {
+            raw: unsafe { sys::SBDebuggerCreate2(source_init_files as u8) },
+        }
     }
 
     /// Get whether or not the debugger is in async mode.
@@ -225,9 +227,7 @@ impl SBDebugger {
     /// about what might have gone wrong.
     pub fn create_target_simple(&self, executable: &str) -> Option<SBTarget> {
         let executable = CString::new(executable).unwrap();
-        SBTarget::maybe_wrap(unsafe {
-            sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr())
-        })
+        SBTarget::maybe_wrap(unsafe { sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr()) })
     }
 
     /// Get an iterator over the [targets] known to this debugger instance.
@@ -258,7 +258,11 @@ impl SBDebugger {
     ///
     /// [`SBPlatform`]: struct.SBPlatform.html
     pub fn selected_platform(&self) -> SBPlatform {
-        unsafe { SBPlatform { raw: sys::SBDebuggerGetSelectedPlatform(self.raw) } }
+        unsafe {
+            SBPlatform {
+                raw: sys::SBDebuggerGetSelectedPlatform(self.raw),
+            }
+        }
     }
 
     /// Set the selected [`SBPlatform`].
