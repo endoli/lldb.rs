@@ -9,6 +9,7 @@ use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
 use super::event::SBEvent;
+use super::processinfo::SBProcessInfo;
 use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::thread::SBThread;
@@ -360,6 +361,11 @@ impl SBProcess {
             Err(error)
         }
     }
+
+    #[allow(missing_docs)]
+    pub fn process_info(&self) -> SBProcessInfo {
+        SBProcessInfo::wrap(unsafe { sys::SBProcessGetProcessInfo(self.raw) } )
+    }
 }
 
 /// Iterate over the [threads] in a [process].
@@ -563,5 +569,9 @@ graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
 
     field selected_thread() -> SBThread {
         self.selected_thread()
+    }
+
+    field process_info() -> SBProcessInfo {
+        self.process_info()
     }
 });

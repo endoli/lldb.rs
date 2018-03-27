@@ -156,6 +156,7 @@ mod module;
 mod modulespec;
 mod platform;
 mod process;
+mod processinfo;
 mod queue;
 mod queueitem;
 mod section;
@@ -201,6 +202,7 @@ pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::{SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter,
                         SBProcessQueueIter, SBProcessThreadIter};
+pub use self::processinfo::SBProcessInfo;
 pub use self::queue::{SBQueue, SBQueueQueueItemIter, SBQueueThreadIter};
 pub use self::queueitem::SBQueueItem;
 pub use self::section::{SBSection, SBSectionSubSectionIter};
