@@ -164,6 +164,7 @@ mod stringlist;
 mod structureddata;
 mod symbol;
 mod symbolcontext;
+mod symbolcontextlist;
 mod target;
 mod thread;
 mod types;
@@ -208,6 +209,7 @@ pub use self::stringlist::{SBStringList, SBStringListIter};
 pub use self::structureddata::SBStructuredData;
 pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
+pub use self::symbolcontextlist::SBSymbolContextList;
 pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
                        SBTargetModuleIter, SBTargetWatchpointIter};
 pub use self::thread::{SBThread, SBThreadEvent, SBThreadFrameIter};

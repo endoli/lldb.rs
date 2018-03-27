@@ -20,9 +20,10 @@ use super::modulespec::SBModuleSpec;
 use super::platform::SBPlatform;
 use super::process::SBProcess;
 use super::stream::SBStream;
+use super::symbolcontextlist::SBSymbolContextList;
 use super::value::SBValue;
 use super::watchpoint::SBWatchpoint;
-use super::{lldb_addr_t, DescriptionLevel};
+use super::{lldb_addr_t, DescriptionLevel, MatchType, SymbolType};
 use sys;
 
 /// The target program running under the debugger.
@@ -294,6 +295,30 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
+         let name = CString::new(name).unwrap();
+         SBSymbolContextList::wrap(unsafe {
+             sys::SBTargetFindFunctions(self.raw, name.as_ptr(), name_type_mask)
+         })
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_global_functions(&self, name: &str, max_matches: u32, matchtype: MatchType) -> SBSymbolContextList {
+         let name = CString::new(name).unwrap();
+         SBSymbolContextList::wrap(unsafe {
+             sys::SBTargetFindGlobalFunctions(self.raw, name.as_ptr(), max_matches, matchtype)
+         })
+    }
+
+    #[allow(missing_docs)]
+    pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
+         let name = CString::new(name).unwrap();
+         SBSymbolContextList::wrap(unsafe {
+             sys::SBTargetFindSymbols(self.raw, name.as_ptr(), symbol_type)
+         })
     }
 
     /// Evaluate an expression.
