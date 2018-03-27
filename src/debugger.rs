@@ -10,6 +10,7 @@ use std::ptr;
 use super::error::SBError;
 use super::platform::SBPlatform;
 use super::stream::SBStream;
+use super::structureddata::SBStructuredData;
 use super::target::SBTarget;
 use sys;
 
@@ -271,6 +272,24 @@ impl SBDebugger {
     pub fn set_selected_platform(&self, platform: &SBPlatform) {
         unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw, platform.raw) };
     }
+
+    /// Get an iterator over the [platforms] known to this debugger instance.
+    ///
+    /// [platforms]: struct.SBPlatform.html
+    pub fn platforms(&self) -> SBDebuggerPlatformIter {
+        SBDebuggerPlatformIter {
+            debugger: self,
+            idx: 0,
+        }
+    }
+
+    /// Get an iterator over the available platforms known to this debugger instance.
+    pub fn available_platforms(&self) -> SBDebuggerAvailablePlatformIter {
+        SBDebuggerAvailablePlatformIter {
+            debugger: self,
+            idx: 0,
+        }
+    }
 }
 
 /// Iterate over the [targets] known to a [debugger].
@@ -319,6 +338,66 @@ impl Drop for SBDebugger {
     }
 }
 
+/// Iterate over the [platforms].
+///
+/// [platforms]: struct.SBPlatform.html
+pub struct SBDebuggerPlatformIter<'d> {
+    debugger: &'d SBDebugger,
+    idx: u32,
+}
+
+impl<'d> Iterator for SBDebuggerPlatformIter<'d> {
+    type Item = SBPlatform;
+
+    fn next(&mut self) -> Option<SBPlatform> {
+        if self.idx < unsafe { sys::SBDebuggerGetNumPlatforms(self.debugger.raw) } {
+            let r = Some(SBPlatform::wrap(unsafe {
+                sys::SBDebuggerGetPlatformAtIndex(self.debugger.raw, self.idx)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBDebuggerGetNumPlatforms(self.debugger.raw) } as usize;
+        (sz - self.idx as usize, Some(sz))
+    }
+}
+
+impl<'d> ExactSizeIterator for SBDebuggerPlatformIter<'d> {}
+
+/// Iterate over the available platforms.
+pub struct SBDebuggerAvailablePlatformIter<'d> {
+    debugger: &'d SBDebugger,
+    idx: u32,
+}
+
+impl<'d> Iterator for SBDebuggerAvailablePlatformIter<'d> {
+    type Item = SBStructuredData;
+
+    fn next(&mut self) -> Option<SBStructuredData> {
+        if self.idx < unsafe { sys::SBDebuggerGetNumAvailablePlatforms(self.debugger.raw) } {
+            let r = Some(SBStructuredData::wrap(unsafe {
+                sys::SBDebuggerGetAvailablePlatformInfoAtIndex(self.debugger.raw, self.idx)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBDebuggerGetNumAvailablePlatforms(self.debugger.raw) } as usize;
+        (sz - self.idx as usize, Some(sz))
+    }
+}
+
+impl<'d> ExactSizeIterator for SBDebuggerAvailablePlatformIter<'d> {}
+
 #[cfg(feature = "graphql")]
 impl ::juniper::Context for SBDebugger {}
 
@@ -334,6 +413,14 @@ graphql_object!(SBDebugger: SBDebugger | &self | {
 
     field selected_platform() -> SBPlatform {
         self.selected_platform()
+    }
+
+    field platforms() -> Vec<SBPlatform> {
+        self.platforms().collect()
+    }
+
+    field available_platforms() -> Vec<SBStructuredData> {
+        self.available_platforms().collect()
     }
 });
 
