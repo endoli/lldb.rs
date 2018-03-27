@@ -21,13 +21,13 @@ pub struct SBValueList {
 impl SBValueList {
     /// Construct a new `SBValueList`.
     pub fn wrap(raw: sys::SBValueListRef) -> SBValueList {
-        SBValueList { raw: raw }
+        SBValueList { raw }
     }
 
     /// Construct a new `Some(SBValueList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueListRef) -> Option<SBValueList> {
         if unsafe { sys::SBValueListIsValid(raw) != 0 } {
-            Some(SBValueList { raw: raw })
+            Some(SBValueList { raw })
         } else {
             None
         }

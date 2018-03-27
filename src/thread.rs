@@ -69,13 +69,13 @@ pub struct SBThread {
 impl SBThread {
     /// Construct a new `SBThread`.
     pub fn wrap(raw: sys::SBThreadRef) -> SBThread {
-        SBThread { raw: raw }
+        SBThread { raw }
     }
 
     /// Construct a new `Some(SBThread)` or `None`.
     pub fn maybe_wrap(raw: sys::SBThreadRef) -> Option<SBThread> {
         if unsafe { sys::SBThreadIsValid(raw) != 0 } {
-            Some(SBThread { raw: raw })
+            Some(SBThread { raw })
         } else {
             None
         }
@@ -296,7 +296,7 @@ pub struct SBThreadEvent<'e> {
 impl<'e> SBThreadEvent<'e> {
     /// Construct a new `SBThreadEvent`.
     pub fn new(event: &'e SBEvent) -> Self {
-        SBThreadEvent { event: event }
+        SBThreadEvent { event }
     }
 
     /// Get the thread from this thread event.

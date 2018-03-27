@@ -25,13 +25,13 @@ impl SBListener {
 
     /// Construct a new `SBListener`.
     pub fn wrap(raw: sys::SBListenerRef) -> SBListener {
-        SBListener { raw: raw }
+        SBListener { raw }
     }
 
     /// Construct a new `Some(SBListener)` or `None`.
     pub fn maybe_wrap(raw: sys::SBListenerRef) -> Option<SBListener> {
         if unsafe { sys::SBListenerIsValid(raw) != 0 } {
-            Some(SBListener { raw: raw })
+            Some(SBListener { raw })
         } else {
             None
         }

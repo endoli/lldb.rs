@@ -21,13 +21,13 @@ impl SBStringList {
     }
     /// Construct a new `SBStringList`.
     pub fn wrap(raw: sys::SBStringListRef) -> SBStringList {
-        SBStringList { raw: raw }
+        SBStringList { raw }
     }
 
     /// Construct a new `Some(SBStringList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStringListRef) -> Option<SBStringList> {
         if unsafe { sys::SBStringListIsValid(raw) != 0 } {
-            Some(SBStringList { raw: raw })
+            Some(SBStringList { raw })
         } else {
             None
         }

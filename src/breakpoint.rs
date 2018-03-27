@@ -69,13 +69,13 @@ pub struct SBBreakpoint {
 impl SBBreakpoint {
     /// Construct a new `SBBreakpoint`.
     pub fn wrap(raw: sys::SBBreakpointRef) -> SBBreakpoint {
-        SBBreakpoint { raw: raw }
+        SBBreakpoint { raw }
     }
 
     /// Construct a new `Some(SBBreakpoint)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
         if unsafe { sys::SBBreakpointIsValid(raw) != 0 } {
-            Some(SBBreakpoint { raw: raw })
+            Some(SBBreakpoint { raw })
         } else {
             None
         }

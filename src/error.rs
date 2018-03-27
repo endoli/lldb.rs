@@ -24,13 +24,13 @@ impl SBError {
 
     /// Construct a new `SBError`.
     pub fn wrap(raw: sys::SBErrorRef) -> SBError {
-        SBError { raw: raw }
+        SBError { raw }
     }
 
     /// Construct a new `Some(SBError)` or `None`.
     pub fn maybe_wrap(raw: sys::SBErrorRef) -> Option<SBError> {
         if unsafe { sys::SBErrorIsValid(raw) != 0 } {
-            Some(SBError { raw: raw })
+            Some(SBError { raw })
         } else {
             None
         }

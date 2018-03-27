@@ -22,13 +22,13 @@ impl SBVariablesOptions {
 
     /// Construct a new `SBVariablesOptions`.
     pub fn wrap(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
-        SBVariablesOptions { raw: raw }
+        SBVariablesOptions { raw }
     }
 
     /// Construct a new `Some(SBVariablesOptions)` or `None`.
     pub fn maybe_wrap(raw: sys::SBVariablesOptionsRef) -> Option<SBVariablesOptions> {
         if unsafe { sys::SBVariablesOptionsIsValid(raw) != 0 } {
-            Some(SBVariablesOptions { raw: raw })
+            Some(SBVariablesOptions { raw })
         } else {
             None
         }

@@ -25,7 +25,7 @@ impl SBFileSpecList {
 
     /// Construct a new `SBFileSpecList`.
     pub fn wrap(raw: sys::SBFileSpecListRef) -> SBFileSpecList {
-        SBFileSpecList { raw: raw }
+        SBFileSpecList { raw }
     }
 
     #[allow(missing_docs)]

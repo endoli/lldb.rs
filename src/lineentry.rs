@@ -20,13 +20,13 @@ pub struct SBLineEntry {
 impl SBLineEntry {
     /// Construct a new `SBLineEntry`.
     pub fn wrap(raw: sys::SBLineEntryRef) -> SBLineEntry {
-        SBLineEntry { raw: raw }
+        SBLineEntry { raw }
     }
 
     /// Construct a new `Some(SBLineEntry)` or `None`.
     pub fn maybe_wrap(raw: sys::SBLineEntryRef) -> Option<SBLineEntry> {
         if unsafe { sys::SBLineEntryIsValid(raw) != 0 } {
-            Some(SBLineEntry { raw: raw })
+            Some(SBLineEntry { raw })
         } else {
             None
         }

@@ -28,13 +28,13 @@ impl SBBroadcaster {
 
     /// Construct a new `SBBroadcaster`.
     pub fn wrap(raw: sys::SBBroadcasterRef) -> SBBroadcaster {
-        SBBroadcaster { raw: raw }
+        SBBroadcaster { raw }
     }
 
     /// Construct a new `Some(SBBroadcaster)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBroadcasterRef) -> Option<SBBroadcaster> {
         if unsafe { sys::SBBroadcasterIsValid(raw) != 0 } {
-            Some(SBBroadcaster { raw: raw })
+            Some(SBBroadcaster { raw })
         } else {
             None
         }

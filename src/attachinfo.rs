@@ -57,7 +57,7 @@ impl SBAttachInfo {
 
     /// Construct a new `SBAttachInfo`.
     pub fn wrap(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
-        SBAttachInfo { raw: raw }
+        SBAttachInfo { raw }
     }
 
     #[allow(missing_docs)]

@@ -119,13 +119,13 @@ pub struct SBProcess {
 impl SBProcess {
     /// Construct a new `SBProcess`.
     pub fn wrap(raw: sys::SBProcessRef) -> SBProcess {
-        SBProcess { raw: raw }
+        SBProcess { raw }
     }
 
     /// Construct a new `Some(SBProcess)` or `None`.
     pub fn maybe_wrap(raw: sys::SBProcessRef) -> Option<SBProcess> {
         if unsafe { sys::SBProcessIsValid(raw) != 0 } {
-            Some(SBProcess { raw: raw })
+            Some(SBProcess { raw })
         } else {
             None
         }
@@ -444,7 +444,7 @@ pub struct SBProcessEvent<'e> {
 #[allow(missing_docs)]
 impl<'e> SBProcessEvent<'e> {
     pub fn new(event: &'e SBEvent) -> Self {
-        SBProcessEvent { event: event }
+        SBProcessEvent { event }
     }
 
     pub fn process_state(&self) -> StateType {

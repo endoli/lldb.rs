@@ -30,7 +30,7 @@ impl SBLaunchInfo {
 
     /// Construct a new `SBLaunchInfo`.
     pub fn wrap(raw: sys::SBLaunchInfoRef) -> SBLaunchInfo {
-        SBLaunchInfo { raw: raw }
+        SBLaunchInfo { raw }
     }
 
     #[allow(missing_docs)]

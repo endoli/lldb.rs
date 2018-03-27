@@ -43,13 +43,13 @@ pub struct SBWatchpoint {
 impl SBWatchpoint {
     /// Construct a new `SBWatchpoint`.
     pub fn wrap(raw: sys::SBWatchpointRef) -> SBWatchpoint {
-        SBWatchpoint { raw: raw }
+        SBWatchpoint { raw }
     }
 
     /// Construct a new `Some(SBWatchpoint)` or `None`.
     pub fn maybe_wrap(raw: sys::SBWatchpointRef) -> Option<SBWatchpoint> {
         if unsafe { sys::SBWatchpointIsValid(raw) != 0 } {
-            Some(SBWatchpoint { raw: raw })
+            Some(SBWatchpoint { raw })
         } else {
             None
         }

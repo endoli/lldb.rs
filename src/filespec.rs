@@ -22,13 +22,13 @@ pub struct SBFileSpec {
 impl SBFileSpec {
     /// Construct a new `SBFileSpec`.
     pub fn wrap(raw: sys::SBFileSpecRef) -> SBFileSpec {
-        SBFileSpec { raw: raw }
+        SBFileSpec { raw }
     }
 
     /// Construct a new `Some(SBFileSpec)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
         if unsafe { sys::SBFileSpecIsValid(raw) != 0 } {
-            Some(SBFileSpec { raw: raw })
+            Some(SBFileSpec { raw })
         } else {
             None
         }

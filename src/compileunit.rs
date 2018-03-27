@@ -19,13 +19,13 @@ pub struct SBCompileUnit {
 impl SBCompileUnit {
     /// Construct a new `SBCompileUnit`.
     pub fn wrap(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
-        SBCompileUnit { raw: raw }
+        SBCompileUnit { raw }
     }
 
     /// Construct a new `Some(SBCompileUnit)` or `None`.
     pub fn maybe_wrap(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
         if unsafe { sys::SBCompileUnitIsValid(raw) != 0 } {
-            Some(SBCompileUnit { raw: raw })
+            Some(SBCompileUnit { raw })
         } else {
             None
         }

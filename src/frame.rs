@@ -32,13 +32,13 @@ pub struct SBFrame {
 impl SBFrame {
     /// Construct a new `SBFrame`.
     pub fn wrap(raw: sys::SBFrameRef) -> SBFrame {
-        SBFrame { raw: raw }
+        SBFrame { raw }
     }
 
     /// Construct a new `Some(SBFrame)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFrameRef) -> Option<SBFrame> {
         if unsafe { sys::SBFrameIsValid(raw) != 0 } {
-            Some(SBFrame { raw: raw })
+            Some(SBFrame { raw })
         } else {
             None
         }

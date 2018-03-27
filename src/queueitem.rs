@@ -25,13 +25,13 @@ pub struct SBQueueItem {
 impl SBQueueItem {
     /// Construct a new `SBQueueItem`.
     pub fn wrap(raw: sys::SBQueueItemRef) -> SBQueueItem {
-        SBQueueItem { raw: raw }
+        SBQueueItem { raw }
     }
 
     /// Construct a new `Some(SBQueueItem)` or `None`.
     pub fn maybe_wrap(raw: sys::SBQueueItemRef) -> Option<SBQueueItem> {
         if unsafe { sys::SBQueueItemIsValid(raw) != 0 } {
-            Some(SBQueueItem { raw: raw })
+            Some(SBQueueItem { raw })
         } else {
             None
         }

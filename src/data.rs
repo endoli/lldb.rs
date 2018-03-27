@@ -16,13 +16,13 @@ pub struct SBData {
 impl SBData {
     /// Construct a new `SBData`.
     pub fn wrap(raw: sys::SBDataRef) -> SBData {
-        SBData { raw: raw }
+        SBData { raw }
     }
 
     /// Construct a new `Some(SBData)` or `None`.
     pub fn maybe_wrap(raw: sys::SBDataRef) -> Option<SBData> {
         if unsafe { sys::SBDataIsValid(raw) != 0 } {
-            Some(SBData { raw: raw })
+            Some(SBData { raw })
         } else {
             None
         }

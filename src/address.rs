@@ -55,13 +55,13 @@ pub struct SBAddress {
 impl SBAddress {
     /// Construct a new `SBAddress`.
     pub fn wrap(raw: sys::SBAddressRef) -> SBAddress {
-        SBAddress { raw: raw }
+        SBAddress { raw }
     }
 
     /// Construct a new `Some(SBAddress)` or `None`.
     pub fn maybe_wrap(raw: sys::SBAddressRef) -> Option<SBAddress> {
         if unsafe { sys::SBAddressIsValid(raw) != 0 } {
-            Some(SBAddress { raw: raw })
+            Some(SBAddress { raw })
         } else {
             None
         }

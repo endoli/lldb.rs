@@ -25,13 +25,13 @@ pub struct SBFunction {
 impl SBFunction {
     /// Construct a new `SBFunction`.
     pub fn wrap(raw: sys::SBFunctionRef) -> SBFunction {
-        SBFunction { raw: raw }
+        SBFunction { raw }
     }
 
     /// Construct a new `Some(SBFunction)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFunctionRef) -> Option<SBFunction> {
         if unsafe { sys::SBFunctionIsValid(raw) != 0 } {
-            Some(SBFunction { raw: raw })
+            Some(SBFunction { raw })
         } else {
             None
         }

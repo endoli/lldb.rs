@@ -20,13 +20,13 @@ pub struct SBBlock {
 impl SBBlock {
     /// Construct a new `SBBlock`.
     pub fn wrap(raw: sys::SBBlockRef) -> SBBlock {
-        SBBlock { raw: raw }
+        SBBlock { raw }
     }
 
     /// Construct a new `Some(SBBlock)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBlockRef) -> Option<SBBlock> {
         if unsafe { sys::SBBlockIsValid(raw) != 0 } {
-            Some(SBBlock { raw: raw })
+            Some(SBBlock { raw })
         } else {
             None
         }

@@ -31,13 +31,13 @@ pub struct SBBreakpointLocation {
 impl SBBreakpointLocation {
     /// Construct a new `SBBreakpointLocation`.
     pub fn wrap(raw: sys::SBBreakpointLocationRef) -> SBBreakpointLocation {
-        SBBreakpointLocation { raw: raw }
+        SBBreakpointLocation { raw }
     }
 
     /// Construct a new `Some(SBBreakpointLocation)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointLocationRef) -> Option<SBBreakpointLocation> {
         if unsafe { sys::SBBreakpointLocationIsValid(raw) != 0 } {
-            Some(SBBreakpointLocation { raw: raw })
+            Some(SBBreakpointLocation { raw })
         } else {
             None
         }

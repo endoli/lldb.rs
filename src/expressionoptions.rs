@@ -21,7 +21,7 @@ impl SBExpressionOptions {
 
     /// Construct a new `SBExpressionOptions`.
     pub fn wrap(raw: sys::SBExpressionOptionsRef) -> SBExpressionOptions {
-        SBExpressionOptions { raw: raw }
+        SBExpressionOptions { raw }
     }
 
     /// Whether to unwind the expression stack on error.

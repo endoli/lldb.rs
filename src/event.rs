@@ -19,13 +19,13 @@ pub struct SBEvent {
 impl SBEvent {
     /// Construct a new `SBEvent`.
     pub fn wrap(raw: sys::SBEventRef) -> SBEvent {
-        SBEvent { raw: raw }
+        SBEvent { raw }
     }
 
     /// Construct a new `Some(SBEvent)` or `None`.
     pub fn maybe_wrap(raw: sys::SBEventRef) -> Option<SBEvent> {
         if unsafe { sys::SBEventIsValid(raw) != 0 } {
-            Some(SBEvent { raw: raw })
+            Some(SBEvent { raw })
         } else {
             None
         }

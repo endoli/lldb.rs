@@ -23,13 +23,13 @@ pub struct SBSymbol {
 impl SBSymbol {
     /// Construct a new `SBSymbol`.
     pub fn wrap(raw: sys::SBSymbolRef) -> SBSymbol {
-        SBSymbol { raw: raw }
+        SBSymbol { raw }
     }
 
     /// Construct a new `Some(SBSymbol)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
         if unsafe { sys::SBSymbolIsValid(raw) != 0 } {
-            Some(SBSymbol { raw: raw })
+            Some(SBSymbol { raw })
         } else {
             None
         }

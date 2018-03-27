@@ -18,7 +18,7 @@ pub struct SBTypeList {
 impl SBTypeList {
     /// Construct a new `SBTypeList`.
     pub fn wrap(raw: sys::SBTypeListRef) -> SBTypeList {
-        SBTypeList { raw: raw }
+        SBTypeList { raw }
     }
 
     #[allow(missing_docs)]

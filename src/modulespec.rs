@@ -18,13 +18,13 @@ pub struct SBModuleSpec {
 impl SBModuleSpec {
     /// Construct a new `SBModuleSpec`.
     pub fn wrap(raw: sys::SBModuleSpecRef) -> SBModuleSpec {
-        SBModuleSpec { raw: raw }
+        SBModuleSpec { raw }
     }
 
     /// Construct a new `Some(SBModuleSpec)` or `None`.
     pub fn maybe_wrap(raw: sys::SBModuleSpecRef) -> Option<SBModuleSpec> {
         if unsafe { sys::SBModuleSpecIsValid(raw) != 0 } {
-            Some(SBModuleSpec { raw: raw })
+            Some(SBModuleSpec { raw })
         } else {
             None
         }

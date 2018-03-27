@@ -20,13 +20,13 @@ pub struct SBSection {
 impl SBSection {
     /// Construct a new `SBSection`.
     pub fn wrap(raw: sys::SBSectionRef) -> SBSection {
-        SBSection { raw: raw }
+        SBSection { raw }
     }
 
     /// Construct a new `Some(SBSection)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSectionRef) -> Option<SBSection> {
         if unsafe { sys::SBSectionIsValid(raw) != 0 } {
-            Some(SBSection { raw: raw })
+            Some(SBSection { raw })
         } else {
             None
         }

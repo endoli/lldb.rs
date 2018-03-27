@@ -20,13 +20,13 @@ pub struct SBStructuredData {
 impl SBStructuredData {
     /// Construct a new `SBStructuredData`.
     pub fn wrap(raw: sys::SBStructuredDataRef) -> SBStructuredData {
-        SBStructuredData { raw: raw }
+        SBStructuredData { raw }
     }
 
     /// Construct a new `Some(SBStructuredData)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStructuredDataRef) -> Option<SBStructuredData> {
         if unsafe { sys::SBStructuredDataIsValid(raw) != 0 } {
-            Some(SBStructuredData { raw: raw })
+            Some(SBStructuredData { raw })
         } else {
             None
         }

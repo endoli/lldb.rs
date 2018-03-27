@@ -24,7 +24,7 @@ impl SBBreakpointList {
 
     /// Construct a new `SBBreakpointList`.
     pub fn wrap(raw: sys::SBBreakpointListRef) -> SBBreakpointList {
-        SBBreakpointList { raw: raw }
+        SBBreakpointList { raw }
     }
 
     #[allow(missing_docs)]

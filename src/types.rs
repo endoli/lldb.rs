@@ -19,13 +19,13 @@ pub struct SBType {
 impl SBType {
     /// Construct a new `SBType`.
     pub fn wrap(raw: sys::SBTypeRef) -> SBType {
-        SBType { raw: raw }
+        SBType { raw }
     }
 
     /// Construct a new `Some(SBType)` or `None`.
     pub fn maybe_wrap(raw: sys::SBTypeRef) -> Option<SBType> {
         if unsafe { sys::SBTypeIsValid(raw) != 0 } {
-            Some(SBType { raw: raw })
+            Some(SBType { raw })
         } else {
             None
         }

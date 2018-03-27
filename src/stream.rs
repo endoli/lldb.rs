@@ -23,13 +23,13 @@ impl SBStream {
 
     /// Construct a new `SBStream`.
     pub fn wrap(raw: sys::SBStreamRef) -> SBStream {
-        SBStream { raw: raw }
+        SBStream { raw }
     }
 
     /// Construct a new `Some(SBStream)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStreamRef) -> Option<SBStream> {
         if unsafe { sys::SBStreamIsValid(raw) != 0 } {
-            Some(SBStream { raw: raw })
+            Some(SBStream { raw })
         } else {
             None
         }

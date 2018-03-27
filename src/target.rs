@@ -89,13 +89,13 @@ pub struct SBTarget {
 impl SBTarget {
     /// Construct a new `SBTarget`.
     pub fn wrap(raw: sys::SBTargetRef) -> SBTarget {
-        SBTarget { raw: raw }
+        SBTarget { raw }
     }
 
     /// Construct a new `Some(SBTarget)` or `None`.
     pub fn maybe_wrap(raw: sys::SBTargetRef) -> Option<SBTarget> {
         if unsafe { sys::SBTargetIsValid(raw) != 0 } {
-            Some(SBTarget { raw: raw })
+            Some(SBTarget { raw })
         } else {
             None
         }
@@ -400,7 +400,7 @@ pub struct SBTargetEvent<'e> {
 #[allow(missing_docs)]
 impl<'e> SBTargetEvent<'e> {
     pub fn new(event: &'e SBEvent) -> Self {
-        SBTargetEvent { event: event }
+        SBTargetEvent { event }
     }
 
     pub fn target(&self) -> SBTarget {

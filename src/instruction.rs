@@ -22,13 +22,13 @@ pub struct SBInstruction {
 impl SBInstruction {
     /// Construct a new `SBInstruction`.
     pub fn wrap(raw: sys::SBInstructionRef) -> SBInstruction {
-        SBInstruction { raw: raw }
+        SBInstruction { raw }
     }
 
     /// Construct a new `Some(SBInstruction)` or `None`.
     pub fn maybe_wrap(raw: sys::SBInstructionRef) -> Option<SBInstruction> {
         if unsafe { sys::SBInstructionIsValid(raw) != 0 } {
-            Some(SBInstruction { raw: raw })
+            Some(SBInstruction { raw })
         } else {
             None
         }

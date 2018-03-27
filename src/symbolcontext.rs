@@ -24,13 +24,13 @@ pub struct SBSymbolContext {
 impl SBSymbolContext {
     /// Construct a new `SBSymbolContext`.
     pub fn wrap(raw: sys::SBSymbolContextRef) -> SBSymbolContext {
-        SBSymbolContext { raw: raw }
+        SBSymbolContext { raw }
     }
 
     /// Construct a new `Some(SBSymbolContext)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolContextRef) -> Option<SBSymbolContext> {
         if unsafe { sys::SBSymbolContextIsValid(raw) != 0 } {
-            Some(SBSymbolContext { raw: raw })
+            Some(SBSymbolContext { raw })
         } else {
             None
         }

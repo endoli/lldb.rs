@@ -42,13 +42,13 @@ pub struct SBPlatform {
 impl SBPlatform {
     /// Construct a new `SBPlatform`.
     pub fn wrap(raw: sys::SBPlatformRef) -> SBPlatform {
-        SBPlatform { raw: raw }
+        SBPlatform { raw }
     }
 
     /// Construct a new `Some(SBPlatform)` or `None`.
     pub fn maybe_wrap(raw: sys::SBPlatformRef) -> Option<SBPlatform> {
         if unsafe { sys::SBPlatformIsValid(raw) != 0 } {
-            Some(SBPlatform { raw: raw })
+            Some(SBPlatform { raw })
         } else {
             None
         }
