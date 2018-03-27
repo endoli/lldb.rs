@@ -74,6 +74,11 @@ impl SBBreakpointLocation {
     }
 
     #[allow(missing_docs)]
+    pub fn hit_count(&self) -> u32 {
+        unsafe { sys::SBBreakpointLocationGetHitCount(self.raw) }
+    }
+
+    #[allow(missing_docs)]
     pub fn ignore_count(&self) -> u32 {
         unsafe { sys::SBBreakpointLocationGetIgnoreCount(self.raw) }
     }
