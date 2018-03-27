@@ -45,7 +45,7 @@ impl SBValueList {
 
     #[allow(missing_docs)]
     pub fn append_list(&self, values: &SBValueList) {
-        unsafe { sys::SBValueListAppend2(self.raw, values.raw) };
+        unsafe { sys::SBValueListAppendList(self.raw, values.raw) };
     }
 
     /// Is this value list empty?
