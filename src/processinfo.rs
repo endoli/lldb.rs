@@ -54,12 +54,12 @@ impl SBProcessInfo {
 
     #[allow(missing_docs)]
     pub fn user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoUserIDIsValid(self.raw) != 0}
+        unsafe { sys::SBProcessInfoUserIDIsValid(self.raw) != 0 }
     }
 
     #[allow(missing_docs)]
     pub fn group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoGroupIDIsValid(self.raw) != 0}
+        unsafe { sys::SBProcessInfoGroupIDIsValid(self.raw) != 0 }
     }
 
     #[allow(missing_docs)]
@@ -74,12 +74,12 @@ impl SBProcessInfo {
 
     #[allow(missing_docs)]
     pub fn effective_user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoEffectiveUserIDIsValid(self.raw) != 0}
+        unsafe { sys::SBProcessInfoEffectiveUserIDIsValid(self.raw) != 0 }
     }
 
     #[allow(missing_docs)]
     pub fn effective_group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoEffectiveGroupIDIsValid(self.raw) != 0}
+        unsafe { sys::SBProcessInfoEffectiveGroupIDIsValid(self.raw) != 0 }
     }
 
     #[allow(missing_docs)]

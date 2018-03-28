@@ -78,18 +78,18 @@ impl SBModule {
 
     #[allow(missing_docs)]
     pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
-         let name = CString::new(name).unwrap();
-         SBSymbolContextList::wrap(unsafe {
-             sys::SBModuleFindFunctions(self.raw, name.as_ptr(), name_type_mask)
-         })
+        let name = CString::new(name).unwrap();
+        SBSymbolContextList::wrap(unsafe {
+            sys::SBModuleFindFunctions(self.raw, name.as_ptr(), name_type_mask)
+        })
     }
 
     #[allow(missing_docs)]
     pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
-         let name = CString::new(name).unwrap();
-         SBSymbolContextList::wrap(unsafe {
-             sys::SBModuleFindSymbols(self.raw, name.as_ptr(), symbol_type)
-         })
+        let name = CString::new(name).unwrap();
+        SBSymbolContextList::wrap(unsafe {
+            sys::SBModuleFindSymbols(self.raw, name.as_ptr(), symbol_type)
+        })
     }
 }
 

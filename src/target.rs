@@ -299,26 +299,31 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
-         let name = CString::new(name).unwrap();
-         SBSymbolContextList::wrap(unsafe {
-             sys::SBTargetFindFunctions(self.raw, name.as_ptr(), name_type_mask)
-         })
+        let name = CString::new(name).unwrap();
+        SBSymbolContextList::wrap(unsafe {
+            sys::SBTargetFindFunctions(self.raw, name.as_ptr(), name_type_mask)
+        })
     }
 
     #[allow(missing_docs)]
-    pub fn find_global_functions(&self, name: &str, max_matches: u32, matchtype: MatchType) -> SBSymbolContextList {
-         let name = CString::new(name).unwrap();
-         SBSymbolContextList::wrap(unsafe {
-             sys::SBTargetFindGlobalFunctions(self.raw, name.as_ptr(), max_matches, matchtype)
-         })
+    pub fn find_global_functions(
+        &self,
+        name: &str,
+        max_matches: u32,
+        matchtype: MatchType,
+    ) -> SBSymbolContextList {
+        let name = CString::new(name).unwrap();
+        SBSymbolContextList::wrap(unsafe {
+            sys::SBTargetFindGlobalFunctions(self.raw, name.as_ptr(), max_matches, matchtype)
+        })
     }
 
     #[allow(missing_docs)]
     pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
-         let name = CString::new(name).unwrap();
-         SBSymbolContextList::wrap(unsafe {
-             sys::SBTargetFindSymbols(self.raw, name.as_ptr(), symbol_type)
-         })
+        let name = CString::new(name).unwrap();
+        SBSymbolContextList::wrap(unsafe {
+            sys::SBTargetFindSymbols(self.raw, name.as_ptr(), symbol_type)
+        })
     }
 
     /// Evaluate an expression.

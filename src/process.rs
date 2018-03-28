@@ -364,7 +364,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn process_info(&self) -> SBProcessInfo {
-        SBProcessInfo::wrap(unsafe { sys::SBProcessGetProcessInfo(self.raw) } )
+        SBProcessInfo::wrap(unsafe { sys::SBProcessGetProcessInfo(self.raw) })
     }
 }
 
