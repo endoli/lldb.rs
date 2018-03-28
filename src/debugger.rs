@@ -176,6 +176,11 @@ impl SBDebugger {
         unsafe { sys::SBDebuggerSetAsync(self.raw, async as u8) }
     }
 
+    #[allow(missing_docs)]
+    pub fn command_interpreter(&self) -> SBCommandInterpreter {
+        SBCommandInterpreter::wrap(unsafe { sys::SBDebuggerGetCommandInterpreter(self.raw) })
+    }
+
     /// Get the LLDB version string.
     pub fn version() -> String {
         unsafe {
