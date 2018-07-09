@@ -4,7 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt;
 use super::address::SBAddress;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
@@ -13,6 +12,7 @@ use super::lineentry::SBLineEntry;
 use super::module::SBModule;
 use super::stream::SBStream;
 use super::symbol::SBSymbol;
+use std::fmt;
 use sys;
 
 /// A container that stores various debugger related info.

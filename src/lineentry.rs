@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt;
 use super::address::SBAddress;
 use super::filespec::SBFileSpec;
 use super::stream::SBStream;
+use std::fmt;
 use sys;
 
 /// Specifies an association with a contiguous range of

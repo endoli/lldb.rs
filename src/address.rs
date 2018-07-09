@@ -4,7 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
 use super::function::SBFunction;
@@ -15,6 +14,7 @@ use super::symbol::SBSymbol;
 use super::symbolcontext::SBSymbolContext;
 use super::target::SBTarget;
 use super::AddressClass;
+use std::fmt;
 use sys;
 
 /// A section + offset based address class.

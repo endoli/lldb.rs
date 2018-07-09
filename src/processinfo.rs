@@ -4,9 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
 use super::filespec::SBFileSpec;
 use super::lldb_pid_t;
+use std::ffi::CStr;
 use sys;
 
 #[allow(missing_docs)]

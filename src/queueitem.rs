@@ -4,9 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
 use super::address::SBAddress;
 use super::thread::SBThread;
+use std::ffi::CString;
 use sys;
 
 /// A work item enqueued on a libdispatch aka Grand Central

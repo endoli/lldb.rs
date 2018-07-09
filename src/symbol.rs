@@ -4,14 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
-use std::ptr;
 use super::address::SBAddress;
 use super::instructionlist::SBInstructionList;
 use super::stream::SBStream;
 use super::target::SBTarget;
 use super::{DisassemblyFlavor, SymbolType};
+use std::ffi::{CStr, CString};
+use std::fmt;
+use std::ptr;
 use sys;
 
 /// The symbol possibly associated with a stack frame.

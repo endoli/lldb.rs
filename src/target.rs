@@ -4,8 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
 use super::attachinfo::SBAttachInfo;
 use super::breakpoint::SBBreakpoint;
 use super::broadcaster::SBBroadcaster;
@@ -24,6 +22,8 @@ use super::symbolcontextlist::SBSymbolContextList;
 use super::value::SBValue;
 use super::watchpoint::SBWatchpoint;
 use super::{lldb_addr_t, DescriptionLevel, MatchType, SymbolType};
+use std::ffi::{CStr, CString};
+use std::fmt;
 use sys;
 
 /// The target program running under the debugger.

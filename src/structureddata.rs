@@ -4,11 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::error::SBError;
+use super::stream::SBStream;
 use std::ffi::CString;
 use std::fmt;
 use std::ptr;
-use super::error::SBError;
-use super::stream::SBStream;
 use sys;
 
 /// The value of a variable, register or expression.

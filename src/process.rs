@@ -4,8 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
 use super::broadcaster::SBBroadcaster;
 use super::error::SBError;
 use super::event::SBEvent;
@@ -14,6 +12,8 @@ use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::thread::SBThread;
 use super::{lldb_pid_t, lldb_tid_t, StateType};
+use std::ffi::{CStr, CString};
+use std::fmt;
 use sys;
 
 /// The process associated with the target program.
@@ -493,8 +493,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
         if self.idx < unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(raw) as usize } {
             let r = unsafe {
                 let s = CStr::from_ptr(sys::SBProcessGetRestartedReasonAtIndexFromEvent(
-                    raw,
-                    self.idx,
+                    raw, self.idx,
                 ));
                 match s.to_str() {
                     Ok(s) => s,

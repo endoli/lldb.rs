@@ -4,15 +4,15 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
-use std::ptr;
+use super::commandinterpreter::SBCommandInterpreter;
 use super::error::SBError;
 use super::platform::SBPlatform;
 use super::stream::SBStream;
 use super::structureddata::SBStructuredData;
 use super::target::SBTarget;
-use super::commandinterpreter::SBCommandInterpreter;
+use std::ffi::{CStr, CString};
+use std::fmt;
+use std::ptr;
 use sys;
 
 /// Creates [`SBTarget`]s, provides access to them and manages

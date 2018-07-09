@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
 use super::process::SBProcess;
 use super::queueitem::SBQueueItem;
 use super::thread::SBThread;
+use std::ffi::CStr;
 use sys;
 
 /// A `libdispatch` (aka Grand Central Dispatch) queue.

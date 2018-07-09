@@ -4,8 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
-use std::fmt;
 use super::address::SBAddress;
 use super::data::SBData;
 use super::error::SBError;
@@ -16,6 +14,8 @@ use super::target::SBTarget;
 use super::thread::SBThread;
 use super::watchpoint::SBWatchpoint;
 use super::{lldb_addr_t, lldb_user_id_t, Format};
+use std::ffi::CStr;
+use std::fmt;
 use sys;
 
 /// The value of a variable, register or expression.

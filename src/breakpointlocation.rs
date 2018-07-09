@@ -4,11 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt;
 use super::address::SBAddress;
 use super::breakpoint::SBBreakpoint;
 use super::stream::SBStream;
 use super::{lldb_addr_t, DescriptionLevel};
+use std::fmt;
 use sys;
 
 /// One unique instance (by address) of a logical breakpoint.

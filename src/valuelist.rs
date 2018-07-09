@@ -4,9 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
-use super::value::SBValue;
 use super::lldb_user_id_t;
+use super::value::SBValue;
+use std::ffi::CString;
 use sys;
 
 /// A list of [values].

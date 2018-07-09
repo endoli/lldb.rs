@@ -108,7 +108,12 @@
 //! [`SBLineEntry`]: struct.SBLineEntry.html
 
 #![warn(missing_docs)]
-#![deny(trivial_numeric_casts, unstable_features, unused_import_braces, unused_qualifications)]
+#![deny(
+    trivial_numeric_casts,
+    unstable_features,
+    unused_import_braces,
+    unused_qualifications
+)]
 
 extern crate lldb_sys as sys;
 
@@ -118,17 +123,17 @@ extern crate juniper;
 
 pub use sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
 
-pub use sys::{AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrder,
-              CommandArgumentType, CommandFlags, ConnectionStatus, DescriptionLevel,
-              DynamicValueType, EmulateInstructionOptions, Encoding, ErrorType,
-              ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,
-              FrameComparison, FunctionNameType, GdbSignal, InputReaderAction,
-              InputReaderGranularity, InstrumentationRuntimeType, LanguageType, LaunchFlags,
-              MatchType, MemberFunctionKind, PathType, Permissions, QueueItemKind, QueueKind,
-              RegisterKind, ReturnStatus, RunMode, ScriptLanguage, SectionType, StateType,
-              StopReason, SymbolContextItem, SymbolType, TemplateArgumentKind, TypeClass,
-              TypeFlags, TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType,
-              WatchpointKind};
+pub use sys::{
+    AccessType, AddressClass, BasicType, BreakpointEventType, ByteOrder, CommandArgumentType,
+    CommandFlags, ConnectionStatus, DescriptionLevel, DynamicValueType, EmulateInstructionOptions,
+    Encoding, ErrorType, ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,
+    FrameComparison, FunctionNameType, GdbSignal, InputReaderAction, InputReaderGranularity,
+    InstrumentationRuntimeType, LanguageType, LaunchFlags, MatchType, MemberFunctionKind, PathType,
+    Permissions, QueueItemKind, QueueKind, RegisterKind, ReturnStatus, RunMode, ScriptLanguage,
+    SectionType, StateType, StopReason, SymbolContextItem, SymbolType, TemplateArgumentKind,
+    TypeClass, TypeFlags, TypeOptions, TypeSummaryCapping, ValueType, WatchpointEventType,
+    WatchpointKind,
+};
 
 mod address;
 mod attachinfo;
@@ -169,8 +174,8 @@ mod symbolcontext;
 mod symbolcontextlist;
 mod target;
 mod thread;
-mod types;
 mod typelist;
+mod types;
 mod value;
 mod valuelist;
 mod variablesoptions;
@@ -202,8 +207,10 @@ pub use self::listener::SBListener;
 pub use self::module::{SBModule, SBModuleSectionIter};
 pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
-pub use self::process::{SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter,
-                        SBProcessQueueIter, SBProcessThreadIter};
+pub use self::process::{
+    SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter, SBProcessQueueIter,
+    SBProcessThreadIter,
+};
 pub use self::processinfo::SBProcessInfo;
 pub use self::queue::{SBQueue, SBQueueQueueItemIter, SBQueueThreadIter};
 pub use self::queueitem::SBQueueItem;
@@ -214,11 +221,13 @@ pub use self::structureddata::SBStructuredData;
 pub use self::symbol::SBSymbol;
 pub use self::symbolcontext::SBSymbolContext;
 pub use self::symbolcontextlist::SBSymbolContextList;
-pub use self::target::{SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter,
-                       SBTargetModuleIter, SBTargetWatchpointIter};
+pub use self::target::{
+    SBTarget, SBTargetBreakpointIter, SBTargetEvent, SBTargetEventModuleIter, SBTargetModuleIter,
+    SBTargetWatchpointIter,
+};
 pub use self::thread::{SBThread, SBThreadEvent, SBThreadFrameIter};
-pub use self::types::SBType;
 pub use self::typelist::{SBTypeList, SBTypeListIter};
+pub use self::types::SBType;
 pub use self::value::SBValue;
 pub use self::valuelist::{SBValueList, SBValueListIter};
 pub use self::variablesoptions::SBVariablesOptions;

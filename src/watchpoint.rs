@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt;
 use super::error::SBError;
 use super::stream::SBStream;
 use super::{lldb_addr_t, DescriptionLevel};
+use std::fmt;
 use sys;
 
 /// An instance of a watch point for a specific target program.

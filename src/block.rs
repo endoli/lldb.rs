@@ -4,11 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
-use std::fmt;
 use super::address::SBAddress;
 use super::filespec::SBFileSpec;
 use super::stream::SBStream;
+use std::ffi::CStr;
+use std::fmt;
 use sys;
 
 /// A lexical block.

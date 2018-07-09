@@ -4,11 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
 use super::data::SBData;
 use super::stream::SBStream;
 use super::target::SBTarget;
+use std::ffi::{CStr, CString};
+use std::fmt;
 use sys;
 
 #[allow(missing_docs)]

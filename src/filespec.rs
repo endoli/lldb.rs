@@ -4,9 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::stream::SBStream;
 use std::ffi::CStr;
 use std::fmt;
-use super::stream::SBStream;
 use sys;
 
 /// A file specification that divides the path into a

@@ -4,9 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
-use std::ptr;
 use super::address::SBAddress;
 use super::block::SBBlock;
 use super::instructionlist::SBInstructionList;
@@ -14,6 +11,9 @@ use super::stream::SBStream;
 use super::target::SBTarget;
 use super::types::SBType;
 use super::{DisassemblyFlavor, LanguageType};
+use std::ffi::{CStr, CString};
+use std::fmt;
+use std::ptr;
 use sys;
 
 /// A generic function, which can be inlined or not.

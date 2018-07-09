@@ -4,8 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
-use std::fmt;
 use super::event::SBEvent;
 use super::frame::SBFrame;
 use super::process::SBProcess;
@@ -13,6 +11,8 @@ use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::value::SBValue;
 use super::{lldb_tid_t, StopReason};
+use std::ffi::CStr;
+use std::fmt;
 use sys;
 
 /// A thread of execution.

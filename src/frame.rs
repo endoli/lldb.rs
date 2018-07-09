@@ -4,14 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::{CStr, CString};
-use std::fmt;
 use super::address::SBAddress;
 use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
 use super::expressionoptions::SBExpressionOptions;
 use super::function::SBFunction;
 use super::lineentry::SBLineEntry;
+use super::lldb_addr_t;
 use super::module::SBModule;
 use super::stream::SBStream;
 use super::symbol::SBSymbol;
@@ -20,7 +19,8 @@ use super::thread::SBThread;
 use super::value::SBValue;
 use super::valuelist::SBValueList;
 use super::variablesoptions::SBVariablesOptions;
-use super::lldb_addr_t;
+use std::ffi::{CStr, CString};
+use std::fmt;
 use sys;
 
 /// One of the stack frames associated with a thread.

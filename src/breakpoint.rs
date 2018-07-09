@@ -4,12 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
-use std::fmt;
 use super::breakpointlocation::SBBreakpointLocation;
+use super::lldb_addr_t;
 use super::stream::SBStream;
 use super::stringlist::SBStringList;
-use super::lldb_addr_t;
+use std::ffi::CString;
+use std::fmt;
 use sys;
 
 /// A logical breakpoint and its associated settings.

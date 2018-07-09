@@ -4,13 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
-use std::fmt;
 use super::filespec::SBFileSpec;
 use super::section::SBSection;
 use super::stream::SBStream;
 use super::symbolcontextlist::SBSymbolContextList;
 use super::SymbolType;
+use std::ffi::CString;
+use std::fmt;
 use sys;
 
 /// An executable image and its associated object and symbol files.

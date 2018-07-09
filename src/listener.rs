@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CString;
 use super::broadcaster::SBBroadcaster;
 use super::debugger::SBDebugger;
 use super::event::SBEvent;
+use std::ffi::CString;
 use sys;
 
 /// Listen for debugger events.

@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::stream::SBStream;
+use super::{BasicType, DescriptionLevel};
 use std::ffi::CStr;
 use std::fmt;
-use super::{BasicType, DescriptionLevel};
-use super::stream::SBStream;
 use sys;
 
 #[allow(missing_docs)]

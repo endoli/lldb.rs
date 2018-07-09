@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::CStr;
 use super::error::SBError;
 use super::launchinfo::SBLaunchInfo;
 use super::lldb_pid_t;
+use std::ffi::CStr;
 use sys;
 
 /// A platform that can represent the current host or a
