@@ -12,6 +12,7 @@ use super::platform::SBPlatform;
 use super::stream::SBStream;
 use super::structureddata::SBStructuredData;
 use super::target::SBTarget;
+use super::commandinterpreter::SBCommandInterpreter;
 use sys;
 
 /// Creates [`SBTarget`]s, provides access to them and manages
