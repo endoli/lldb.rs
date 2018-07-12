@@ -150,7 +150,7 @@ impl SBFrame {
     /// See also `is_inlined`.
     pub fn function_name(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBFrameGetFunctionName(self.raw)).to_str() {
+            match CStr::from_ptr(sys::SBFrameGetFunctionName(self.raw).as_ref()?).to_str() {
                 Ok(s) => Some(s),
                 _ => None,
             }
