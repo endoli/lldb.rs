@@ -105,18 +105,18 @@ graphql_object!(SBProcessInfo: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be lldb_pid_t
-    field process_id() -> i64 {
-        self.process_id() as i64
+    field process_id() -> i32 {
+        self.process_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field user_id() -> i64 {
-        self.user_id() as i64
+    field user_id() -> i32 {
+        self.user_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field group_id() -> i64 {
-        self.group_id() as i64
+    field group_id() -> i32 {
+        self.group_id() as i32
     }
 
     field user_id_is_valid() -> bool {
@@ -128,13 +128,13 @@ graphql_object!(SBProcessInfo: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field effective_user_id() -> i64 {
-        self.effective_user_id() as i64
+    field effective_user_id() -> i32 {
+        self.effective_user_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field effective_group_id() -> i64 {
-        self.effective_group_id() as i64
+    field effective_group_id() -> i32 {
+        self.effective_group_id() as i32
     }
 
     field effective_user_id_is_valid() -> bool {
@@ -146,7 +146,7 @@ graphql_object!(SBProcessInfo: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be lldb_pid_t
-    field parent_process_id() -> i64 {
-        self.parent_process_id() as i64
+    field parent_process_id() -> i32 {
+        self.parent_process_id() as i32
     }
 });

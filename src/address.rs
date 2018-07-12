@@ -257,8 +257,8 @@ graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u64
-    field file_address() -> i64 {
-        self.file_address() as i64
+    field file_address() -> i32 {
+        self.file_address() as i32
     }
 
     field module() -> Option<SBModule> {

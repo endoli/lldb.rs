@@ -155,12 +155,12 @@ graphql_object!(SBBlock: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field inlined_call_site_line() -> Option<i64> {
-        self.inlined_call_site_line().map(|i| i as i64)
+    field inlined_call_site_line() -> Option<i32> {
+        self.inlined_call_site_line().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u32
-    field inlined_call_site_column() -> Option<i64> {
-        self.inlined_call_site_column().map(|i| i as i64)
+    field inlined_call_site_column() -> Option<i32> {
+        self.inlined_call_site_column().map(|i| i as i32)
     }
 });

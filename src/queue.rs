@@ -197,8 +197,8 @@ graphql_object!(SBQueue: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u64
-    field queue_id() -> i64 {
-        self.queue_id() as i64
+    field queue_id() -> i32 {
+        self.queue_id() as i32
     }
 
     field name() -> &str {
@@ -214,7 +214,7 @@ graphql_object!(SBQueue: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field num_running_items() -> i64 {
-        self.num_running_items() as i64
+    field num_running_items() -> i32 {
+        self.num_running_items() as i32
     }
 });

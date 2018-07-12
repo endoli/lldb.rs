@@ -280,8 +280,8 @@ graphql_object!(SBValue: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm): This should be u64
-    field id() -> i64 {
-        self.id() as i64
+    field id() -> i32 {
+        self.id() as i32
     }
 
     field name() -> &str {
@@ -297,8 +297,8 @@ graphql_object!(SBValue: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm): This should be usize.
-    field byte_size() -> i64 {
-        self.byte_size() as i64
+    field byte_size() -> i32 {
+        self.byte_size() as i32
     }
 
     field is_in_scope() -> bool {

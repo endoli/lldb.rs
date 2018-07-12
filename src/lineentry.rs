@@ -102,12 +102,12 @@ graphql_object!(SBLineEntry: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field line() -> i64 {
-        self.line() as i64
+    field line() -> i32 {
+        self.line() as i32
     }
 
     // TODO(bm) This should be u32
-    field column() -> i64 {
-        self.column() as i64
+    field column() -> i32 {
+        self.column() as i32
     }
 });

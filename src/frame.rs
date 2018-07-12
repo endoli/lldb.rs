@@ -305,28 +305,28 @@ graphql_object!(SBFrame: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm): This should be u32
-    field frame_id() -> i64 {
-        self.frame_id() as i64
+    field frame_id() -> i32 {
+        self.frame_id() as i32
     }
 
     // TODO(bm) This should be u64
-    field cfa() -> Option<i64> {
-        self.cfa().map(|i| i as i64)
+    field cfa() -> Option<i32> {
+        self.cfa().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u64
-    field pc() -> i64 {
-        self.pc() as i64
+    field pc() -> i32 {
+        self.pc() as i32
     }
 
     // TODO(bm) This should be u64
-    field sp() -> i64 {
-        self.sp() as i64
+    field sp() -> i32 {
+        self.sp() as i32
     }
 
     // TODO(bm) This should be u64
-    field fp() -> i64 {
-        self.fp() as i64
+    field fp() -> i32 {
+        self.fp() as i32
     }
 
     field pc_address() -> SBAddress {

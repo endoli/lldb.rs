@@ -317,13 +317,13 @@ graphql_object!(SBThread: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm): This should be u64
-    field thread_id() -> i64 {
-        self.thread_id() as i64
+    field thread_id() -> i32 {
+        self.thread_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field index_id() -> i64 {
-        self.index_id() as i64
+    field index_id() -> i32 {
+        self.index_id() as i32
     }
 
     field frames() -> Vec<SBFrame> {

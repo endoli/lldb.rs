@@ -205,17 +205,17 @@ graphql_object!(SBPlatform: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field os_major_version() -> i64 {
-        self.os_major_version() as i64
+    field os_major_version() -> i32 {
+        self.os_major_version() as i32
     }
 
     // TODO(bm) This should be u32
-    field os_minor_version() -> i64 {
-        self.os_minor_version() as i64
+    field os_minor_version() -> i32 {
+        self.os_minor_version() as i32
     }
 
     // TODO(bm) This should be u32
-    field os_update_version() -> i64 {
-        self.os_update_version() as i64
+    field os_update_version() -> i32 {
+        self.os_update_version() as i32
     }
 });

@@ -170,8 +170,8 @@ graphql_object!(SBSymbol: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be a u32
-    field prologue_byte_size() -> i64 {
-        self.prologue_byte_size() as i64
+    field prologue_byte_size() -> i32 {
+        self.prologue_byte_size() as i32
     }
 
     field is_external() -> bool {

@@ -174,23 +174,23 @@ graphql_object!(SBSection: super::debugger::SBDebugger | &self | {
         self.subsections().collect()
     }
 
-    field file_address() -> i64 {
-        self.file_address() as i64
+    field file_address() -> i32 {
+        self.file_address() as i32
     }
 
-    field byte_size() -> i64 {
-        self.byte_size() as i64
+    field byte_size() -> i32 {
+        self.byte_size() as i32
     }
 
-    field file_offset() -> i64 {
-        self.file_offset() as i64
+    field file_offset() -> i32 {
+        self.file_offset() as i32
     }
 
-    field file_byte_size() -> i64 {
-        self.file_byte_size() as i64
+    field file_byte_size() -> i32 {
+        self.file_byte_size() as i32
     }
 
-    field target_byte_size() -> i64 {
-        self.target_byte_size() as i64
+    field target_byte_size() -> i32 {
+        self.target_byte_size() as i32
     }
 });

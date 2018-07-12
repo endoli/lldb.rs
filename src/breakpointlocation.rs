@@ -121,9 +121,8 @@ graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
         self.is_valid()
     }
 
-    // TODO(bm) This should be i32
-    field id() -> i64 {
-        self.id() as i64
+    field id() -> i32 {
+        self.id()
     }
 
     field address() -> Option<SBAddress> {
@@ -131,8 +130,8 @@ graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u64
-    field load_address() -> i64 {
-        self.load_address() as i64
+    field load_address() -> i32 {
+        self.load_address() as i32
     }
 
     field is_enabled() -> bool {
@@ -140,8 +139,8 @@ graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field ignore_count() -> i64 {
-        self.ignore_count() as i64
+    field ignore_count() -> i32 {
+        self.ignore_count() as i32
     }
 
     field is_resolved() -> bool {

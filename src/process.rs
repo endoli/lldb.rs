@@ -534,9 +534,8 @@ graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
         self.is_stopped()
     }
 
-    // TODO(bm) This should be i32
-    field exit_status() -> i64 {
-        self.exit_status() as i64
+    field exit_status() -> i32 {
+        self.exit_status()
     }
 
     field exit_description() -> &str {
@@ -544,18 +543,18 @@ graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm): This should be u64
-    field process_id() -> i64 {
-        self.process_id() as i64
+    field process_id() -> i32 {
+        self.process_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field unique_id() -> i64 {
-        self.unique_id() as i64
+    field unique_id() -> i32 {
+        self.unique_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field address_byte_size() -> i64 {
-        self.address_byte_size() as i64
+    field address_byte_size() -> i32 {
+        self.address_byte_size() as i32
     }
 
     field threads() -> Vec<SBThread> {

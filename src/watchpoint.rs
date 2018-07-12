@@ -136,24 +136,22 @@ graphql_object!(SBWatchpoint: super::debugger::SBDebugger | &self | {
         self.is_valid()
     }
 
-    // TODO(bm) This should be i32
-    field id() -> i64 {
-        self.id() as i64
+    field id() -> i32 {
+        self.id()
     }
 
-    // TODO(bm) This should be `Option<i32>`.
-    field hardware_index() -> Option<i64> {
-        self.hardware_index().map(|i| i as i64)
+    field hardware_index() -> Option<i32> {
+        self.hardware_index()
     }
 
     // TODO(bm) This should be u64
-    field watch_address() -> i64 {
-        self.watch_address() as i64
+    field watch_address() -> i32 {
+        self.watch_address() as i32
     }
 
     // TODO(bm) This should be u32
-    field watch_size() -> i64 {
-        self.watch_size() as i64
+    field watch_size() -> i32 {
+        self.watch_size() as i32
     }
 
     field is_enabled() -> bool {
@@ -161,12 +159,12 @@ graphql_object!(SBWatchpoint: super::debugger::SBDebugger | &self | {
     }
 
     // TODO(bm) This should be u32
-    field hit_count() -> i64 {
-        self.hit_count() as i64
+    field hit_count() -> i32 {
+        self.hit_count() as i32
     }
 
     // TODO(bm) This should be u32
-    field ignore_count() -> i64 {
-        self.ignore_count() as i64
+    field ignore_count() -> i32 {
+        self.ignore_count() as i32
     }
 });
