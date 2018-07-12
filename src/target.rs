@@ -152,6 +152,12 @@ impl SBTarget {
             Err(error)
         }
     }
+    
+    #[allow(missing_docs)]
+    pub fn load_core(&self, core_file: &str) -> SBProcess {
+        let core_file = CString::new(core_file).unwrap();
+        SBProcess::wrap(unsafe { sys::SBTargetLoadCore(self.raw, core_file.as_ptr()) })
+    }
 
     #[allow(missing_docs)]
     pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
