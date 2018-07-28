@@ -6,12 +6,14 @@
 
 use super::commandinterpreter::SBCommandInterpreter;
 use super::error::SBError;
+use super::listener::SBListener;
 use super::platform::SBPlatform;
 use super::stream::SBStream;
 use super::structureddata::SBStructuredData;
 use super::target::SBTarget;
 use std::ffi::{CStr, CString};
 use std::fmt;
+use std::iter;
 use std::ptr;
 use sys;
 
@@ -182,6 +184,30 @@ impl SBDebugger {
         SBCommandInterpreter::wrap(unsafe { sys::SBDebuggerGetCommandInterpreter(self.raw) })
     }
 
+    /// Enable logging (defaults to `stderr`).
+    ///
+    /// `enable_log("lldb", &["default"])` is useful for troubleshooting in most
+    /// cases. Include `"all"` in `categories` for extra verbosity.
+    ///
+    /// See invocations to `lldb_private::Log::Register` for more channels and
+    /// categories.
+    pub fn enable_log(&mut self, channel: &str, categories: &[&str]) -> bool {
+        let channel = CString::new(channel).unwrap();
+        let categories: Vec<_> = categories
+            .into_iter()
+            .map(|&s| CString::new(s).unwrap())
+            .collect();
+        let mut categories_ptr: Vec<_> = categories
+            .iter()
+            .map(|s| s.as_ptr())
+            .chain(iter::once(ptr::null()))
+            .collect();
+        let ret = unsafe {
+            sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_mut_ptr())
+        };
+        ret != 0
+    }
+
     /// Get the LLDB version string.
     pub fn version() -> String {
         unsafe {
@@ -245,6 +271,13 @@ impl SBDebugger {
             debugger: self,
             idx: 0,
         }
+    }
+
+    /// Get the default [SBListener] associated with the debugger.
+    ///
+    /// [SBListener]: struct.SBListener.html
+    pub fn listener(&self) -> SBListener {
+        SBListener::wrap(unsafe { sys::SBDebuggerGetListener(self.raw) })
     }
 
     /// Get the currently selected [`SBTarget`].
