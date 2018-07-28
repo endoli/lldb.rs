@@ -31,6 +31,11 @@ impl SBEvent {
         }
     }
 
+    #[allow(missing_docs)]
+    pub fn new() -> SBEvent {
+        Self::wrap(unsafe { sys::CreateSBEvent() })
+    }
+
     /// Check whether or not this is a valid `SBEvent` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBEventIsValid(self.raw) != 0 }
