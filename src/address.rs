@@ -13,7 +13,6 @@ use super::stream::SBStream;
 use super::symbol::SBSymbol;
 use super::symbolcontext::SBSymbolContext;
 use super::target::SBTarget;
-use super::AddressClass;
 use std::fmt;
 use sys;
 
@@ -81,11 +80,6 @@ impl SBAddress {
     /// The address as it has been loaded into memory by a target.
     pub fn load_address(&self, target: &SBTarget) -> u64 {
         unsafe { sys::SBAddressGetLoadAddress(self.raw, target.raw) }
-    }
-
-    /// Get the address class for this address.
-    pub fn address_class(&self) -> AddressClass {
-        unsafe { sys::SBAddressGetAddressClass(self.raw) }
     }
 
     /// Get the `SBSymbolContext` for a given address.

@@ -8,7 +8,6 @@ use super::address::SBAddress;
 use super::data::SBData;
 use super::stream::SBStream;
 use super::target::SBTarget;
-use super::AddressClass;
 use std::ffi::CStr;
 use std::fmt;
 use sys;
@@ -42,11 +41,6 @@ impl SBInstruction {
     /// Get the address of the instruction.
     pub fn address(&self) -> SBAddress {
         SBAddress::wrap(unsafe { sys::SBInstructionGetAddress(self.raw) })
-    }
-
-    /// Get the address class for the address of the instruction.
-    pub fn address_class(&self) -> AddressClass {
-        unsafe { sys::SBInstructionGetAddressClass(self.raw) }
     }
 
     #[allow(missing_docs)]
