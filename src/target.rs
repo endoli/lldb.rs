@@ -121,7 +121,7 @@ impl SBTarget {
     ///
     /// After return, the platform object should be checked for validity.
     ///
-    /// [`SBPlatform`]: strut.SBPlatform.html
+    /// [`SBPlatform`]: struct.SBPlatform.html
     pub fn platform(&self) -> SBPlatform {
         unsafe {
             SBPlatform {
@@ -132,7 +132,7 @@ impl SBTarget {
 
     /// Get the [`SBProcess`] associated with this target.
     ///
-    /// [`SBProcess`]: strut.SBProcess.html
+    /// [`SBProcess`]: struct.SBProcess.html
     pub fn process(&self) -> SBProcess {
         unsafe {
             SBProcess {
