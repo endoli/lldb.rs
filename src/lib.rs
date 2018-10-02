@@ -124,9 +124,9 @@ extern crate juniper;
 pub use sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
 
 pub use sys::{
-    AccessType, BasicType, BreakpointEventType, ByteOrder, CommandArgumentType,
-    CommandFlags, ConnectionStatus, DescriptionLevel, DynamicValueType, EmulateInstructionOptions,
-    Encoding, ErrorType, ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,
+    AccessType, BasicType, BreakpointEventType, ByteOrder, CommandArgumentType, CommandFlags,
+    ConnectionStatus, DescriptionLevel, DynamicValueType, EmulateInstructionOptions, Encoding,
+    ErrorType, ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,
     FrameComparison, FunctionNameType, GdbSignal, InputReaderAction, InputReaderGranularity,
     InstrumentationRuntimeType, LanguageType, LaunchFlags, MatchType, MemberFunctionKind, PathType,
     Permissions, QueueItemKind, QueueKind, RegisterKind, ReturnStatus, RunMode, ScriptLanguage,
