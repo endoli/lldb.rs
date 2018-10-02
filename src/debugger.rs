@@ -258,6 +258,8 @@ impl SBDebugger {
     /// Using [`create_target`] is preferred in most cases as
     /// that provides access to an `SBError` to inform the caller
     /// about what might have gone wrong.
+    ///
+    /// [`create_target`]: struct.SBDebugger.html#method.create_target
     pub fn create_target_simple(&self, executable: &str) -> Option<SBTarget> {
         let executable = CString::new(executable).unwrap();
         SBTarget::maybe_wrap(unsafe { sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr()) })
