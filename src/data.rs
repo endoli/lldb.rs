@@ -39,3 +39,6 @@ impl Drop for SBData {
         unsafe { sys::DisposeSBData(self.raw) };
     }
 }
+
+unsafe impl Send for SBData {}
+unsafe impl Sync for SBData {}

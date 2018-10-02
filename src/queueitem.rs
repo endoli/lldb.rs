@@ -78,6 +78,9 @@ impl Drop for SBQueueItem {
     }
 }
 
+unsafe impl Send for SBQueueItem {}
+unsafe impl Sync for SBQueueItem {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBQueueItem: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

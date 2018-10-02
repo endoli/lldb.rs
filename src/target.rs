@@ -364,6 +364,9 @@ impl Drop for SBTarget {
     }
 }
 
+unsafe impl Send for SBTarget {}
+unsafe impl Sync for SBTarget {}
+
 /// Iterate over the [breakpoints] in a [target].
 ///
 /// [breakpoints]: struct.SBBreakpoint.html

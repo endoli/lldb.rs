@@ -84,6 +84,9 @@ impl Drop for SBValueList {
     }
 }
 
+unsafe impl Send for SBValueList {}
+unsafe impl Sync for SBValueList {}
+
 /// An iterator over the [values] in an [`SBValueList`].
 ///
 /// [values]: struct.SBValue.html

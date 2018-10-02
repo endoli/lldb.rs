@@ -130,6 +130,9 @@ impl Drop for SBWatchpoint {
     }
 }
 
+unsafe impl Send for SBWatchpoint {}
+unsafe impl Sync for SBWatchpoint {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBWatchpoint: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

@@ -201,6 +201,9 @@ impl Drop for SBBreakpoint {
     }
 }
 
+unsafe impl Send for SBBreakpoint {}
+unsafe impl Sync for SBBreakpoint {}
+
 /// An iterator over the [locations] in an [`SBBreakpoint`].
 ///
 /// [locations]: struct.SBBreakpointLocation.html

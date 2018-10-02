@@ -111,3 +111,6 @@ impl Drop for SBVariablesOptions {
         unsafe { sys::DisposeSBVariablesOptions(self.raw) };
     }
 }
+
+unsafe impl Send for SBVariablesOptions {}
+unsafe impl Sync for SBVariablesOptions {}

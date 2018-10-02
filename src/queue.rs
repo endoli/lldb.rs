@@ -126,6 +126,9 @@ impl Drop for SBQueue {
     }
 }
 
+unsafe impl Send for SBQueue {}
+unsafe impl Sync for SBQueue {}
+
 /// Iterate over the [threads] associated with a [queue].
 ///
 /// [threads]: struct.SBThread.html

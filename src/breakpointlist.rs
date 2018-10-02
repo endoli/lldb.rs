@@ -72,6 +72,9 @@ impl Drop for SBBreakpointList {
     }
 }
 
+unsafe impl Send for SBBreakpointList {}
+unsafe impl Sync for SBBreakpointList {}
+
 /// An iterator over the [breakpoints] in an [`SBBreakpointList`].
 ///
 /// [breakpoints]: struct.SBBreakpoint.html

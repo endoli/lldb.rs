@@ -78,6 +78,9 @@ impl Drop for SBSymbolContextList {
     }
 }
 
+unsafe impl Send for SBSymbolContextList {}
+unsafe impl Sync for SBSymbolContextList {}
+
 /// An iterator over the [contexts] in an [`SBSymbolContextList`].
 ///
 /// [contexts]: struct.SBSymbolContext.html

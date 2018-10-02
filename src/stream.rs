@@ -82,3 +82,6 @@ impl Drop for SBStream {
         unsafe { sys::DisposeSBStream(self.raw) };
     }
 }
+
+unsafe impl Send for SBStream {}
+unsafe impl Sync for SBStream {}

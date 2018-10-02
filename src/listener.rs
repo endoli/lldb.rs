@@ -212,3 +212,6 @@ impl Drop for SBListener {
         unsafe { sys::DisposeSBListener(self.raw) };
     }
 }
+
+unsafe impl Send for SBListener {}
+unsafe impl Sync for SBListener {}

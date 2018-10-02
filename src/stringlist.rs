@@ -80,6 +80,9 @@ impl Drop for SBStringList {
     }
 }
 
+unsafe impl Send for SBStringList {}
+unsafe impl Sync for SBStringList {}
+
 /// An iterator over an `SBStringList`.
 pub struct SBStringListIter<'d> {
     string_list: &'d SBStringList,

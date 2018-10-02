@@ -442,6 +442,9 @@ impl Drop for SBProcess {
     }
 }
 
+unsafe impl Send for SBProcess {}
+unsafe impl Sync for SBProcess {}
+
 #[allow(missing_docs)]
 pub struct SBProcessEvent<'e> {
     event: &'e SBEvent,

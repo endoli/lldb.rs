@@ -75,6 +75,9 @@ impl Drop for SBInstructionList {
     }
 }
 
+unsafe impl Send for SBInstructionList {}
+unsafe impl Sync for SBInstructionList {}
+
 /// An iterator over the [instructions] in an [`SBInstructionList`].
 ///
 /// [instructions]: struct.SBInstruction.html

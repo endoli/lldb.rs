@@ -121,3 +121,6 @@ impl Drop for SBModuleSpec {
         unsafe { sys::DisposeSBModuleSpec(self.raw) };
     }
 }
+
+unsafe impl Send for SBModuleSpec {}
+unsafe impl Sync for SBModuleSpec {}

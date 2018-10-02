@@ -115,6 +115,9 @@ impl Drop for SBBreakpointLocation {
     }
 }
 
+unsafe impl Send for SBBreakpointLocation {}
+unsafe impl Sync for SBBreakpointLocation {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

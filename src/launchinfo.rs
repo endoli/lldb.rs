@@ -247,3 +247,6 @@ impl Drop for SBLaunchInfo {
         unsafe { sys::DisposeSBLaunchInfo(self.raw) };
     }
 }
+
+unsafe impl Send for SBLaunchInfo {}
+unsafe impl Sync for SBLaunchInfo {}

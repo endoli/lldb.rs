@@ -79,6 +79,9 @@ impl Drop for SBFileSpec {
     }
 }
 
+unsafe impl Send for SBFileSpec {}
+unsafe impl Sync for SBFileSpec {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBFileSpec: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

@@ -90,3 +90,6 @@ impl Drop for SBEvent {
         unsafe { sys::DisposeSBEvent(self.raw) };
     }
 }
+
+unsafe impl Send for SBEvent {}
+unsafe impl Sync for SBEvent {}

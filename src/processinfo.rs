@@ -94,6 +94,9 @@ impl Drop for SBProcessInfo {
     }
 }
 
+unsafe impl Send for SBProcessInfo {}
+unsafe impl Sync for SBProcessInfo {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBProcessInfo: super::debugger::SBDebugger | &self | {
     field name() -> &str {

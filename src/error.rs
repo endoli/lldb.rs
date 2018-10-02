@@ -92,3 +92,6 @@ impl Drop for SBError {
         unsafe { sys::DisposeSBError(self.raw) };
     }
 }
+
+unsafe impl Send for SBError {}
+unsafe impl Sync for SBError {}

@@ -83,6 +83,9 @@ impl Drop for SBLineEntry {
     }
 }
 
+unsafe impl Send for SBLineEntry {}
+unsafe impl Sync for SBLineEntry {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBLineEntry: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

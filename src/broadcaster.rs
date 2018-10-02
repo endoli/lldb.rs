@@ -89,3 +89,6 @@ impl Drop for SBBroadcaster {
         unsafe { sys::DisposeSBBroadcaster(self.raw) };
     }
 }
+
+unsafe impl Send for SBBroadcaster {}
+unsafe impl Sync for SBBroadcaster {}

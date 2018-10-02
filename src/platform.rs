@@ -174,6 +174,9 @@ impl Drop for SBPlatform {
     }
 }
 
+unsafe impl Send for SBPlatform {}
+unsafe impl Sync for SBPlatform {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBPlatform: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

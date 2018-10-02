@@ -46,6 +46,9 @@ impl Drop for SBTypeList {
     }
 }
 
+unsafe impl Send for SBTypeList {}
+unsafe impl Sync for SBTypeList {}
+
 /// An iterator over the [types] in an [`SBTypeList`].
 ///
 /// [types]: struct.SBType.html

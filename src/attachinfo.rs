@@ -136,3 +136,6 @@ impl Drop for SBAttachInfo {
         unsafe { sys::DisposeSBAttachInfo(self.raw) };
     }
 }
+
+unsafe impl Send for SBAttachInfo {}
+unsafe impl Sync for SBAttachInfo {}

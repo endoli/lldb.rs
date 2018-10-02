@@ -107,3 +107,6 @@ impl Drop for SBInstruction {
         unsafe { sys::DisposeSBInstruction(self.raw) };
     }
 }
+
+unsafe impl Send for SBInstruction {}
+unsafe impl Sync for SBInstruction {}

@@ -56,3 +56,6 @@ impl Drop for SBExpressionOptions {
         unsafe { sys::DisposeSBExpressionOptions(self.raw) };
     }
 }
+
+unsafe impl Send for SBExpressionOptions {}
+unsafe impl Sync for SBExpressionOptions {}

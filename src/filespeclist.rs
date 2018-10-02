@@ -77,6 +77,9 @@ impl Drop for SBFileSpecList {
     }
 }
 
+unsafe impl Send for SBFileSpecList {}
+unsafe impl Sync for SBFileSpecList {}
+
 /// An iterator over the [filespecs] in an [`SBFileSpecList`].
 ///
 /// [filespecs]: struct.SBFileSpec.html

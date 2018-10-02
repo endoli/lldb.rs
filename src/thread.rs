@@ -288,6 +288,9 @@ impl Drop for SBThread {
     }
 }
 
+unsafe impl Send for SBThread {}
+unsafe impl Sync for SBThread {}
+
 /// A thread event.
 pub struct SBThreadEvent<'e> {
     event: &'e SBEvent,

@@ -244,6 +244,9 @@ impl Drop for SBAddress {
     }
 }
 
+unsafe impl Send for SBAddress {}
+unsafe impl Sync for SBAddress {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

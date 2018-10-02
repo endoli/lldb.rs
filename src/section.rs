@@ -160,6 +160,9 @@ impl Drop for SBSection {
     }
 }
 
+unsafe impl Send for SBSection {}
+unsafe impl Sync for SBSection {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBSection: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

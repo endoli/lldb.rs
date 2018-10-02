@@ -377,6 +377,9 @@ impl Drop for SBDebugger {
     }
 }
 
+unsafe impl Send for SBDebugger {}
+unsafe impl Sync for SBDebugger {}
+
 /// Iterate over the [platforms].
 ///
 /// [platforms]: struct.SBPlatform.html

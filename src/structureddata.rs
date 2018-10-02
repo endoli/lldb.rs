@@ -148,6 +148,9 @@ impl Drop for SBStructuredData {
     }
 }
 
+unsafe impl Send for SBStructuredData {}
+unsafe impl Sync for SBStructuredData {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBStructuredData: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

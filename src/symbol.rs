@@ -143,6 +143,9 @@ impl Drop for SBSymbol {
     }
 }
 
+unsafe impl Send for SBSymbol {}
+unsafe impl Sync for SBSymbol {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBSymbol: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {

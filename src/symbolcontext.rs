@@ -101,6 +101,9 @@ impl Drop for SBSymbolContext {
     }
 }
 
+unsafe impl Send for SBSymbolContext {}
+unsafe impl Sync for SBSymbolContext {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBSymbolContext: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {
