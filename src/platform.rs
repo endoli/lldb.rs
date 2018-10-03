@@ -168,6 +168,14 @@ impl SBPlatform {
     }
 }
 
+impl Clone for SBPlatform {
+    fn clone(&self) -> SBPlatform {
+        SBPlatform {
+            raw: unsafe { sys::CloneSBPlatform(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBPlatform {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBPlatform(self.raw) };

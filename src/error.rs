@@ -73,6 +73,14 @@ impl SBError {
     }
 }
 
+impl Clone for SBError {
+    fn clone(&self) -> SBError {
+        SBError {
+            raw: unsafe { sys::CloneSBError(self.raw) },
+        }
+    }
+}
+
 impl Default for SBError {
     fn default() -> SBError {
         SBError::new()

@@ -77,6 +77,14 @@ impl SBEvent {
     }
 }
 
+impl Clone for SBEvent {
+    fn clone(&self) -> SBEvent {
+        SBEvent {
+            raw: unsafe { sys::CloneSBEvent(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBEvent {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

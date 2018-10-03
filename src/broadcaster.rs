@@ -78,6 +78,14 @@ impl SBBroadcaster {
     }
 }
 
+impl Clone for SBBroadcaster {
+    fn clone(&self) -> SBBroadcaster {
+        SBBroadcaster {
+            raw: unsafe { sys::CloneSBBroadcaster(self.raw) },
+        }
+    }
+}
+
 impl Default for SBBroadcaster {
     fn default() -> SBBroadcaster {
         SBBroadcaster::new()

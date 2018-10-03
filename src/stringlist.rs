@@ -68,6 +68,14 @@ impl SBStringList {
     }
 }
 
+impl Clone for SBStringList {
+    fn clone(&self) -> SBStringList {
+        SBStringList {
+            raw: unsafe { sys::CloneSBStringList(self.raw) },
+        }
+    }
+}
+
 impl Default for SBStringList {
     fn default() -> Self {
         Self::new()

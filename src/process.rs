@@ -428,6 +428,14 @@ impl<'d> Iterator for SBProcessQueueIter<'d> {
     }
 }
 
+impl Clone for SBProcess {
+    fn clone(&self) -> SBProcess {
+        SBProcess {
+            raw: unsafe { sys::CloneSBProcess(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBProcess {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

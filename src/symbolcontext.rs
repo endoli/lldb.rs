@@ -87,6 +87,14 @@ impl SBSymbolContext {
     }
 }
 
+impl Clone for SBSymbolContext {
+    fn clone(&self) -> SBSymbolContext {
+        SBSymbolContext {
+            raw: unsafe { sys::CloneSBSymbolContext(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBSymbolContext {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

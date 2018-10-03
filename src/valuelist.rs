@@ -78,6 +78,14 @@ impl SBValueList {
     }
 }
 
+impl Clone for SBValueList {
+    fn clone(&self) -> SBValueList {
+        SBValueList {
+            raw: unsafe { sys::CloneSBValueList(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBValueList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBValueList(self.raw) };

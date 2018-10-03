@@ -274,6 +274,14 @@ impl<'d> Iterator for SBThreadFrameIter<'d> {
 
 impl<'d> ExactSizeIterator for SBThreadFrameIter<'d> {}
 
+impl Clone for SBThread {
+    fn clone(&self) -> SBThread {
+        SBThread {
+            raw: unsafe { sys::CloneSBThread(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBThread {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

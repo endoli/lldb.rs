@@ -365,6 +365,14 @@ impl<'d> Iterator for SBDebuggerTargetIter<'d> {
 
 impl<'d> ExactSizeIterator for SBDebuggerTargetIter<'d> {}
 
+impl Clone for SBDebugger {
+    fn clone(&self) -> SBDebugger {
+        SBDebugger {
+            raw: unsafe { sys::CloneSBDebugger(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBDebugger {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

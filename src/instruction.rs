@@ -94,6 +94,14 @@ impl SBInstruction {
     }
 }
 
+impl Clone for SBInstruction {
+    fn clone(&self) -> SBInstruction {
+        SBInstruction {
+            raw: unsafe { sys::CloneSBInstruction(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBInstruction {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

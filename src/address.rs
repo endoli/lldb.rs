@@ -230,6 +230,14 @@ impl SBAddress {
     }
 }
 
+impl Clone for SBAddress {
+    fn clone(&self) -> SBAddress {
+        SBAddress {
+            raw: unsafe { sys::CloneSBAddress(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBAddress {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

@@ -65,6 +65,14 @@ impl SBFileSpec {
     }
 }
 
+impl Clone for SBFileSpec {
+    fn clone(&self) -> SBFileSpec {
+        SBFileSpec {
+            raw: unsafe { sys::CloneSBFileSpec(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBFileSpec {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

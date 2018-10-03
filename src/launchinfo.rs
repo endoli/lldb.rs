@@ -236,6 +236,14 @@ impl SBLaunchInfo {
     }
 }
 
+impl Clone for SBLaunchInfo {
+    fn clone(&self) -> SBLaunchInfo {
+        SBLaunchInfo {
+            raw: unsafe { sys::CloneSBLaunchInfo(self.raw) },
+        }
+    }
+}
+
 impl Default for SBLaunchInfo {
     fn default() -> SBLaunchInfo {
         SBLaunchInfo::new()

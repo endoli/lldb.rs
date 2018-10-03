@@ -99,6 +99,14 @@ impl SBBreakpointLocation {
     }
 }
 
+impl Clone for SBBreakpointLocation {
+    fn clone(&self) -> SBBreakpointLocation {
+        SBBreakpointLocation {
+            raw: unsafe { sys::CloneSBBreakpointLocation(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBBreakpointLocation {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

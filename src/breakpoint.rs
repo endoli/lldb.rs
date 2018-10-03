@@ -187,6 +187,14 @@ impl SBBreakpoint {
     }
 }
 
+impl Clone for SBBreakpoint {
+    fn clone(&self) -> SBBreakpoint {
+        SBBreakpoint {
+            raw: unsafe { sys::CloneSBBreakpoint(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBBreakpoint {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

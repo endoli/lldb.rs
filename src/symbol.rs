@@ -129,6 +129,14 @@ impl SBSymbol {
     }
 }
 
+impl Clone for SBSymbol {
+    fn clone(&self) -> SBSymbol {
+        SBSymbol {
+            raw: unsafe { sys::CloneSBSymbol(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBSymbol {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

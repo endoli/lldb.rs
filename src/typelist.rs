@@ -40,6 +40,14 @@ impl SBTypeList {
     }
 }
 
+impl Clone for SBTypeList {
+    fn clone(&self) -> SBTypeList {
+        SBTypeList {
+            raw: unsafe { sys::CloneSBTypeList(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBTypeList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBTypeList(self.raw) };

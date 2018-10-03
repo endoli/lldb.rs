@@ -88,6 +88,14 @@ impl SBProcessInfo {
     }
 }
 
+impl Clone for SBProcessInfo {
+    fn clone(&self) -> SBProcessInfo {
+        SBProcessInfo {
+            raw: unsafe { sys::CloneSBProcessInfo(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBProcessInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBProcessInfo(self.raw) };

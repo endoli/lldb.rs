@@ -259,6 +259,14 @@ impl SBValue {
     }
 }
 
+impl Clone for SBValue {
+    fn clone(&self) -> SBValue {
+        SBValue {
+            raw: unsafe { sys::CloneSBValue(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBValue {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

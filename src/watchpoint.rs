@@ -116,6 +116,14 @@ impl SBWatchpoint {
     }
 }
 
+impl Clone for SBWatchpoint {
+    fn clone(&self) -> SBWatchpoint {
+        SBWatchpoint {
+            raw: unsafe { sys::CloneSBWatchpoint(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBWatchpoint {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();
