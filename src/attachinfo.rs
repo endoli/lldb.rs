@@ -125,6 +125,14 @@ impl SBAttachInfo {
     }
 }
 
+impl Clone for SBAttachInfo {
+    fn clone(&self) -> SBAttachInfo {
+        SBAttachInfo {
+            raw: unsafe { sys::CloneSBAttachInfo(self.raw) },
+        }
+    }
+}
+
 impl Default for SBAttachInfo {
     fn default() -> SBAttachInfo {
         SBAttachInfo::new()

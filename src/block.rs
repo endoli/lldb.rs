@@ -122,6 +122,14 @@ impl SBBlock {
     }
 }
 
+impl Clone for SBBlock {
+    fn clone(&self) -> SBBlock {
+        SBBlock {
+            raw: unsafe { sys::CloneSBBlock(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBBlock {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

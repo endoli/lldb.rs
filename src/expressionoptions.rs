@@ -45,6 +45,14 @@ impl SBExpressionOptions {
     }
 }
 
+impl Clone for SBExpressionOptions {
+    fn clone(&self) -> SBExpressionOptions {
+        SBExpressionOptions {
+            raw: unsafe { sys::CloneSBExpressionOptions(self.raw) },
+        }
+    }
+}
+
 impl Default for SBExpressionOptions {
     fn default() -> Self {
         Self::new()

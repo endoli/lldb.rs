@@ -284,6 +284,14 @@ impl SBFrame {
     }
 }
 
+impl Clone for SBFrame {
+    fn clone(&self) -> SBFrame {
+        SBFrame {
+            raw: unsafe { sys::CloneSBFrame(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBFrame {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

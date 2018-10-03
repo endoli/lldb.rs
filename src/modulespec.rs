@@ -108,6 +108,14 @@ impl SBModuleSpec {
     }
 }
 
+impl Clone for SBModuleSpec {
+    fn clone(&self) -> SBModuleSpec {
+        SBModuleSpec {
+            raw: unsafe { sys::CloneSBModuleSpec(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBModuleSpec {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

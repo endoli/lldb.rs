@@ -350,6 +350,14 @@ impl SBTarget {
     }
 }
 
+impl Clone for SBTarget {
+    fn clone(&self) -> SBTarget {
+        SBTarget {
+            raw: unsafe { sys::CloneSBTarget(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBTarget {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

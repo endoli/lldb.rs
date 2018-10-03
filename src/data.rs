@@ -34,6 +34,14 @@ impl SBData {
     }
 }
 
+impl Clone for SBData {
+    fn clone(&self) -> SBData {
+        SBData {
+            raw: unsafe { sys::CloneSBData(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBData {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBData(self.raw) };

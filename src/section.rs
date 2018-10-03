@@ -146,6 +146,14 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
 
 impl<'d> ExactSizeIterator for SBSectionSubSectionIter<'d> {}
 
+impl Clone for SBSection {
+    fn clone(&self) -> SBSection {
+        SBSection {
+            raw: unsafe { sys::CloneSBSection(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBSection {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

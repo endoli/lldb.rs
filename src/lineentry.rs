@@ -69,6 +69,14 @@ impl SBLineEntry {
     }
 }
 
+impl Clone for SBLineEntry {
+    fn clone(&self) -> SBLineEntry {
+        SBLineEntry {
+            raw: unsafe { sys::CloneSBLineEntry(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBLineEntry {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

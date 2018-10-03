@@ -142,6 +142,14 @@ impl SBType {
     }
 }
 
+impl Clone for SBType {
+    fn clone(&self) -> SBType {
+        SBType {
+            raw: unsafe { sys::CloneSBType(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBType {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

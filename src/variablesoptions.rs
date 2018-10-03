@@ -100,6 +100,14 @@ impl SBVariablesOptions {
     }
 }
 
+impl Clone for SBVariablesOptions {
+    fn clone(&self) -> SBVariablesOptions {
+        SBVariablesOptions {
+            raw: unsafe { sys::CloneSBVariablesOptions(self.raw) },
+        }
+    }
+}
+
 impl Default for SBVariablesOptions {
     fn default() -> Self {
         Self::new()

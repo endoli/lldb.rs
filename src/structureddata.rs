@@ -134,6 +134,14 @@ impl SBStructuredData {
     }
 }
 
+impl Clone for SBStructuredData {
+    fn clone(&self) -> SBStructuredData {
+        SBStructuredData {
+            raw: unsafe { sys::CloneSBStructuredData(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBStructuredData {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

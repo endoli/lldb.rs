@@ -20,6 +20,14 @@ impl SBCommandInterpreter {
     }
 }
 
+impl Clone for SBCommandInterpreter {
+    fn clone(&self) -> SBCommandInterpreter {
+        SBCommandInterpreter {
+            raw: unsafe { sys::CloneSBCommandInterpreter(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBCommandInterpreter {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBCommandInterpreter(self.raw) };

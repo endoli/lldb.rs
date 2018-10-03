@@ -134,6 +134,14 @@ impl SBFunction {
     }
 }
 
+impl Clone for SBFunction {
+    fn clone(&self) -> SBFunction {
+        SBFunction {
+            raw: unsafe { sys::CloneSBFunction(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBFunction {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

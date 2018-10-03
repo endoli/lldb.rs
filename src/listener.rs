@@ -201,6 +201,14 @@ impl SBListener {
     }
 }
 
+impl Clone for SBListener {
+    fn clone(&self) -> SBListener {
+        SBListener {
+            raw: unsafe { sys::CloneSBListener(self.raw) },
+        }
+    }
+}
+
 impl Default for SBListener {
     fn default() -> SBListener {
         SBListener::new()

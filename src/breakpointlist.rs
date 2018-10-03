@@ -66,6 +66,14 @@ impl SBBreakpointList {
     }
 }
 
+impl Clone for SBBreakpointList {
+    fn clone(&self) -> SBBreakpointList {
+        SBBreakpointList {
+            raw: unsafe { sys::CloneSBBreakpointList(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBBreakpointList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBreakpointList(self.raw) };

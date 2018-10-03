@@ -72,6 +72,14 @@ impl SBSymbolContextList {
     }
 }
 
+impl Clone for SBSymbolContextList {
+    fn clone(&self) -> SBSymbolContextList {
+        SBSymbolContextList {
+            raw: unsafe { sys::CloneSBSymbolContextList(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBSymbolContextList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBSymbolContextList(self.raw) };

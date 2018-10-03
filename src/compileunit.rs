@@ -47,6 +47,14 @@ impl SBCompileUnit {
     }
 }
 
+impl Clone for SBCompileUnit {
+    fn clone(&self) -> SBCompileUnit {
+        SBCompileUnit {
+            raw: unsafe { sys::CloneSBCompileUnit(self.raw) },
+        }
+    }
+}
+
 impl fmt::Debug for SBCompileUnit {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         let stream = SBStream::new();

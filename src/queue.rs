@@ -120,6 +120,14 @@ impl SBQueue {
     }
 }
 
+impl Clone for SBQueue {
+    fn clone(&self) -> SBQueue {
+        SBQueue {
+            raw: unsafe { sys::CloneSBQueue(self.raw) },
+        }
+    }
+}
+
 impl Drop for SBQueue {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBQueue(self.raw) };
