@@ -191,7 +191,7 @@ impl SBDebugger {
     ///
     /// See invocations to `lldb_private::Log::Register` for more channels and
     /// categories.
-    pub fn enable_log(&mut self, channel: &str, categories: &[&str]) -> bool {
+    pub fn enable_log(&self, channel: &str, categories: &[&str]) -> bool {
         let channel = CString::new(channel).unwrap();
         let categories: Vec<_> = categories
             .into_iter()
