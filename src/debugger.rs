@@ -194,7 +194,7 @@ impl SBDebugger {
     pub fn enable_log(&self, channel: &str, categories: &[&str]) -> bool {
         let channel = CString::new(channel).unwrap();
         let categories: Vec<_> = categories
-            .into_iter()
+            .iter()
             .map(|&s| CString::new(s).unwrap())
             .collect();
         let mut categories_ptr: Vec<_> = categories
