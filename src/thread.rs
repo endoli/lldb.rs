@@ -7,6 +7,7 @@
 use super::event::SBEvent;
 use super::frame::SBFrame;
 use super::process::SBProcess;
+use super::error::SBError;
 use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::value::SBValue;
@@ -184,14 +185,16 @@ impl SBThread {
     /// `run_to_address`), the thread will not be allowed to run and these
     /// functions will simply return.
     pub fn suspend(&self) -> u8 {
-        unsafe { sys::SBThreadSuspend(self.raw) }
+        let error: SBError = SBError::new();
+        unsafe { sys::SBThreadSuspend(self.raw, error.raw) }
     }
 
     /// Set the user resume state for this to allow it to run again.
     ///
     /// See the discussion on `suspend` for further details.
     pub fn resume(&self) -> u8 {
-        unsafe { sys::SBThreadResume(self.raw) }
+        let error: SBError = SBError::new();
+        unsafe { sys::SBThreadResume(self.raw, error.raw) }
     }
 
     /// Is this thread set to the suspended user resume state?
