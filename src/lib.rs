@@ -107,6 +107,7 @@
 //! [`SBBlock`]: struct.SBBlock.html
 //! [`SBLineEntry`]: struct.SBLineEntry.html
 
+#![allow(clippy::upper_case_acronyms)]
 #![warn(missing_docs)]
 #![deny(
     trivial_numeric_casts,
