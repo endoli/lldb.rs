@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::error::SBError;
 use super::event::SBEvent;
 use super::frame::SBFrame;
 use super::process::SBProcess;
-use super::error::SBError;
 use super::queue::SBQueue;
 use super::stream::SBStream;
 use super::value::SBValue;

@@ -154,11 +154,12 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
-    pub fn load_core(&self, core_file: &str) ->  Result<SBProcess, SBError> {
+    pub fn load_core(&self, core_file: &str) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::new();
         let core_file = CString::new(core_file).unwrap();
-        let process =
-            SBProcess::wrap(unsafe { sys::SBTargetLoadCore(self.raw, core_file.as_ptr(), error.raw) });
+        let process = SBProcess::wrap(unsafe {
+            sys::SBTargetLoadCore(self.raw, core_file.as_ptr(), error.raw)
+        });
         if error.is_success() {
             Ok(process)
         } else {
