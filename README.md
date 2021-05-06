@@ -27,14 +27,24 @@ Add it to your `Cargo.toml` like so:
 lldb = "0.0.8"
 ```
 
-On macOS, the `LLDB.framework` requires that an `@rpath`
-be configured for your application so that the `LLDB.framework`
-can be found. This isn't directly supported by Cargo today, but
-for local work and development, you can do this:
+### Linux
 
-```shell
-export DYLD_FRAMEWORK_PATH=/Applications/Xcode.app/Contents/SharedFrameworks
-```
+Install the lldb and liblldb-dev packages for your platform so that you have both LLDB itself installed as well as the headers and other support files required. For example, on Ubuntu you can run `sudo apt install lldb liblldb-dev`.
+
+### macOS
+
+You will need to have 2 environment variables set to do the build:
+
+    LLVM_ROOT - This points to the root of the LLVM source tree.
+    LLVM_BUILD_ROOT - This points to the root of an LLVM build directory. This may be the same as the LLVM source tree, especially if you're working from a binary install.
+
+For now, you will have to set an @rpath manually on your executables so that they can find the LLDB.framework at runtime. This can be done with install_name_tool:
+
+install_name_tool -add_rpath /Applications/Xcode.app/Contents/SharedFrameworks target/debug/examples/barebones
+
+Alternatively, for testing and local work, you can set the DYLD_FRAMEWORK_PATH:
+
+    export DYLD_FRAMEWORK_PATH=/Applications/Xcode.app/Contents/SharedFrameworks
 
 ## Development Guidelines
 
