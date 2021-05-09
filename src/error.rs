@@ -71,6 +71,18 @@ impl SBError {
     pub fn error_type(&self) -> ErrorType {
         unsafe { sys::SBErrorGetType(self.raw) }
     }
+
+    /// Convert to a Result<(), SBError>
+    ///
+    /// SBErrors represent either a success or a failure. This method converts
+    /// the success variant to Ok(()) and the error variant to Err(SBError).
+    pub fn into_result(self) -> Result<(), SBError> {
+        if self.is_success() {
+            Ok(())
+        } else {
+            Err(self)
+        }
+    }
 }
 
 impl Clone for SBError {
