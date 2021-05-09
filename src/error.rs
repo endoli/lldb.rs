@@ -6,8 +6,8 @@
 
 use super::stream::SBStream;
 use super::ErrorType;
-use std::ffi::CStr;
 use std::fmt;
+use std::{error::Error, ffi::CStr};
 use sys;
 
 /// A container for holding any error code.
@@ -94,6 +94,20 @@ impl fmt::Debug for SBError {
         write!(fmt, "SBError {{ {} }}", stream.data())
     }
 }
+
+impl fmt::Display for SBError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if !self.is_valid() {
+            write!(f, "Invalid SBError")
+        } else if !self.is_failure() {
+            write!(f, "SBError representing success")
+        } else {
+            write!(f, "SBError: {}", self.error_string())
+        }
+    }
+}
+
+impl Error for SBError {}
 
 impl Drop for SBError {
     fn drop(&mut self) {
