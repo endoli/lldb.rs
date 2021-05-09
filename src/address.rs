@@ -255,6 +255,14 @@ impl Drop for SBAddress {
 unsafe impl Send for SBAddress {}
 unsafe impl Sync for SBAddress {}
 
+impl PartialEq for SBAddress {
+    fn eq(&self, other: &Self) -> bool {
+        unsafe { sys::SBAddressIsEqual(self.raw, other.raw) }
+    }
+}
+
+impl Eq for SBAddress {}
+
 #[cfg(feature = "graphql")]
 graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
     field is_valid() -> bool {
@@ -290,3 +298,24 @@ graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
         self.line_entry()
     }
 });
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_equal() {
+        let sect = unsafe { sys::CreateSBSection() };
+        let a = SBAddress::maybe_wrap(unsafe { sys::CreateSBAddress2(sect, 42) }).unwrap();
+        let b = SBAddress::maybe_wrap(unsafe { sys::CreateSBAddress2(sect, 42) }).unwrap();
+        assert!(a == b);
+    }
+
+    #[test]
+    fn test_not_equal() {
+        let sect = unsafe { sys::CreateSBSection() };
+        let a = SBAddress::maybe_wrap(unsafe { sys::CreateSBAddress2(sect, 42) }).unwrap();
+        let b = SBAddress::maybe_wrap(unsafe { sys::CreateSBAddress2(sect, 111) }).unwrap();
+        assert!(a != b);
+    }
+}
