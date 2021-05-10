@@ -47,7 +47,7 @@ impl SBLineEntry {
         SBAddress::wrap(unsafe { sys::SBLineEntryGetEndAddress(self.raw) })
     }
 
-    /// The file (`SBFileSpec`) for this line entry.
+    /// The file [`SBFileSpec`] for this line entry.
     pub fn filespec(&self) -> SBFileSpec {
         SBFileSpec::wrap(unsafe { sys::SBLineEntryGetFileSpec(self.raw) })
     }
