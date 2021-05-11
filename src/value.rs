@@ -32,7 +32,7 @@ impl SBValue {
 
     /// Construct a new `Some(SBValue)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
-        if unsafe { sys::SBValueIsValid(raw) != 0 } {
+        if unsafe { sys::SBValueIsValid(raw) } {
             Some(SBValue { raw })
         } else {
             None
@@ -41,7 +41,7 @@ impl SBValue {
 
     /// Check whether or not this is a valid `SBValue` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBValueIsValid(self.raw) != 0 }
+        unsafe { sys::SBValueIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -91,12 +91,12 @@ impl SBValue {
 
     #[allow(missing_docs)]
     pub fn byte_size(&self) -> usize {
-        unsafe { sys::SBValueGetByteSize(self.raw) as usize }
+        unsafe { sys::SBValueGetByteSize(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_in_scope(&self) -> bool {
-        unsafe { sys::SBValueIsInScope(self.raw) != 0 }
+        unsafe { sys::SBValueIsInScope(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -131,7 +131,7 @@ impl SBValue {
 
     #[allow(missing_docs)]
     pub fn type_is_pointer_type(&self) -> bool {
-        unsafe { sys::SBValueTypeIsPointerType(self.raw) != 0 }
+        unsafe { sys::SBValueTypeIsPointerType(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -162,15 +162,7 @@ impl SBValue {
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
         let error = SBError::new();
-        let wp = unsafe {
-            sys::SBValueWatch(
-                self.raw,
-                resolve_location as u8,
-                read as u8,
-                write as u8,
-                error.raw,
-            )
-        };
+        let wp = unsafe { sys::SBValueWatch(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
             Ok(SBWatchpoint::wrap(wp))
         } else {
@@ -186,15 +178,8 @@ impl SBValue {
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
         let error = SBError::new();
-        let wp = unsafe {
-            sys::SBValueWatchPointee(
-                self.raw,
-                resolve_location as u8,
-                read as u8,
-                write as u8,
-                error.raw,
-            )
-        };
+        let wp =
+            unsafe { sys::SBValueWatchPointee(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
             Ok(SBWatchpoint::wrap(wp))
         } else {
@@ -236,7 +221,7 @@ impl SBValue {
     #[allow(missing_docs)]
     pub fn set_data(&self, data: &SBData) -> Result<(), SBError> {
         let error = SBError::new();
-        if unsafe { sys::SBValueSetData(self.raw, data.raw, error.raw) != 0 } {
+        if unsafe { sys::SBValueSetData(self.raw, data.raw, error.raw) } {
             Ok(())
         } else {
             Err(error)

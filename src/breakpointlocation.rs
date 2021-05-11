@@ -36,7 +36,7 @@ impl SBBreakpointLocation {
 
     /// Construct a new `Some(SBBreakpointLocation)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointLocationRef) -> Option<SBBreakpointLocation> {
-        if unsafe { sys::SBBreakpointLocationIsValid(raw) != 0 } {
+        if unsafe { sys::SBBreakpointLocationIsValid(raw) } {
             Some(SBBreakpointLocation { raw })
         } else {
             None
@@ -45,7 +45,7 @@ impl SBBreakpointLocation {
 
     /// Check whether or not this is a valid `SBBreakpointLocation` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBBreakpointLocationIsValid(self.raw) != 0 }
+        unsafe { sys::SBBreakpointLocationIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -65,12 +65,12 @@ impl SBBreakpointLocation {
 
     #[allow(missing_docs)]
     pub fn is_enabled(&self) -> bool {
-        unsafe { sys::SBBreakpointLocationIsEnabled(self.raw) != 0 }
+        unsafe { sys::SBBreakpointLocationIsEnabled(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_enabled(&self, enabled: bool) {
-        unsafe { sys::SBBreakpointLocationSetEnabled(self.raw, enabled as u8) }
+        unsafe { sys::SBBreakpointLocationSetEnabled(self.raw, enabled) }
     }
 
     #[allow(missing_docs)]
@@ -90,7 +90,7 @@ impl SBBreakpointLocation {
 
     #[allow(missing_docs)]
     pub fn is_resolved(&self) -> bool {
-        unsafe { sys::SBBreakpointLocationIsResolved(self.raw) != 0 }
+        unsafe { sys::SBBreakpointLocationIsResolved(self.raw) }
     }
 
     #[allow(missing_docs)]

@@ -37,7 +37,7 @@ impl SBFrame {
 
     /// Construct a new `Some(SBFrame)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFrameRef) -> Option<SBFrame> {
-        if unsafe { sys::SBFrameIsValid(raw) != 0 } {
+        if unsafe { sys::SBFrameIsValid(raw) } {
             Some(SBFrame { raw })
         } else {
             None
@@ -46,7 +46,7 @@ impl SBFrame {
 
     /// Check whether or not this is a valid `SBFrame` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBFrameIsValid(self.raw) != 0 }
+        unsafe { sys::SBFrameIsValid(self.raw) }
     }
 
     /// The zero-based stack frame index for this frame.
@@ -78,7 +78,7 @@ impl SBFrame {
 
     #[allow(missing_docs)]
     pub fn set_pc(&self, new_pc: lldb_addr_t) -> bool {
-        unsafe { sys::SBFrameSetPC(self.raw, new_pc) != 0 }
+        unsafe { sys::SBFrameSetPC(self.raw, new_pc) }
     }
 
     /// The stack pointer address as an unsigned integer.
@@ -169,7 +169,7 @@ impl SBFrame {
 
     /// Return `true` if this frame represents an inlined function.
     pub fn is_inlined(&self) -> bool {
-        unsafe { sys::SBFrameIsInlined(self.raw) != 0 }
+        unsafe { sys::SBFrameIsInlined(self.raw) }
     }
 
     /// Evaluate an expression within the context of this frame.

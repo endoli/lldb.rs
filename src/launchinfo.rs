@@ -6,7 +6,7 @@
 
 use super::filespec::SBFileSpec;
 use super::listener::SBListener;
-use super::{lldb_pid_t, LaunchFlags};
+use super::{lldb_pid_t, lldb_user_id_t, LaunchFlags};
 use std::ffi::{CStr, CString};
 use std::ptr;
 use sys;
@@ -39,7 +39,7 @@ impl SBLaunchInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn user_id(&self) -> u32 {
+    pub fn user_id(&self) -> lldb_user_id_t {
         unsafe { sys::SBLaunchInfoGetUserID(self.raw) }
     }
 
@@ -50,7 +50,7 @@ impl SBLaunchInfo {
 
     #[allow(missing_docs)]
     pub fn user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBLaunchInfoUserIDIsValid(self.raw) != 0 }
+        unsafe { sys::SBLaunchInfoUserIDIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -65,7 +65,7 @@ impl SBLaunchInfo {
 
     #[allow(missing_docs)]
     pub fn group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBLaunchInfoGroupIDIsValid(self.raw) != 0 }
+        unsafe { sys::SBLaunchInfoGroupIDIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -95,9 +95,7 @@ impl SBLaunchInfo {
     ///
     /// [`SBTarget::launch(...)`]: struct.SBTarget.html#method.launch
     pub fn set_executable_file(&self, filespec: &SBFileSpec, add_as_first_arg: bool) {
-        unsafe {
-            sys::SBLaunchInfoSetExecutableFile(self.raw, filespec.raw, add_as_first_arg as u8)
-        };
+        unsafe { sys::SBLaunchInfoSetExecutableFile(self.raw, filespec.raw, add_as_first_arg) };
     }
 
     /// Get the listener that will be used to receive process events.
@@ -166,12 +164,12 @@ impl SBLaunchInfo {
 
     #[allow(missing_docs)]
     pub fn shell_expand_arguments(&self) -> bool {
-        unsafe { sys::SBLaunchInfoGetShellExpandArguments(self.raw) != 0 }
+        unsafe { sys::SBLaunchInfoGetShellExpandArguments(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_shell_expand_arguments(&self, expand: bool) {
-        unsafe { sys::SBLaunchInfoSetShellExpandArguments(self.raw, expand as u8) };
+        unsafe { sys::SBLaunchInfoSetShellExpandArguments(self.raw, expand) };
     }
 
     #[allow(missing_docs)]
@@ -186,28 +184,23 @@ impl SBLaunchInfo {
 
     #[allow(missing_docs)]
     pub fn add_close_file_action(&self, fd: i32) -> bool {
-        unsafe { sys::SBLaunchInfoAddCloseFileAction(self.raw, fd) != 0 }
+        unsafe { sys::SBLaunchInfoAddCloseFileAction(self.raw, fd) }
     }
 
     #[allow(missing_docs)]
     pub fn add_duplicate_file_action(&self, fd: i32, dup_fd: i32) -> bool {
-        unsafe { sys::SBLaunchInfoAddDuplicateFileAction(self.raw, fd, dup_fd) != 0 }
+        unsafe { sys::SBLaunchInfoAddDuplicateFileAction(self.raw, fd, dup_fd) }
     }
 
     #[allow(missing_docs)]
     pub fn add_open_file_action(&self, fd: i32, path: &str, read: bool, write: bool) -> bool {
         let path = CString::new(path).unwrap();
-        unsafe {
-            sys::SBLaunchInfoAddOpenFileAction(self.raw, fd, path.as_ptr(), read as u8, write as u8)
-                != 0
-        }
+        unsafe { sys::SBLaunchInfoAddOpenFileAction(self.raw, fd, path.as_ptr(), read, write) }
     }
 
     #[allow(missing_docs)]
     pub fn add_suppress_file_action(&self, fd: i32, read: bool, write: bool) -> bool {
-        unsafe {
-            sys::SBLaunchInfoAddSuppressFileAction(self.raw, fd, read as u8, write as u8) != 0
-        }
+        unsafe { sys::SBLaunchInfoAddSuppressFileAction(self.raw, fd, read, write) }
     }
 
     #[allow(missing_docs)]
@@ -228,11 +221,11 @@ impl SBLaunchInfo {
 
     #[allow(missing_docs)]
     pub fn detach_on_error(&self) -> bool {
-        unsafe { sys::SBLaunchInfoGetDetachOnError(self.raw) != 0 }
+        unsafe { sys::SBLaunchInfoGetDetachOnError(self.raw) }
     }
     #[allow(missing_docs)]
     pub fn set_detach_on_error(&self, detach: bool) {
-        unsafe { sys::SBLaunchInfoSetDetachOnError(self.raw, detach as u8) };
+        unsafe { sys::SBLaunchInfoSetDetachOnError(self.raw, detach) };
     }
 }
 

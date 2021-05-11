@@ -157,7 +157,7 @@ impl SBDebugger {
     /// be processed.
     pub fn create(source_init_files: bool) -> SBDebugger {
         SBDebugger {
-            raw: unsafe { sys::SBDebuggerCreate2(source_init_files as u8) },
+            raw: unsafe { sys::SBDebuggerCreate2(source_init_files) },
         }
     }
 
@@ -167,7 +167,7 @@ impl SBDebugger {
     /// stepping or continuing without waiting for the process
     /// to change state.
     pub fn async(&self) -> bool {
-        unsafe { sys::SBDebuggerGetAsync(self.raw) != 0 }
+        unsafe { sys::SBDebuggerGetAsync(self.raw) }
     }
 
     /// Set the debugger to be in async mode or not.
@@ -176,7 +176,7 @@ impl SBDebugger {
     /// stepping or continuing without waiting for the process
     /// to change state.
     pub fn set_async(&self, async: bool) {
-        unsafe { sys::SBDebuggerSetAsync(self.raw, async as u8) }
+        unsafe { sys::SBDebuggerSetAsync(self.raw, async) }
     }
 
     #[allow(missing_docs)]
@@ -205,7 +205,7 @@ impl SBDebugger {
         let ret = unsafe {
             sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_mut_ptr())
         };
-        ret != 0
+        ret
     }
 
     /// Get the LLDB version string.
@@ -239,7 +239,7 @@ impl SBDebugger {
                 executable.as_ptr(),
                 target_triple.map_or(ptr::null(), |s| s.as_ptr()),
                 platform_name.map_or(ptr::null(), |s| s.as_ptr()),
-                add_dependent_modules as u8,
+                add_dependent_modules,
                 error.raw,
             )
         };

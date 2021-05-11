@@ -33,7 +33,7 @@ impl SBBroadcaster {
 
     /// Construct a new `Some(SBBroadcaster)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBroadcasterRef) -> Option<SBBroadcaster> {
-        if unsafe { sys::SBBroadcasterIsValid(raw) != 0 } {
+        if unsafe { sys::SBBroadcasterIsValid(raw) } {
             Some(SBBroadcaster { raw })
         } else {
             None
@@ -42,17 +42,17 @@ impl SBBroadcaster {
 
     /// Check whether or not this is a valid `SBBroadcaster` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBBroadcasterIsValid(self.raw) != 0 }
+        unsafe { sys::SBBroadcasterIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn broadcast_event_by_type(&self, event_type: u32, unique: bool) {
-        unsafe { sys::SBBroadcasterBroadcastEventByType(self.raw, event_type, unique as u8) };
+        unsafe { sys::SBBroadcasterBroadcastEventByType(self.raw, event_type, unique) };
     }
 
     #[allow(missing_docs)]
     pub fn broadcast_event(&self, event: &SBEvent, unique: bool) {
-        unsafe { sys::SBBroadcasterBroadcastEvent(self.raw, event.raw, unique as u8) };
+        unsafe { sys::SBBroadcasterBroadcastEvent(self.raw, event.raw, unique) };
     }
 
     #[allow(missing_docs)]
@@ -69,12 +69,12 @@ impl SBBroadcaster {
 
     #[allow(missing_docs)]
     pub fn event_type_has_listeners(&self, event_type: u32) -> bool {
-        unsafe { sys::SBBroadcasterEventTypeHasListeners(self.raw, event_type) != 0 }
+        unsafe { sys::SBBroadcasterEventTypeHasListeners(self.raw, event_type) }
     }
 
     #[allow(missing_docs)]
     pub fn remove_listener(&self, listener: &SBListener, event_mask: u32) -> bool {
-        unsafe { sys::SBBroadcasterRemoveListener(self.raw, listener.raw, event_mask) != 0 }
+        unsafe { sys::SBBroadcasterRemoveListener(self.raw, listener.raw, event_mask) }
     }
 }
 

@@ -25,7 +25,7 @@ impl SBLineEntry {
 
     /// Construct a new `Some(SBLineEntry)` or `None`.
     pub fn maybe_wrap(raw: sys::SBLineEntryRef) -> Option<SBLineEntry> {
-        if unsafe { sys::SBLineEntryIsValid(raw) != 0 } {
+        if unsafe { sys::SBLineEntryIsValid(raw) } {
             Some(SBLineEntry { raw })
         } else {
             None
@@ -34,7 +34,7 @@ impl SBLineEntry {
 
     /// Check whether or not this is a valid `SBLineEntry` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBLineEntryIsValid(self.raw) != 0 }
+        unsafe { sys::SBLineEntryIsValid(self.raw) }
     }
 
     /// The start address for this line entry.

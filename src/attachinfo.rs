@@ -50,9 +50,7 @@ impl SBAttachInfo {
     ///   called and an `eStateExited` process event will be delivered.
     pub fn new_with_path(path: &str, wait_for: bool, async: bool) -> SBAttachInfo {
         let p = CString::new(path).unwrap();
-        SBAttachInfo::wrap(unsafe {
-            sys::CreateSBAttachInfo4(p.as_ptr(), wait_for as u8, async as u8)
-        })
+        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, async) })
     }
 
     /// Construct a new `SBAttachInfo`.
@@ -83,12 +81,12 @@ impl SBAttachInfo {
 
     #[allow(missing_docs)]
     pub fn ignore_existing(&self) -> bool {
-        unsafe { sys::SBAttachInfoGetIgnoreExisting(self.raw) != 0 }
+        unsafe { sys::SBAttachInfoGetIgnoreExisting(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_ignore_existing(&self, b: bool) {
-        unsafe { sys::SBAttachInfoSetIgnoreExisting(self.raw, b as u8) }
+        unsafe { sys::SBAttachInfoSetIgnoreExisting(self.raw, b) }
     }
 
     #[allow(missing_docs)]

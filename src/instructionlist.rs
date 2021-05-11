@@ -25,7 +25,7 @@ impl SBInstructionList {
 
     /// Construct a new `Some(SBInstructionList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBInstructionListRef) -> Option<SBInstructionList> {
-        if unsafe { sys::SBInstructionListIsValid(raw) != 0 } {
+        if unsafe { sys::SBInstructionListIsValid(raw) } {
             Some(SBInstructionList { raw })
         } else {
             None
@@ -34,7 +34,7 @@ impl SBInstructionList {
 
     /// Check whether or not this is a valid `SBInstructionList` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBInstructionListIsValid(self.raw) != 0 }
+        unsafe { sys::SBInstructionListIsValid(self.raw) }
     }
 
     /// Is this instruction list empty?

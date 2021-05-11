@@ -29,7 +29,7 @@ impl SBError {
 
     /// Construct a new `Some(SBError)` or `None`.
     pub fn maybe_wrap(raw: sys::SBErrorRef) -> Option<SBError> {
-        if unsafe { sys::SBErrorIsValid(raw) != 0 } {
+        if unsafe { sys::SBErrorIsValid(raw) } {
             Some(SBError { raw })
         } else {
             None
@@ -38,7 +38,7 @@ impl SBError {
 
     /// Check whether or not this is a valid `SBError` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBErrorIsValid(self.raw) != 0 }
+        unsafe { sys::SBErrorIsValid(self.raw) }
     }
 
     /// Any textual error message associated with the error.
@@ -53,12 +53,12 @@ impl SBError {
 
     /// Does this error represent a failure?
     pub fn is_failure(&self) -> bool {
-        unsafe { sys::SBErrorFail(self.raw) != 0 }
+        unsafe { sys::SBErrorFail(self.raw) }
     }
 
     /// Does this error represent a success?
     pub fn is_success(&self) -> bool {
-        unsafe { sys::SBErrorSuccess(self.raw) != 0 }
+        unsafe { sys::SBErrorSuccess(self.raw) }
     }
 
     /// The underlying error code. Must be interpreted in conjunction

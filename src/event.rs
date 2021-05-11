@@ -24,7 +24,7 @@ impl SBEvent {
 
     /// Construct a new `Some(SBEvent)` or `None`.
     pub fn maybe_wrap(raw: sys::SBEventRef) -> Option<SBEvent> {
-        if unsafe { sys::SBEventIsValid(raw) != 0 } {
+        if unsafe { sys::SBEventIsValid(raw) } {
             Some(SBEvent { raw })
         } else {
             None
@@ -38,7 +38,7 @@ impl SBEvent {
 
     /// Check whether or not this is a valid `SBEvent` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBEventIsValid(self.raw) != 0 }
+        unsafe { sys::SBEventIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -73,7 +73,7 @@ impl SBEvent {
 
     #[allow(missing_docs)]
     pub fn broadcaster_matches_ref(&self, broadcaster: &SBBroadcaster) -> bool {
-        unsafe { sys::SBEventBroadcasterMatchesRef(self.raw, broadcaster.raw) != 0 }
+        unsafe { sys::SBEventBroadcasterMatchesRef(self.raw, broadcaster.raw) }
     }
 }
 

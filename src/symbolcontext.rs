@@ -29,7 +29,7 @@ impl SBSymbolContext {
 
     /// Construct a new `Some(SBSymbolContext)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolContextRef) -> Option<SBSymbolContext> {
-        if unsafe { sys::SBSymbolContextIsValid(raw) != 0 } {
+        if unsafe { sys::SBSymbolContextIsValid(raw) } {
             Some(SBSymbolContext { raw })
         } else {
             None
@@ -38,7 +38,7 @@ impl SBSymbolContext {
 
     /// Check whether or not this is a valid `SBSymbolContext` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBSymbolContextIsValid(self.raw) != 0 }
+        unsafe { sys::SBSymbolContextIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]

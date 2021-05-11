@@ -125,7 +125,7 @@ impl SBProcess {
 
     /// Construct a new `Some(SBProcess)` or `None`.
     pub fn maybe_wrap(raw: sys::SBProcessRef) -> Option<SBProcess> {
-        if unsafe { sys::SBProcessIsValid(raw) != 0 } {
+        if unsafe { sys::SBProcessIsValid(raw) } {
             Some(SBProcess { raw })
         } else {
             None
@@ -134,7 +134,7 @@ impl SBProcess {
 
     /// Check whether or not this is a valid `SBProcess` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBProcessIsValid(self.raw) != 0 }
+        unsafe { sys::SBProcessIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -329,22 +329,22 @@ impl SBProcess {
 
     /// Set the selected thread.
     pub fn set_selected_thread(&self, thread: &SBThread) -> bool {
-        unsafe { sys::SBProcessSetSelectedThread(self.raw, thread.raw) != 0 }
+        unsafe { sys::SBProcessSetSelectedThread(self.raw, thread.raw) }
     }
 
     /// Set the selected thread by ID.
     pub fn set_selected_thread_by_id(&self, thread_id: lldb_tid_t) -> bool {
-        unsafe { sys::SBProcessSetSelectedThreadByID(self.raw, thread_id) != 0 }
+        unsafe { sys::SBProcessSetSelectedThreadByID(self.raw, thread_id) }
     }
 
     /// Set the selected thread by index ID.
     pub fn set_selected_thread_by_index_id(&self, thread_index_id: u32) -> bool {
-        unsafe { sys::SBProcessSetSelectedThreadByIndexID(self.raw, thread_index_id) != 0 }
+        unsafe { sys::SBProcessSetSelectedThreadByIndexID(self.raw, thread_index_id) }
     }
 
     #[allow(missing_docs)]
     pub fn event_as_process_event(event: &SBEvent) -> Option<SBProcessEvent> {
-        if unsafe { sys::SBProcessEventIsProcessEvent(event.raw) != 0 } {
+        if unsafe { sys::SBProcessEventIsProcessEvent(event.raw) } {
             Some(SBProcessEvent::new(event))
         } else {
             None
@@ -473,11 +473,11 @@ impl<'e> SBProcessEvent<'e> {
     }
 
     pub fn interrupted(&self) -> bool {
-        unsafe { sys::SBProcessGetInterruptedFromEvent(self.event.raw) != 0 }
+        unsafe { sys::SBProcessGetInterruptedFromEvent(self.event.raw) }
     }
 
     pub fn restarted(&self) -> bool {
-        unsafe { sys::SBProcessGetRestartedFromEvent(self.event.raw) != 0 }
+        unsafe { sys::SBProcessGetRestartedFromEvent(self.event.raw) }
     }
 
     pub fn restarted_reasons(&self) -> SBProcessEventRestartedReasonIter {
@@ -501,7 +501,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
 
     fn next(&mut self) -> Option<&'d str> {
         let raw = self.event.event.raw;
-        if self.idx < unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(raw) as usize } {
+        if self.idx < unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(raw) } {
             let r = unsafe {
                 let s = CStr::from_ptr(sys::SBProcessGetRestartedReasonAtIndexFromEvent(
                     raw, self.idx,
@@ -519,8 +519,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz =
-            unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) } as usize;
+        let sz = unsafe { sys::SBProcessGetNumRestartedReasonsFromEvent(self.event.event.raw) };
         (sz - self.idx, Some(sz))
     }
 }

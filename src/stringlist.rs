@@ -26,7 +26,7 @@ impl SBStringList {
 
     /// Construct a new `Some(SBStringList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStringListRef) -> Option<SBStringList> {
-        if unsafe { sys::SBStringListIsValid(raw) != 0 } {
+        if unsafe { sys::SBStringListIsValid(raw) } {
             Some(SBStringList { raw })
         } else {
             None
@@ -35,7 +35,7 @@ impl SBStringList {
 
     /// Check whether or not this is a valid `SBStringList` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBStringListIsValid(self.raw) != 0 }
+        unsafe { sys::SBStringListIsValid(self.raw) }
     }
 
     /// Is this string list empty?

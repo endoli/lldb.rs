@@ -26,7 +26,7 @@ impl SBInstruction {
 
     /// Construct a new `Some(SBInstruction)` or `None`.
     pub fn maybe_wrap(raw: sys::SBInstructionRef) -> Option<SBInstruction> {
-        if unsafe { sys::SBInstructionIsValid(raw) != 0 } {
+        if unsafe { sys::SBInstructionIsValid(raw) } {
             Some(SBInstruction { raw })
         } else {
             None
@@ -35,7 +35,7 @@ impl SBInstruction {
 
     /// Check whether or not this is a valid `SBInstruction` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBInstructionIsValid(self.raw) != 0 }
+        unsafe { sys::SBInstructionIsValid(self.raw) }
     }
 
     /// Get the address of the instruction.
@@ -85,12 +85,12 @@ impl SBInstruction {
 
     #[allow(missing_docs)]
     pub fn is_branch(&self) -> bool {
-        unsafe { sys::SBInstructionDoesBranch(self.raw) != 0 }
+        unsafe { sys::SBInstructionDoesBranch(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn has_delay_slot(&self) -> bool {
-        unsafe { sys::SBInstructionHasDelaySlot(self.raw) != 0 }
+        unsafe { sys::SBInstructionHasDelaySlot(self.raw) }
     }
 }
 

@@ -25,7 +25,7 @@ impl SBSection {
 
     /// Construct a new `Some(SBSection)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSectionRef) -> Option<SBSection> {
-        if unsafe { sys::SBSectionIsValid(raw) != 0 } {
+        if unsafe { sys::SBSectionIsValid(raw) } {
             Some(SBSection { raw })
         } else {
             None
@@ -34,7 +34,7 @@ impl SBSection {
 
     /// Check whether or not this is a valid `SBSection` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBSectionIsValid(self.raw) != 0 }
+        unsafe { sys::SBSectionIsValid(self.raw) }
     }
 
     /// The section name.

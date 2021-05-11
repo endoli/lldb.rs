@@ -75,7 +75,7 @@ impl SBThread {
 
     /// Construct a new `Some(SBThread)` or `None`.
     pub fn maybe_wrap(raw: sys::SBThreadRef) -> Option<SBThread> {
-        if unsafe { sys::SBThreadIsValid(raw) != 0 } {
+        if unsafe { sys::SBThreadIsValid(raw) } {
             Some(SBThread { raw })
         } else {
             None
@@ -84,7 +84,7 @@ impl SBThread {
 
     /// Check whether or not this is a valid `SBThread` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBThreadIsValid(self.raw) != 0 }
+        unsafe { sys::SBThreadIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -184,7 +184,7 @@ impl SBThread {
     /// called (`step_over`, `step_into`, `step_out`, `step_instruction`,
     /// `run_to_address`), the thread will not be allowed to run and these
     /// functions will simply return.
-    pub fn suspend(&self) -> u8 {
+    pub fn suspend(&self) -> bool {
         let error: SBError = SBError::new();
         unsafe { sys::SBThreadSuspend(self.raw, error.raw) }
     }
@@ -192,7 +192,7 @@ impl SBThread {
     /// Set the user resume state for this to allow it to run again.
     ///
     /// See the discussion on `suspend` for further details.
-    pub fn resume(&self) -> u8 {
+    pub fn resume(&self) -> bool {
         let error: SBError = SBError::new();
         unsafe { sys::SBThreadResume(self.raw, error.raw) }
     }
@@ -201,12 +201,12 @@ impl SBThread {
     ///
     /// See the discussion on `suspend` for further details.
     pub fn is_suspended(&self) -> bool {
-        unsafe { sys::SBThreadIsSuspended(self.raw) != 0 }
+        unsafe { sys::SBThreadIsSuspended(self.raw) }
     }
 
     /// Is this thread stopped?
     pub fn is_stopped(&self) -> bool {
-        unsafe { sys::SBThreadIsStopped(self.raw) != 0 }
+        unsafe { sys::SBThreadIsStopped(self.raw) }
     }
 
     /// Get an iterator over the [frames] known to this thread instance.
@@ -237,7 +237,7 @@ impl SBThread {
     /// If the given event is a thread event, return it as an
     /// `SBThreadEvent`. Otherwise, return `None`.
     pub fn event_as_thread_event(event: &SBEvent) -> Option<SBThreadEvent> {
-        if unsafe { sys::SBThreadEventIsThreadEvent(event.raw) != 0 } {
+        if unsafe { sys::SBThreadEventIsThreadEvent(event.raw) } {
             Some(SBThreadEvent::new(event))
         } else {
             None

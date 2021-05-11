@@ -48,7 +48,7 @@ impl SBWatchpoint {
 
     /// Construct a new `Some(SBWatchpoint)` or `None`.
     pub fn maybe_wrap(raw: sys::SBWatchpointRef) -> Option<SBWatchpoint> {
-        if unsafe { sys::SBWatchpointIsValid(raw) != 0 } {
+        if unsafe { sys::SBWatchpointIsValid(raw) } {
             Some(SBWatchpoint { raw })
         } else {
             None
@@ -57,7 +57,7 @@ impl SBWatchpoint {
 
     /// Check whether or not this is a valid `SBWatchpoint` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBWatchpointIsValid(self.raw) != 0 }
+        unsafe { sys::SBWatchpointIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -86,18 +86,18 @@ impl SBWatchpoint {
     }
 
     #[allow(missing_docs)]
-    pub fn watch_size(&self) -> u32 {
+    pub fn watch_size(&self) -> usize {
         unsafe { sys::SBWatchpointGetWatchSize(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_enabled(&self) -> bool {
-        unsafe { sys::SBWatchpointIsEnabled(self.raw) != 0 }
+        unsafe { sys::SBWatchpointIsEnabled(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_enabled(&self, enabled: bool) {
-        unsafe { sys::SBWatchpointSetEnabled(self.raw, enabled as u8) }
+        unsafe { sys::SBWatchpointSetEnabled(self.raw, enabled) }
     }
 
     #[allow(missing_docs)]

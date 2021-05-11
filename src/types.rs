@@ -24,7 +24,7 @@ impl SBType {
 
     /// Construct a new `Some(SBType)` or `None`.
     pub fn maybe_wrap(raw: sys::SBTypeRef) -> Option<SBType> {
-        if unsafe { sys::SBTypeIsValid(raw) != 0 } {
+        if unsafe { sys::SBTypeIsValid(raw) } {
             Some(SBType { raw })
         } else {
             None
@@ -33,42 +33,42 @@ impl SBType {
 
     /// Check whether or not this is a valid `SBType` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBTypeIsValid(self.raw) != 0 }
+        unsafe { sys::SBTypeIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_pointer_type(&self) -> bool {
-        unsafe { sys::SBTypeIsPointerType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsPointerType(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_reference_type(&self) -> bool {
-        unsafe { sys::SBTypeIsReferenceType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsReferenceType(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_function_type(&self) -> bool {
-        unsafe { sys::SBTypeIsFunctionType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsFunctionType(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_polymorphic_class(&self) -> bool {
-        unsafe { sys::SBTypeIsPolymorphicClass(self.raw) != 0 }
+        unsafe { sys::SBTypeIsPolymorphicClass(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_array_type(&self) -> bool {
-        unsafe { sys::SBTypeIsArrayType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsArrayType(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_vector_type(&self) -> bool {
-        unsafe { sys::SBTypeIsVectorType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsVectorType(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn is_typedef_type(&self) -> bool {
-        unsafe { sys::SBTypeIsTypedefType(self.raw) != 0 }
+        unsafe { sys::SBTypeIsTypedefType(self.raw) }
     }
 
     #[allow(missing_docs)]

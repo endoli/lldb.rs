@@ -30,7 +30,7 @@ impl SBListener {
 
     /// Construct a new `Some(SBListener)` or `None`.
     pub fn maybe_wrap(raw: sys::SBListenerRef) -> Option<SBListener> {
-        if unsafe { sys::SBListenerIsValid(raw) != 0 } {
+        if unsafe { sys::SBListenerIsValid(raw) } {
             Some(SBListener { raw })
         } else {
             None
@@ -39,7 +39,7 @@ impl SBListener {
 
     /// Check whether or not this is a valid `SBListener` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBListenerIsValid(self.raw) != 0 }
+        unsafe { sys::SBListenerIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -74,7 +74,7 @@ impl SBListener {
                 debugger.raw,
                 bc.as_ptr(),
                 event_mask,
-            ) != 0
+            )
         }
     }
 
@@ -85,12 +85,12 @@ impl SBListener {
 
     #[allow(missing_docs)]
     pub fn stop_listening_for_events(&self, broadcaster: &SBBroadcaster, event_mask: u32) -> bool {
-        unsafe { sys::SBListenerStopListeningForEvents(self.raw, broadcaster.raw, event_mask) != 0 }
+        unsafe { sys::SBListenerStopListeningForEvents(self.raw, broadcaster.raw, event_mask) }
     }
 
     #[allow(missing_docs)]
     pub fn wait_for_event(&self, num_seconds: u32, event: &mut SBEvent) -> bool {
-        unsafe { sys::SBListenerWaitForEvent(self.raw, num_seconds, event.raw) != 0 }
+        unsafe { sys::SBListenerWaitForEvent(self.raw, num_seconds, event.raw) }
     }
 
     #[allow(missing_docs)]
@@ -106,7 +106,7 @@ impl SBListener {
                 num_seconds,
                 broadcaster.raw,
                 event.raw,
-            ) != 0
+            )
         }
     }
 
@@ -125,13 +125,13 @@ impl SBListener {
                 broadcaster.raw,
                 event_type_mask,
                 event.raw,
-            ) != 0
+            )
         }
     }
 
     #[allow(missing_docs)]
     pub fn peek_at_next_event(&self, event: &mut SBEvent) -> bool {
-        unsafe { sys::SBListenerPeekAtNextEvent(self.raw, event.raw) != 0 }
+        unsafe { sys::SBListenerPeekAtNextEvent(self.raw, event.raw) }
     }
 
     #[allow(missing_docs)]
@@ -141,7 +141,7 @@ impl SBListener {
         event: &mut SBEvent,
     ) -> bool {
         unsafe {
-            sys::SBListenerPeekAtNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw) != 0
+            sys::SBListenerPeekAtNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw)
         }
     }
 
@@ -158,13 +158,13 @@ impl SBListener {
                 broadcaster.raw,
                 event_type_mask,
                 event.raw,
-            ) != 0
+            )
         }
     }
 
     #[allow(missing_docs)]
     pub fn get_next_event(&self, event: &mut SBEvent) -> bool {
-        unsafe { sys::SBListenerGetNextEvent(self.raw, event.raw) != 0 }
+        unsafe { sys::SBListenerGetNextEvent(self.raw, event.raw) }
     }
 
     #[allow(missing_docs)]
@@ -173,9 +173,7 @@ impl SBListener {
         broadcaster: &SBBroadcaster,
         event: &mut SBEvent,
     ) -> bool {
-        unsafe {
-            sys::SBListenerGetNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw) != 0
-        }
+        unsafe { sys::SBListenerGetNextEventForBroadcaster(self.raw, broadcaster.raw, event.raw) }
     }
 
     #[allow(missing_docs)]
@@ -191,13 +189,13 @@ impl SBListener {
                 broadcaster.raw,
                 event_type_mask,
                 event.raw,
-            ) != 0
+            )
         }
     }
 
     #[allow(missing_docs)]
     pub fn handle_broadcast_event(&self, event: &SBEvent) -> bool {
-        unsafe { sys::SBListenerHandleBroadcastEvent(self.raw, event.raw) != 0 }
+        unsafe { sys::SBListenerHandleBroadcastEvent(self.raw, event.raw) }
     }
 }
 

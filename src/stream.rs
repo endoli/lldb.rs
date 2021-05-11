@@ -28,7 +28,7 @@ impl SBStream {
 
     /// Construct a new `Some(SBStream)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStreamRef) -> Option<SBStream> {
-        if unsafe { sys::SBStreamIsValid(raw) != 0 } {
+        if unsafe { sys::SBStreamIsValid(raw) } {
             Some(SBStream { raw })
         } else {
             None
@@ -37,7 +37,7 @@ impl SBStream {
 
     /// Check whether or not this is a valid `SBStream` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBStreamIsValid(self.raw) != 0 }
+        unsafe { sys::SBStreamIsValid(self.raw) }
     }
 
     /// If the stream is directed to a file, forget about the file and

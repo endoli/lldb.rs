@@ -26,22 +26,22 @@ impl SBExpressionOptions {
 
     /// Whether to unwind the expression stack on error.
     pub fn unwind_on_error(&self) -> bool {
-        unsafe { sys::SBExpressionOptionsGetUnwindOnError(self.raw) != 0 }
+        unsafe { sys::SBExpressionOptionsGetUnwindOnError(self.raw) }
     }
 
     /// Whether to unwind the expression stack on error.
     pub fn set_unwind_on_error(&self, unwind: bool) {
-        unsafe { sys::SBExpressionOptionsSetUnwindOnError(self.raw, unwind as u8) };
+        unsafe { sys::SBExpressionOptionsSetUnwindOnError(self.raw, unwind) };
     }
 
     /// Whether to ignore breakpoint hits while running expressions.
     pub fn ignore_breakpoints(&self) -> bool {
-        unsafe { sys::SBExpressionOptionsGetIgnoreBreakpoints(self.raw) != 0 }
+        unsafe { sys::SBExpressionOptionsGetIgnoreBreakpoints(self.raw) }
     }
 
     /// Whether to ignore breakpoint hits while running expressions.
     pub fn set_ignore_breakpoints(&self, ignore: bool) {
-        unsafe { sys::SBExpressionOptionsSetIgnoreBreakpoints(self.raw, ignore as u8) };
+        unsafe { sys::SBExpressionOptionsSetIgnoreBreakpoints(self.raw, ignore) };
     }
 }
 

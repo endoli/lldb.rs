@@ -30,7 +30,7 @@ impl SBQueueItem {
 
     /// Construct a new `Some(SBQueueItem)` or `None`.
     pub fn maybe_wrap(raw: sys::SBQueueItemRef) -> Option<SBQueueItem> {
-        if unsafe { sys::SBQueueItemIsValid(raw) != 0 } {
+        if unsafe { sys::SBQueueItemIsValid(raw) } {
             Some(SBQueueItem { raw })
         } else {
             None
@@ -39,7 +39,7 @@ impl SBQueueItem {
 
     /// Check whether or not this is a valid `SBQueueItem` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBQueueItemIsValid(self.raw) != 0 }
+        unsafe { sys::SBQueueItemIsValid(self.raw) }
     }
 
     /// The kind of this work item.

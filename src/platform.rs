@@ -47,7 +47,7 @@ impl SBPlatform {
 
     /// Construct a new `Some(SBPlatform)` or `None`.
     pub fn maybe_wrap(raw: sys::SBPlatformRef) -> Option<SBPlatform> {
-        if unsafe { sys::SBPlatformIsValid(raw) != 0 } {
+        if unsafe { sys::SBPlatformIsValid(raw) } {
             Some(SBPlatform { raw })
         } else {
             None
@@ -56,7 +56,7 @@ impl SBPlatform {
 
     /// Check whether or not this is a valid `SBPlatform` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBPlatformIsValid(self.raw) != 0 }
+        unsafe { sys::SBPlatformIsValid(self.raw) }
     }
 
     /// The working directory for this platform.

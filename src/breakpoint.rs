@@ -74,7 +74,7 @@ impl SBBreakpoint {
 
     /// Construct a new `Some(SBBreakpoint)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
-        if unsafe { sys::SBBreakpointIsValid(raw) != 0 } {
+        if unsafe { sys::SBBreakpointIsValid(raw) } {
             Some(SBBreakpoint { raw })
         } else {
             None
@@ -83,7 +83,7 @@ impl SBBreakpoint {
 
     /// Check whether or not this is a valid `SBBreakpoint` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBBreakpointIsValid(self.raw) != 0 }
+        unsafe { sys::SBBreakpointIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -93,27 +93,27 @@ impl SBBreakpoint {
 
     #[allow(missing_docs)]
     pub fn is_enabled(&self) -> bool {
-        unsafe { sys::SBBreakpointIsEnabled(self.raw) != 0 }
+        unsafe { sys::SBBreakpointIsEnabled(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_enabled(&self, enabled: bool) {
-        unsafe { sys::SBBreakpointSetEnabled(self.raw, enabled as u8) }
+        unsafe { sys::SBBreakpointSetEnabled(self.raw, enabled) }
     }
 
     #[allow(missing_docs)]
     pub fn is_oneshot(&self) -> bool {
-        unsafe { sys::SBBreakpointIsOneShot(self.raw) != 0 }
+        unsafe { sys::SBBreakpointIsOneShot(self.raw) }
     }
 
     #[allow(missing_docs)]
     pub fn set_oneshot(&self, oneshot: bool) {
-        unsafe { sys::SBBreakpointSetOneShot(self.raw, oneshot as u8) }
+        unsafe { sys::SBBreakpointSetOneShot(self.raw, oneshot) }
     }
 
     #[allow(missing_docs)]
     pub fn is_internal(&self) -> bool {
-        unsafe { sys::SBBreakpointIsInternal(self.raw) != 0 }
+        unsafe { sys::SBBreakpointIsInternal(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -134,7 +134,7 @@ impl SBBreakpoint {
     #[allow(missing_docs)]
     pub fn add_name(&self, name: &str) -> bool {
         let name = CString::new(name).unwrap();
-        unsafe { sys::SBBreakpointAddName(self.raw, name.as_ptr()) != 0 }
+        unsafe { sys::SBBreakpointAddName(self.raw, name.as_ptr()) }
     }
 
     #[allow(missing_docs)]
@@ -146,7 +146,7 @@ impl SBBreakpoint {
     #[allow(missing_docs)]
     pub fn matches_name(&self, name: &str) -> bool {
         let name = CString::new(name).unwrap();
-        unsafe { sys::SBBreakpointMatchesName(self.raw, name.as_ptr()) != 0 }
+        unsafe { sys::SBBreakpointMatchesName(self.raw, name.as_ptr()) }
     }
 
     #[allow(missing_docs)]
@@ -225,7 +225,7 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
     type Item = SBBreakpointLocation;
 
     fn next(&mut self) -> Option<SBBreakpointLocation> {
-        if self.idx < unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) as usize } {
+        if self.idx < unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) } {
             let r = SBBreakpointLocation::maybe_wrap(unsafe {
                 sys::SBBreakpointGetLocationAtIndex(self.breakpoint.raw, self.idx as u32)
             });
@@ -237,7 +237,7 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz = unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) } as usize;
+        let sz = unsafe { sys::SBBreakpointGetNumLocations(self.breakpoint.raw) };
         (sz - self.idx, Some(sz))
     }
 }

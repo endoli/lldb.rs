@@ -28,7 +28,7 @@ impl SBSymbol {
 
     /// Construct a new `Some(SBSymbol)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
-        if unsafe { sys::SBSymbolIsValid(raw) != 0 } {
+        if unsafe { sys::SBSymbolIsValid(raw) } {
             Some(SBSymbol { raw })
         } else {
             None
@@ -37,7 +37,7 @@ impl SBSymbol {
 
     /// Check whether or not this is a valid `SBSymbol` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBSymbolIsValid(self.raw) != 0 }
+        unsafe { sys::SBSymbolIsValid(self.raw) }
     }
 
     /// The name of this function.
@@ -119,13 +119,13 @@ impl SBSymbol {
     /// Is this symbol externally visible (exported) from the module that
     /// contains it?
     pub fn is_external(&self) -> bool {
-        unsafe { sys::SBSymbolIsExternal(self.raw) != 0 }
+        unsafe { sys::SBSymbolIsExternal(self.raw) }
     }
 
     /// Is this symbol synthetically created from information in the
     /// module that contains it?
     pub fn is_synthetic(&self) -> bool {
-        unsafe { sys::SBSymbolIsSynthetic(self.raw) != 0 }
+        unsafe { sys::SBSymbolIsSynthetic(self.raw) }
     }
 }
 

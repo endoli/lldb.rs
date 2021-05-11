@@ -25,7 +25,7 @@ impl SBBlock {
 
     /// Construct a new `Some(SBBlock)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBlockRef) -> Option<SBBlock> {
-        if unsafe { sys::SBBlockIsValid(raw) != 0 } {
+        if unsafe { sys::SBBlockIsValid(raw) } {
             Some(SBBlock { raw })
         } else {
             None
@@ -34,12 +34,12 @@ impl SBBlock {
 
     /// Check whether or not this is a valid `SBBlock` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBBlockIsValid(self.raw) != 0 }
+        unsafe { sys::SBBlockIsValid(self.raw) }
     }
 
     /// Does this block represent an inlined function?
     pub fn is_inlined(&self) -> bool {
-        unsafe { sys::SBBlockIsInlined(self.raw) != 0 }
+        unsafe { sys::SBBlockIsInlined(self.raw) }
     }
 
     /// Get the function name if this block represents an inlined function.

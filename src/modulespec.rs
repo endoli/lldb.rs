@@ -23,7 +23,7 @@ impl SBModuleSpec {
 
     /// Construct a new `Some(SBModuleSpec)` or `None`.
     pub fn maybe_wrap(raw: sys::SBModuleSpecRef) -> Option<SBModuleSpec> {
-        if unsafe { sys::SBModuleSpecIsValid(raw) != 0 } {
+        if unsafe { sys::SBModuleSpecIsValid(raw) } {
             Some(SBModuleSpec { raw })
         } else {
             None
@@ -32,7 +32,7 @@ impl SBModuleSpec {
 
     /// Check whether or not this is a valid `SBModuleSpec` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBModuleSpecIsValid(self.raw) != 0 }
+        unsafe { sys::SBModuleSpecIsValid(self.raw) }
     }
 
     /// The file for the module on the host system that is running LLDB.

@@ -50,7 +50,7 @@ impl SBQueue {
 
     /// Construct a new `Some(SBQueue)` or `None`.
     pub fn maybe_wrap(raw: sys::SBQueueRef) -> Option<SBQueue> {
-        if unsafe { sys::SBQueueIsValid(raw) != 0 } {
+        if unsafe { sys::SBQueueIsValid(raw) } {
             Some(SBQueue { raw })
         } else {
             None
@@ -59,7 +59,7 @@ impl SBQueue {
 
     /// Check whether or not this is a valid `SBQueue` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBQueueIsValid(self.raw) != 0 }
+        unsafe { sys::SBQueueIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]

@@ -26,7 +26,7 @@ impl SBValueList {
 
     /// Construct a new `Some(SBValueList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueListRef) -> Option<SBValueList> {
-        if unsafe { sys::SBValueListIsValid(raw) != 0 } {
+        if unsafe { sys::SBValueListIsValid(raw) } {
             Some(SBValueList { raw })
         } else {
             None
@@ -35,7 +35,7 @@ impl SBValueList {
 
     /// Check whether or not this is a valid `SBValueList` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBValueListIsValid(self.raw) != 0 }
+        unsafe { sys::SBValueListIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]

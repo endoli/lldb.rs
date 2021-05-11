@@ -59,7 +59,7 @@ impl SBAddress {
 
     /// Construct a new `Some(SBAddress)` or `None`.
     pub fn maybe_wrap(raw: sys::SBAddressRef) -> Option<SBAddress> {
-        if unsafe { sys::SBAddressIsValid(raw) != 0 } {
+        if unsafe { sys::SBAddressIsValid(raw) } {
             Some(SBAddress { raw })
         } else {
             None
@@ -68,7 +68,7 @@ impl SBAddress {
 
     /// Check whether or not this is a valid `SBAddress` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBAddressIsValid(self.raw) != 0 }
+        unsafe { sys::SBAddressIsValid(self.raw) }
     }
 
     /// The address that represents the address as it is found in the

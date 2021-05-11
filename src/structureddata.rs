@@ -25,7 +25,7 @@ impl SBStructuredData {
 
     /// Construct a new `Some(SBStructuredData)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStructuredDataRef) -> Option<SBStructuredData> {
-        if unsafe { sys::SBStructuredDataIsValid(raw) != 0 } {
+        if unsafe { sys::SBStructuredDataIsValid(raw) } {
             Some(SBStructuredData { raw })
         } else {
             None
@@ -34,7 +34,7 @@ impl SBStructuredData {
 
     /// Check whether or not this is a valid `SBStructuredData` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBStructuredDataIsValid(self.raw) != 0 }
+        unsafe { sys::SBStructuredDataIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -112,7 +112,7 @@ impl SBStructuredData {
     /// Return the boolean value if this data structure is a boolean type.
     pub fn boolean_value(&self) -> Option<bool> {
         if self.data_type() == sys::StructuredDataType::Boolean {
-            Some(unsafe { sys::SBStructuredDataGetBooleanValue(self.raw, false as u8) != 0 })
+            Some(unsafe { sys::SBStructuredDataGetBooleanValue(self.raw, false) })
         } else {
             None
         }

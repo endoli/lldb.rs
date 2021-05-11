@@ -30,7 +30,7 @@ impl SBFunction {
 
     /// Construct a new `Some(SBFunction)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFunctionRef) -> Option<SBFunction> {
-        if unsafe { sys::SBFunctionIsValid(raw) != 0 } {
+        if unsafe { sys::SBFunctionIsValid(raw) } {
             Some(SBFunction { raw })
         } else {
             None
@@ -39,7 +39,7 @@ impl SBFunction {
 
     /// Check whether or not this is a valid `SBFunction` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBFunctionIsValid(self.raw) != 0 }
+        unsafe { sys::SBFunctionIsValid(self.raw) }
     }
 
     /// The name of this function.
@@ -130,7 +130,7 @@ impl SBFunction {
     /// provide some guidance to the user about this.
     /// Returns false if unoptimized, or unknown.
     pub fn is_optimized(&self) -> bool {
-        unsafe { sys::SBFunctionGetIsOptimized(self.raw) != 0 }
+        unsafe { sys::SBFunctionGetIsOptimized(self.raw) }
     }
 }
 

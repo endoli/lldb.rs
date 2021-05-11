@@ -27,7 +27,7 @@ impl SBFileSpec {
 
     /// Construct a new `Some(SBFileSpec)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
-        if unsafe { sys::SBFileSpecIsValid(raw) != 0 } {
+        if unsafe { sys::SBFileSpecIsValid(raw) } {
             Some(SBFileSpec { raw })
         } else {
             None
@@ -36,12 +36,12 @@ impl SBFileSpec {
 
     /// Check whether or not this is a valid `SBFileSpec` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBFileSpecIsValid(self.raw) != 0 }
+        unsafe { sys::SBFileSpecIsValid(self.raw) }
     }
 
     /// Does this file exist?
     pub fn exists(&self) -> bool {
-        unsafe { sys::SBFileSpecExists(self.raw) != 0 }
+        unsafe { sys::SBFileSpecExists(self.raw) }
     }
 
     /// The path file name.

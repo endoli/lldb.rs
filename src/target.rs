@@ -95,7 +95,7 @@ impl SBTarget {
 
     /// Construct a new `Some(SBTarget)` or `None`.
     pub fn maybe_wrap(raw: sys::SBTargetRef) -> Option<SBTarget> {
-        if unsafe { sys::SBTargetIsValid(raw) != 0 } {
+        if unsafe { sys::SBTargetIsValid(raw) } {
             Some(SBTarget { raw })
         } else {
             None
@@ -104,7 +104,7 @@ impl SBTarget {
 
     /// Check whether or not this is a valid `SBTarget` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBTargetIsValid(self.raw) != 0 }
+        unsafe { sys::SBTargetIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
@@ -186,7 +186,7 @@ impl SBTarget {
 
     /// Add a module to the target.
     pub fn add_module(&self, module: &SBModule) -> bool {
-        unsafe { sys::SBTargetAddModule(self.raw, module.raw) != 0 }
+        unsafe { sys::SBTargetAddModule(self.raw, module.raw) }
     }
 
     /// Add a module to the target using an `SBModuleSpec`.
@@ -196,7 +196,7 @@ impl SBTarget {
 
     /// Remove a module from the target.
     pub fn remove_module(&self, module: &SBModule) -> bool {
-        unsafe { sys::SBTargetRemoveModule(self.raw, module.raw) != 0 }
+        unsafe { sys::SBTargetRemoveModule(self.raw, module.raw) }
     }
 
     /// Get the debugger controlling this target.
@@ -288,9 +288,8 @@ impl SBTarget {
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
         let error: SBError = SBError::new();
-        let watchpoint = unsafe {
-            sys::SBTargetWatchAddress(self.raw, addr, size, read as u8, write as u8, error.raw)
-        };
+        let watchpoint =
+            unsafe { sys::SBTargetWatchAddress(self.raw, addr, size, read, write, error.raw) };
         if error.is_success() {
             Ok(SBWatchpoint::wrap(watchpoint))
         } else {
@@ -350,7 +349,7 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn event_as_target_event(event: &SBEvent) -> Option<SBTargetEvent> {
-        if unsafe { sys::SBTargetEventIsTargetEvent(event.raw) != 0 } {
+        if unsafe { sys::SBTargetEventIsTargetEvent(event.raw) } {
             Some(SBTargetEvent::new(event))
         } else {
             None

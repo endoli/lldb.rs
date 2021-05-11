@@ -21,7 +21,7 @@ impl SBData {
 
     /// Construct a new `Some(SBData)` or `None`.
     pub fn maybe_wrap(raw: sys::SBDataRef) -> Option<SBData> {
-        if unsafe { sys::SBDataIsValid(raw) != 0 } {
+        if unsafe { sys::SBDataIsValid(raw) } {
             Some(SBData { raw })
         } else {
             None
@@ -30,7 +30,7 @@ impl SBData {
 
     /// Check whether or not this is a valid `SBData` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBDataIsValid(self.raw) != 0 }
+        unsafe { sys::SBDataIsValid(self.raw) }
     }
 }
 

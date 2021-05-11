@@ -24,7 +24,7 @@ impl SBSymbolContextList {
 
     /// Construct a new `Some(SBSymbolContextList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolContextListRef) -> Option<SBSymbolContextList> {
-        if unsafe { sys::SBSymbolContextListIsValid(raw) != 0 } {
+        if unsafe { sys::SBSymbolContextListIsValid(raw) } {
             Some(SBSymbolContextList { raw })
         } else {
             None
@@ -33,7 +33,7 @@ impl SBSymbolContextList {
 
     /// Check whether or not this is a valid `SBSymbolContextList`.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBSymbolContextListIsValid(self.raw) != 0 }
+        unsafe { sys::SBSymbolContextListIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]

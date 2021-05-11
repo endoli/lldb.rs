@@ -24,7 +24,7 @@ impl SBCompileUnit {
 
     /// Construct a new `Some(SBCompileUnit)` or `None`.
     pub fn maybe_wrap(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
-        if unsafe { sys::SBCompileUnitIsValid(raw) != 0 } {
+        if unsafe { sys::SBCompileUnitIsValid(raw) } {
             Some(SBCompileUnit { raw })
         } else {
             None
@@ -33,7 +33,7 @@ impl SBCompileUnit {
 
     /// Check whether or not this is a valid `SBCompileUnit` value.
     pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBCompileUnitIsValid(self.raw) != 0 }
+        unsafe { sys::SBCompileUnitIsValid(self.raw) }
     }
 
     /// The source file for the compile unit.
