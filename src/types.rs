@@ -5,7 +5,7 @@
 // except according to those terms.
 
 use super::stream::SBStream;
-use super::{BasicType, DescriptionLevel};
+use super::{BasicType, DescriptionLevel, TypeClass};
 use std::ffi::CStr;
 use std::fmt;
 use sys;
@@ -134,6 +134,11 @@ impl SBType {
                 _ => panic!("Invalid string?"),
             }
         }
+    }
+
+    #[allow(missing_docs)]
+    pub fn type_class(&self) -> TypeClass {
+        TypeClass::from_bits_truncate(unsafe { sys::SBTypeGetTypeClass(self.raw) })
     }
 }
 

@@ -6,7 +6,8 @@
 
 use super::filespec::SBFileSpec;
 use super::stream::SBStream;
-use super::LanguageType;
+use super::typelist::SBTypeList;
+use super::{LanguageType, TypeClass};
 use std::fmt;
 use sys;
 
@@ -39,6 +40,18 @@ impl SBCompileUnit {
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
         SBFileSpec::from(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
+    }
+
+    /// Get all types matching `type_mask` from the debug info in this
+    /// compile unit.
+    ///
+    /// `type_mask` is a bitfield consisting of one or more type classes.
+    /// This allows you to request only structure types, or only class,
+    /// structure, and union types. Passing in [`TypeClass::ANY`] will
+    /// return all types found in the debug information for this compile
+    /// unit.
+    pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
+        SBTypeList::from(unsafe { sys::SBCompileUnitGetTypes(self.raw, type_mask.bits()) })
     }
 
     /// The language for the compile unit.

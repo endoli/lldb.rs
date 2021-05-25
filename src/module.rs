@@ -8,7 +8,8 @@ use super::filespec::SBFileSpec;
 use super::section::SBSection;
 use super::stream::SBStream;
 use super::symbolcontextlist::SBSymbolContextList;
-use super::SymbolType;
+use super::typelist::SBTypeList;
+use super::{SymbolType, TypeClass};
 use std::ffi::CString;
 use std::fmt;
 use sys;
@@ -86,6 +87,18 @@ impl SBModule {
             sys::SBModuleFindSymbols(self.raw, name.as_ptr(), symbol_type)
         })
     }
+
+    /// Get all types matching `type_mask` from the debug info in this
+    /// module.
+    ///
+    /// `type_mask` is a bitfield consisting of one or more type classes.
+    /// This allows you to request only structure types, or only class,
+    /// structure, and union types. Passing in [`TypeClass::ANY`] will
+    /// return all types found in the debug information for this module.
+    pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
+        SBTypeList::from(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
+    }
+
 }
 
 /// Iterate over the [sections] in a [module].
