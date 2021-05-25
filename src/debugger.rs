@@ -202,9 +202,7 @@ impl SBDebugger {
             .map(|s| s.as_ptr())
             .chain(iter::once(ptr::null()))
             .collect();
-        unsafe {
-            sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_ptr())
-        }
+        unsafe { sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_ptr()) }
     }
 
     /// Get the LLDB version string.
