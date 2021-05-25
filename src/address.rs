@@ -8,7 +8,9 @@ use super::block::SBBlock;
 use super::compileunit::SBCompileUnit;
 use super::function::SBFunction;
 use super::lineentry::SBLineEntry;
+use super::lldb_addr_t;
 use super::module::SBModule;
+use super::section::SBSection;
 use super::stream::SBStream;
 use super::symbol::SBSymbol;
 use super::symbolcontext::SBSymbolContext;
@@ -66,6 +68,18 @@ impl SBAddress {
         unsafe { sys::SBAddressIsValid(self.raw) }
     }
 
+    /// Construct a new `SBAddress` from the given section and offset.
+    pub fn from_section_offset(section: &SBSection, offset: lldb_addr_t) -> SBAddress {
+        let a = unsafe { sys::CreateSBAddress2(section.raw, offset) };
+        SBAddress::from(a)
+    }
+
+    /// Create a new `SBAddress` from the given load address within the target.
+    pub fn from_load_address(load_addr: lldb_addr_t, target: &SBTarget) -> SBAddress {
+        let a = unsafe { sys::CreateSBAddress3(load_addr, target.raw) };
+        SBAddress::from(a)
+    }
+
     /// The address that represents the address as it is found in the
     /// object file that defines it.
     pub fn file_address(&self) -> u64 {
@@ -83,7 +97,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// * `resolve_scope`: Flags that specify what type of symbol context
     ///   is needed by the caller. These flags have constants starting
@@ -98,7 +112,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.
@@ -120,7 +134,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.
@@ -142,7 +156,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.
@@ -164,7 +178,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.
@@ -186,7 +200,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.
@@ -208,7 +222,7 @@ impl SBAddress {
     /// module, or it might refer to something on the stack or heap.
     /// This will only return valid values if the address has been
     /// resolved to a code or data address using
-    /// `SBAddress::set_load_address` or `SBTarget::resolve_load_address`.
+    /// [`SBAddress::from_load_address`] or [`SBTarget::resolve_load_address`].
     ///
     /// This grabs an individual object for a given address and
     /// is less efficient if you want more than one symbol related objects.

@@ -4,6 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use super::address::SBAddress;
 use super::attachinfo::SBAttachInfo;
 use super::breakpoint::SBBreakpoint;
 use super::broadcaster::SBBroadcaster;
@@ -214,6 +215,19 @@ impl SBTarget {
     /// Find the module for the given `SBFileSpec`.
     pub fn find_module(&self, file_spec: &SBFileSpec) -> Option<SBModule> {
         SBModule::maybe_wrap(unsafe { sys::SBTargetFindModule(self.raw, file_spec.raw) })
+    }
+
+    /// Resolve a current file address into a section offset address.
+    pub fn resolve_file_address(&self, file_addr: lldb_addr_t) -> Option<SBAddress> {
+        SBAddress::maybe_wrap(unsafe { sys::SBTargetResolveFileAddress(self.raw, file_addr) })
+    }
+
+    /// Resolve a current load address into a section offset address.
+    ///
+    /// The return value will be `None` if the `vm_addr` doesn't resolve to
+    /// a section within a module.
+    pub fn resolve_load_address(&self, vm_addr: lldb_addr_t) -> Option<SBAddress> {
+        SBAddress::maybe_wrap(unsafe { sys::SBTargetResolveLoadAddress(self.raw, vm_addr) })
     }
 
     #[allow(missing_docs)]
