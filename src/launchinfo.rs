@@ -6,7 +6,7 @@
 
 use super::filespec::SBFileSpec;
 use super::listener::SBListener;
-use super::{lldb_pid_t, lldb_user_id_t, LaunchFlags};
+use super::{lldb_pid_t, LaunchFlags};
 use std::ffi::{CStr, CString};
 use std::ptr;
 use sys;
@@ -39,7 +39,7 @@ impl SBLaunchInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn user_id(&self) -> lldb_user_id_t {
+    pub fn user_id(&self) -> u32 {
         unsafe { sys::SBLaunchInfoGetUserID(self.raw) }
     }
 

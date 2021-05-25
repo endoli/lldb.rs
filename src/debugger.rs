@@ -197,13 +197,13 @@ impl SBDebugger {
             .iter()
             .map(|&s| CString::new(s).unwrap())
             .collect();
-        let mut categories_ptr: Vec<_> = categories
+        let categories_ptr: Vec<_> = categories
             .iter()
             .map(|s| s.as_ptr())
             .chain(iter::once(ptr::null()))
             .collect();
         unsafe {
-            sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_mut_ptr())
+            sys::SBDebuggerEnableLog(self.raw, channel.as_ptr(), categories_ptr.as_ptr())
         }
     }
 

@@ -79,7 +79,7 @@ impl SBInstruction {
     }
 
     #[allow(missing_docs)]
-    pub fn byte_size(&self) -> u32 {
+    pub fn byte_size(&self) -> usize {
         unsafe { sys::SBInstructionGetByteSize(self.raw) }
     }
 

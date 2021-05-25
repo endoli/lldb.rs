@@ -62,7 +62,7 @@ impl SBStream {
     /// If this stream is not redirected to a file, this retrieves the
     /// length of the locally cached data.
     pub fn len(&self) -> usize {
-        unsafe { sys::SBStreamGetSize(self.raw) as usize }
+        unsafe { sys::SBStreamGetSize(self.raw) }
     }
 
     /// Is this stream empty?

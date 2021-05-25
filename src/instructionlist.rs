@@ -99,7 +99,7 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
     type Item = SBInstruction;
 
     fn next(&mut self) -> Option<SBInstruction> {
-        if self.idx < unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) as usize } {
+        if self.idx < unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) } {
             let r = SBInstruction::wrap(unsafe {
                 sys::SBInstructionListGetInstructionAtIndex(
                     self.instruction_list.raw,
@@ -114,7 +114,7 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz = unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) } as usize;
+        let sz = unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) };
         (sz - self.idx, Some(sz))
     }
 }

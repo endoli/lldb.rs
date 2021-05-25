@@ -127,7 +127,7 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
     type Item = SBSection;
 
     fn next(&mut self) -> Option<SBSection> {
-        if self.idx < unsafe { sys::SBSectionGetNumSubSections(self.section.raw) as usize } {
+        if self.idx < unsafe { sys::SBSectionGetNumSubSections(self.section.raw) } {
             let r = Some(SBSection::wrap(unsafe {
                 sys::SBSectionGetSubSectionAtIndex(self.section.raw, self.idx)
             }));
@@ -139,7 +139,7 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz = unsafe { sys::SBSectionGetNumSubSections(self.section.raw) } as usize;
+        let sz = unsafe { sys::SBSectionGetNumSubSections(self.section.raw) };
         (sz - self.idx, Some(sz))
     }
 }
