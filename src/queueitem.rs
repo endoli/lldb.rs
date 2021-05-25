@@ -23,11 +23,6 @@ pub struct SBQueueItem {
 }
 
 impl SBQueueItem {
-    /// Construct a new `SBQueueItem`.
-    pub fn wrap(raw: sys::SBQueueItemRef) -> SBQueueItem {
-        SBQueueItem { raw }
-    }
-
     /// Construct a new `Some(SBQueueItem)` or `None`.
     pub fn maybe_wrap(raw: sys::SBQueueItemRef) -> Option<SBQueueItem> {
         if unsafe { sys::SBQueueItemIsValid(raw) } {
@@ -83,6 +78,12 @@ impl Clone for SBQueueItem {
 impl Drop for SBQueueItem {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBQueueItem(self.raw) };
+    }
+}
+
+impl From<sys::SBQueueItemRef> for SBQueueItem {
+    fn from(raw: sys::SBQueueItemRef) -> SBQueueItem {
+        SBQueueItem { raw }
     }
 }
 

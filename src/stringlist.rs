@@ -17,11 +17,7 @@ pub struct SBStringList {
 impl SBStringList {
     /// Construct a new `SBStringList`.
     pub fn new() -> SBStringList {
-        SBStringList::wrap(unsafe { sys::CreateSBStringList() })
-    }
-    /// Construct a new `SBStringList`.
-    pub fn wrap(raw: sys::SBStringListRef) -> SBStringList {
-        SBStringList { raw }
+        SBStringList::from(unsafe { sys::CreateSBStringList() })
     }
 
     /// Construct a new `Some(SBStringList)` or `None`.
@@ -85,6 +81,12 @@ impl Default for SBStringList {
 impl Drop for SBStringList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBStringList(self.raw) };
+    }
+}
+
+impl From<sys::SBStringListRef> for SBStringList {
+    fn from(raw: sys::SBStringListRef) -> SBStringList {
+        SBStringList { raw }
     }
 }
 

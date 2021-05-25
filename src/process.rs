@@ -118,11 +118,6 @@ pub struct SBProcess {
 }
 
 impl SBProcess {
-    /// Construct a new `SBProcess`.
-    pub fn wrap(raw: sys::SBProcessRef) -> SBProcess {
-        SBProcess { raw }
-    }
-
     /// Construct a new `Some(SBProcess)` or `None`.
     pub fn maybe_wrap(raw: sys::SBProcessRef) -> Option<SBProcess> {
         if unsafe { sys::SBProcessIsValid(raw) } {
@@ -229,7 +224,7 @@ impl SBProcess {
     /// Kills the process and shuts down all threads that were spawned to
     /// track and monitor the process.
     pub fn destroy(&self) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessDestroy(self.raw) });
+        let error = SBError::from(unsafe { sys::SBProcessDestroy(self.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -239,7 +234,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn continue_execution(&self) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessContinue(self.raw) });
+        let error = SBError::from(unsafe { sys::SBProcessContinue(self.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -249,7 +244,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn stop(&self) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessStop(self.raw) });
+        let error = SBError::from(unsafe { sys::SBProcessStop(self.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -259,7 +254,7 @@ impl SBProcess {
 
     /// Same as calling `destroy`.
     pub fn kill(&self) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessKill(self.raw) });
+        let error = SBError::from(unsafe { sys::SBProcessKill(self.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -269,7 +264,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn detach(&self) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessDetach(self.raw) });
+        let error = SBError::from(unsafe { sys::SBProcessDetach(self.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -279,7 +274,7 @@ impl SBProcess {
 
     /// Send the process a Unix signal.
     pub fn signal(&self, signal: i32) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBProcessSignal(self.raw, signal) });
+        let error = SBError::from(unsafe { sys::SBProcessSignal(self.raw, signal) });
         if error.is_success() {
             Ok(())
         } else {
@@ -289,7 +284,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
-        SBBroadcaster::wrap(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
+        SBBroadcaster::from(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
     }
 
     /// Get an iterator over the [threads] known to this process instance.
@@ -324,7 +319,7 @@ impl SBProcess {
 
     /// Returns the currently selected thread.
     pub fn selected_thread(&self) -> SBThread {
-        SBThread::wrap(unsafe { sys::SBProcessGetSelectedThread(self.raw) })
+        SBThread::from(unsafe { sys::SBProcessGetSelectedThread(self.raw) })
     }
 
     /// Set the selected thread.
@@ -354,7 +349,7 @@ impl SBProcess {
     /// Save the state of the process in a core file (or mini dump on Windows).
     pub fn save_core(&self, file_name: &str) -> Result<(), SBError> {
         let f = CString::new(file_name).unwrap();
-        let error = SBError::wrap(unsafe { sys::SBProcessSaveCore(self.raw, f.as_ptr()) });
+        let error = SBError::from(unsafe { sys::SBProcessSaveCore(self.raw, f.as_ptr()) });
         if error.is_success() {
             Ok(())
         } else {
@@ -364,7 +359,7 @@ impl SBProcess {
 
     #[allow(missing_docs)]
     pub fn process_info(&self) -> SBProcessInfo {
-        SBProcessInfo::wrap(unsafe { sys::SBProcessGetProcessInfo(self.raw) })
+        SBProcessInfo::from(unsafe { sys::SBProcessGetProcessInfo(self.raw) })
     }
 }
 
@@ -382,7 +377,7 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
 
     fn next(&mut self) -> Option<SBThread> {
         if self.idx < unsafe { sys::SBProcessGetNumThreads(self.process.raw) as usize } {
-            let r = Some(SBThread::wrap(unsafe {
+            let r = Some(SBThread::from(unsafe {
                 sys::SBProcessGetThreadAtIndex(self.process.raw, self.idx)
             }));
             self.idx += 1;
@@ -412,7 +407,7 @@ impl<'d> Iterator for SBProcessQueueIter<'d> {
 
     fn next(&mut self) -> Option<SBQueue> {
         if self.idx < unsafe { sys::SBProcessGetNumQueues(self.process.raw) as usize } {
-            let r = Some(SBQueue::wrap(unsafe {
+            let r = Some(SBQueue::from(unsafe {
                 sys::SBProcessGetQueueAtIndex(self.process.raw, self.idx)
             }));
             self.idx += 1;
@@ -450,6 +445,12 @@ impl Drop for SBProcess {
     }
 }
 
+impl From<sys::SBProcessRef> for SBProcess {
+    fn from(raw: sys::SBProcessRef) -> SBProcess {
+        SBProcess { raw }
+    }
+}
+
 unsafe impl Send for SBProcess {}
 unsafe impl Sync for SBProcess {}
 
@@ -469,7 +470,7 @@ impl<'e> SBProcessEvent<'e> {
     }
 
     pub fn process(&self) -> SBProcess {
-        SBProcess::wrap(unsafe { sys::SBProcessGetProcessFromEvent(self.event.raw) })
+        SBProcess::from(unsafe { sys::SBProcessGetProcessFromEvent(self.event.raw) })
     }
 
     pub fn interrupted(&self) -> bool {

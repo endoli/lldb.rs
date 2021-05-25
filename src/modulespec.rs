@@ -16,11 +16,6 @@ pub struct SBModuleSpec {
 }
 
 impl SBModuleSpec {
-    /// Construct a new `SBModuleSpec`.
-    pub fn wrap(raw: sys::SBModuleSpecRef) -> SBModuleSpec {
-        SBModuleSpec { raw }
-    }
-
     /// Construct a new `Some(SBModuleSpec)` or `None`.
     pub fn maybe_wrap(raw: sys::SBModuleSpecRef) -> Option<SBModuleSpec> {
         if unsafe { sys::SBModuleSpecIsValid(raw) } {
@@ -40,7 +35,7 @@ impl SBModuleSpec {
     /// This can differ from the path on the platform since we might
     /// be doing remote debugging.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBModuleSpecGetFileSpec(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBModuleSpecGetFileSpec(self.raw) })
     }
 
     /// Set the file for the module on the host system that is running LLDB.
@@ -58,7 +53,7 @@ impl SBModuleSpec {
     /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBModuleSpecGetPlatformFileSpec(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBModuleSpecGetPlatformFileSpec(self.raw) })
     }
 
     /// Set the file for the module as it is known on the remote system which
@@ -127,6 +122,12 @@ impl fmt::Debug for SBModuleSpec {
 impl Drop for SBModuleSpec {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBModuleSpec(self.raw) };
+    }
+}
+
+impl From<sys::SBModuleSpecRef> for SBModuleSpec {
+    fn from(raw: sys::SBModuleSpecRef) -> SBModuleSpec {
+        SBModuleSpec { raw }
     }
 }
 

@@ -29,11 +29,6 @@ pub struct SBBreakpointLocation {
 }
 
 impl SBBreakpointLocation {
-    /// Construct a new `SBBreakpointLocation`.
-    pub fn wrap(raw: sys::SBBreakpointLocationRef) -> SBBreakpointLocation {
-        SBBreakpointLocation { raw }
-    }
-
     /// Construct a new `Some(SBBreakpointLocation)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointLocationRef) -> Option<SBBreakpointLocation> {
         if unsafe { sys::SBBreakpointLocationIsValid(raw) } {
@@ -95,7 +90,7 @@ impl SBBreakpointLocation {
 
     #[allow(missing_docs)]
     pub fn breakpoint(&self) -> SBBreakpoint {
-        SBBreakpoint::wrap(unsafe { sys::SBBreakpointLocationGetBreakpoint(self.raw) })
+        SBBreakpoint::from(unsafe { sys::SBBreakpointLocationGetBreakpoint(self.raw) })
     }
 }
 
@@ -120,6 +115,12 @@ impl fmt::Debug for SBBreakpointLocation {
 impl Drop for SBBreakpointLocation {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBreakpointLocation(self.raw) };
+    }
+}
+
+impl From<sys::SBBreakpointLocationRef> for SBBreakpointLocation {
+    fn from(raw: sys::SBBreakpointLocationRef) -> SBBreakpointLocation {
+        SBBreakpointLocation { raw }
     }
 }
 

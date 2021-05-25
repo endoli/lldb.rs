@@ -17,11 +17,6 @@ pub struct SBSymbolContextList {
 }
 
 impl SBSymbolContextList {
-    /// Construct a new `SBSymbolContextList`.
-    pub fn wrap(raw: sys::SBSymbolContextListRef) -> SBSymbolContextList {
-        SBSymbolContextList { raw }
-    }
-
     /// Construct a new `Some(SBSymbolContextList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolContextListRef) -> Option<SBSymbolContextList> {
         if unsafe { sys::SBSymbolContextListIsValid(raw) } {
@@ -86,6 +81,12 @@ impl Drop for SBSymbolContextList {
     }
 }
 
+impl From<sys::SBSymbolContextListRef> for SBSymbolContextList {
+    fn from(raw: sys::SBSymbolContextListRef) -> SBSymbolContextList {
+        SBSymbolContextList { raw }
+    }
+}
+
 unsafe impl Send for SBSymbolContextList {}
 unsafe impl Sync for SBSymbolContextList {}
 
@@ -103,7 +104,7 @@ impl<'d> Iterator for SBSymbolContextListIter<'d> {
 
     fn next(&mut self) -> Option<SBSymbolContext> {
         if self.idx < unsafe { sys::SBSymbolContextListGetSize(self.context_list.raw) as usize } {
-            let r = SBSymbolContext::wrap(unsafe {
+            let r = SBSymbolContext::from(unsafe {
                 sys::SBSymbolContextListGetContextAtIndex(self.context_list.raw, self.idx as u32)
             });
             self.idx += 1;

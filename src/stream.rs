@@ -18,12 +18,7 @@ pub struct SBStream {
 impl SBStream {
     /// Construct a new `SBStream`.
     pub fn new() -> SBStream {
-        SBStream::wrap(unsafe { sys::CreateSBStream() })
-    }
-
-    /// Construct a new `SBStream`.
-    pub fn wrap(raw: sys::SBStreamRef) -> SBStream {
-        SBStream { raw }
+        SBStream::from(unsafe { sys::CreateSBStream() })
     }
 
     /// Construct a new `Some(SBStream)` or `None`.
@@ -80,6 +75,12 @@ impl Default for SBStream {
 impl Drop for SBStream {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBStream(self.raw) };
+    }
+}
+
+impl From<sys::SBStreamRef> for SBStream {
+    fn from(raw: sys::SBStreamRef) -> SBStream {
+        SBStream { raw }
     }
 }
 

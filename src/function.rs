@@ -23,11 +23,6 @@ pub struct SBFunction {
 }
 
 impl SBFunction {
-    /// Construct a new `SBFunction`.
-    pub fn wrap(raw: sys::SBFunctionRef) -> SBFunction {
-        SBFunction { raw }
-    }
-
     /// Construct a new `Some(SBFunction)` or `None`.
     pub fn maybe_wrap(raw: sys::SBFunctionRef) -> Option<SBFunction> {
         if unsafe { sys::SBFunctionIsValid(raw) } {
@@ -83,7 +78,7 @@ impl SBFunction {
             DisassemblyFlavor::Default => None,
             DisassemblyFlavor::Intel => CString::new("intel").ok(),
         };
-        SBInstructionList::wrap(unsafe {
+        SBInstructionList::from(unsafe {
             sys::SBFunctionGetInstructions2(
                 self.raw,
                 target.raw,
@@ -94,12 +89,12 @@ impl SBFunction {
 
     /// Get the address of the start of this function.
     pub fn start_address(&self) -> SBAddress {
-        SBAddress::wrap(unsafe { sys::SBFunctionGetStartAddress(self.raw) })
+        SBAddress::from(unsafe { sys::SBFunctionGetStartAddress(self.raw) })
     }
 
     /// Get the address of the end of this function.
     pub fn end_address(&self) -> SBAddress {
-        SBAddress::wrap(unsafe { sys::SBFunctionGetEndAddress(self.raw) })
+        SBAddress::from(unsafe { sys::SBFunctionGetEndAddress(self.raw) })
     }
 
     /// Get the size of the function prologue, in bytes.
@@ -109,12 +104,12 @@ impl SBFunction {
 
     /// The return type for this function.
     pub fn return_type(&self) -> SBType {
-        SBType::wrap(unsafe { sys::SBFunctionGetType(self.raw) })
+        SBType::from(unsafe { sys::SBFunctionGetType(self.raw) })
     }
 
     /// Get the top level lexical block for this function.
     pub fn block(&self) -> SBBlock {
-        SBBlock::wrap(unsafe { sys::SBFunctionGetBlock(self.raw) })
+        SBBlock::from(unsafe { sys::SBFunctionGetBlock(self.raw) })
     }
 
     /// The language that this function was written in.
@@ -153,6 +148,12 @@ impl fmt::Debug for SBFunction {
 impl Drop for SBFunction {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBFunction(self.raw) };
+    }
+}
+
+impl From<sys::SBFunctionRef> for SBFunction {
+    fn from(raw: sys::SBFunctionRef) -> SBFunction {
+        SBFunction { raw }
     }
 }
 

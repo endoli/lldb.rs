@@ -20,12 +20,7 @@ pub struct SBListener {
 impl SBListener {
     /// Construct a new `SBListener`.
     pub fn new() -> SBListener {
-        SBListener::wrap(unsafe { sys::CreateSBListener() })
-    }
-
-    /// Construct a new `SBListener`.
-    pub fn wrap(raw: sys::SBListenerRef) -> SBListener {
-        SBListener { raw }
+        SBListener::from(unsafe { sys::CreateSBListener() })
     }
 
     /// Construct a new `Some(SBListener)` or `None`.
@@ -216,6 +211,12 @@ impl Default for SBListener {
 impl Drop for SBListener {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBListener(self.raw) };
+    }
+}
+
+impl From<sys::SBListenerRef> for SBListener {
+    fn from(raw: sys::SBListenerRef) -> SBListener {
+        SBListener { raw }
     }
 }
 

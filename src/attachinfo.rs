@@ -24,12 +24,12 @@ pub struct SBAttachInfo {
 impl SBAttachInfo {
     /// Construct a new `SBAttachInfo`.
     pub fn new() -> SBAttachInfo {
-        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo() })
+        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo() })
     }
 
     /// Construct a new `SBAttachInfo` for a given process ID (pid).
     pub fn new_with_pid(pid: lldb_pid_t) -> SBAttachInfo {
-        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo2(pid) })
+        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo2(pid) })
     }
 
     /// Attach to a process by name.
@@ -50,12 +50,7 @@ impl SBAttachInfo {
     ///   called and an `eStateExited` process event will be delivered.
     pub fn new_with_path(path: &str, wait_for: bool, async: bool) -> SBAttachInfo {
         let p = CString::new(path).unwrap();
-        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, async) })
-    }
-
-    /// Construct a new `SBAttachInfo`.
-    pub fn wrap(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
-        SBAttachInfo { raw }
+        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, async) })
     }
 
     #[allow(missing_docs)]
@@ -106,7 +101,7 @@ impl SBAttachInfo {
     /// returned (`SBListener::is_valid()` will return `false`). If a listener
     /// has been set, then the valid listener object will be returned.
     pub fn listener(&self) -> SBListener {
-        SBListener::wrap(unsafe { sys::SBAttachInfoGetListener(self.raw) })
+        SBListener::from(unsafe { sys::SBAttachInfoGetListener(self.raw) })
     }
 
     /// Set the listener that will be used to receive process events.
@@ -140,6 +135,12 @@ impl Default for SBAttachInfo {
 impl Drop for SBAttachInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBAttachInfo(self.raw) };
+    }
+}
+
+impl From<sys::SBAttachInfoRef> for SBAttachInfo {
+    fn from(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
+        SBAttachInfo { raw }
     }
 }
 

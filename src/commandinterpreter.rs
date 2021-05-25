@@ -13,12 +13,7 @@ pub struct SBCommandInterpreter {
     pub raw: sys::SBCommandInterpreterRef,
 }
 
-impl SBCommandInterpreter {
-    /// Construct a new `SBCommandInterpreter`.
-    pub fn wrap(raw: sys::SBCommandInterpreterRef) -> SBCommandInterpreter {
-        SBCommandInterpreter { raw }
-    }
-}
+impl SBCommandInterpreter {}
 
 impl Clone for SBCommandInterpreter {
     fn clone(&self) -> SBCommandInterpreter {
@@ -31,6 +26,12 @@ impl Clone for SBCommandInterpreter {
 impl Drop for SBCommandInterpreter {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBCommandInterpreter(self.raw) };
+    }
+}
+
+impl From<sys::SBCommandInterpreterRef> for SBCommandInterpreter {
+    fn from(raw: sys::SBCommandInterpreterRef) -> SBCommandInterpreter {
+        SBCommandInterpreter { raw }
     }
 }
 

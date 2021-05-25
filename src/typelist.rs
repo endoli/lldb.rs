@@ -16,11 +16,6 @@ pub struct SBTypeList {
 }
 
 impl SBTypeList {
-    /// Construct a new `SBTypeList`.
-    pub fn wrap(raw: sys::SBTypeListRef) -> SBTypeList {
-        SBTypeList { raw }
-    }
-
     #[allow(missing_docs)]
     pub fn append(&self, t: &SBType) {
         unsafe { sys::SBTypeListAppend(self.raw, t.raw) };
@@ -54,6 +49,12 @@ impl Drop for SBTypeList {
     }
 }
 
+impl From<sys::SBTypeListRef> for SBTypeList {
+    fn from(raw: sys::SBTypeListRef) -> SBTypeList {
+        SBTypeList { raw }
+    }
+}
+
 unsafe impl Send for SBTypeList {}
 unsafe impl Sync for SBTypeList {}
 
@@ -71,7 +72,7 @@ impl<'d> Iterator for SBTypeListIter<'d> {
 
     fn next(&mut self) -> Option<SBType> {
         if self.idx < unsafe { sys::SBTypeListGetSize(self.type_list.raw) as usize } {
-            let r = SBType::wrap(unsafe {
+            let r = SBType::from(unsafe {
                 sys::SBTypeListGetTypeAtIndex(self.type_list.raw, self.idx as u32)
             });
             self.idx += 1;

@@ -43,11 +43,6 @@ pub struct SBQueue {
 }
 
 impl SBQueue {
-    /// Construct a new `SBQueue`.
-    pub fn wrap(raw: sys::SBQueueRef) -> SBQueue {
-        SBQueue { raw }
-    }
-
     /// Construct a new `Some(SBQueue)` or `None`.
     pub fn maybe_wrap(raw: sys::SBQueueRef) -> Option<SBQueue> {
         if unsafe { sys::SBQueueIsValid(raw) } {
@@ -64,7 +59,7 @@ impl SBQueue {
 
     #[allow(missing_docs)]
     pub fn process(&self) -> SBProcess {
-        SBProcess::wrap(unsafe { sys::SBQueueGetProcess(self.raw) })
+        SBProcess::from(unsafe { sys::SBQueueGetProcess(self.raw) })
     }
 
     /// Returns a unique identifying number for this queue that will not
@@ -134,6 +129,12 @@ impl Drop for SBQueue {
     }
 }
 
+impl From<sys::SBQueueRef> for SBQueue {
+    fn from(raw: sys::SBQueueRef) -> SBQueue {
+        SBQueue { raw }
+    }
+}
+
 unsafe impl Send for SBQueue {}
 unsafe impl Sync for SBQueue {}
 
@@ -151,7 +152,7 @@ impl<'d> Iterator for SBQueueThreadIter<'d> {
 
     fn next(&mut self) -> Option<SBThread> {
         if self.idx < unsafe { sys::SBQueueGetNumThreads(self.queue.raw) as usize } {
-            let r = Some(SBThread::wrap(unsafe {
+            let r = Some(SBThread::from(unsafe {
                 sys::SBQueueGetThreadAtIndex(self.queue.raw, self.idx as u32)
             }));
             self.idx += 1;
@@ -183,7 +184,7 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
 
     fn next(&mut self) -> Option<SBQueueItem> {
         if self.idx < unsafe { sys::SBQueueGetNumPendingItems(self.queue.raw) as usize } {
-            let r = Some(SBQueueItem::wrap(unsafe {
+            let r = Some(SBQueueItem::from(unsafe {
                 sys::SBQueueGetPendingItemAtIndex(self.queue.raw, self.idx as u32)
             }));
             self.idx += 1;

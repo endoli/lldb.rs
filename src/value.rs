@@ -25,11 +25,6 @@ pub struct SBValue {
 }
 
 impl SBValue {
-    /// Construct a new `SBValue`.
-    pub fn wrap(raw: sys::SBValueRef) -> SBValue {
-        SBValue { raw }
-    }
-
     /// Construct a new `Some(SBValue)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
         if unsafe { sys::SBValueIsValid(raw) } {
@@ -136,22 +131,22 @@ impl SBValue {
 
     #[allow(missing_docs)]
     pub fn target(&self) -> SBTarget {
-        SBTarget::wrap(unsafe { sys::SBValueGetTarget(self.raw) })
+        SBTarget::from(unsafe { sys::SBValueGetTarget(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn process(&self) -> SBProcess {
-        SBProcess::wrap(unsafe { sys::SBValueGetProcess(self.raw) })
+        SBProcess::from(unsafe { sys::SBValueGetProcess(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn thread(&self) -> SBThread {
-        SBThread::wrap(unsafe { sys::SBValueGetThread(self.raw) })
+        SBThread::from(unsafe { sys::SBValueGetThread(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn frame(&self) -> SBFrame {
-        SBFrame::wrap(unsafe { sys::SBValueGetFrame(self.raw) })
+        SBFrame::from(unsafe { sys::SBValueGetFrame(self.raw) })
     }
 
     /// Find and watch a variable.
@@ -164,7 +159,7 @@ impl SBValue {
         let error = SBError::new();
         let wp = unsafe { sys::SBValueWatch(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
-            Ok(SBWatchpoint::wrap(wp))
+            Ok(SBWatchpoint::from(wp))
         } else {
             Err(error)
         }
@@ -181,7 +176,7 @@ impl SBValue {
         let wp =
             unsafe { sys::SBValueWatchPointee(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
-            Ok(SBWatchpoint::wrap(wp))
+            Ok(SBWatchpoint::from(wp))
         } else {
             Err(error)
         }
@@ -263,6 +258,12 @@ impl fmt::Debug for SBValue {
 impl Drop for SBValue {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBValue(self.raw) };
+    }
+}
+
+impl From<sys::SBValueRef> for SBValue {
+    fn from(raw: sys::SBValueRef) -> SBValue {
+        SBValue { raw }
     }
 }
 

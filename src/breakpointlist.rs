@@ -19,12 +19,7 @@ pub struct SBBreakpointList {
 impl SBBreakpointList {
     /// Construct a new `SBBreakpointList`.
     pub fn new(target: &SBTarget) -> SBBreakpointList {
-        SBBreakpointList::wrap(unsafe { sys::CreateSBBreakpointList(target.raw) })
-    }
-
-    /// Construct a new `SBBreakpointList`.
-    pub fn wrap(raw: sys::SBBreakpointListRef) -> SBBreakpointList {
-        SBBreakpointList { raw }
+        SBBreakpointList::from(unsafe { sys::CreateSBBreakpointList(target.raw) })
     }
 
     #[allow(missing_docs)]
@@ -80,6 +75,12 @@ impl Drop for SBBreakpointList {
     }
 }
 
+impl From<sys::SBBreakpointListRef> for SBBreakpointList {
+    fn from(raw: sys::SBBreakpointListRef) -> SBBreakpointList {
+        SBBreakpointList { raw }
+    }
+}
+
 unsafe impl Send for SBBreakpointList {}
 unsafe impl Sync for SBBreakpointList {}
 
@@ -97,7 +98,7 @@ impl<'d> Iterator for SBBreakpointListIter<'d> {
 
     fn next(&mut self) -> Option<SBBreakpoint> {
         if self.idx < unsafe { sys::SBBreakpointListGetSize(self.breakpoint_list.raw) } {
-            let r = SBBreakpoint::wrap(unsafe {
+            let r = SBBreakpoint::from(unsafe {
                 sys::SBBreakpointListGetBreakpointAtIndex(self.breakpoint_list.raw, self.idx)
             });
             self.idx += 1;

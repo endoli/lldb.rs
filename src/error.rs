@@ -19,12 +19,7 @@ pub struct SBError {
 impl SBError {
     /// Construct a new `SBError`.
     pub fn new() -> SBError {
-        SBError::wrap(unsafe { sys::CreateSBError() })
-    }
-
-    /// Construct a new `SBError`.
-    pub fn wrap(raw: sys::SBErrorRef) -> SBError {
-        SBError { raw }
+        SBError::from(unsafe { sys::CreateSBError() })
     }
 
     /// Construct a new `Some(SBError)` or `None`.
@@ -124,6 +119,12 @@ impl Error for SBError {}
 impl Drop for SBError {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBError(self.raw) };
+    }
+}
+
+impl From<sys::SBErrorRef> for SBError {
+    fn from(raw: sys::SBErrorRef) -> SBError {
+        SBError { raw }
     }
 }
 

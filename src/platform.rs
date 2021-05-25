@@ -40,11 +40,6 @@ pub struct SBPlatform {
 }
 
 impl SBPlatform {
-    /// Construct a new `SBPlatform`.
-    pub fn wrap(raw: sys::SBPlatformRef) -> SBPlatform {
-        SBPlatform { raw }
-    }
-
     /// Construct a new `Some(SBPlatform)` or `None`.
     pub fn maybe_wrap(raw: sys::SBPlatformRef) -> Option<SBPlatform> {
         if unsafe { sys::SBPlatformIsValid(raw) } {
@@ -149,7 +144,7 @@ impl SBPlatform {
 
     /// Launch a process. This is not for debugging that process.
     pub fn launch(&self, launch_info: &SBLaunchInfo) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBPlatformLaunch(self.raw, launch_info.raw) });
+        let error = SBError::from(unsafe { sys::SBPlatformLaunch(self.raw, launch_info.raw) });
         if error.is_success() {
             Ok(())
         } else {
@@ -159,7 +154,7 @@ impl SBPlatform {
 
     /// Kill a process.
     pub fn kill(&self, pid: lldb_pid_t) -> Result<(), SBError> {
-        let error = SBError::wrap(unsafe { sys::SBPlatformKill(self.raw, pid) });
+        let error = SBError::from(unsafe { sys::SBPlatformKill(self.raw, pid) });
         if error.is_success() {
             Ok(())
         } else {
@@ -179,6 +174,12 @@ impl Clone for SBPlatform {
 impl Drop for SBPlatform {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBPlatform(self.raw) };
+    }
+}
+
+impl From<sys::SBPlatformRef> for SBPlatform {
+    fn from(raw: sys::SBPlatformRef) -> SBPlatform {
+        SBPlatform { raw }
     }
 }
 

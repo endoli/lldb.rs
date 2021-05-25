@@ -38,7 +38,7 @@ impl SBCompileUnit {
 
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
     }
 
     /// The language for the compile unit.
@@ -66,6 +66,12 @@ impl fmt::Debug for SBCompileUnit {
 impl Drop for SBCompileUnit {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBCompileUnit(self.raw) };
+    }
+}
+
+impl From<sys::SBCompileUnitRef> for SBCompileUnit {
+    fn from(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
+        SBCompileUnit { raw }
     }
 }
 

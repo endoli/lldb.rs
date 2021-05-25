@@ -52,11 +52,6 @@ pub struct SBAddress {
 }
 
 impl SBAddress {
-    /// Construct a new `SBAddress`.
-    pub fn wrap(raw: sys::SBAddressRef) -> SBAddress {
-        SBAddress { raw }
-    }
-
     /// Construct a new `Some(SBAddress)` or `None`.
     pub fn maybe_wrap(raw: sys::SBAddressRef) -> Option<SBAddress> {
         if unsafe { sys::SBAddressIsValid(raw) } {
@@ -94,7 +89,7 @@ impl SBAddress {
     ///   is needed by the caller. These flags have constants starting
     ///   with `SYMBOL_CONTEXT_ITEM_`.
     pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
-        SBSymbolContext::wrap(unsafe { sys::SBAddressGetSymbolContext(self.raw, resolve_scope) })
+        SBSymbolContext::from(unsafe { sys::SBAddressGetSymbolContext(self.raw, resolve_scope) })
     }
 
     /// Get the `SBModule` for a given address.
@@ -249,6 +244,12 @@ impl fmt::Debug for SBAddress {
 impl Drop for SBAddress {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBAddress(self.raw) };
+    }
+}
+
+impl From<sys::SBAddressRef> for SBAddress {
+    fn from(raw: sys::SBAddressRef) -> SBAddress {
+        SBAddress { raw }
     }
 }
 

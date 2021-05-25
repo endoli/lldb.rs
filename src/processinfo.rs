@@ -17,11 +17,6 @@ pub struct SBProcessInfo {
 }
 
 impl SBProcessInfo {
-    /// Construct a new `SBProcessInfo`.
-    pub fn wrap(raw: sys::SBProcessInfoRef) -> SBProcessInfo {
-        SBProcessInfo { raw }
-    }
-
     #[allow(missing_docs)]
     pub fn name(&self) -> &str {
         unsafe {
@@ -34,7 +29,7 @@ impl SBProcessInfo {
 
     #[allow(missing_docs)]
     pub fn executable_file(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBProcessInfoGetExecutableFile(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBProcessInfoGetExecutableFile(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -99,6 +94,12 @@ impl Clone for SBProcessInfo {
 impl Drop for SBProcessInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBProcessInfo(self.raw) };
+    }
+}
+
+impl From<sys::SBProcessInfoRef> for SBProcessInfo {
+    fn from(raw: sys::SBProcessInfoRef) -> SBProcessInfo {
+        SBProcessInfo { raw }
     }
 }
 

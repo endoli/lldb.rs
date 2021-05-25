@@ -22,11 +22,6 @@ pub struct SBSymbolContext {
 }
 
 impl SBSymbolContext {
-    /// Construct a new `SBSymbolContext`.
-    pub fn wrap(raw: sys::SBSymbolContextRef) -> SBSymbolContext {
-        SBSymbolContext { raw }
-    }
-
     /// Construct a new `Some(SBSymbolContext)` or `None`.
     pub fn maybe_wrap(raw: sys::SBSymbolContextRef) -> Option<SBSymbolContext> {
         if unsafe { sys::SBSymbolContextIsValid(raw) } {
@@ -43,22 +38,22 @@ impl SBSymbolContext {
 
     #[allow(missing_docs)]
     pub fn module(&self) -> SBModule {
-        SBModule::wrap(unsafe { sys::SBSymbolContextGetModule(self.raw) })
+        SBModule::from(unsafe { sys::SBSymbolContextGetModule(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn compile_unit(&self) -> SBCompileUnit {
-        SBCompileUnit::wrap(unsafe { sys::SBSymbolContextGetCompileUnit(self.raw) })
+        SBCompileUnit::from(unsafe { sys::SBSymbolContextGetCompileUnit(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn function(&self) -> SBFunction {
-        SBFunction::wrap(unsafe { sys::SBSymbolContextGetFunction(self.raw) })
+        SBFunction::from(unsafe { sys::SBSymbolContextGetFunction(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn block(&self) -> SBBlock {
-        SBBlock::wrap(unsafe { sys::SBSymbolContextGetBlock(self.raw) })
+        SBBlock::from(unsafe { sys::SBSymbolContextGetBlock(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -68,7 +63,7 @@ impl SBSymbolContext {
 
     #[allow(missing_docs)]
     pub fn symbol(&self) -> SBSymbol {
-        SBSymbol::wrap(unsafe { sys::SBSymbolContextGetSymbol(self.raw) })
+        SBSymbol::from(unsafe { sys::SBSymbolContextGetSymbol(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -77,7 +72,7 @@ impl SBSymbolContext {
         curr_frame_pc: &SBAddress,
         parent_frame_addr: &SBAddress,
     ) -> SBSymbolContext {
-        SBSymbolContext::wrap(unsafe {
+        SBSymbolContext::from(unsafe {
             sys::SBSymbolContextGetParentOfInlinedScope(
                 self.raw,
                 curr_frame_pc.raw,
@@ -106,6 +101,12 @@ impl fmt::Debug for SBSymbolContext {
 impl Drop for SBSymbolContext {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBSymbolContext(self.raw) };
+    }
+}
+
+impl From<sys::SBSymbolContextRef> for SBSymbolContext {
+    fn from(raw: sys::SBSymbolContextRef) -> SBSymbolContext {
+        SBSymbolContext { raw }
     }
 }
 

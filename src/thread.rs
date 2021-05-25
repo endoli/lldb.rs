@@ -68,11 +68,6 @@ pub struct SBThread {
 }
 
 impl SBThread {
-    /// Construct a new `SBThread`.
-    pub fn wrap(raw: sys::SBThreadRef) -> SBThread {
-        SBThread { raw }
-    }
-
     /// Construct a new `Some(SBThread)` or `None`.
     pub fn maybe_wrap(raw: sys::SBThreadRef) -> Option<SBThread> {
         if unsafe { sys::SBThreadIsValid(raw) } {
@@ -221,7 +216,7 @@ impl SBThread {
 
     /// Get the currently selected frame for this thread.
     pub fn selected_frame(&self) -> SBFrame {
-        SBFrame::wrap(unsafe { sys::SBThreadGetSelectedFrame(self.raw) })
+        SBFrame::from(unsafe { sys::SBThreadGetSelectedFrame(self.raw) })
     }
 
     /// Set the currently selected frame for this thread. This takes a frame index.
@@ -231,7 +226,7 @@ impl SBThread {
 
     /// Get the process in which this thread is running.
     pub fn process(&self) -> SBProcess {
-        SBProcess::wrap(unsafe { sys::SBThreadGetProcess(self.raw) })
+        SBProcess::from(unsafe { sys::SBThreadGetProcess(self.raw) })
     }
 
     /// If the given event is a thread event, return it as an
@@ -259,7 +254,7 @@ impl<'d> Iterator for SBThreadFrameIter<'d> {
 
     fn next(&mut self) -> Option<SBFrame> {
         if self.idx < unsafe { sys::SBThreadGetNumFrames(self.thread.raw) as usize } {
-            let r = Some(SBFrame::wrap(unsafe {
+            let r = Some(SBFrame::from(unsafe {
                 sys::SBThreadGetFrameAtIndex(self.thread.raw, self.idx as u32)
             }));
             self.idx += 1;
@@ -299,6 +294,12 @@ impl Drop for SBThread {
     }
 }
 
+impl From<sys::SBThreadRef> for SBThread {
+    fn from(raw: sys::SBThreadRef) -> SBThread {
+        SBThread { raw }
+    }
+}
+
 unsafe impl Send for SBThread {}
 unsafe impl Sync for SBThread {}
 
@@ -315,7 +316,7 @@ impl<'e> SBThreadEvent<'e> {
 
     /// Get the thread from this thread event.
     pub fn thread(&self) -> SBThread {
-        SBThread::wrap(unsafe { sys::SBThreadGetThreadFromEvent(self.event.raw) })
+        SBThread::from(unsafe { sys::SBThreadGetThreadFromEvent(self.event.raw) })
     }
 
     /// Get the frame from this thread event.

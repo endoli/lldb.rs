@@ -20,12 +20,7 @@ pub struct SBFileSpecList {
 impl SBFileSpecList {
     /// Construct a new `SBFileSpecList`
     pub fn new() -> SBFileSpecList {
-        SBFileSpecList::wrap(unsafe { sys::CreateSBFileSpecList() })
-    }
-
-    /// Construct a new `SBFileSpecList`.
-    pub fn wrap(raw: sys::SBFileSpecListRef) -> SBFileSpecList {
-        SBFileSpecList { raw }
+        SBFileSpecList::from(unsafe { sys::CreateSBFileSpecList() })
     }
 
     #[allow(missing_docs)]
@@ -85,6 +80,12 @@ impl Drop for SBFileSpecList {
     }
 }
 
+impl From<sys::SBFileSpecListRef> for SBFileSpecList {
+    fn from(raw: sys::SBFileSpecListRef) -> SBFileSpecList {
+        SBFileSpecList { raw }
+    }
+}
+
 unsafe impl Send for SBFileSpecList {}
 unsafe impl Sync for SBFileSpecList {}
 
@@ -102,7 +103,7 @@ impl<'d> Iterator for SBFileSpecListIter<'d> {
 
     fn next(&mut self) -> Option<SBFileSpec> {
         if self.idx < unsafe { sys::SBFileSpecListGetSize(self.filespec_list.raw) as usize } {
-            let r = SBFileSpec::wrap(unsafe {
+            let r = SBFileSpec::from(unsafe {
                 sys::SBFileSpecListGetFileSpecAtIndex(self.filespec_list.raw, self.idx as u32)
             });
             self.idx += 1;

@@ -17,12 +17,7 @@ pub struct SBVariablesOptions {
 impl SBVariablesOptions {
     /// Construct a new `SBVariablesOptions`.
     pub fn new() -> SBVariablesOptions {
-        SBVariablesOptions::wrap(unsafe { sys::CreateSBVariablesOptions() })
-    }
-
-    /// Construct a new `SBVariablesOptions`.
-    pub fn wrap(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
-        SBVariablesOptions { raw }
+        SBVariablesOptions::from(unsafe { sys::CreateSBVariablesOptions() })
     }
 
     /// Construct a new `Some(SBVariablesOptions)` or `None`.
@@ -117,6 +112,12 @@ impl Default for SBVariablesOptions {
 impl Drop for SBVariablesOptions {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBVariablesOptions(self.raw) };
+    }
+}
+
+impl From<sys::SBVariablesOptionsRef> for SBVariablesOptions {
+    fn from(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
+        SBVariablesOptions { raw }
     }
 }
 

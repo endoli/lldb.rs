@@ -23,12 +23,7 @@ pub struct SBBroadcaster {
 impl SBBroadcaster {
     /// Construct a new `SBBroadcaster`.
     pub fn new() -> SBBroadcaster {
-        SBBroadcaster::wrap(unsafe { sys::CreateSBBroadcaster() })
-    }
-
-    /// Construct a new `SBBroadcaster`.
-    pub fn wrap(raw: sys::SBBroadcasterRef) -> SBBroadcaster {
-        SBBroadcaster { raw }
+        SBBroadcaster::from(unsafe { sys::CreateSBBroadcaster() })
     }
 
     /// Construct a new `Some(SBBroadcaster)` or `None`.
@@ -95,6 +90,12 @@ impl Default for SBBroadcaster {
 impl Drop for SBBroadcaster {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBroadcaster(self.raw) };
+    }
+}
+
+impl From<sys::SBBroadcasterRef> for SBBroadcaster {
+    fn from(raw: sys::SBBroadcasterRef) -> SBBroadcaster {
+        SBBroadcaster { raw }
     }
 }
 

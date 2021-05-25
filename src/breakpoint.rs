@@ -67,11 +67,6 @@ pub struct SBBreakpoint {
 }
 
 impl SBBreakpoint {
-    /// Construct a new `SBBreakpoint`.
-    pub fn wrap(raw: sys::SBBreakpointRef) -> SBBreakpoint {
-        SBBreakpoint { raw }
-    }
-
     /// Construct a new `Some(SBBreakpoint)` or `None`.
     pub fn maybe_wrap(raw: sys::SBBreakpointRef) -> Option<SBBreakpoint> {
         if unsafe { sys::SBBreakpointIsValid(raw) } {
@@ -206,6 +201,12 @@ impl fmt::Debug for SBBreakpoint {
 impl Drop for SBBreakpoint {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBreakpoint(self.raw) };
+    }
+}
+
+impl From<sys::SBBreakpointRef> for SBBreakpoint {
+    fn from(raw: sys::SBBreakpointRef) -> SBBreakpoint {
+        SBBreakpoint { raw }
     }
 }
 

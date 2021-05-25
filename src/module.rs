@@ -20,11 +20,6 @@ pub struct SBModule {
 }
 
 impl SBModule {
-    /// Construct a new `SBModule`.
-    pub fn wrap(raw: sys::SBModuleRef) -> SBModule {
-        SBModule { raw }
-    }
-
     /// Construct a new `Some(SBModule)` or `None`.
     pub fn maybe_wrap(raw: sys::SBModuleRef) -> Option<SBModule> {
         if unsafe { sys::SBModuleIsValid(raw) } {
@@ -44,7 +39,7 @@ impl SBModule {
     /// This can differ from the path on the platform since we might
     /// be doing remote debugging.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBModuleGetFileSpec(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBModuleGetFileSpec(self.raw) })
     }
 
     /// The file for the module as it is known on the remote system on
@@ -57,7 +52,7 @@ impl SBModule {
     /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
-        SBFileSpec::wrap(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
+        SBFileSpec::from(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -79,7 +74,7 @@ impl SBModule {
     #[allow(missing_docs)]
     pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::wrap(unsafe {
+        SBSymbolContextList::from(unsafe {
             sys::SBModuleFindFunctions(self.raw, name.as_ptr(), name_type_mask)
         })
     }
@@ -87,7 +82,7 @@ impl SBModule {
     #[allow(missing_docs)]
     pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::wrap(unsafe {
+        SBSymbolContextList::from(unsafe {
             sys::SBModuleFindSymbols(self.raw, name.as_ptr(), symbol_type)
         })
     }
@@ -107,7 +102,7 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 
     fn next(&mut self) -> Option<SBSection> {
         if self.idx < unsafe { sys::SBModuleGetNumSections(self.module.raw) } {
-            let r = Some(SBSection::wrap(unsafe {
+            let r = Some(SBSection::from(unsafe {
                 sys::SBModuleGetSectionAtIndex(self.module.raw, self.idx)
             }));
             self.idx += 1;
@@ -144,6 +139,12 @@ impl fmt::Debug for SBModule {
 impl Drop for SBModule {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBModule(self.raw) };
+    }
+}
+
+impl From<sys::SBModuleRef> for SBModule {
+    fn from(raw: sys::SBModuleRef) -> SBModule {
+        SBModule { raw }
     }
 }
 

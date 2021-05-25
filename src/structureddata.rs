@@ -18,11 +18,6 @@ pub struct SBStructuredData {
 }
 
 impl SBStructuredData {
-    /// Construct a new `SBStructuredData`.
-    pub fn wrap(raw: sys::SBStructuredDataRef) -> SBStructuredData {
-        SBStructuredData { raw }
-    }
-
     /// Construct a new `Some(SBStructuredData)` or `None`.
     pub fn maybe_wrap(raw: sys::SBStructuredDataRef) -> Option<SBStructuredData> {
         if unsafe { sys::SBStructuredDataIsValid(raw) } {
@@ -44,7 +39,7 @@ impl SBStructuredData {
 
     #[allow(missing_docs)]
     pub fn set_from_json(&self, stream: &SBStream) -> Result<(), SBError> {
-        let e = SBError::wrap(unsafe { sys::SBStructuredDataSetFromJSON(self.raw, stream.raw) });
+        let e = SBError::from(unsafe { sys::SBStructuredDataSetFromJSON(self.raw, stream.raw) });
         if e.is_success() {
             Ok(())
         } else {
@@ -55,7 +50,7 @@ impl SBStructuredData {
     #[allow(missing_docs)]
     pub fn get_as_json(&self) -> Result<SBStream, SBError> {
         let stream = SBStream::new();
-        let e = SBError::wrap(unsafe { sys::SBStructuredDataGetAsJSON(self.raw, stream.raw) });
+        let e = SBError::from(unsafe { sys::SBStructuredDataGetAsJSON(self.raw, stream.raw) });
         if e.is_success() {
             Ok(stream)
         } else {
@@ -153,6 +148,12 @@ impl fmt::Debug for SBStructuredData {
 impl Drop for SBStructuredData {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBStructuredData(self.raw) };
+    }
+}
+
+impl From<sys::SBStructuredDataRef> for SBStructuredData {
+    fn from(raw: sys::SBStructuredDataRef) -> SBStructuredData {
+        SBStructuredData { raw }
     }
 }
 

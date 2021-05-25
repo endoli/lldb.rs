@@ -19,11 +19,6 @@ pub struct SBValueList {
 }
 
 impl SBValueList {
-    /// Construct a new `SBValueList`.
-    pub fn wrap(raw: sys::SBValueListRef) -> SBValueList {
-        SBValueList { raw }
-    }
-
     /// Construct a new `Some(SBValueList)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueListRef) -> Option<SBValueList> {
         if unsafe { sys::SBValueListIsValid(raw) } {
@@ -92,6 +87,12 @@ impl Drop for SBValueList {
     }
 }
 
+impl From<sys::SBValueListRef> for SBValueList {
+    fn from(raw: sys::SBValueListRef) -> SBValueList {
+        SBValueList { raw }
+    }
+}
+
 unsafe impl Send for SBValueList {}
 unsafe impl Sync for SBValueList {}
 
@@ -109,7 +110,7 @@ impl<'d> Iterator for SBValueListIter<'d> {
 
     fn next(&mut self) -> Option<SBValue> {
         if self.idx < unsafe { sys::SBValueListGetSize(self.value_list.raw) as usize } {
-            let r = SBValue::wrap(unsafe {
+            let r = SBValue::from(unsafe {
                 sys::SBValueListGetValueAtIndex(self.value_list.raw, self.idx as u32)
             });
             self.idx += 1;
