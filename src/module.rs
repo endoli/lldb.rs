@@ -98,7 +98,6 @@ impl SBModule {
     pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
         SBTypeList::from(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
     }
-
 }
 
 /// Iterate over the [sections] in a [module].
