@@ -156,7 +156,7 @@ impl SBValue {
         read: bool,
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
-        let error = SBError::new();
+        let error = SBError::default();
         let wp = unsafe { sys::SBValueWatch(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
             Ok(SBWatchpoint::from(wp))
@@ -172,7 +172,7 @@ impl SBValue {
         read: bool,
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
-        let error = SBError::new();
+        let error = SBError::default();
         let wp =
             unsafe { sys::SBValueWatchPointee(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
@@ -215,7 +215,7 @@ impl SBValue {
 
     #[allow(missing_docs)]
     pub fn set_data(&self, data: &SBData) -> Result<(), SBError> {
-        let error = SBError::new();
+        let error = SBError::default();
         if unsafe { sys::SBValueSetData(self.raw, data.raw, error.raw) } {
             Ok(())
         } else {

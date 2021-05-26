@@ -229,7 +229,7 @@ impl SBDebugger {
         let executable = CString::new(executable).unwrap();
         let target_triple = target_triple.map(|s| CString::new(s).unwrap());
         let platform_name = platform_name.map(|s| CString::new(s).unwrap());
-        let error = SBError::new();
+        let error = SBError::default();
         let target = unsafe {
             sys::SBDebuggerCreateTarget(
                 self.raw,

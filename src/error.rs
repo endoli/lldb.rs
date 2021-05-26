@@ -10,18 +10,23 @@ use std::fmt;
 use std::{error::Error, ffi::CStr};
 use sys;
 
-/// A container for holding any error code.
+/// A container for holding any error code and an error message.
+///
+/// An `SBError` is used to indicate whether or not an operation
+/// has succeeded or failed, along with an indication of why it
+/// has failed.
+///
+/// To check if the operation has succeeded, use [`SBError::is_success()`].
+/// If it has failed, then [`SBError::is_failure()`] will return true,
+/// and more information about the error can be obtained from
+/// [`SBError::error()`], [`SBError::error_string()`], and
+/// [`SBError::error_type()`].
 pub struct SBError {
     /// The underlying raw `SBErrorRef`.
     pub raw: sys::SBErrorRef,
 }
 
 impl SBError {
-    /// Construct a new `SBError`.
-    pub fn new() -> SBError {
-        SBError::from(unsafe { sys::CreateSBError() })
-    }
-
     /// Construct a new `Some(SBError)` or `None`.
     pub fn maybe_wrap(raw: sys::SBErrorRef) -> Option<SBError> {
         if unsafe { sys::SBErrorIsValid(raw) } {
@@ -31,12 +36,80 @@ impl SBError {
         }
     }
 
-    /// Check whether or not this is a valid `SBError` value.
-    pub fn is_valid(&self) -> bool {
-        unsafe { sys::SBErrorIsValid(self.raw) }
+    /// Does this error represent a success?
+    ///
+    /// An error starts out in the success state by default:
+    ///
+    /// ```
+    /// # use lldb::SBError;
+    /// let e = SBError::default();
+    /// assert!(e.is_success());
+    /// ```
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::into_result()`]
+    /// * [`SBError::is_failure()`]
+    pub fn is_success(&self) -> bool {
+        unsafe { sys::SBErrorSuccess(self.raw) }
+    }
+
+    /// Does this error represent a failure?
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::error()`]
+    /// * [`SBError::error_string()`]
+    /// * [`SBError::error_type()`]
+    /// * [`SBError::into_result()`]
+    /// * [`SBError::is_success()`]
+    pub fn is_failure(&self) -> bool {
+        unsafe { sys::SBErrorFail(self.raw) }
+    }
+
+    /// Convert to a `Result<(), SBError>`.
+    ///
+    /// An `SBError` represents either a success or a failure. This method
+    /// converts the success variant to `Ok(())` and the error variant
+    /// to `Err(self)`.
+    ///
+    /// ```
+    /// # use lldb::SBError;
+    /// let e = SBError::default();
+    /// // Do something with `e`.
+    /// let r = e.into_result();
+    /// ```
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::error()`]
+    /// * [`SBError::error_string()`]
+    /// * [`SBError::error_type()`]
+    pub fn into_result(self) -> Result<(), SBError> {
+        if self.is_success() {
+            Ok(())
+        } else {
+            Err(self)
+        }
+    }
+
+    /// The underlying error code. Must be interpreted in conjunction
+    /// with the error type.
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::error_string()`]
+    /// * [`SBError::error_type()`]
+    pub fn error(&self) -> u32 {
+        unsafe { sys::SBErrorGetError(self.raw) }
     }
 
     /// Any textual error message associated with the error.
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::error()`]
+    /// * [`SBError::error_type()`]
     pub fn error_string(&self) -> &str {
         unsafe {
             match CStr::from_ptr(sys::SBErrorGetCString(self.raw)).to_str() {
@@ -46,37 +119,14 @@ impl SBError {
         }
     }
 
-    /// Does this error represent a failure?
-    pub fn is_failure(&self) -> bool {
-        unsafe { sys::SBErrorFail(self.raw) }
-    }
-
-    /// Does this error represent a success?
-    pub fn is_success(&self) -> bool {
-        unsafe { sys::SBErrorSuccess(self.raw) }
-    }
-
-    /// The underlying error code. Must be interpreted in conjunction
-    /// with the error type.
-    pub fn error(&self) -> u32 {
-        unsafe { sys::SBErrorGetError(self.raw) }
-    }
-
     /// What type of error is this?
+    ///
+    /// See also:
+    ///
+    /// * [`SBError::error()`]
+    /// * [`SBError::error_string()`]
     pub fn error_type(&self) -> ErrorType {
         unsafe { sys::SBErrorGetType(self.raw) }
-    }
-
-    /// Convert to a Result<(), SBError>
-    ///
-    /// SBErrors represent either a success or a failure. This method converts
-    /// the success variant to Ok(()) and the error variant to Err(SBError).
-    pub fn into_result(self) -> Result<(), SBError> {
-        if self.is_success() {
-            Ok(())
-        } else {
-            Err(self)
-        }
     }
 }
 
@@ -90,7 +140,7 @@ impl Clone for SBError {
 
 impl Default for SBError {
     fn default() -> SBError {
-        SBError::new()
+        SBError::from(unsafe { sys::CreateSBError() })
     }
 }
 
@@ -104,9 +154,7 @@ impl fmt::Debug for SBError {
 
 impl fmt::Display for SBError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if !self.is_valid() {
-            write!(f, "Invalid SBError")
-        } else if !self.is_failure() {
+        if self.is_success() {
             write!(f, "SBError representing success")
         } else {
             write!(f, "SBError: {}", self.error_string())

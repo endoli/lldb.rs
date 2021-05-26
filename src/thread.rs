@@ -180,7 +180,7 @@ impl SBThread {
     /// `step_out`, `step_instruction`, `run_to_address`), the thread will
     /// not be allowed to run and these functions will simply return.
     pub fn suspend(&self) -> bool {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         unsafe { sys::SBThreadSuspend(self.raw, error.raw) }
     }
 
@@ -188,7 +188,7 @@ impl SBThread {
     ///
     /// See the discussion on [`SBThread::suspend()`] for further details.
     pub fn resume(&self) -> bool {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         unsafe { sys::SBThreadResume(self.raw, error.raw) }
     }
 

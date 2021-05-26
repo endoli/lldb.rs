@@ -139,7 +139,7 @@ impl SBTarget {
 
     /// Launch a target for debugging.
     pub fn launch(&self, launch_info: SBLaunchInfo) -> Result<SBProcess, SBError> {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         let process =
             SBProcess::from(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
         if error.is_success() {
@@ -151,7 +151,7 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn load_core(&self, core_file: &str) -> Result<SBProcess, SBError> {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         let core_file = CString::new(core_file).unwrap();
         let process = SBProcess::from(unsafe {
             sys::SBTargetLoadCore(self.raw, core_file.as_ptr(), error.raw)
@@ -165,7 +165,7 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         let process =
             SBProcess::from(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
         if error.is_success() {
@@ -296,7 +296,7 @@ impl SBTarget {
         read: bool,
         write: bool,
     ) -> Result<SBWatchpoint, SBError> {
-        let error: SBError = SBError::new();
+        let error: SBError = SBError::default();
         let watchpoint =
             unsafe { sys::SBTargetWatchAddress(self.raw, addr, size, read, write, error.raw) };
         if error.is_success() {
