@@ -119,7 +119,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
@@ -141,7 +141,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
@@ -163,7 +163,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
@@ -185,7 +185,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
@@ -207,7 +207,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
@@ -229,7 +229,7 @@ impl SBAddress {
     /// Use one of the following when you want multiple debug symbol related
     /// objects for an address:
     ///
-    /// * `SBAddress::symbol_context`
+    /// * [`SBAddress::symbol_context`]
     /// * `SBTarget::resolve_symbol_context_for_address`
     ///
     /// One or more bits from the `SymbolContextItem` enumerations can be logically
