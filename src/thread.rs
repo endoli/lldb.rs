@@ -179,17 +179,19 @@ impl SBThread {
     /// functions for stepping are called (`step_over`, `step_into`,
     /// `step_out`, `step_instruction`, `run_to_address`), the thread will
     /// not be allowed to run and these functions will simply return.
-    pub fn suspend(&self) -> bool {
+    pub fn suspend(&self) -> Result<(), SBError> {
         let error: SBError = SBError::default();
-        unsafe { sys::SBThreadSuspend(self.raw, error.raw) }
+        unsafe { sys::SBThreadSuspend(self.raw, error.raw) };
+        error.into_result()
     }
 
     /// Set the user resume state for this to allow it to run again.
     ///
     /// See the discussion on [`SBThread::suspend()`] for further details.
-    pub fn resume(&self) -> bool {
+    pub fn resume(&self) -> Result<(), SBError> {
         let error: SBError = SBError::default();
-        unsafe { sys::SBThreadResume(self.raw, error.raw) }
+        unsafe { sys::SBThreadResume(self.raw, error.raw) };
+        error.into_result()
     }
 
     /// Is this thread set to the suspended user resume state?
