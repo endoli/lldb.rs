@@ -109,7 +109,7 @@ impl SBThread {
     /// process lifetime.  On Mac OS X systems, this is a system-wide
     /// unique thread identifier; this identifier is also used by
     /// other tools like sample which helps to associate data from
-    /// those tools with lldb.  See related `SBThread::index_id`.
+    /// those tools with lldb.  See related [`SBThread::index_id`].
     pub fn thread_id(&self) -> lldb_tid_t {
         unsafe { sys::SBThreadGetThreadID(self.raw) }
     }
@@ -122,7 +122,7 @@ impl SBThread {
     /// in a debug session) and increments up throughout the process
     /// lifetime.  An index number will not be reused for a different
     /// thread later in a process - thread 1 will always be associated
-    /// with the same thread.  See related `SBThread::thread_id`.
+    /// with the same thread.  See related [`SBThread::thread_id`].
     pub fn index_id(&self) -> u32 {
         unsafe { sys::SBThreadGetIndexID(self.raw) }
     }
@@ -140,7 +140,7 @@ impl SBThread {
     /// Return the queue associated with this thread, if any.
     ///
     /// If this `SBThread` is actually a history thread, then there may be
-    /// a queue ID and name available, but not a full `SBQueue` as the
+    /// a queue ID and name available, but not a full [`SBQueue`] as the
     /// individual attributes may have been saved, but without enough
     /// information to reconstitute the entire `SBQueue` at that time.
     pub fn queue(&self) -> Option<SBQueue> {
@@ -149,7 +149,7 @@ impl SBThread {
 
     /// Return the queue name associated with this thread, if any.
     ///
-    /// For example, this would report a libdispatch (Grand Central Dispatch)
+    /// For example, this would report a `libdispatch` (Grand Central Dispatch)
     /// queue name.
     pub fn queue_name(&self) -> &str {
         unsafe {
@@ -162,7 +162,7 @@ impl SBThread {
 
     /// Return the `dispatch_queue_id` for this thread, if any.
     ///
-    /// For example, this would report a libdispatch (Grand Central Dispatch)
+    /// For example, this would report a `libdispatch` (Grand Central Dispatch)
     /// queue ID.
     pub fn queue_id(&self) -> u64 {
         unsafe { sys::SBThreadGetQueueID(self.raw) }
@@ -174,11 +174,11 @@ impl SBThread {
     /// thread in a process stops, all other threads are stopped. The `suspend`
     /// call here tells our process to suspend a thread and not let it run when
     /// the other threads in a process are allowed to run. So when
-    /// `SBProcess::continue()` is called, any threads that aren't suspended will
-    /// be allowed to run. If any of the `SBThread` functions for stepping are
-    /// called (`step_over`, `step_into`, `step_out`, `step_instruction`,
-    /// `run_to_address`), the thread will not be allowed to run and these
-    /// functions will simply return.
+    /// [`SBProcess::continue_execution()`] is called, any threads that
+    /// aren't suspended will be allowed to run. If any of the `SBThread`
+    /// functions for stepping are called (`step_over`, `step_into`,
+    /// `step_out`, `step_instruction`, `run_to_address`), the thread will
+    /// not be allowed to run and these functions will simply return.
     pub fn suspend(&self) -> bool {
         let error: SBError = SBError::new();
         unsafe { sys::SBThreadSuspend(self.raw, error.raw) }
@@ -186,7 +186,7 @@ impl SBThread {
 
     /// Set the user resume state for this to allow it to run again.
     ///
-    /// See the discussion on `suspend` for further details.
+    /// See the discussion on [`SBThread::suspend()`] for further details.
     pub fn resume(&self) -> bool {
         let error: SBError = SBError::new();
         unsafe { sys::SBThreadResume(self.raw, error.raw) }
@@ -194,7 +194,7 @@ impl SBThread {
 
     /// Is this thread set to the suspended user resume state?
     ///
-    /// See the discussion on `suspend` for further details.
+    /// See the discussion on [`SBThread::suspend()`] for further details.
     pub fn is_suspended(&self) -> bool {
         unsafe { sys::SBThreadIsSuspended(self.raw) }
     }
