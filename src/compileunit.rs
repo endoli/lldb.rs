@@ -5,6 +5,7 @@
 // except according to those terms.
 
 use super::filespec::SBFileSpec;
+use super::lineentry::SBLineEntry;
 use super::stream::SBStream;
 use super::typelist::SBTypeList;
 use super::{LanguageType, TypeClass};
@@ -40,6 +41,16 @@ impl SBCompileUnit {
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
         SBFileSpec::from(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
+    }
+
+    /// The [line entries][SBLineEntry] for the compilation unit.
+    ///
+    /// These come from the line table in the debug data.
+    pub fn line_entries(&self) -> SBCompileUnitLineEntryIter {
+        SBCompileUnitLineEntryIter {
+            source: self,
+            idx: 0,
+        }
     }
 
     /// Get all types matching `type_mask` from the debug info in this
@@ -90,6 +101,38 @@ impl From<sys::SBCompileUnitRef> for SBCompileUnit {
 
 unsafe impl Send for SBCompileUnit {}
 unsafe impl Sync for SBCompileUnit {}
+
+/// Iterate over the [line entries] in a [compile unit].
+///
+/// [line entries]: struct.SBLineEntry.html
+/// [compile unit]: struct.SBCompileUnit.html
+pub struct SBCompileUnitLineEntryIter<'d> {
+    source: &'d SBCompileUnit,
+    idx: u32,
+}
+
+impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
+    type Item = SBLineEntry;
+
+    fn next(&mut self) -> Option<SBLineEntry> {
+        if self.idx < unsafe { sys::SBCompileUnitGetNumLineEntries(self.source.raw) } {
+            let r = Some(SBLineEntry::from(unsafe {
+                sys::SBCompileUnitGetLineEntryAtIndex(self.source.raw, self.idx)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBCompileUnitGetNumLineEntries(self.source.raw) } as usize;
+        (sz - self.idx as usize, Some(sz))
+    }
+}
+
+impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
 
 #[cfg(feature = "graphql")]
 graphql_object!(SBCompileUnit: super::debugger::SBDebugger | &self | {
