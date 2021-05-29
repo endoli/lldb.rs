@@ -51,13 +51,6 @@ impl SBSymbolContextList {
         unsafe { sys::SBSymbolContextListClear(self.raw) };
     }
 
-    #[allow(missing_docs)]
-    pub fn get_context_at_index(&self, idx: u32) -> Option<SBSymbolContext> {
-        SBSymbolContext::maybe_wrap(unsafe {
-            sys::SBSymbolContextListGetContextAtIndex(self.raw, idx)
-        })
-    }
-
     /// Iterate over this context list.
     pub fn iter(&self) -> SBSymbolContextListIter {
         SBSymbolContextListIter {
