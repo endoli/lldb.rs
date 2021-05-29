@@ -117,7 +117,7 @@ impl SBStructuredData {
     pub fn string_value(&self) -> Option<String> {
         if self.data_type() == sys::StructuredDataType::String {
             unsafe {
-                let sz = sys::SBStructuredDataGetStringValue(self.raw, ptr::null_mut(), 0);
+                let sz = sys::SBStructuredDataGetStringValue(self.raw, ptr::null_mut(), 0) + 1;
                 let mut buf: Vec<u8> = Vec::with_capacity(sz);
                 sys::SBStructuredDataGetStringValue(self.raw, buf.as_mut_ptr() as *mut i8, sz);
                 buf.set_len(sz);
