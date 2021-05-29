@@ -110,8 +110,8 @@ impl SBPlatform {
 
     /// The long form description of the platform's OS version.
     ///
-    /// On Mac OS X, this might look like `"Darwin Kernel Version 15.5.0:
-    /// Tue Apr 19 18:36:36 PDT 2016; root:xnu-3248.50.21~8/RELEASE_X86_64"`.
+    /// On macOS, this might look like `"Darwin Kernel Version 20.5.0:
+    /// Sat May  8 05:10:33 PDT 2021; root:xnu-7195.121.3~9/RELEASE_X86_64"`.
     pub fn os_description(&self) -> &str {
         unsafe {
             match CStr::from_ptr(sys::SBPlatformGetOSDescription(self.raw)).to_str() {
@@ -123,21 +123,21 @@ impl SBPlatform {
 
     /// The major component of the platform's OS version.
     ///
-    /// On Mac OS X 10.11.4, this would have the value `10`.
+    /// On macOS 10.15.4, this would have the value `10`.
     pub fn os_major_version(&self) -> u32 {
         unsafe { sys::SBPlatformGetOSMajorVersion(self.raw) }
     }
 
     /// The minor component of the platform's OS version.
     ///
-    /// On Mac OS X 10.11.4, this would have the value `11`.
+    /// On macOS 10.15.4, this would have the value `15`.
     pub fn os_minor_version(&self) -> u32 {
         unsafe { sys::SBPlatformGetOSMinorVersion(self.raw) }
     }
 
     /// The patch or update component of the platform's OS version.
     ///
-    /// On Mac OS X 10.11.4, this would have the value `4`.
+    /// On macOS 10.15.4, this would have the value `4`.
     pub fn os_update_version(&self) -> u32 {
         unsafe { sys::SBPlatformGetOSUpdateVersion(self.raw) }
     }

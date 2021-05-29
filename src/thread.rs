@@ -106,7 +106,7 @@ impl SBThread {
     /// Returns a unique thread identifier for the current `SBThread`
     /// that will remain constant throughout the thread's lifetime in
     /// this process and will not be reused by another thread during this
-    /// process lifetime.  On Mac OS X systems, this is a system-wide
+    /// process lifetime.  On macOS systems, this is a system-wide
     /// unique thread identifier; this identifier is also used by
     /// other tools like sample which helps to associate data from
     /// those tools with lldb.  See related [`SBThread::index_id`].
