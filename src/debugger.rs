@@ -321,7 +321,14 @@ impl SBDebugger {
         }
     }
 
-    /// Get an iterator over the available platforms known to this debugger instance.
+    /// Get an iterator over the available platforms known to this debugger
+    /// instance.
+    ///
+    /// These correspond to the available platform plugins within LLDB.
+    ///
+    /// The structured data will have 2 string keys:
+    /// * `"name"` - Name of the platform plugin.
+    /// * `"description"` - The description of the platform plugin.
     pub fn available_platforms(&self) -> SBDebuggerAvailablePlatformIter {
         SBDebuggerAvailablePlatformIter {
             debugger: self,
