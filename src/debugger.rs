@@ -80,6 +80,35 @@ use sys;
 /// a `false` value. You can see if you're in asynchronous mode or not
 /// by calling [`async`].
 ///
+/// # Platform Management
+///
+/// LLDB supports multiple platforms when debugging.
+///
+/// LLDB is aware of both available and active platforms. By default,
+/// the `host` platform is active for debugging processes on the local
+/// machine.
+///
+/// A number of additional platforms are
+/// [available][SBDebugger::available_platforms()] and can be activated
+/// via [`SBDebugger::set_current_platform()`].
+///
+/// The currently selected platform is controlled by
+/// [`SBDebugger::set_selected_platform()`] typically using
+/// instances of [`SBPlatform`].
+///
+/// When doing remote debugging, additional confirmation and work
+/// is required. (See `SBPlatform::connect_remote()`. This is
+/// not yet wrapped in this library.)
+///
+/// See also:
+///
+/// * [`SBDebugger::available_platforms()`]
+/// * [`SBDebugger::platforms()`]
+/// * [`SBDebugger::selected_platform()`]
+/// * [`SBDebugger::set_current_platform()`]
+/// * [`SBDebugger::set_selected_platform()`]
+/// * [`SBPlatform`]
+///
 /// # Target Management
 ///
 /// The `SBDebugger` instance tracks the various targets that are
@@ -118,10 +147,6 @@ use sys;
 /// let targets = debugger.targets().collect::<Vec<SBTarget>>();
 /// # }
 /// ```
-///
-/// # Platform Management
-///
-/// ...
 ///
 /// [`SBTarget`]: struct.SBTarget.html
 /// [`set_async`]: #method.set_async
@@ -293,9 +318,31 @@ impl SBDebugger {
         unsafe { sys::SBDebuggerSetSelectedTarget(self.raw, target.raw) };
     }
 
+    /// Get an iterator over the currently active [platforms][SBPlatform].
+    ///
+    /// By default, the `host` platform will be active. Additional
+    /// platforms can be activated via [`SBDebugger::set_current_platform()`].
+    ///
+    /// See also:
+    ///
+    /// * [`SBDebugger::available_platforms()`]
+    /// * [`SBDebugger::selected_platform()`]
+    /// * [`SBDebugger::set_current_platform()`]
+    /// * [`SBDebugger::set_selected_platform()`]
+    pub fn platforms(&self) -> SBDebuggerPlatformIter {
+        SBDebuggerPlatformIter {
+            debugger: self,
+            idx: 0,
+        }
+    }
+
     /// Get the currently selected [`SBPlatform`].
     ///
-    /// [`SBPlatform`]: struct.SBPlatform.html
+    /// See also:
+    ///
+    /// * [`SBDebugger::platforms()`]
+    /// * [`SBDebugger::set_current_platform()`]
+    /// * [`SBDebugger::set_selected_platform()`]
     pub fn selected_platform(&self) -> SBPlatform {
         unsafe {
             SBPlatform {
@@ -306,34 +353,56 @@ impl SBDebugger {
 
     /// Set the selected [`SBPlatform`].
     ///
-    /// [`SBPlatform`]: struct.SBPlatform.html
+    /// Selecting a platform by name rather than an instance of [`SBPlatform`]
+    /// can be done via [`SBDebugger::set_current_platform()`].
+    ///
+    /// See also:
+    ///
+    /// * [`SBDebugger::platforms()`]
+    /// * [`SBDebugger::selected_platform()`]
+    /// * [`SBDebugger::set_current_platform()`]
     pub fn set_selected_platform(&self, platform: &SBPlatform) {
         unsafe { sys::SBDebuggerSetSelectedPlatform(self.raw, platform.raw) };
     }
 
-    /// Get an iterator over the [platforms] known to this debugger instance.
+    /// Get an iterator over the available [platforms][SBPlatform] known to
+    /// this debugger instance.
     ///
-    /// [platforms]: struct.SBPlatform.html
-    pub fn platforms(&self) -> SBDebuggerPlatformIter {
-        SBDebuggerPlatformIter {
-            debugger: self,
-            idx: 0,
-        }
-    }
-
-    /// Get an iterator over the available platforms known to this debugger
-    /// instance.
-    ///
-    /// These correspond to the available platform plugins within LLDB.
+    /// These correspond to the available platform plugins within LLDB. The
+    /// platform name can be used with [`SBDebugger::set_current_platform()`]
+    /// to activate and select it.
     ///
     /// The structured data will have 2 string keys:
     /// * `"name"` - Name of the platform plugin.
     /// * `"description"` - The description of the platform plugin.
+    ///
+    /// See also:
+    ///
+    /// * [`SBDebugger::platforms()`]
+    /// * [`SBDebugger::selected_platform()`]
+    /// * [`SBDebugger::set_current_platform()`]
+    /// * [`SBDebugger::set_selected_platform()`]
     pub fn available_platforms(&self) -> SBDebuggerAvailablePlatformIter {
         SBDebuggerAvailablePlatformIter {
             debugger: self,
             idx: 0,
         }
+    }
+
+    /// Activate and select an available [platform][SBPlatform] by name.
+    ///
+    /// The list of available platforms can be found via
+    /// [`SBDebugger::available_platforms()`].
+    ///
+    /// See also:
+    ///
+    /// * [`SBDebugger::available_platforms()`]
+    /// * [`SBDebugger::platforms()`]
+    /// * [`SBDebugger::selected_platform()`]
+    /// * [`SBDebugger::set_selected_platform()`]
+    pub fn set_current_platform(&self, platform_name: &str) {
+        let platform_name = CString::new(platform_name).unwrap();
+        unsafe { sys::SBDebuggerSetCurrentPlatform(self.raw, platform_name.as_ptr()) };
     }
 }
 

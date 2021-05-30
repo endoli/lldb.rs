@@ -26,13 +26,14 @@ use sys;
 /// and much more.
 ///
 /// Every [`SBTarget`] has a corresponding `SBPlatform`. The platform can be
-/// specified upon target creation, or the currently selected platform
+/// specified upon target creation, or the [currently selected] platform
 /// will attempt to be used when creating the target automatically as long
 /// as the currently selected platform matches the target architecture
 /// and executable type. If the architecture or executable type do not match,
 /// a suitable platform will be found automatically.
 ///
-/// [`SBTarget`]: struct.SBTarget.html
+/// [`SBTarget`]: crate::SBTarget
+/// [currently selected]: crate::SBDebugger::selected_platform
 #[derive(Debug)]
 pub struct SBPlatform {
     /// The underlying raw `SBPlatformRef`.
