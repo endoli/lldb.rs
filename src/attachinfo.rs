@@ -193,11 +193,10 @@ impl SBAttachInfo {
     /// Get the listener that will be used to receive process events.
     ///
     /// If no listener has been set via a call to
-    /// `SBAttachInfo::set_listener()`, then an invalid `SBListener` will be
-    /// returned (`SBListener::is_valid()` will return `false`). If a listener
-    /// has been set, then the valid listener object will be returned.
-    pub fn listener(&self) -> SBListener {
-        SBListener::from(unsafe { sys::SBAttachInfoGetListener(self.raw) })
+    /// `SBAttachInfo::set_listener()`, then `None` will be returned.
+    /// If a listener has been set, then the listener object will be returned.
+    pub fn listener(&self) -> Option<SBListener> {
+        SBListener::maybe_wrap(unsafe { sys::SBAttachInfoGetListener(self.raw) })
     }
 
     /// Set the listener that will be used to receive process events.
