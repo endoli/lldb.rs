@@ -7,14 +7,14 @@
 use super::filespec::SBFileSpec;
 use super::listener::SBListener;
 use super::lldb_pid_t;
-use std::ffi::CString;
+use std::ffi::{CStr, CString};
 use sys;
 
 /// Configuration for attaching to a process.
 ///
-/// See [`SBTarget::attach`].
+/// See [`SBTarget::attach()`].
 ///
-/// [`SBTarget::attach`]: struct.SBTarget.html#method.attach
+/// [`SBTarget::attach()`]: crate::SBTarget::attach()
 #[derive(Debug)]
 pub struct SBAttachInfo {
     /// The underlying raw `SBAttachInfoRef`.
@@ -75,6 +75,16 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
+    pub fn wait_for_launch(&self) -> bool {
+        unsafe { sys::SBAttachInfoGetWaitForLaunch(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_wait_for_launch(&self, wait: bool, async: bool) {
+        unsafe { sys::SBAttachInfoSetWaitForLaunch2(self.raw, wait, async) };
+    }
+
+    #[allow(missing_docs)]
     pub fn ignore_existing(&self) -> bool {
         unsafe { sys::SBAttachInfoGetIgnoreExisting(self.raw) }
     }
@@ -92,6 +102,92 @@ impl SBAttachInfo {
     #[allow(missing_docs)]
     pub fn set_resume_count(&self, c: u32) {
         unsafe { sys::SBAttachInfoSetResumeCount(self.raw, c) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn process_plugin_name(&self) -> Option<&str> {
+        unsafe {
+            match CStr::from_ptr(sys::SBAttachInfoGetProcessPluginName(self.raw)).to_str() {
+                Ok(s) => Some(s),
+                _ => None,
+            }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_process_plugin_name(&self, plugin: &str) {
+        let plugin = CString::new(plugin).unwrap();
+        unsafe { sys::SBAttachInfoSetProcessPluginName(self.raw, plugin.as_ptr()) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn user_id(&self) -> Option<u32> {
+        if unsafe { sys::SBAttachInfoUserIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBAttachInfoGetUserID(self.raw) })
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_user_id(&self, uid: u32) {
+        unsafe { sys::SBAttachInfoSetUserID(self.raw, uid) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn group_id(&self) -> Option<u32> {
+        if unsafe { sys::SBAttachInfoGroupIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBAttachInfoGetGroupID(self.raw) })
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_group_id(&self, gid: u32) {
+        unsafe { sys::SBAttachInfoSetGroupID(self.raw, gid) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn effective_user_id(&self) -> Option<u32> {
+        if unsafe { sys::SBAttachInfoEffectiveUserIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBAttachInfoGetEffectiveUserID(self.raw) })
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_effective_user_id(&self, uid: u32) {
+        unsafe { sys::SBAttachInfoSetEffectiveUserID(self.raw, uid) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn effective_group_id(&self) -> Option<u32> {
+        if unsafe { sys::SBAttachInfoEffectiveGroupIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBAttachInfoGetEffectiveGroupID(self.raw) })
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_effective_group_id(&self, gid: u32) {
+        unsafe { sys::SBAttachInfoSetEffectiveGroupID(self.raw, gid) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn parent_process_id(&self) -> Option<lldb_pid_t> {
+        if unsafe { sys::SBAttachInfoParentProcessIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBAttachInfoGetParentProcessID(self.raw) })
+        } else {
+            None
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_parent_process_id(&self, ppid: lldb_pid_t) {
+        unsafe { sys::SBAttachInfoSetParentProcessID(self.raw, ppid) };
     }
 
     /// Get the listener that will be used to receive process events.
