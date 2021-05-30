@@ -38,43 +38,39 @@ impl SBProcessInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn user_id(&self) -> u32 {
-        unsafe { sys::SBProcessInfoGetUserID(self.raw) }
+    pub fn user_id(&self) -> Option<u32> {
+        if unsafe { sys::SBProcessInfoUserIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBProcessInfoGetUserID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
-    pub fn group_id(&self) -> u32 {
-        unsafe { sys::SBProcessInfoGetGroupID(self.raw) }
+    pub fn group_id(&self) -> Option<u32> {
+        if unsafe { sys::SBProcessInfoGroupIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBProcessInfoGetGroupID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
-    pub fn user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoUserIDIsValid(self.raw) }
+    pub fn effective_user_id(&self) -> Option<u32> {
+        if unsafe { sys::SBProcessInfoEffectiveUserIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBProcessInfoGetEffectiveUserID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
-    pub fn group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoGroupIDIsValid(self.raw) }
-    }
-
-    #[allow(missing_docs)]
-    pub fn effective_user_id(&self) -> u32 {
-        unsafe { sys::SBProcessInfoGetEffectiveUserID(self.raw) }
-    }
-
-    #[allow(missing_docs)]
-    pub fn effective_group_id(&self) -> u32 {
-        unsafe { sys::SBProcessInfoGetEffectiveGroupID(self.raw) }
-    }
-
-    #[allow(missing_docs)]
-    pub fn effective_user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoEffectiveUserIDIsValid(self.raw) }
-    }
-
-    #[allow(missing_docs)]
-    pub fn effective_group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBProcessInfoEffectiveGroupIDIsValid(self.raw) }
+    pub fn effective_group_id(&self) -> Option<u32> {
+        if unsafe { sys::SBProcessInfoEffectiveGroupIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBProcessInfoGetEffectiveGroupID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]

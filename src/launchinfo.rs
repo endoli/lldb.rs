@@ -34,8 +34,12 @@ impl SBLaunchInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn user_id(&self) -> u32 {
-        unsafe { sys::SBLaunchInfoGetUserID(self.raw) }
+    pub fn user_id(&self) -> Option<u32> {
+        if unsafe { sys::SBLaunchInfoUserIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBLaunchInfoGetUserID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
@@ -44,23 +48,17 @@ impl SBLaunchInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn user_id_is_valid(&self) -> bool {
-        unsafe { sys::SBLaunchInfoUserIDIsValid(self.raw) }
-    }
-
-    #[allow(missing_docs)]
-    pub fn group_id(&self) -> u32 {
-        unsafe { sys::SBLaunchInfoGetGroupID(self.raw) }
+    pub fn group_id(&self) -> Option<u32> {
+        if unsafe { sys::SBLaunchInfoGroupIDIsValid(self.raw) } {
+            Some(unsafe { sys::SBLaunchInfoGetGroupID(self.raw) })
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
     pub fn set_group_id(&self, group_id: u32) {
         unsafe { sys::SBLaunchInfoSetGroupID(self.raw, group_id) };
-    }
-
-    #[allow(missing_docs)]
-    pub fn group_id_is_valid(&self) -> bool {
-        unsafe { sys::SBLaunchInfoGroupIDIsValid(self.raw) }
     }
 
     #[allow(missing_docs)]
