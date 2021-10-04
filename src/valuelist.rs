@@ -4,10 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::lldb_user_id_t;
-use super::value::SBValue;
+use crate::{lldb_user_id_t, sys, SBValue};
 use std::ffi::CString;
-use sys;
 
 /// A list of [values].
 ///

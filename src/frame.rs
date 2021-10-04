@@ -4,24 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::block::SBBlock;
-use super::compileunit::SBCompileUnit;
-use super::expressionoptions::SBExpressionOptions;
-use super::function::SBFunction;
-use super::lineentry::SBLineEntry;
-use super::lldb_addr_t;
-use super::module::SBModule;
-use super::stream::SBStream;
-use super::symbol::SBSymbol;
-use super::symbolcontext::SBSymbolContext;
-use super::thread::SBThread;
-use super::value::SBValue;
-use super::valuelist::SBValueList;
-use super::variablesoptions::SBVariablesOptions;
+use crate::{
+    lldb_addr_t, sys, SBAddress, SBBlock, SBCompileUnit, SBExpressionOptions, SBFunction,
+    SBLineEntry, SBModule, SBStream, SBSymbol, SBSymbolContext, SBThread, SBValue, SBValueList,
+    SBVariablesOptions,
+};
 use std::ffi::{CStr, CString};
 use std::fmt;
-use sys;
 
 /// One of the stack frames associated with a thread.
 pub struct SBFrame {
@@ -311,7 +300,7 @@ unsafe impl Send for SBFrame {}
 unsafe impl Sync for SBFrame {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFrame: super::debugger::SBDebugger | &self | {
+graphql_object!(SBFrame: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

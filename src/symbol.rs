@@ -4,15 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::instructionlist::SBInstructionList;
-use super::stream::SBStream;
-use super::target::SBTarget;
-use super::{DisassemblyFlavor, SymbolType};
+use crate::{sys, DisassemblyFlavor, SBAddress, SBInstructionList, SBStream, SBTarget, SymbolType};
 use std::ffi::{CStr, CString};
 use std::fmt;
 use std::ptr;
-use sys;
 
 /// The symbol possibly associated with a stack frame.
 pub struct SBSymbol {
@@ -156,7 +151,7 @@ unsafe impl Send for SBSymbol {}
 unsafe impl Sync for SBSymbol {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSymbol: super::debugger::SBDebugger | &self | {
+graphql_object!(SBSymbol: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

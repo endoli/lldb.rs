@@ -4,8 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use crate::sys;
 use std::ffi::CStr;
-use sys;
 
 /// A destination for streaming data output. By default, this is
 /// a string stream, but it can be redirected to a file.

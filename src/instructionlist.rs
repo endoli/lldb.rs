@@ -4,10 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::instruction::SBInstruction;
-use super::stream::SBStream;
+use crate::{sys, SBInstruction, SBStream};
 use std::fmt;
-use sys;
 
 /// A list of [machine instructions].
 ///

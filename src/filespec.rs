@@ -4,10 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::stream::SBStream;
+use crate::{sys, SBStream};
 use std::ffi::CStr;
 use std::fmt;
-use sys;
 
 /// A file specification that divides the path into a
 /// directory and basename.
@@ -92,7 +91,7 @@ unsafe impl Send for SBFileSpec {}
 unsafe impl Sync for SBFileSpec {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFileSpec: super::debugger::SBDebugger | &self | {
+graphql_object!(SBFileSpec: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

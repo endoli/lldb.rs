@@ -4,9 +4,7 @@
 // option. This bkpt may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::breakpoint::SBBreakpoint;
-use super::target::SBTarget;
-use sys;
+use crate::{sys, SBBreakpoint, SBTarget};
 
 /// A list of [breakpoints].
 ///

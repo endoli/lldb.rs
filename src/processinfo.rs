@@ -4,10 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::filespec::SBFileSpec;
-use super::lldb_pid_t;
+use crate::{lldb_pid_t, sys, SBFileSpec};
 use std::ffi::CStr;
-use sys;
 
 #[allow(missing_docs)]
 #[derive(Debug)]
@@ -103,7 +101,7 @@ unsafe impl Send for SBProcessInfo {}
 unsafe impl Sync for SBProcessInfo {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBProcessInfo: super::debugger::SBDebugger | &self | {
+graphql_object!(SBProcessInfo: crate::SBDebugger | &self | {
     field name() -> &str {
         self.name()
     }

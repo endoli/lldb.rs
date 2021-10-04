@@ -4,11 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::filespec::SBFileSpec;
-use super::listener::SBListener;
-use super::lldb_pid_t;
+use crate::{lldb_pid_t, sys, SBFileSpec, SBListener};
 use std::ffi::{CStr, CString};
-use sys;
 
 /// Configuration for attaching to a process.
 ///

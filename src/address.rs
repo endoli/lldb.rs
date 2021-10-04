@@ -4,19 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::block::SBBlock;
-use super::compileunit::SBCompileUnit;
-use super::function::SBFunction;
-use super::lineentry::SBLineEntry;
-use super::lldb_addr_t;
-use super::module::SBModule;
-use super::section::SBSection;
-use super::stream::SBStream;
-use super::symbol::SBSymbol;
-use super::symbolcontext::SBSymbolContext;
-use super::target::SBTarget;
+use crate::{
+    lldb_addr_t, sys, SBBlock, SBCompileUnit, SBFunction, SBLineEntry, SBModule, SBSection,
+    SBStream, SBSymbol, SBSymbolContext, SBTarget,
+};
 use std::fmt;
-use sys;
 
 /// A section + offset based address class.
 ///
@@ -279,7 +271,7 @@ impl PartialEq for SBAddress {
 impl Eq for SBAddress {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
+graphql_object!(SBAddress: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }
@@ -316,7 +308,7 @@ graphql_object!(SBAddress: super::debugger::SBDebugger | &self | {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::SBAddress;
 
     #[test]
     fn test_equal() {

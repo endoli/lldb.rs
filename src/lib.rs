@@ -122,9 +122,9 @@ extern crate lldb_sys as sys;
 #[macro_use]
 extern crate juniper;
 
-pub use sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
+pub use crate::sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
 
-pub use sys::{
+pub use crate::sys::{
     AccessType, BasicType, BreakpointEventType, ByteOrder, CommandArgumentType, CommandFlags,
     ConnectionStatus, DescriptionLevel, DynamicValueType, EmulateInstructionOptions, Encoding,
     ErrorType, ExpressionEvaluationPhase, ExpressionResults, FilePermissions, Format,

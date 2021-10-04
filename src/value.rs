@@ -4,19 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::data::SBData;
-use super::error::SBError;
-use super::frame::SBFrame;
-use super::process::SBProcess;
-use super::stream::SBStream;
-use super::target::SBTarget;
-use super::thread::SBThread;
-use super::watchpoint::SBWatchpoint;
-use super::{lldb_addr_t, lldb_user_id_t, Format};
+use crate::{
+    lldb_addr_t, lldb_user_id_t, sys, Format, SBAddress, SBData, SBError, SBFrame, SBProcess,
+    SBStream, SBTarget, SBThread, SBWatchpoint,
+};
 use std::ffi::CStr;
 use std::fmt;
-use sys;
 
 /// The value of a variable, register or expression.
 pub struct SBValue {
@@ -271,7 +264,7 @@ unsafe impl Send for SBValue {}
 unsafe impl Sync for SBValue {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBValue: super::debugger::SBDebugger | &self | {
+graphql_object!(SBValue: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

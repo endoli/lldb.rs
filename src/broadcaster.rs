@@ -4,9 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::event::SBEvent;
-use super::listener::SBListener;
-use sys;
+use crate::{sys, SBEvent, SBListener};
 
 /// An entity which can broadcast events.
 ///

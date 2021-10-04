@@ -4,11 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::filespec::SBFileSpec;
-use super::stream::SBStream;
+use crate::{sys, SBAddress, SBFileSpec, SBStream};
 use std::fmt;
-use sys;
 
 /// Specifies an association with a contiguous range of
 /// instructions and a source file location.
@@ -96,7 +93,7 @@ unsafe impl Send for SBLineEntry {}
 unsafe impl Sync for SBLineEntry {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBLineEntry: super::debugger::SBDebugger | &self | {
+graphql_object!(SBLineEntry: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

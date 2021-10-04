@@ -4,11 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::process::SBProcess;
-use super::queueitem::SBQueueItem;
-use super::thread::SBThread;
+use crate::{sys, SBProcess, SBQueueItem, SBThread};
 use std::ffi::CStr;
-use sys;
 
 /// A `libdispatch` (aka Grand Central Dispatch) queue.
 ///
@@ -203,7 +200,7 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
 impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBQueue: super::debugger::SBDebugger | &self | {
+graphql_object!(SBQueue: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

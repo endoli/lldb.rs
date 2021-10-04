@@ -4,12 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::filespec::SBFileSpec;
-use super::listener::SBListener;
-use super::{lldb_pid_t, LaunchFlags};
+use crate::{lldb_pid_t, sys, LaunchFlags, SBFileSpec, SBListener};
 use std::ffi::{CStr, CString};
 use std::ptr;
-use sys;
 
 /// Configuration for launching a process.
 ///

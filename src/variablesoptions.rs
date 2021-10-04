@@ -4,8 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::DynamicValueType;
-use sys;
+use crate::{sys, DynamicValueType};
 
 #[allow(missing_docs)]
 #[derive(Debug)]

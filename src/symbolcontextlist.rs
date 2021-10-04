@@ -4,8 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::symbolcontext::SBSymbolContext;
-use sys;
+use crate::{sys, SBSymbolContext};
 
 /// A list of [symbol contexts].
 ///

@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use sys;
+use crate::sys;
 
 #[allow(missing_docs)]
 #[derive(Debug)]
@@ -39,4 +39,4 @@ unsafe impl Send for SBCommandInterpreter {}
 unsafe impl Sync for SBCommandInterpreter {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBCommandInterpreter: super::debugger::SBDebugger | &self | {});
+graphql_object!(SBCommandInterpreter: crate::SBDebugger | &self | {});

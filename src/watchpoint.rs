@@ -4,11 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::error::SBError;
-use super::stream::SBStream;
-use super::{lldb_addr_t, DescriptionLevel};
+use crate::{lldb_addr_t, sys, DescriptionLevel, SBError, SBStream};
 use std::fmt;
-use sys;
 
 /// An instance of a watch point for a specific target program.
 ///
@@ -143,7 +140,7 @@ unsafe impl Send for SBWatchpoint {}
 unsafe impl Sync for SBWatchpoint {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBWatchpoint: super::debugger::SBDebugger | &self | {
+graphql_object!(SBWatchpoint: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

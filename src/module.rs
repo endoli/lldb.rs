@@ -4,15 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::filespec::SBFileSpec;
-use super::section::SBSection;
-use super::stream::SBStream;
-use super::symbolcontextlist::SBSymbolContextList;
-use super::typelist::SBTypeList;
-use super::{SymbolType, TypeClass};
+use crate::{
+    sys, SBFileSpec, SBSection, SBStream, SBSymbolContextList, SBTypeList, SymbolType, TypeClass,
+};
 use std::ffi::CString;
 use std::fmt;
-use sys;
 
 /// An executable image and its associated object and symbol files.
 pub struct SBModule {
@@ -164,7 +160,7 @@ unsafe impl Send for SBModule {}
 unsafe impl Sync for SBModule {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBModule: super::debugger::SBDebugger | &self | {
+graphql_object!(SBModule: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

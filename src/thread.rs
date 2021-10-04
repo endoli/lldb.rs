@@ -4,17 +4,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::error::SBError;
-use super::event::SBEvent;
-use super::frame::SBFrame;
-use super::process::SBProcess;
-use super::queue::SBQueue;
-use super::stream::SBStream;
-use super::value::SBValue;
-use super::{lldb_tid_t, StopReason};
+use crate::{
+    lldb_tid_t, sys, SBError, SBEvent, SBFrame, SBProcess, SBQueue, SBStream, SBValue, StopReason,
+};
 use std::ffi::CStr;
 use std::fmt;
-use sys;
 
 /// A thread of execution.
 ///
@@ -328,7 +322,7 @@ impl<'e> SBThreadEvent<'e> {
 }
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBThread: super::debugger::SBDebugger | &self | {
+graphql_object!(SBThread: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

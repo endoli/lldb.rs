@@ -4,28 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::attachinfo::SBAttachInfo;
-use super::breakpoint::SBBreakpoint;
-use super::broadcaster::SBBroadcaster;
-use super::debugger::SBDebugger;
-use super::error::SBError;
-use super::event::SBEvent;
-use super::expressionoptions::SBExpressionOptions;
-use super::filespec::SBFileSpec;
-use super::launchinfo::SBLaunchInfo;
-use super::module::SBModule;
-use super::modulespec::SBModuleSpec;
-use super::platform::SBPlatform;
-use super::process::SBProcess;
-use super::stream::SBStream;
-use super::symbolcontextlist::SBSymbolContextList;
-use super::value::SBValue;
-use super::watchpoint::SBWatchpoint;
-use super::{lldb_addr_t, DescriptionLevel, MatchType, SymbolType};
+use crate::{
+    lldb_addr_t, sys, DescriptionLevel, MatchType, SBAddress, SBAttachInfo, SBBreakpoint,
+    SBBroadcaster, SBDebugger, SBError, SBEvent, SBExpressionOptions, SBFileSpec, SBLaunchInfo,
+    SBModule, SBModuleSpec, SBPlatform, SBProcess, SBStream, SBSymbolContextList, SBValue,
+    SBWatchpoint, SymbolType,
+};
 use std::ffi::{CStr, CString};
 use std::fmt;
-use sys;
 
 /// The target program running under the debugger.
 ///

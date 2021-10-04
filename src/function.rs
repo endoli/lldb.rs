@@ -4,17 +4,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::block::SBBlock;
-use super::instructionlist::SBInstructionList;
-use super::stream::SBStream;
-use super::target::SBTarget;
-use super::types::SBType;
-use super::{DisassemblyFlavor, LanguageType};
+use crate::{
+    sys, DisassemblyFlavor, LanguageType, SBAddress, SBBlock, SBInstructionList, SBStream,
+    SBTarget, SBType,
+};
 use std::ffi::{CStr, CString};
 use std::fmt;
 use std::ptr;
-use sys;
 
 /// A generic function, which can be inlined or not.
 pub struct SBFunction {
@@ -161,7 +157,7 @@ unsafe impl Send for SBFunction {}
 unsafe impl Sync for SBFunction {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFunction: super::debugger::SBDebugger | &self | {
+graphql_object!(SBFunction: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

@@ -4,12 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::data::SBData;
-use super::stream::SBStream;
-use super::target::SBTarget;
+use crate::{sys, SBData, SBStream, SBTarget};
 use std::ffi::{CStr, CString};
 use std::fmt;
-use sys;
 
 #[allow(missing_docs)]
 pub struct SBSection {
@@ -173,7 +170,7 @@ unsafe impl Send for SBSection {}
 unsafe impl Sync for SBSection {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSection: super::debugger::SBDebugger | &self | {
+graphql_object!(SBSection: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

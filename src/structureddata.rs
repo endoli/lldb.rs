@@ -4,12 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::error::SBError;
-use super::stream::SBStream;
+use crate::{sys, SBError, SBStream};
 use std::ffi::CString;
 use std::fmt;
 use std::ptr;
-use sys;
 
 /// The value of a variable, register or expression.
 pub struct SBStructuredData {
@@ -161,7 +159,7 @@ unsafe impl Send for SBStructuredData {}
 unsafe impl Sync for SBStructuredData {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBStructuredData: super::debugger::SBDebugger | &self | {
+graphql_object!(SBStructuredData: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

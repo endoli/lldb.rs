@@ -4,8 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::types::SBType;
-use sys;
+use crate::{sys, SBType};
 
 /// A list of [types].
 ///

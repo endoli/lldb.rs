@@ -4,17 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::broadcaster::SBBroadcaster;
-use super::error::SBError;
-use super::event::SBEvent;
-use super::processinfo::SBProcessInfo;
-use super::queue::SBQueue;
-use super::stream::SBStream;
-use super::thread::SBThread;
-use super::{lldb_pid_t, lldb_tid_t, StateType};
+use crate::{
+    lldb_pid_t, lldb_tid_t, sys, SBBroadcaster, SBError, SBEvent, SBProcessInfo, SBQueue, SBStream,
+    SBThread, StateType,
+};
 use std::ffi::{CStr, CString};
 use std::fmt;
-use sys;
 
 /// The process associated with the target program.
 ///
@@ -525,7 +520,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
 impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBProcess: super::debugger::SBDebugger | &self | {
+graphql_object!(SBProcess: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

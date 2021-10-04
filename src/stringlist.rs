@@ -4,8 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use crate::sys;
 use std::ffi::{CStr, CString};
-use sys;
 
 /// A list of strings.
 #[derive(Debug)]

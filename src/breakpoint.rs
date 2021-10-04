@@ -4,13 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::breakpointlocation::SBBreakpointLocation;
-use super::lldb_addr_t;
-use super::stream::SBStream;
-use super::stringlist::SBStringList;
+use crate::{lldb_addr_t, sys, SBBreakpointLocation, SBStream, SBStringList};
 use std::ffi::CString;
 use std::fmt;
-use sys;
 
 /// A logical breakpoint and its associated settings.
 ///
@@ -246,7 +242,7 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
 impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBBreakpoint: super::debugger::SBDebugger | &self | {
+graphql_object!(SBBreakpoint: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

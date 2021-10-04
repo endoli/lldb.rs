@@ -4,11 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::broadcaster::SBBroadcaster;
-use super::stream::SBStream;
+use crate::{sys, SBBroadcaster, SBStream};
 use std::ffi::CStr;
 use std::fmt;
-use sys;
 
 /// An event.
 pub struct SBEvent {

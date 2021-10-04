@@ -4,12 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::breakpoint::SBBreakpoint;
-use super::stream::SBStream;
-use super::{lldb_addr_t, DescriptionLevel};
+use crate::{lldb_addr_t, sys, DescriptionLevel, SBAddress, SBBreakpoint, SBStream};
 use std::fmt;
-use sys;
 
 /// One unique instance (by address) of a logical breakpoint.
 ///
@@ -128,7 +124,7 @@ unsafe impl Send for SBBreakpointLocation {}
 unsafe impl Sync for SBBreakpointLocation {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBBreakpointLocation: super::debugger::SBDebugger | &self | {
+graphql_object!(SBBreakpointLocation: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

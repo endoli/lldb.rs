@@ -4,11 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::error::SBError;
-use super::launchinfo::SBLaunchInfo;
-use super::lldb_pid_t;
+use crate::{lldb_pid_t, sys, SBError, SBLaunchInfo};
 use std::ffi::CStr;
-use sys;
 
 /// A platform that can represent the current host or a
 /// remote host debug platform.
@@ -188,7 +185,7 @@ unsafe impl Send for SBPlatform {}
 unsafe impl Sync for SBPlatform {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBPlatform: super::debugger::SBDebugger | &self | {
+graphql_object!(SBPlatform: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

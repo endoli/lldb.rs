@@ -4,11 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::stream::SBStream;
-use super::{BasicType, DescriptionLevel, TypeClass};
+use crate::{sys, BasicType, DescriptionLevel, SBStream, TypeClass};
 use std::ffi::CStr;
 use std::fmt;
-use sys;
 
 #[allow(missing_docs)]
 pub struct SBType {
@@ -174,7 +172,7 @@ unsafe impl Send for SBType {}
 unsafe impl Sync for SBType {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBType: super::debugger::SBDebugger | &self | {
+graphql_object!(SBType: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

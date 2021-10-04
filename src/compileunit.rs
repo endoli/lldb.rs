@@ -4,13 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::filespec::SBFileSpec;
-use super::lineentry::SBLineEntry;
-use super::stream::SBStream;
-use super::typelist::SBTypeList;
-use super::{LanguageType, TypeClass};
+use crate::{sys, LanguageType, SBFileSpec, SBLineEntry, SBStream, SBTypeList, TypeClass};
 use std::fmt;
-use sys;
 
 /// A compilation unit or compiled source file.
 pub struct SBCompileUnit {
@@ -135,7 +130,7 @@ impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
 impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBCompileUnit: super::debugger::SBDebugger | &self | {
+graphql_object!(SBCompileUnit: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

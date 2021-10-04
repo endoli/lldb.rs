@@ -4,10 +4,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::thread::SBThread;
+use crate::{sys, SBAddress, SBThread};
 use std::ffi::CString;
-use sys;
 
 /// A work item enqueued on a libdispatch aka Grand Central
 /// Dispatch (GCD) queue.
@@ -91,7 +89,7 @@ unsafe impl Send for SBQueueItem {}
 unsafe impl Sync for SBQueueItem {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBQueueItem: super::debugger::SBDebugger | &self | {
+graphql_object!(SBQueueItem: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }

@@ -4,18 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::commandinterpreter::SBCommandInterpreter;
-use super::error::SBError;
-use super::listener::SBListener;
-use super::platform::SBPlatform;
-use super::stream::SBStream;
-use super::structureddata::SBStructuredData;
-use super::target::SBTarget;
+use crate::{
+    sys, SBCommandInterpreter, SBError, SBListener, SBPlatform, SBStream, SBStructuredData,
+    SBTarget,
+};
 use std::ffi::{CStr, CString};
 use std::fmt;
 use std::iter;
 use std::ptr;
-use sys;
 
 /// Creates [`SBTarget`]s, provides access to them and manages
 /// the overall debugging experience.

@@ -4,11 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::stream::SBStream;
-use super::ErrorType;
+use crate::{sys, ErrorType, SBStream};
 use std::fmt;
 use std::{error::Error, ffi::CStr};
-use sys;
 
 /// A container for holding any error code and an error message.
 ///

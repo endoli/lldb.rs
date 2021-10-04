@@ -4,16 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use super::address::SBAddress;
-use super::block::SBBlock;
-use super::compileunit::SBCompileUnit;
-use super::function::SBFunction;
-use super::lineentry::SBLineEntry;
-use super::module::SBModule;
-use super::stream::SBStream;
-use super::symbol::SBSymbol;
+use crate::{
+    sys, SBAddress, SBBlock, SBCompileUnit, SBFunction, SBLineEntry, SBModule, SBStream, SBSymbol,
+};
 use std::fmt;
-use sys;
 
 /// A container that stores various debugger related info.
 pub struct SBSymbolContext {
@@ -114,7 +108,7 @@ unsafe impl Send for SBSymbolContext {}
 unsafe impl Sync for SBSymbolContext {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSymbolContext: super::debugger::SBDebugger | &self | {
+graphql_object!(SBSymbolContext: crate::SBDebugger | &self | {
     field is_valid() -> bool {
         self.is_valid()
     }
