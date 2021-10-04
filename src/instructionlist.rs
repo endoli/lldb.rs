@@ -9,7 +9,7 @@ use std::fmt;
 
 /// A list of [machine instructions].
 ///
-/// [machine instructions]: struct.SBInstruction.html
+/// [machine instructions]: SBInstruction
 pub struct SBInstructionList {
     /// The underlying raw `SBInstructionListRef`.
     pub raw: sys::SBInstructionListRef,
@@ -87,8 +87,7 @@ unsafe impl Sync for SBInstructionList {}
 
 /// An iterator over the [instructions] in an [`SBInstructionList`].
 ///
-/// [instructions]: struct.SBInstruction.html
-/// [`SBInstructionList`]: struct.SBInstructionList.html
+/// [instructions]: SBInstruction
 pub struct SBInstructionListIter<'d> {
     instruction_list: &'d SBInstructionList,
     idx: usize,

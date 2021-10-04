@@ -8,7 +8,7 @@ use crate::{sys, SBSymbolContext};
 
 /// A list of [symbol contexts].
 ///
-/// [symbol contexts]: struct.SBSymbolContext.html
+/// [symbol contexts]: SBSymbolContext
 #[derive(Debug)]
 pub struct SBSymbolContextList {
     /// The underlying raw `SBSymbolContextListRef`.
@@ -84,8 +84,7 @@ unsafe impl Sync for SBSymbolContextList {}
 
 /// An iterator over the [contexts] in an [`SBSymbolContextList`].
 ///
-/// [contexts]: struct.SBSymbolContext.html
-/// [`SBSymbolContextList`]: struct.SBSymbolContextList.html
+/// [contexts]: SBSymbolContext
 pub struct SBSymbolContextListIter<'d> {
     context_list: &'d SBSymbolContextList,
     idx: usize,

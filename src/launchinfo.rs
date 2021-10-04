@@ -10,9 +10,9 @@ use std::ptr;
 
 /// Configuration for launching a process.
 ///
-/// See [`SBTarget::launch`].
+/// See [`SBTarget::launch()`].
 ///
-/// [`SBTarget::launch`]: struct.SBTarget.html#method.launch
+/// [`SBTarget::launch()`]: crate::SBTarget::launch()
 #[derive(Debug)]
 pub struct SBLaunchInfo {
     /// The underlying raw `SBLaunchInfoRef`.
@@ -83,7 +83,7 @@ impl SBLaunchInfo {
     /// the argument vector prior to launching. Otherwise the argument
     /// vector will be left alone.
     ///
-    /// [`SBTarget::launch(...)`]: struct.SBTarget.html#method.launch
+    /// [`SBTarget::launch(...)`]: crate::SBTarget::launch()
     pub fn set_executable_file(&self, filespec: &SBFileSpec, add_as_first_arg: bool) {
         unsafe { sys::SBLaunchInfoSetExecutableFile(self.raw, filespec.raw, add_as_first_arg) };
     }
@@ -104,8 +104,8 @@ impl SBLaunchInfo {
     /// process events. Calling this function allows a different
     /// listener to be used to listen for process events.
     ///
-    /// [`SBDebugger`]: struct.SBDebugger.html
-    /// [`SBTarget`]: struct.SBTarget.html
+    /// [`SBDebugger`]: crate::SBDebugger
+    /// [`SBTarget`]: crate::SBTarget
     pub fn set_listener(&self, listener: &SBListener) {
         unsafe { sys::SBLaunchInfoSetListener(self.raw, listener.raw) };
     }

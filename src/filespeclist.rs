@@ -9,7 +9,7 @@ use std::fmt;
 
 /// A list of [filespecs].
 ///
-/// [filespecs]: struct.SBFileSpec.html
+/// [filespecs]: SBFileSpec
 pub struct SBFileSpecList {
     /// The underlying raw `SBFileSpecListRef`.
     pub raw: sys::SBFileSpecListRef,
@@ -89,8 +89,7 @@ unsafe impl Sync for SBFileSpecList {}
 
 /// An iterator over the [filespecs] in an [`SBFileSpecList`].
 ///
-/// [filespecs]: struct.SBFileSpec.html
-/// [`SBFileSpecList`]: struct.SBFileSpecList.html
+/// [filespecs]: SBFileSpec
 pub struct SBFileSpecListIter<'d> {
     filespec_list: &'d SBFileSpecList,
     idx: usize,

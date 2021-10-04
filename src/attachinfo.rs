@@ -203,8 +203,8 @@ impl SBAttachInfo {
     /// process events. Calling this function allows a different
     /// listener to be used to listen for process events.
     ///
-    /// [`SBDebugger`]: struct.SBDebugger.html
-    /// [`SBTarget`]: struct.SBTarget.html
+    /// [`SBDebugger`]: crate::SBDebugger
+    /// [`SBTarget`]: crate::SBTarget
     pub fn set_listener(&self, listener: SBListener) {
         unsafe { sys::SBAttachInfoSetListener(self.raw, listener.raw) };
     }

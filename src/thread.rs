@@ -30,7 +30,7 @@ use std::fmt;
 /// # Frames
 ///
 /// The thread contains [stack frames]. These can be iterated
-/// over with [`frames`]:
+/// over with [`SBThread::frames()`]:
 ///
 /// ```no_run
 /// # use lldb::{SBFrame, SBThread};
@@ -45,17 +45,15 @@ use std::fmt;
 /// ```
 ///
 /// Some functions operate on the 'currently selected frame'. This can
-/// retrieved via [`selected_frame`] and set via [`set_selected_frame`].
+/// retrieved via [`SBThread::selected_frame()`] and set via
+/// [`SBThread::set_selected_frame()`].
 ///
 ///
 /// # Events
 ///
 /// ...
 ///
-/// [stack frames]: struct.SBFrame.html
-/// [`frames`]: #method.frames
-/// [`selected_frame`]: #method.selected_frame
-/// [`set_selected_frame`]: #method.set_selected_frame
+/// [stack frames]: SBFrame
 pub struct SBThread {
     /// The underlying raw `SBThreadRef`.
     pub raw: sys::SBThreadRef,
@@ -202,7 +200,7 @@ impl SBThread {
 
     /// Get an iterator over the [frames] known to this thread instance.
     ///
-    /// [frames]: struct.SBFrame.html
+    /// [frames]: SBFrame
     pub fn frames(&self) -> SBThreadFrameIter {
         SBThreadFrameIter {
             thread: self,
@@ -238,8 +236,8 @@ impl SBThread {
 
 /// Iterate over the [frames] in a [thread].
 ///
-/// [frames]: struct.SBFrame.html
-/// [thread]: struct.SBThread.html
+/// [frames]: SBFrame
+/// [thread]: SBThread
 pub struct SBThreadFrameIter<'d> {
     thread: &'d SBThread,
     idx: usize,

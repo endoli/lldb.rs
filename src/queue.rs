@@ -32,8 +32,7 @@ use std::ffi::CStr;
 /// If a queue is associated with a thread, it can be discovered
 /// from the thread via [`SBThread::queue()`].
 ///
-/// [`process`]: struct.SBProcess.html
-/// [`SBThread::queue()`]: struct.SBThread.html#method.queue
+/// [`process`]: SBProcess
 pub struct SBQueue {
     /// The underlying raw `SBQueueRef`.
     pub raw: sys::SBQueueRef,
@@ -80,7 +79,7 @@ impl SBQueue {
 
     /// Get an iterator over the [threads] associated with this queue.
     ///
-    /// [threads]: struct.SBThread.html
+    /// [threads]: SBThread
     pub fn threads(&self) -> SBQueueThreadIter {
         SBQueueThreadIter {
             queue: self,
@@ -90,7 +89,7 @@ impl SBQueue {
 
     /// Get an iterator over the [pending items] known to this queue.
     ///
-    /// [pending items]: struct.SBQueueItem.html
+    /// [pending items]: SBQueueItem
     pub fn pending_items(&self) -> SBQueueQueueItemIter {
         SBQueueQueueItemIter {
             queue: self,
@@ -137,8 +136,8 @@ unsafe impl Sync for SBQueue {}
 
 /// Iterate over the [threads] associated with a [queue].
 ///
-/// [threads]: struct.SBThread.html
-/// [queue]: struct.SBQueue.html
+/// [threads]: SBThread
+/// [queue]: SBQueue
 pub struct SBQueueThreadIter<'d> {
     queue: &'d SBQueue,
     idx: usize,
@@ -169,8 +168,8 @@ impl<'d> ExactSizeIterator for SBQueueThreadIter<'d> {}
 
 /// Iterate over the [queue items] in a [queue].
 ///
-/// [queue items]: struct.SBQueueItem.html
-/// [queue]: struct.SBQueue.html
+/// [queue items]: SBQueueItem
+/// [queue]: SBQueue
 pub struct SBQueueQueueItemIter<'d> {
     queue: &'d SBQueue,
     idx: usize,

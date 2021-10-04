@@ -18,20 +18,15 @@ use std::fmt;
 /// A watchpoint has multiple ways of controlling whether
 /// or not it should be considered active.
 ///
-/// * Enabled. This is controlled via [`is_enabled`] and
-///   [`set_enabled`].
+/// * Enabled. This is controlled via [`SBWatchpoint::is_enabled()`]
+///   and [`SBWatchpoint::set_enabled()`].
 /// * Ignore count. If set, this watchpoint will be ignored
 ///   the first *ignore count* times that it is hit. This is
-///   controlled via [`ignore_count`] and [`set_ignore_count`].
+///   controlled via [`SBWatchpoint::ignore_count()`] and
+///   [`SBWatchpoint::set_ignore_count()`].
 ///
 /// A count of how many times a watchpoint has been it is
-/// available via [`hit_count`].
-///
-/// [`is_enabled`]: #method.is_enabled
-/// [`set_enabled`]: #method.set_enabled
-/// [`ignore_count`]: #method.ignore_count
-/// [`set_ignore_count`]: #method.set_ignore_count
-/// [`hit_count`]: #method.hit_count
+/// available via [`SBWatchpoint::hit_count()`].
 pub struct SBWatchpoint {
     /// The underlying raw `SBWatchpointRef`.
     pub raw: sys::SBWatchpointRef,

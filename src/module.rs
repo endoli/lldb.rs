@@ -60,7 +60,7 @@ impl SBModule {
 
     /// Get an iterator over the [sections] known to this module instance.
     ///
-    /// [sections]: struct.SBSection.html
+    /// [sections]: SBSection
     pub fn sections(&self) -> SBModuleSectionIter {
         SBModuleSectionIter {
             module: self,
@@ -98,8 +98,8 @@ impl SBModule {
 
 /// Iterate over the [sections] in a [module].
 ///
-/// [sections]: struct.SBSection.html
-/// [module]: struct.SBModule.html
+/// [sections]: SBSection
+/// [module]: SBModule
 pub struct SBModuleSectionIter<'d> {
     module: &'d SBModule,
     idx: usize,

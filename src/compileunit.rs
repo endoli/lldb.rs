@@ -99,8 +99,8 @@ unsafe impl Sync for SBCompileUnit {}
 
 /// Iterate over the [line entries] in a [compile unit].
 ///
-/// [line entries]: struct.SBLineEntry.html
-/// [compile unit]: struct.SBCompileUnit.html
+/// [line entries]: SBLineEntry
+/// [compile unit]: SBCompileUnit
 pub struct SBCompileUnitLineEntryIter<'d> {
     source: &'d SBCompileUnit,
     idx: u32,

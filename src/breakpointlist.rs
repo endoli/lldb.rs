@@ -8,7 +8,7 @@ use crate::{sys, SBBreakpoint, SBTarget};
 
 /// A list of [breakpoints].
 ///
-/// [breakpoints]: struct.SBBreakpoint.html
+/// [breakpoints]: SBBreakpoint
 pub struct SBBreakpointList {
     /// The underlying raw `SBBreakpointListRef`.
     pub raw: sys::SBBreakpointListRef,
@@ -84,8 +84,7 @@ unsafe impl Sync for SBBreakpointList {}
 
 /// An iterator over the [breakpoints] in an [`SBBreakpointList`].
 ///
-/// [breakpoints]: struct.SBBreakpoint.html
-/// [`SBBreakpointList`]: struct.SBBreakpointList.html
+/// [breakpoints]: SBBreakpoint
 pub struct SBBreakpointListIter<'d> {
     breakpoint_list: &'d SBBreakpointList,
     idx: usize,

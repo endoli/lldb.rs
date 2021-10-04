@@ -92,20 +92,6 @@
 //! [LLDB]: https://lldb.llvm.org/
 //! [LLVM project]: https://llvm.org/
 //! [crates.io]: https://crates.io/crates/lldb
-//! [`SBDebugger`]: struct.SBDebugger.html
-//! [`SBTarget`]: struct.SBTarget.html
-//! [`SBProcess`]: struct.SBProcess.html
-//! [`SBThread`]: struct.SBThread.html
-//! [`SBFrame`]: struct.SBFrame.html
-//! [`SBSymbolContext`]: struct.SBSymbolContext.html
-//! [`SBValue`]: struct.SBValue.html
-//! [`SBModule`]: struct.SBModule.html
-//! [`SBBreakpoint`]: struct.SBBreakpoint.html
-//! [`SBSymbol`]: struct.SBSymbol.html
-//! [`SBCompileUnit`]: struct.SBCompileUnit.html
-//! [`SBFunction`]: struct.SBFunction.html
-//! [`SBBlock`]: struct.SBBlock.html
-//! [`SBLineEntry`]: struct.SBLineEntry.html
 
 #![allow(clippy::upper_case_acronyms)]
 #![warn(missing_docs)]

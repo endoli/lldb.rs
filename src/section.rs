@@ -52,7 +52,7 @@ impl SBSection {
 
     /// Get an iterator over the [subsections] known to this section instance.
     ///
-    /// [subsections]: struct.SBSection.html
+    /// [subsections]: SBSection
     pub fn subsections(&self) -> SBSectionSubSectionIter {
         SBSectionSubSectionIter {
             section: self,
@@ -108,8 +108,8 @@ impl SBSection {
 
 /// Iterate over the [subsections] in a [section].
 ///
-/// [subsections]: struct.SBSection.html
-/// [section]: struct.SBSection.html
+/// [subsections]: SBSection
+/// [section]: SBSection
 pub struct SBSectionSubSectionIter<'d> {
     section: &'d SBSection,
     idx: usize,

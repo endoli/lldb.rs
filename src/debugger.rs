@@ -72,9 +72,10 @@ use std::ptr;
 /// so on won't be completed immediately and you must process events
 /// to see what the results of an action are.
 ///
-/// Synchronous mode can be enabled by using [`set_asynchronous`] and
-/// passing it a `false` value. You can see if you're in asynchronous
-/// mode or not by calling [`asynchronous`].
+/// Synchronous mode can be enabled by using
+/// [`SBDebugger::set_asynchronous()`] and passing it a `false` value.
+/// You can see if you're in asynchronous mode or not by calling
+/// [`SBDebugger::asynchronous()`].
 ///
 /// # Platform Management
 ///
@@ -110,8 +111,8 @@ use std::ptr;
 /// The `SBDebugger` instance tracks the various targets that are
 /// currently known to the debugger.
 ///
-/// Typically, you create a target with [`create_target`],
-/// [`create_target_simple`] or one of the related methods.
+/// Typically, you create a target with [`SBDebugger::create_target()`],
+/// [`SBDebugger::create_target_simple()`] or one of the related methods.
 ///
 /// Sometimes, you'll want to create a target without an associated
 /// executable. A common use case for this is to attach to a process
@@ -130,7 +131,7 @@ use std::ptr;
 /// ```
 ///
 /// You can iterate over these targets which have been created by
-/// using [`targets`]:
+/// using [`SBDebugger::targets()`]:
 ///
 /// ```no_run
 /// # use lldb::{SBDebugger, SBTarget};
@@ -143,13 +144,6 @@ use std::ptr;
 /// let targets = debugger.targets().collect::<Vec<SBTarget>>();
 /// # }
 /// ```
-///
-/// [`SBTarget`]: struct.SBTarget.html
-/// [`set_asynchronous`]: #method.set_asynchronous
-/// [`asynchronous`]: #method.asynchronous
-/// [`create_target`]: #method.create_target
-/// [`create_target_simple`]: #method.create_target_simple
-/// [`targets`]: #method.targets
 pub struct SBDebugger {
     /// The underlying raw `SBDebuggerRef`.
     pub raw: sys::SBDebuggerRef,
@@ -273,11 +267,9 @@ impl SBDebugger {
     /// The executable name may be an empty string to create
     /// an empty target.
     ///
-    /// Using [`create_target`] is preferred in most cases as
-    /// that provides access to an `SBError` to inform the caller
-    /// about what might have gone wrong.
-    ///
-    /// [`create_target`]: struct.SBDebugger.html#method.create_target
+    /// Using [`SBDebugger::create_target()`] is preferred in most
+    /// cases as that provides access to an `SBError` to inform the
+    /// caller about what might have gone wrong.
     pub fn create_target_simple(&self, executable: &str) -> Option<SBTarget> {
         let executable = CString::new(executable).unwrap();
         SBTarget::maybe_wrap(unsafe { sys::SBDebuggerCreateTarget2(self.raw, executable.as_ptr()) })
@@ -285,7 +277,7 @@ impl SBDebugger {
 
     /// Get an iterator over the [targets] known to this debugger instance.
     ///
-    /// [targets]: struct.SBTarget.html
+    /// [targets]: SBTarget
     pub fn targets(&self) -> SBDebuggerTargetIter {
         SBDebuggerTargetIter {
             debugger: self,
@@ -293,23 +285,17 @@ impl SBDebugger {
         }
     }
 
-    /// Get the default [SBListener] associated with the debugger.
-    ///
-    /// [SBListener]: struct.SBListener.html
+    /// Get the default [`SBListener`] associated with the debugger.
     pub fn listener(&self) -> SBListener {
         SBListener::from(unsafe { sys::SBDebuggerGetListener(self.raw) })
     }
 
     /// Get the currently selected [`SBTarget`].
-    ///
-    /// [SBTarget]: struct.SBTarget.html
     pub fn selected_target(&self) -> Option<SBTarget> {
         SBTarget::maybe_wrap(unsafe { sys::SBDebuggerGetSelectedTarget(self.raw) })
     }
 
     /// Set the selected [`SBTarget`].
-    ///
-    /// [SBTarget]: struct.SBTarget.html
     pub fn set_selected_target(&self, target: &SBTarget) {
         unsafe { sys::SBDebuggerSetSelectedTarget(self.raw, target.raw) };
     }
@@ -404,8 +390,8 @@ impl SBDebugger {
 
 /// Iterate over the [targets] known to a [debugger].
 ///
-/// [targets]: struct.SBTarget.html
-/// [debugger]: struct.SBDebugger.html
+/// [targets]: SBTarget
+/// [debugger]: SBDebugger
 pub struct SBDebuggerTargetIter<'d> {
     debugger: &'d SBDebugger,
     idx: usize,
@@ -467,7 +453,7 @@ unsafe impl Sync for SBDebugger {}
 
 /// Iterate over the [platforms].
 ///
-/// [platforms]: struct.SBPlatform.html
+/// [platforms]: SBPlatform
 pub struct SBDebuggerPlatformIter<'d> {
     debugger: &'d SBDebugger,
     idx: u32,

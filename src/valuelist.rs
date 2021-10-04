@@ -9,7 +9,7 @@ use std::ffi::CString;
 
 /// A list of [values].
 ///
-/// [values]: struct.SBValue.html
+/// [values]: SBValue
 #[derive(Debug)]
 pub struct SBValueList {
     /// The underlying raw `SBValueListRef`.
@@ -96,8 +96,7 @@ unsafe impl Sync for SBValueList {}
 
 /// An iterator over the [values] in an [`SBValueList`].
 ///
-/// [values]: struct.SBValue.html
-/// [`SBValueList`]: struct.SBValueList.html
+/// [values]: SBValue
 pub struct SBValueListIter<'d> {
     value_list: &'d SBValueList,
     idx: usize,

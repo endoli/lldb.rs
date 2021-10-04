@@ -17,8 +17,6 @@ use std::fmt;
 /// `SBBreakpoint` contains `SBBreakpointLocation`(s).
 /// See [`SBBreakpoint`] for retrieval of an `SBBreakpointLocation`
 /// from an `SBBreakpoint`.
-///
-/// [`SBBreakpoint`]: struct.SBBreakpoint.html
 pub struct SBBreakpointLocation {
     /// The underlying raw `SBBreakpointLocationRef`.
     pub raw: sys::SBBreakpointLocationRef,

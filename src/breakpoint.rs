@@ -15,17 +15,18 @@ use std::fmt;
 /// A breakpoint has multiple ways of controlling whether
 /// or not it should be considered active.
 ///
-/// * Enabled. This is controlled via [`is_enabled`] and
-///   [`set_enabled`].
+/// * Enabled. This is controlled via [`SBBreakpoint::is_enabled()`]
+///   and [`SBBreakpoint::set_enabled()`].
 /// * One shot. If set, this will be disabled once it has
-///   been hit. This is controlled via [`is_oneshot`] and
-///   [`set_oneshot`].
+///   been hit. This is controlled via [`SBBreakpoint::is_oneshot()`]
+///   and [`SBBreakpoint::set_oneshot()`].
 /// * Ignore count. If set, this breakpoint will be ignored
 ///   the first *ignore count* times that it is hit. This is
-///   controlled via [`ignore_count`] and [`set_ignore_count`].
+///   controlled via [`SBBreakpoint::ignore_count()`] and
+///   [`SBBreakpoint::set_ignore_count()`].
 ///
 /// A count of how many times a breakpoint has been it is
-/// available via [`hit_count`].
+/// available via [`SBBreakpoint::hit_count()`].
 ///
 /// # Breakpoint Names and Aliases
 ///
@@ -39,24 +40,13 @@ use std::fmt;
 /// all a name of `memory`. Then, you can make it easy for the user
 /// enable or disable them all in a single shot.
 ///
-/// Names are managed via [`add_name`], [`remove_name`],
-/// [`matches_name`] and [`names`].
+/// Names are managed via [`SBBreakpoint::add_name()`],
+/// [`SBBreakpoint::remove_name()`], [`SBBreakpoint::matches_name()`]
+/// and [`SBBreakpoint::names()`].
 ///
 /// # Breakpoint Locations
 ///
 /// ...
-///
-/// [`is_enabled`]: #method.is_enabled
-/// [`set_enabled`]: #method.set_enabled
-/// [`is_oneshot`]: #method.is_oneshot
-/// [`set_oneshot`]: #method.set_oneshot
-/// [`ignore_count`]: #method.ignore_count
-/// [`set_ignore_count`]: #method.set_ignore_count
-/// [`hit_count`]: #method.hit_count
-/// [`add_name`]: #method.add_name
-/// [`remove_name`]: #method.remove_name
-/// [`matches_name`]: #method.matches_name
-/// [`names`]: #method.names
 pub struct SBBreakpoint {
     /// The underlying raw `SBBreakpointRef`.
     pub raw: sys::SBBreakpointRef,
@@ -211,8 +201,7 @@ unsafe impl Sync for SBBreakpoint {}
 
 /// An iterator over the [locations] in an [`SBBreakpoint`].
 ///
-/// [locations]: struct.SBBreakpointLocation.html
-/// [`SBBreakpoint`]: struct.SBBreakpoint.html
+/// [locations]: SBBreakpointLocation
 pub struct SBBreakpointLocationIter<'d> {
     breakpoint: &'d SBBreakpoint,
     idx: usize,

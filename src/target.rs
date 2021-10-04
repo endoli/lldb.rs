@@ -23,7 +23,7 @@ use std::fmt;
 /// ## Launching
 ///
 /// Launching a process can be done by creating and filling
-/// out an [`SBLaunchInfo`] and calling [`launch`].
+/// out an [`SBLaunchInfo`] and calling [`SBTarget::launch()`].
 ///
 /// ```no_run
 /// use lldb::*;
@@ -38,7 +38,7 @@ use std::fmt;
 /// ## Attaching
 ///
 /// Attaching to a process can be done by creating and filling
-/// out an [`SBAttachInfo`] and calling [`attach`].
+/// out an [`SBAttachInfo`] and calling [`SBTarget::attach()`].
 ///
 /// ```no_run
 /// use lldb::{lldb_pid_t, SBAttachInfo, SBError, SBProcess, SBTarget};
@@ -64,11 +64,6 @@ use std::fmt;
 /// # Events
 ///
 /// ...
-///
-/// [`SBLaunchInfo`]: struct.SBLaunchInfo.html
-/// [`launch`]: #method.launch
-/// [`SBAttachInfo`]: struct.SBAttachInfo.html
-/// [`attach`]: #method.attach
 pub struct SBTarget {
     /// The underlying raw `SBTargetRef`.
     pub raw: sys::SBTargetRef,
@@ -102,8 +97,6 @@ impl SBTarget {
     /// Get the [`SBPlatform`] associated with this target.
     ///
     /// After return, the platform object should be checked for validity.
-    ///
-    /// [`SBPlatform`]: struct.SBPlatform.html
     pub fn platform(&self) -> SBPlatform {
         unsafe {
             SBPlatform {
@@ -113,8 +106,6 @@ impl SBTarget {
     }
 
     /// Get the [`SBProcess`] associated with this target.
-    ///
-    /// [`SBProcess`]: struct.SBProcess.html
     pub fn process(&self) -> SBProcess {
         unsafe {
             SBProcess {
@@ -190,7 +181,7 @@ impl SBTarget {
 
     /// Get an iterator over the [modules] known to this target instance.
     ///
-    /// [modules]: struct.SBModule.html
+    /// [modules]: SBModule
     pub fn modules(&self) -> SBTargetModuleIter {
         SBTargetModuleIter {
             target: self,
@@ -385,8 +376,8 @@ unsafe impl Sync for SBTarget {}
 
 /// Iterate over the [breakpoints] in a [target].
 ///
-/// [breakpoints]: struct.SBBreakpoint.html
-/// [target]: struct.SBTarget.html
+/// [breakpoints]: SBBreakpoint
+/// [target]: SBTarget
 pub struct SBTargetBreakpointIter<'d> {
     target: &'d SBTarget,
     idx: usize,
@@ -417,8 +408,8 @@ impl<'d> ExactSizeIterator for SBTargetBreakpointIter<'d> {}
 
 /// Iterate over the [watchpoints] in a [target].
 ///
-/// [watchpoints]: struct.SBWatchpoint.html
-/// [target]: struct.SBTarget.html
+/// [watchpoints]: SBWatchpoint
+/// [target]: SBTarget
 pub struct SBTargetWatchpointIter<'d> {
     target: &'d SBTarget,
     idx: usize,
@@ -472,8 +463,8 @@ impl<'e> SBTargetEvent<'e> {
 
 /// Iterate over the [modules] referenced from a [target event].
 ///
-/// [modules]: struct.SBModule.html
-/// [target event]: struct.SBTargetEvent.html
+/// [modules]: SBModule
+/// [target event]: SBTargetEvent
 pub struct SBTargetEventModuleIter<'d> {
     event: &'d SBTargetEvent<'d>,
     idx: usize,
@@ -505,8 +496,8 @@ impl<'d> ExactSizeIterator for SBTargetEventModuleIter<'d> {}
 
 /// Iterate over the [modules] in a [target].
 ///
-/// [modules]: struct.SBModule.html
-/// [target]: struct.SBTarget.html
+/// [modules]: SBModule
+/// [target]: SBTarget
 pub struct SBTargetModuleIter<'d> {
     target: &'d SBTarget,
     idx: u32,

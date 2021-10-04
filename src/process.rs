@@ -19,28 +19,29 @@ use std::fmt;
 /// # Process State
 ///
 /// The OS process ID (`pid_t`) for the process is available via
-/// [`process_id`].
+/// [`SBProcess::process_id()`].
 ///
-/// The [process state] can be obtained via [`state`]. It is common to
-/// just check to see if the process [`is_alive`], [`is_running`] or
-/// [`is_stopped`].
+/// The [process state] can be obtained via [`SBProcess::state()`]. It
+/// is common to just check to see if the process [`SBProcess::is_alive()`],
+/// [`SBProcess::is_running()`] or [`SBProcess::is_stopped()`].
 ///
-/// Once the process is in the `Exited` state, the [`exit_status`] and
-/// [`exit_description`] are available for inspection.
+/// Once the process is in the `Exited` state, the
+/// [`SBProcess::exit_status()`] and
+/// [`SBProcess::exit_description()`] are available for inspection.
 ///
 /// # Execution Control
 ///
 /// Once you have a process, you can:
 ///
-/// * [`continue_execution`]
-/// * [`stop`]
-/// * [`kill`]
-/// * [`detach`]
+/// * [`SBProcess::continue_execution()`]
+/// * [`SBProcess::stop()`]
+/// * [`SBProcess::kill()`]
+/// * [`SBProcess::detach()`]
 ///
 /// # Threads
 ///
 /// The process contains the [threads of execution] for the [target]. The
-/// available threads can be iterated over with [`threads`]:
+/// available threads can be iterated over with [`SBProcess::threads()`]:
 ///
 /// ```no_run
 /// # use lldb::{SBProcess, SBThread};
@@ -54,12 +55,15 @@ use std::fmt;
 /// # }
 /// ```
 ///
-/// Specific individual threads can be looked up via [`thread_by_id`]
-/// and [`thread_by_index_id`] methods.
+/// Specific individual threads can be looked up via
+/// [`SBProcess::thread_by_id()`] and [`SBProcess::thread_by_index_id()`]
+/// methods.
 ///
 /// Some functions operate on the 'currently selected thread'. This can
-/// retrieved via [`selected_thread`] and set via [`set_selected_thread`],
-/// [`set_selected_thread_by_id`], or [`set_selected_thread_by_index_id`].
+/// retrieved via [`SBProcess::selected_thread()`] and set via
+/// [`SBProcess::set_selected_thread()`],
+/// [`SBProcess::set_selected_thread_by_id()`], or
+/// [`SBProcess::set_selected_thread_by_index_id()`].
 ///
 /// # Queues
 ///
@@ -68,7 +72,7 @@ use std::fmt;
 /// integration with `libdispatch`, also known as GCD or "Grand Central
 /// Dispatch".
 ///
-/// The active queues can be iterated over with [`queues`]:
+/// The active queues can be iterated over with [`SBProcess::queues()`]:
 ///
 /// ```no_run
 /// # use lldb::{SBProcess, SBQueue};
@@ -84,29 +88,10 @@ use std::fmt;
 ///
 /// ... to be written ...
 ///
-/// [`SBTarget`]: struct.SBTarget.html
-/// [`process_id`]: #method.process_id
-/// [process state]: enum.StateType.html
-/// [`state`]: #method.state
-/// [`is_alive`]: #method.is_alive
-/// [`is_running`]: #method.is_running
-/// [`is_stopped`]: #method.is_stopped
-/// [`exit_status`]: #method.exit_status
-/// [`exit_description`]: #method.exit_description
-/// [`continue_execution`]: #method.continue_execution
-/// [`stop`]: #method.stop
-/// [`kill`]: #method.kill
-/// [`detach`]: #method.detach
-/// [threads of execution]: struct.SBThread.html
-/// [target]: struct.SBTarget.html
-/// [`threads`]: #method.threads
-/// [`thread_by_id`]: #method.thread_by_id
-/// [`thread_by_index_id`]: #method.thread_by_index_id
-/// [`selected_thread`]: #method.selected_thread
-/// [`set_selected_thread`]: #method.set_selected_thread
-/// [`set_selected_thread_by_id`]: #method.set_selected_thread_by_id
-/// [`set_selected_thread_by_index_id`]: #method.set_selected_thread_by_index_id
-/// [`queues`]: #method.queues
+/// [`SBTarget`]: crate::SBTarget
+/// [process state]: StateType
+/// [threads of execution]: SBThread
+/// [target]: crate::SBTarget
 pub struct SBProcess {
     /// The underlying raw `SBProcessRef`.
     pub raw: sys::SBProcessRef,
@@ -281,7 +266,7 @@ impl SBProcess {
 
     /// Get an iterator over the [threads] known to this process instance.
     ///
-    /// [threads]: struct.SBThread.html
+    /// [threads]: SBThread
     pub fn threads(&self) -> SBProcessThreadIter {
         SBProcessThreadIter {
             process: self,
@@ -291,7 +276,7 @@ impl SBProcess {
 
     /// Get an iterator over the [queues] known to this process instance.
     ///
-    /// [queues]: struct.SBQueue.html
+    /// [queues]: SBQueue
     pub fn queues(&self) -> SBProcessQueueIter {
         SBProcessQueueIter {
             process: self,
@@ -357,8 +342,8 @@ impl SBProcess {
 
 /// Iterate over the [threads] in a [process].
 ///
-/// [threads]: struct.SBThread.html
-/// [process]: struct.SBProcess.html
+/// [threads]: SBThread
+/// [process]: SBProcess
 pub struct SBProcessThreadIter<'d> {
     process: &'d SBProcess,
     idx: usize,
@@ -387,8 +372,8 @@ impl<'d> Iterator for SBProcessThreadIter<'d> {
 
 /// Iterate over the [queues] in a [process].
 ///
-/// [queues]: struct.SBQueue.html
-/// [process]: struct.SBProcess.html
+/// [queues]: SBQueue
+/// [process]: SBProcess
 pub struct SBProcessQueueIter<'d> {
     process: &'d SBProcess,
     idx: usize,
@@ -483,7 +468,7 @@ impl<'e> SBProcessEvent<'e> {
 
 /// Iterate over the restart reasons in a [process event].
 ///
-/// [process event]: struct.SBProcessEvent.html
+/// [process event]: SBProcessEvent
 pub struct SBProcessEventRestartedReasonIter<'d> {
     event: &'d SBProcessEvent<'d>,
     idx: usize,

@@ -8,7 +8,7 @@ use crate::{sys, SBType};
 
 /// A list of [types].
 ///
-/// [types]: struct.SBType.html
+/// [types]: SBType
 pub struct SBTypeList {
     /// The underlying raw `SBTypeListRef`.
     pub raw: sys::SBTypeListRef,
@@ -59,8 +59,7 @@ unsafe impl Sync for SBTypeList {}
 
 /// An iterator over the [types] in an [`SBTypeList`].
 ///
-/// [types]: struct.SBType.html
-/// [`SBTypeList`]: struct.SBTypeList.html
+/// [types]: SBType
 pub struct SBTypeListIter<'d> {
     type_list: &'d SBTypeList,
     idx: usize,
