@@ -1,6 +1,6 @@
 # lldb
 
-[![](http://meritbadge.herokuapp.com/lldb)](https://crates.io/crates/lldb)
+[![](https://img.shields.io/crates/v/lldb.svg)](https://crates.io/crates/lldb)
 
 This crate provides a safe binding to the public API for [LLDB](https://lldb.llvm.org/) the
 debugger provided by the [LLVM project](https://llvm.org/). LLDB provides a modern, high
