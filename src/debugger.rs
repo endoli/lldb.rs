@@ -72,9 +72,9 @@ use std::ptr;
 /// so on won't be completed immediately and you must process events
 /// to see what the results of an action are.
 ///
-/// Synchronous mode can be enabled by using [`set_async`] and passing it
-/// a `false` value. You can see if you're in asynchronous mode or not
-/// by calling [`async`].
+/// Synchronous mode can be enabled by using [`set_asynchronous`] and
+/// passing it a `false` value. You can see if you're in asynchronous
+/// mode or not by calling [`asynchronous`].
 ///
 /// # Platform Management
 ///
@@ -145,8 +145,8 @@ use std::ptr;
 /// ```
 ///
 /// [`SBTarget`]: struct.SBTarget.html
-/// [`set_async`]: #method.set_async
-/// [`async`]: #method.async
+/// [`set_asynchronous`]: #method.set_asynchronous
+/// [`asynchronous`]: #method.asynchronous
 /// [`create_target`]: #method.create_target
 /// [`create_target_simple`]: #method.create_target_simple
 /// [`targets`]: #method.targets
@@ -182,22 +182,22 @@ impl SBDebugger {
         }
     }
 
-    /// Get whether or not the debugger is in async mode.
+    /// Get whether or not the debugger is in asynchronous mode.
     ///
-    /// When in async mode, the debugger returns immediately when
+    /// When in asynchronous mode, the debugger returns immediately when
     /// stepping or continuing without waiting for the process
     /// to change state.
-    pub fn async(&self) -> bool {
+    pub fn asynchronous(&self) -> bool {
         unsafe { sys::SBDebuggerGetAsync(self.raw) }
     }
 
-    /// Set the debugger to be in async mode or not.
+    /// Set the debugger to be in asynchronous mode or not.
     ///
-    /// When in async mode, the debugger returns immediately when
+    /// When in asynchronous mode, the debugger returns immediately when
     /// stepping or continuing without waiting for the process
     /// to change state.
-    pub fn set_async(&self, async: bool) {
-        unsafe { sys::SBDebuggerSetAsync(self.raw, async) }
+    pub fn set_asynchronous(&self, asynchronous: bool) {
+        unsafe { sys::SBDebuggerSetAsync(self.raw, asynchronous) }
     }
 
     #[allow(missing_docs)]

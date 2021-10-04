@@ -32,22 +32,22 @@ impl SBAttachInfo {
     /// Attach to a process by name.
     ///
     /// Future calls to `SBTarget::attach(...)` will be synchronous or
-    /// asynchronous depending on the `async` argument.
+    /// asynchronous depending on the `asynchronous` argument.
     ///
     /// * `path`: A full or partial name for the process to attach to.
     /// * `wait_for`: If `false`, attach to an existing process whose name
     ///   matches. If `true`, then wait for the next process whose name
     ///   matches.
-    /// * `async`: If `false`, then the `SBTarget::attach` call will be
+    /// * `asynchronous`: If `false`, then the `SBTarget::attach` call will be
     ///   synchronous with no way to cancel the attach while it is in
     ///   progress. If `true`, then the `SBTarget::attach` call will return
     ///   immediately and clients are expected to wait for a process
     ///   `eStateStopped` event if a suitable process is eventually found.
     ///   If the client wants to cancel the event, `SBProcess::stop` can be
     ///   called and an `eStateExited` process event will be delivered.
-    pub fn new_with_path(path: &str, wait_for: bool, async: bool) -> SBAttachInfo {
+    pub fn new_with_path(path: &str, wait_for: bool, asynchronous: bool) -> SBAttachInfo {
         let p = CString::new(path).unwrap();
-        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, async) })
+        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, asynchronous) })
     }
 
     #[allow(missing_docs)]
@@ -77,8 +77,8 @@ impl SBAttachInfo {
     }
 
     #[allow(missing_docs)]
-    pub fn set_wait_for_launch(&self, wait: bool, async: bool) {
-        unsafe { sys::SBAttachInfoSetWaitForLaunch2(self.raw, wait, async) };
+    pub fn set_wait_for_launch(&self, wait: bool, asynchronous: bool) {
+        unsafe { sys::SBAttachInfoSetWaitForLaunch2(self.raw, wait, asynchronous) };
     }
 
     #[allow(missing_docs)]

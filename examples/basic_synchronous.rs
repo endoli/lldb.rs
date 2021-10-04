@@ -6,7 +6,7 @@ fn main() {
     SBDebugger::initialize();
 
     let debugger = SBDebugger::create(false);
-    debugger.set_async(false);
+    debugger.set_asynchronous(false);
     println!("{:?}", debugger);
 
     if let Some(target) = debugger.create_target_simple("/usr/local/bin/servo") {
