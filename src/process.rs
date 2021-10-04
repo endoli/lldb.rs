@@ -153,16 +153,16 @@ impl SBProcess {
     /// `Launching`, `Stopped`, `Running`, `Stepping`, `Crashed`
     /// or `Suspended` states.
     pub fn is_alive(&self) -> bool {
-        match self.state() {
+        matches!(
+            self.state(),
             StateType::Attaching
-            | StateType::Launching
-            | StateType::Stopped
-            | StateType::Running
-            | StateType::Stepping
-            | StateType::Crashed
-            | StateType::Suspended => true,
-            _ => false,
-        }
+                | StateType::Launching
+                | StateType::Stopped
+                | StateType::Running
+                | StateType::Stepping
+                | StateType::Crashed
+                | StateType::Suspended
+        )
     }
 
     /// Returns `true` if the process is currently running.
@@ -170,10 +170,7 @@ impl SBProcess {
     /// This corresponds to the process being in the `Running`
     /// or `Stepping` states.
     pub fn is_running(&self) -> bool {
-        match self.state() {
-            StateType::Running | StateType::Stepping => true,
-            _ => false,
-        }
+        matches!(self.state(), StateType::Running | StateType::Stepping)
     }
 
     /// Returns `true` if the process is currently stopped.
@@ -181,10 +178,10 @@ impl SBProcess {
     /// This corresponds to the process being in the `Stopped`, `Crashed`,
     /// or `Suspended` states.
     pub fn is_stopped(&self) -> bool {
-        match self.state() {
-            StateType::Stopped | StateType::Crashed | StateType::Suspended => true,
-            _ => false,
-        }
+        matches!(
+            self.state(),
+            StateType::Stopped | StateType::Crashed | StateType::Suspended
+        )
     }
 
     /// The exit status of the process when the process state is
