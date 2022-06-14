@@ -8,7 +8,7 @@ use crate::{
     lldb_addr_t, lldb_user_id_t, sys, Format, SBAddress, SBData, SBError, SBFrame, SBProcess,
     SBStream, SBTarget, SBThread, SBWatchpoint,
 };
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
 
 /// The value of a variable, register or expression.
@@ -109,6 +109,18 @@ impl SBValue {
                 Ok(s) => s,
                 _ => panic!("Invalid string?"),
             }
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_value_from_cstring(&self, val: &str) -> Result<(), SBError> {
+        let error = SBError::default();
+        let val = CString::new(val).unwrap();
+
+        if unsafe { sys::SBValueSetValueFromCString2(self.raw, val.as_ptr(), error.raw) } {
+            Ok(())
+        } else {
+            Err(error)
         }
     }
 
