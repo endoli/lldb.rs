@@ -238,6 +238,26 @@ impl SBTarget {
     }
 
     #[allow(missing_docs)]
+    pub fn breakpoint_create_by_location(&self, file: &str, line: u32) -> SBBreakpoint {
+        let file = CString::new(file).unwrap();
+        SBBreakpoint::wrap(unsafe {
+            sys::SBTargetBreakpointCreateByLocation(self.raw, file.as_ptr(), line)
+        })
+    }
+
+    #[allow(missing_docs)]
+    pub fn breakpoint_create_by_address(&self, address: lldb_addr_t) -> SBBreakpoint {
+        SBBreakpoint::wrap(unsafe { sys::SBTargetBreakpointCreateByAddress(self.raw, address) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn breakpoint_create_by_sbaddress(&self, address: SBAddress) -> SBBreakpoint {
+        SBBreakpoint::wrap(unsafe {
+            sys::SBTargetBreakpointCreateBySBAddress(self.raw, address.raw)
+        })
+    }
+
+    #[allow(missing_docs)]
     pub fn breakpoints(&self) -> SBTargetBreakpointIter {
         SBTargetBreakpointIter {
             target: self,
