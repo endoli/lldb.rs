@@ -10,6 +10,7 @@ use crate::{
 };
 use std::ffi::CStr;
 use std::fmt;
+use std::os::raw::c_char;
 
 /// The value of a variable, register or expression.
 pub struct SBValue {
@@ -18,6 +19,17 @@ pub struct SBValue {
 }
 
 impl SBValue {
+    unsafe fn check_null_ptr(&self, ptr: *const c_char) -> Option<&str> {
+        if !ptr.is_null() {
+            match CStr::from_ptr(ptr).to_str() {
+                Ok(s) => Some(s),
+                _ => panic!("Invalid string?"),
+            }
+        } else {
+            None
+        }
+    }
+
     /// Construct a new `Some(SBValue)` or `None`.
     pub fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
         if unsafe { sys::SBValueIsValid(raw) } {
@@ -48,33 +60,18 @@ impl SBValue {
     }
 
     #[allow(missing_docs)]
-    pub fn name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBValueGetName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBValueGetName(self.raw)) }
     }
 
     #[allow(missing_docs)]
-    pub fn type_name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBValueGetTypeName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn type_name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBValueGetTypeName(self.raw)) }
     }
 
     #[allow(missing_docs)]
-    pub fn display_type_name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBValueGetDisplayTypeName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn display_type_name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBValueGetDisplayTypeName(self.raw)) }
     }
 
     #[allow(missing_docs)]
@@ -98,13 +95,8 @@ impl SBValue {
     }
 
     #[allow(missing_docs)]
-    pub fn value(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBValueGetValue(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn value(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBValueGetValue(self.raw)) }
     }
 
     #[allow(missing_docs)]
