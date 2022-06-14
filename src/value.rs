@@ -100,6 +100,16 @@ impl SBValue {
     }
 
     #[allow(missing_docs)]
+    pub fn get_child_at_index(&self, id: u32) -> Option<SBValue> {
+        SBValue::maybe_wrap(unsafe { sys::SBValueGetChildAtIndex(self.raw, id) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_num_children(&self) -> u32 {
+        unsafe { sys::SBValueGetNumChildren(self.raw) }
+    }
+
+    #[allow(missing_docs)]
     pub fn dereference(&self) -> Option<SBValue> {
         SBValue::maybe_wrap(unsafe { sys::SBValueDereference(self.raw) })
     }
