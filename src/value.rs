@@ -8,7 +8,7 @@ use crate::{
     lldb_addr_t, lldb_user_id_t, sys, Format, SBAddress, SBData, SBError, SBFrame, SBProcess,
     SBStream, SBTarget, SBThread, SBWatchpoint,
 };
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
 use std::os::raw::c_char;
 
@@ -107,6 +107,18 @@ impl SBValue {
     #[allow(missing_docs)]
     pub fn get_num_children(&self) -> u32 {
         unsafe { sys::SBValueGetNumChildren(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_value_from_cstring(&self, val: &str) -> Result<(), SBError> {
+        let error = SBError::default();
+        let val = CString::new(val).unwrap();
+
+        if unsafe { sys::SBValueSetValueFromCString2(self.raw, val.as_ptr(), error.raw) } {
+            Ok(())
+        } else {
+            Err(error)
+        }
     }
 
     #[allow(missing_docs)]
