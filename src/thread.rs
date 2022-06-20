@@ -9,6 +9,7 @@ use crate::{
 };
 use std::ffi::CStr;
 use std::fmt;
+use RunMode;
 
 /// A thread of execution.
 ///
@@ -221,6 +222,28 @@ impl SBThread {
     /// Get the process in which this thread is running.
     pub fn process(&self) -> SBProcess {
         SBProcess::from(unsafe { sys::SBThreadGetProcess(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_out(&self) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepOut(self.raw, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_over(&self, stop_other_threads: RunMode) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepOver(self.raw, stop_other_threads, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
     }
 
     /// If the given event is a thread event, return it as an
