@@ -129,7 +129,7 @@ impl SBFrame {
     /// * the name of the inlined function (if there is one)
     /// * the name of the concrete function (if there is one)
     /// * the name of the symbol (if there is one)
-    /// * NULL
+    /// * `None`
     ///
     /// See also `is_inlined`.
     pub fn function_name(&self) -> Option<&str> {

@@ -156,6 +156,17 @@ impl SBValue {
         SBFrame::from(unsafe { sys::SBValueGetFrame(self.raw) })
     }
 
+    /// Get an iterator over the [child values] of this value.
+    ///
+    /// [child values]: SBValue
+    pub fn children(&self) -> SBValueChildIter {
+        SBValueChildIter {
+            value: self,
+            idx: 0,
+        }
+    }
+
+
     /// Find and watch a variable.
     pub fn watch(
         &self,
@@ -276,6 +287,38 @@ impl From<sys::SBValueRef> for SBValue {
 
 unsafe impl Send for SBValue {}
 unsafe impl Sync for SBValue {}
+
+/// Iterate over the child [values] of a [value].
+///
+/// [values]: SBValue
+/// [value]: SBValue
+pub struct SBValueChildIter<'d> {
+    value: &'d SBValue,
+    idx: u32,
+}
+
+impl<'d> Iterator for SBValueChildIter<'d> {
+    type Item = SBValue;
+
+    fn next(&mut self) -> Option<SBValue> {
+        if self.idx < unsafe { sys::SBValueGetNumChildren(self.value.raw) } {
+            let r = Some(SBValue::from(unsafe {
+                sys::SBValueGetChildAtIndex(self.value.raw, self.idx)
+            }));
+            self.idx += 1;
+            r
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = unsafe { sys::SBValueGetNumChildren(self.value.raw) } as usize;
+        (sz - self.idx as usize, Some(sz))
+    }
+}
+
+impl<'d> ExactSizeIterator for SBValueChildIter<'d> {}
 
 #[cfg(feature = "graphql")]
 graphql_object!(SBValue: crate::SBDebugger | &self | {
