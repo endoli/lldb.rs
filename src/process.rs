@@ -6,7 +6,8 @@
 
 use crate::{
     lldb_addr_t, lldb_pid_t, lldb_tid_t, sys, Permissions, SBBroadcaster, SBError, SBEvent,
-    SBProcessInfo, SBQueue, SBStream, SBStructuredData, SBThread, StateType,
+    SBMemoryRegionInfo, SBMemoryRegionInfoList, SBProcessInfo, SBQueue, SBStream, SBStructuredData,
+    SBThread, StateType,
 };
 use libc::size_t;
 use std::ffi::{CStr, CString};
@@ -420,6 +421,28 @@ impl SBProcess {
         } else {
             Err(error)
         }
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_memory_region_info(
+        &self,
+        load_addr: lldb_addr_t,
+    ) -> Result<SBMemoryRegionInfo, SBError> {
+        let region_info = SBMemoryRegionInfo::default();
+        let error = SBError::wrap(unsafe {
+            sys::SBProcessGetMemoryRegionInfo(self.raw, load_addr, region_info.raw)
+        });
+
+        if error.is_success() {
+            Ok(region_info)
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_memory_regions(&self) -> SBMemoryRegionInfoList {
+        SBMemoryRegionInfoList::from(unsafe { sys::SBProcessGetMemoryRegions(self.raw) })
     }
 }
 
