@@ -5,7 +5,8 @@
 // except according to those terms.
 
 use crate::{
-    lldb_tid_t, sys, SBError, SBEvent, SBFrame, SBProcess, SBQueue, SBStream, SBValue, StopReason,
+    lldb_tid_t, sys, RunMode, SBError, SBEvent, SBFrame, SBProcess, SBQueue, SBStream, SBValue,
+    StopReason,
 };
 use std::ffi::CStr;
 use std::fmt;
@@ -226,6 +227,28 @@ impl SBThread {
     /// Get the process in which this thread is running.
     pub fn process(&self) -> SBProcess {
         SBProcess::wrap(unsafe { sys::SBThreadGetProcess(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_over(&self, stop_other_threads: RunMode) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepOver(self.raw, stop_other_threads, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_out(&self) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepOut(self.raw, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
     }
 
     /// If the given event is a thread event, return it as an
