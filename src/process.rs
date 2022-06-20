@@ -5,10 +5,10 @@
 // except according to those terms.
 
 use crate::{
-    lldb_pid_t, lldb_tid_t, sys, SBBroadcaster, SBError, SBEvent, SBProcessInfo, SBQueue, SBStream,
-    SBThread, StateType,
+    lldb_addr_t, lldb_pid_t, lldb_tid_t, sys, SBBroadcaster, SBError, SBEvent, SBMemoryRegionInfo,
+    SBMemoryRegionInfoList, SBProcessInfo, SBQueue, SBStream, SBThread, StateType,
 };
-use std::ffi::{CStr, CString};
+use std::ffi::{c_void, CStr, CString};
 use std::fmt;
 
 /// The process associated with the target program.
@@ -337,6 +337,28 @@ impl SBProcess {
     #[allow(missing_docs)]
     pub fn process_info(&self) -> SBProcessInfo {
         SBProcessInfo::from(unsafe { sys::SBProcessGetProcessInfo(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_memory_region_info(
+        &self,
+        load_addr: lldb_addr_t,
+    ) -> Result<SBMemoryRegionInfo, SBError> {
+        let region_info = SBMemoryRegionInfo::default();
+        let error = SBError::from(unsafe {
+            sys::SBProcessGetMemoryRegionInfo(self.raw, load_addr, region_info.raw)
+        });
+
+        if error.is_success() {
+            Ok(region_info)
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_memory_regions(&self) -> SBMemoryRegionInfoList {
+        SBMemoryRegionInfoList::from(unsafe { sys::SBProcessGetMemoryRegions(self.raw) })
     }
 }
 
