@@ -17,11 +17,16 @@ pub struct SBListener {
 impl SBListener {
     /// Construct a new `SBListener`.
     pub fn new() -> SBListener {
-        SBListener::from(unsafe { sys::CreateSBListener() })
+        SBListener::wrap(unsafe { sys::CreateSBListener() })
+    }
+
+    /// Construct a new `SBListener`.
+    pub(crate) fn wrap(raw: sys::SBListenerRef) -> SBListener {
+        SBListener { raw }
     }
 
     /// Construct a new `Some(SBListener)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBListenerRef) -> Option<SBListener> {
+    pub(crate) fn maybe_wrap(raw: sys::SBListenerRef) -> Option<SBListener> {
         if unsafe { sys::SBListenerIsValid(raw) } {
             Some(SBListener { raw })
         } else {
@@ -208,12 +213,6 @@ impl Default for SBListener {
 impl Drop for SBListener {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBListener(self.raw) };
-    }
-}
-
-impl From<sys::SBListenerRef> for SBListener {
-    fn from(raw: sys::SBListenerRef) -> SBListener {
-        SBListener { raw }
     }
 }
 

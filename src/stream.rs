@@ -18,11 +18,17 @@ pub struct SBStream {
 impl SBStream {
     /// Construct a new `SBStream`.
     pub fn new() -> SBStream {
-        SBStream::from(unsafe { sys::CreateSBStream() })
+        SBStream::wrap(unsafe { sys::CreateSBStream() })
+    }
+
+    /// Construct a new `SBStream`.
+    pub(crate) fn wrap(raw: sys::SBStreamRef) -> SBStream {
+        SBStream { raw }
     }
 
     /// Construct a new `Some(SBStream)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBStreamRef) -> Option<SBStream> {
+    #[allow(dead_code)]
+    pub(crate) fn maybe_wrap(raw: sys::SBStreamRef) -> Option<SBStream> {
         if unsafe { sys::SBStreamIsValid(raw) } {
             Some(SBStream { raw })
         } else {
@@ -75,12 +81,6 @@ impl Default for SBStream {
 impl Drop for SBStream {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBStream(self.raw) };
-    }
-}
-
-impl From<sys::SBStreamRef> for SBStream {
-    fn from(raw: sys::SBStreamRef) -> SBStream {
-        SBStream { raw }
     }
 }
 

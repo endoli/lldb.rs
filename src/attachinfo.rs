@@ -21,12 +21,12 @@ pub struct SBAttachInfo {
 impl SBAttachInfo {
     /// Construct a new `SBAttachInfo`.
     pub fn new() -> SBAttachInfo {
-        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo() })
+        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo() })
     }
 
     /// Construct a new `SBAttachInfo` for a given process ID (pid).
     pub fn new_with_pid(pid: lldb_pid_t) -> SBAttachInfo {
-        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo2(pid) })
+        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo2(pid) })
     }
 
     /// Attach to a process by name.
@@ -47,7 +47,12 @@ impl SBAttachInfo {
     ///   called and an `eStateExited` process event will be delivered.
     pub fn new_with_path(path: &str, wait_for: bool, asynchronous: bool) -> SBAttachInfo {
         let p = CString::new(path).unwrap();
-        SBAttachInfo::from(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, asynchronous) })
+        SBAttachInfo::wrap(unsafe { sys::CreateSBAttachInfo4(p.as_ptr(), wait_for, asynchronous) })
+    }
+
+    /// Construct a new `SBAttachInfo`.
+    pub(crate) fn wrap(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
+        SBAttachInfo { raw }
     }
 
     #[allow(missing_docs)]
@@ -227,12 +232,6 @@ impl Default for SBAttachInfo {
 impl Drop for SBAttachInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBAttachInfo(self.raw) };
-    }
-}
-
-impl From<sys::SBAttachInfoRef> for SBAttachInfo {
-    fn from(raw: sys::SBAttachInfoRef) -> SBAttachInfo {
-        SBAttachInfo { raw }
     }
 }
 

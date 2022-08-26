@@ -15,8 +15,13 @@ pub struct SBType {
 }
 
 impl SBType {
+    /// Construct a new `SBType`.
+    pub(crate) fn wrap(raw: sys::SBTypeRef) -> SBType {
+        SBType { raw }
+    }
+
     /// Construct a new `Some(SBType)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBTypeRef) -> Option<SBType> {
+    pub(crate) fn maybe_wrap(raw: sys::SBTypeRef) -> Option<SBType> {
         if unsafe { sys::SBTypeIsValid(raw) } {
             Some(SBType { raw })
         } else {
@@ -159,12 +164,6 @@ impl fmt::Debug for SBType {
 impl Drop for SBType {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBType(self.raw) };
-    }
-}
-
-impl From<sys::SBTypeRef> for SBType {
-    fn from(raw: sys::SBTypeRef) -> SBType {
-        SBType { raw }
     }
 }
 

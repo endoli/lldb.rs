@@ -16,11 +16,17 @@ pub struct SBVariablesOptions {
 impl SBVariablesOptions {
     /// Construct a new `SBVariablesOptions`.
     pub fn new() -> SBVariablesOptions {
-        SBVariablesOptions::from(unsafe { sys::CreateSBVariablesOptions() })
+        SBVariablesOptions::wrap(unsafe { sys::CreateSBVariablesOptions() })
+    }
+
+    /// Construct a new `SBVariablesOptions`.
+    pub(crate) fn wrap(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
+        SBVariablesOptions { raw }
     }
 
     /// Construct a new `Some(SBVariablesOptions)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBVariablesOptionsRef) -> Option<SBVariablesOptions> {
+    #[allow(dead_code)]
+    pub(crate) fn maybe_wrap(raw: sys::SBVariablesOptionsRef) -> Option<SBVariablesOptions> {
         if unsafe { sys::SBVariablesOptionsIsValid(raw) } {
             Some(SBVariablesOptions { raw })
         } else {
@@ -111,12 +117,6 @@ impl Default for SBVariablesOptions {
 impl Drop for SBVariablesOptions {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBVariablesOptions(self.raw) };
-    }
-}
-
-impl From<sys::SBVariablesOptionsRef> for SBVariablesOptions {
-    fn from(raw: sys::SBVariablesOptionsRef) -> SBVariablesOptions {
-        SBVariablesOptions { raw }
     }
 }
 

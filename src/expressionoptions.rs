@@ -16,7 +16,12 @@ pub struct SBExpressionOptions {
 impl SBExpressionOptions {
     /// Construct a new `SBExpressionOptions`.
     pub fn new() -> SBExpressionOptions {
-        SBExpressionOptions::from(unsafe { sys::CreateSBExpressionOptions() })
+        SBExpressionOptions::wrap(unsafe { sys::CreateSBExpressionOptions() })
+    }
+
+    /// Construct a new `SBExpressionOptions`.
+    pub(crate) fn wrap(raw: sys::SBExpressionOptionsRef) -> SBExpressionOptions {
+        SBExpressionOptions { raw }
     }
 
     /// Whether to unwind the expression stack on error.
@@ -57,12 +62,6 @@ impl Default for SBExpressionOptions {
 impl Drop for SBExpressionOptions {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBExpressionOptions(self.raw) };
-    }
-}
-
-impl From<sys::SBExpressionOptionsRef> for SBExpressionOptions {
-    fn from(raw: sys::SBExpressionOptionsRef) -> SBExpressionOptions {
-        SBExpressionOptions { raw }
     }
 }
 

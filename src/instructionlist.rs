@@ -16,8 +16,14 @@ pub struct SBInstructionList {
 }
 
 impl SBInstructionList {
+    /// Construct a new `SBInstructionList`.
+    pub(crate) fn wrap(raw: sys::SBInstructionListRef) -> SBInstructionList {
+        SBInstructionList { raw }
+    }
+
     /// Construct a new `Some(SBInstructionList)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBInstructionListRef) -> Option<SBInstructionList> {
+    #[allow(dead_code)]
+    pub(crate) fn maybe_wrap(raw: sys::SBInstructionListRef) -> Option<SBInstructionList> {
         if unsafe { sys::SBInstructionListIsValid(raw) } {
             Some(SBInstructionList { raw })
         } else {
@@ -76,12 +82,6 @@ impl Drop for SBInstructionList {
     }
 }
 
-impl From<sys::SBInstructionListRef> for SBInstructionList {
-    fn from(raw: sys::SBInstructionListRef) -> SBInstructionList {
-        SBInstructionList { raw }
-    }
-}
-
 unsafe impl Send for SBInstructionList {}
 unsafe impl Sync for SBInstructionList {}
 
@@ -98,7 +98,7 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
 
     fn next(&mut self) -> Option<SBInstruction> {
         if self.idx < unsafe { sys::SBInstructionListGetSize(self.instruction_list.raw) } {
-            let r = SBInstruction::from(unsafe {
+            let r = SBInstruction::wrap(unsafe {
                 sys::SBInstructionListGetInstructionAtIndex(
                     self.instruction_list.raw,
                     self.idx as u32,

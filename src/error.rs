@@ -25,8 +25,13 @@ pub struct SBError {
 }
 
 impl SBError {
+    /// Construct a new `SBError`.
+    pub(crate) fn wrap(raw: sys::SBErrorRef) -> SBError {
+        SBError { raw }
+    }
+
     /// Construct a new `Some(SBError)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBErrorRef) -> Option<SBError> {
+    pub(crate) fn maybe_wrap(raw: sys::SBErrorRef) -> Option<SBError> {
         if unsafe { sys::SBErrorIsValid(raw) } {
             Some(SBError { raw })
         } else {
@@ -138,7 +143,7 @@ impl Clone for SBError {
 
 impl Default for SBError {
     fn default() -> SBError {
-        SBError::from(unsafe { sys::CreateSBError() })
+        SBError::wrap(unsafe { sys::CreateSBError() })
     }
 }
 
@@ -165,12 +170,6 @@ impl Error for SBError {}
 impl Drop for SBError {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBError(self.raw) };
-    }
-}
-
-impl From<sys::SBErrorRef> for SBError {
-    fn from(raw: sys::SBErrorRef) -> SBError {
-        SBError { raw }
     }
 }
 

@@ -15,8 +15,13 @@ pub struct SBBlock {
 }
 
 impl SBBlock {
+    /// Construct a new `SBBlock`.
+    pub(crate) fn wrap(raw: sys::SBBlockRef) -> SBBlock {
+        SBBlock { raw }
+    }
+
     /// Construct a new `Some(SBBlock)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBBlockRef) -> Option<SBBlock> {
+    pub(crate) fn maybe_wrap(raw: sys::SBBlockRef) -> Option<SBBlock> {
         if unsafe { sys::SBBlockIsValid(raw) } {
             Some(SBBlock { raw })
         } else {
@@ -133,12 +138,6 @@ impl fmt::Debug for SBBlock {
 impl Drop for SBBlock {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBlock(self.raw) };
-    }
-}
-
-impl From<sys::SBBlockRef> for SBBlock {
-    fn from(raw: sys::SBBlockRef) -> SBBlock {
-        SBBlock { raw }
     }
 }
 

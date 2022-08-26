@@ -15,8 +15,14 @@ pub struct SBEvent {
 }
 
 impl SBEvent {
+    /// Construct a new `SBEvent`.
+    pub(crate) fn wrap(raw: sys::SBEventRef) -> SBEvent {
+        SBEvent { raw }
+    }
+
     /// Construct a new `Some(SBEvent)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBEventRef) -> Option<SBEvent> {
+    #[allow(dead_code)]
+    pub(crate) fn maybe_wrap(raw: sys::SBEventRef) -> Option<SBEvent> {
         if unsafe { sys::SBEventIsValid(raw) } {
             Some(SBEvent { raw })
         } else {
@@ -26,7 +32,7 @@ impl SBEvent {
 
     #[allow(missing_docs)]
     pub fn new() -> SBEvent {
-        Self::from(unsafe { sys::CreateSBEvent() })
+        Self::wrap(unsafe { sys::CreateSBEvent() })
     }
 
     /// Check whether or not this is a valid `SBEvent` value.
@@ -51,7 +57,7 @@ impl SBEvent {
 
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
-        SBBroadcaster::from(unsafe { sys::SBEventGetBroadcaster(self.raw) })
+        SBBroadcaster::wrap(unsafe { sys::SBEventGetBroadcaster(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -89,12 +95,6 @@ impl fmt::Debug for SBEvent {
 impl Drop for SBEvent {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBEvent(self.raw) };
-    }
-}
-
-impl From<sys::SBEventRef> for SBEvent {
-    fn from(raw: sys::SBEventRef) -> SBEvent {
-        SBEvent { raw }
     }
 }
 

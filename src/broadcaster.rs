@@ -21,11 +21,17 @@ pub struct SBBroadcaster {
 impl SBBroadcaster {
     /// Construct a new `SBBroadcaster`.
     pub fn new() -> SBBroadcaster {
-        SBBroadcaster::from(unsafe { sys::CreateSBBroadcaster() })
+        SBBroadcaster::wrap(unsafe { sys::CreateSBBroadcaster() })
+    }
+
+    /// Construct a new `SBBroadcaster`.
+    pub(crate) fn wrap(raw: sys::SBBroadcasterRef) -> SBBroadcaster {
+        SBBroadcaster { raw }
     }
 
     /// Construct a new `Some(SBBroadcaster)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBBroadcasterRef) -> Option<SBBroadcaster> {
+    #[allow(dead_code)]
+    pub(crate) fn maybe_wrap(raw: sys::SBBroadcasterRef) -> Option<SBBroadcaster> {
         if unsafe { sys::SBBroadcasterIsValid(raw) } {
             Some(SBBroadcaster { raw })
         } else {
@@ -88,12 +94,6 @@ impl Default for SBBroadcaster {
 impl Drop for SBBroadcaster {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBBroadcaster(self.raw) };
-    }
-}
-
-impl From<sys::SBBroadcasterRef> for SBBroadcaster {
-    fn from(raw: sys::SBBroadcasterRef) -> SBBroadcaster {
-        SBBroadcaster { raw }
     }
 }
 

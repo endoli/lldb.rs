@@ -15,8 +15,13 @@ pub struct SBSection {
 }
 
 impl SBSection {
+    /// Construct a new `SBSection`.
+    pub(crate) fn wrap(raw: sys::SBSectionRef) -> SBSection {
+        SBSection { raw }
+    }
+
     /// Construct a new `Some(SBSection)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBSectionRef) -> Option<SBSection> {
+    pub(crate) fn maybe_wrap(raw: sys::SBSectionRef) -> Option<SBSection> {
         if unsafe { sys::SBSectionIsValid(raw) } {
             Some(SBSection { raw })
         } else {
@@ -87,12 +92,12 @@ impl SBSection {
 
     #[allow(missing_docs)]
     pub fn section_data(&self) -> SBData {
-        SBData::from(unsafe { sys::SBSectionGetSectionData(self.raw) })
+        SBData::wrap(unsafe { sys::SBSectionGetSectionData(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn section_data_slice(&self, offset: u64, size: u64) -> SBData {
-        SBData::from(unsafe { sys::SBSectionGetSectionData2(self.raw, offset, size) })
+        SBData::wrap(unsafe { sys::SBSectionGetSectionData2(self.raw, offset, size) })
     }
 
     #[allow(missing_docs)]
@@ -120,7 +125,7 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
 
     fn next(&mut self) -> Option<SBSection> {
         if self.idx < unsafe { sys::SBSectionGetNumSubSections(self.section.raw) } {
-            let r = Some(SBSection::from(unsafe {
+            let r = Some(SBSection::wrap(unsafe {
                 sys::SBSectionGetSubSectionAtIndex(self.section.raw, self.idx)
             }));
             self.idx += 1;
@@ -157,12 +162,6 @@ impl fmt::Debug for SBSection {
 impl Drop for SBSection {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBSection(self.raw) };
-    }
-}
-
-impl From<sys::SBSectionRef> for SBSection {
-    fn from(raw: sys::SBSectionRef) -> SBSection {
-        SBSection { raw }
     }
 }
 

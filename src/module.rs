@@ -17,8 +17,13 @@ pub struct SBModule {
 }
 
 impl SBModule {
+    /// Construct a new `SBModule`.
+    pub(crate) fn wrap(raw: sys::SBModuleRef) -> SBModule {
+        SBModule { raw }
+    }
+
     /// Construct a new `Some(SBModule)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBModuleRef) -> Option<SBModule> {
+    pub(crate) fn maybe_wrap(raw: sys::SBModuleRef) -> Option<SBModule> {
         if unsafe { sys::SBModuleIsValid(raw) } {
             Some(SBModule { raw })
         } else {
@@ -36,7 +41,7 @@ impl SBModule {
     /// This can differ from the path on the platform since we might
     /// be doing remote debugging.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::from(unsafe { sys::SBModuleGetFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBModuleGetFileSpec(self.raw) })
     }
 
     /// The file for the module as it is known on the remote system on
@@ -49,7 +54,7 @@ impl SBModule {
     /// `/tmp/lldb/platform-cache/remote.host.computer/usr/lib/liba.dylib`
     /// The file could also be cached in a local developer kit directory.
     pub fn platform_filespec(&self) -> SBFileSpec {
-        SBFileSpec::from(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBModuleGetPlatformFileSpec(self.raw) })
     }
 
     #[allow(missing_docs)]
@@ -71,7 +76,7 @@ impl SBModule {
     #[allow(missing_docs)]
     pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::from(unsafe {
+        SBSymbolContextList::wrap(unsafe {
             sys::SBModuleFindFunctions(self.raw, name.as_ptr(), name_type_mask)
         })
     }
@@ -79,7 +84,7 @@ impl SBModule {
     #[allow(missing_docs)]
     pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::from(unsafe {
+        SBSymbolContextList::wrap(unsafe {
             sys::SBModuleFindSymbols(self.raw, name.as_ptr(), symbol_type)
         })
     }
@@ -92,7 +97,7 @@ impl SBModule {
     /// structure, and union types. Passing in [`TypeClass::ANY`] will
     /// return all types found in the debug information for this module.
     pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
-        SBTypeList::from(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
+        SBTypeList::wrap(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
     }
 }
 
@@ -110,7 +115,7 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 
     fn next(&mut self) -> Option<SBSection> {
         if self.idx < unsafe { sys::SBModuleGetNumSections(self.module.raw) } {
-            let r = Some(SBSection::from(unsafe {
+            let r = Some(SBSection::wrap(unsafe {
                 sys::SBModuleGetSectionAtIndex(self.module.raw, self.idx)
             }));
             self.idx += 1;
@@ -147,12 +152,6 @@ impl fmt::Debug for SBModule {
 impl Drop for SBModule {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBModule(self.raw) };
-    }
-}
-
-impl From<sys::SBModuleRef> for SBModule {
-    fn from(raw: sys::SBModuleRef) -> SBModule {
-        SBModule { raw }
     }
 }
 

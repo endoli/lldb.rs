@@ -16,8 +16,13 @@ pub struct SBSymbol {
 }
 
 impl SBSymbol {
+    /// Construct a new `SBSymbol`.
+    pub(crate) fn wrap(raw: sys::SBSymbolRef) -> SBSymbol {
+        SBSymbol { raw }
+    }
+
     /// Construct a new `Some(SBSymbol)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
+    pub(crate) fn maybe_wrap(raw: sys::SBSymbolRef) -> Option<SBSymbol> {
         if unsafe { sys::SBSymbolIsValid(raw) } {
             Some(SBSymbol { raw })
         } else {
@@ -71,7 +76,7 @@ impl SBSymbol {
             DisassemblyFlavor::Default => None,
             DisassemblyFlavor::Intel => CString::new("intel").ok(),
         };
-        SBInstructionList::from(unsafe {
+        SBInstructionList::wrap(unsafe {
             sys::SBSymbolGetInstructions2(
                 self.raw,
                 target.raw,
@@ -138,12 +143,6 @@ impl fmt::Debug for SBSymbol {
 impl Drop for SBSymbol {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBSymbol(self.raw) };
-    }
-}
-
-impl From<sys::SBSymbolRef> for SBSymbol {
-    fn from(raw: sys::SBSymbolRef) -> SBSymbol {
-        SBSymbol { raw }
     }
 }
 

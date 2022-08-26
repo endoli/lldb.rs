@@ -15,12 +15,12 @@ pub struct SBCompileUnit {
 
 impl SBCompileUnit {
     /// Construct a new `SBCompileUnit`.
-    pub fn wrap(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
+    pub(crate) fn wrap(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
         SBCompileUnit { raw }
     }
 
     /// Construct a new `Some(SBCompileUnit)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
+    pub(crate) fn maybe_wrap(raw: sys::SBCompileUnitRef) -> Option<SBCompileUnit> {
         if unsafe { sys::SBCompileUnitIsValid(raw) } {
             Some(SBCompileUnit { raw })
         } else {
@@ -35,7 +35,7 @@ impl SBCompileUnit {
 
     /// The source file for the compile unit.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::from(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBCompileUnitGetFileSpec(self.raw) })
     }
 
     /// The [line entries][SBLineEntry] for the compilation unit.
@@ -57,7 +57,7 @@ impl SBCompileUnit {
     /// return all types found in the debug information for this compile
     /// unit.
     pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
-        SBTypeList::from(unsafe { sys::SBCompileUnitGetTypes(self.raw, type_mask.bits()) })
+        SBTypeList::wrap(unsafe { sys::SBCompileUnitGetTypes(self.raw, type_mask.bits()) })
     }
 
     /// The language for the compile unit.
@@ -88,12 +88,6 @@ impl Drop for SBCompileUnit {
     }
 }
 
-impl From<sys::SBCompileUnitRef> for SBCompileUnit {
-    fn from(raw: sys::SBCompileUnitRef) -> SBCompileUnit {
-        SBCompileUnit { raw }
-    }
-}
-
 unsafe impl Send for SBCompileUnit {}
 unsafe impl Sync for SBCompileUnit {}
 
@@ -111,7 +105,7 @@ impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
 
     fn next(&mut self) -> Option<SBLineEntry> {
         if self.idx < unsafe { sys::SBCompileUnitGetNumLineEntries(self.source.raw) } {
-            let r = Some(SBLineEntry::from(unsafe {
+            let r = Some(SBLineEntry::wrap(unsafe {
                 sys::SBCompileUnitGetLineEntryAtIndex(self.source.raw, self.idx)
             }));
             self.idx += 1;

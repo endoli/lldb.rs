@@ -19,8 +19,13 @@ pub struct SBFileSpec {
 }
 
 impl SBFileSpec {
+    /// Construct a new `SBFileSpec`.
+    pub(crate) fn wrap(raw: sys::SBFileSpecRef) -> SBFileSpec {
+        SBFileSpec { raw }
+    }
+
     /// Construct a new `Some(SBFileSpec)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
+    pub(crate) fn maybe_wrap(raw: sys::SBFileSpecRef) -> Option<SBFileSpec> {
         if unsafe { sys::SBFileSpecIsValid(raw) } {
             Some(SBFileSpec { raw })
         } else {
@@ -78,12 +83,6 @@ impl fmt::Debug for SBFileSpec {
 impl Drop for SBFileSpec {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBFileSpec(self.raw) };
-    }
-}
-
-impl From<sys::SBFileSpecRef> for SBFileSpec {
-    fn from(raw: sys::SBFileSpecRef) -> SBFileSpec {
-        SBFileSpec { raw }
     }
 }
 

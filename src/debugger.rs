@@ -196,7 +196,7 @@ impl SBDebugger {
 
     #[allow(missing_docs)]
     pub fn command_interpreter(&self) -> SBCommandInterpreter {
-        SBCommandInterpreter::from(unsafe { sys::SBDebuggerGetCommandInterpreter(self.raw) })
+        SBCommandInterpreter::wrap(unsafe { sys::SBDebuggerGetCommandInterpreter(self.raw) })
     }
 
     /// Enable logging (defaults to `stderr`).
@@ -256,7 +256,7 @@ impl SBDebugger {
             )
         };
         if error.is_success() {
-            Ok(SBTarget::from(target))
+            Ok(SBTarget::wrap(target))
         } else {
             Err(error)
         }
@@ -287,7 +287,7 @@ impl SBDebugger {
 
     /// Get the default [`SBListener`] associated with the debugger.
     pub fn listener(&self) -> SBListener {
-        SBListener::from(unsafe { sys::SBDebuggerGetListener(self.raw) })
+        SBListener::wrap(unsafe { sys::SBDebuggerGetListener(self.raw) })
     }
 
     /// Get the currently selected [`SBTarget`].
@@ -442,12 +442,6 @@ impl Drop for SBDebugger {
     }
 }
 
-impl From<sys::SBDebuggerRef> for SBDebugger {
-    fn from(raw: sys::SBDebuggerRef) -> SBDebugger {
-        SBDebugger { raw }
-    }
-}
-
 unsafe impl Send for SBDebugger {}
 unsafe impl Sync for SBDebugger {}
 
@@ -464,7 +458,7 @@ impl<'d> Iterator for SBDebuggerPlatformIter<'d> {
 
     fn next(&mut self) -> Option<SBPlatform> {
         if self.idx < unsafe { sys::SBDebuggerGetNumPlatforms(self.debugger.raw) } {
-            let r = Some(SBPlatform::from(unsafe {
+            let r = Some(SBPlatform::wrap(unsafe {
                 sys::SBDebuggerGetPlatformAtIndex(self.debugger.raw, self.idx)
             }));
             self.idx += 1;
@@ -493,7 +487,7 @@ impl<'d> Iterator for SBDebuggerAvailablePlatformIter<'d> {
 
     fn next(&mut self) -> Option<SBStructuredData> {
         if self.idx < unsafe { sys::SBDebuggerGetNumAvailablePlatforms(self.debugger.raw) } {
-            let r = Some(SBStructuredData::from(unsafe {
+            let r = Some(SBStructuredData::wrap(unsafe {
                 sys::SBDebuggerGetAvailablePlatformInfoAtIndex(self.debugger.raw, self.idx)
             }));
             self.idx += 1;

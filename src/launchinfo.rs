@@ -22,7 +22,12 @@ pub struct SBLaunchInfo {
 impl SBLaunchInfo {
     /// Construct a new `SBLaunchInfo`.
     pub fn new() -> SBLaunchInfo {
-        SBLaunchInfo::from(unsafe { sys::CreateSBLaunchInfo(ptr::null_mut()) })
+        SBLaunchInfo::wrap(unsafe { sys::CreateSBLaunchInfo(ptr::null_mut()) })
+    }
+
+    /// Construct a new `SBLaunchInfo`.
+    pub(crate) fn wrap(raw: sys::SBLaunchInfoRef) -> SBLaunchInfo {
+        SBLaunchInfo { raw }
     }
 
     #[allow(missing_docs)]
@@ -236,12 +241,6 @@ impl Default for SBLaunchInfo {
 impl Drop for SBLaunchInfo {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBLaunchInfo(self.raw) };
-    }
-}
-
-impl From<sys::SBLaunchInfoRef> for SBLaunchInfo {
-    fn from(raw: sys::SBLaunchInfoRef) -> SBLaunchInfo {
-        SBLaunchInfo { raw }
     }
 }
 

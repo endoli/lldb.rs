@@ -70,8 +70,13 @@ pub struct SBTarget {
 }
 
 impl SBTarget {
+    /// Construct a new `SBTarget`.
+    pub(crate) fn wrap(raw: sys::SBTargetRef) -> SBTarget {
+        SBTarget { raw }
+    }
+
     /// Construct a new `Some(SBTarget)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBTargetRef) -> Option<SBTarget> {
+    pub(crate) fn maybe_wrap(raw: sys::SBTargetRef) -> Option<SBTarget> {
         if unsafe { sys::SBTargetIsValid(raw) } {
             Some(SBTarget { raw })
         } else {
@@ -118,7 +123,7 @@ impl SBTarget {
     pub fn launch(&self, launch_info: SBLaunchInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::default();
         let process =
-            SBProcess::from(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
+            SBProcess::wrap(unsafe { sys::SBTargetLaunch2(self.raw, launch_info.raw, error.raw) });
         if error.is_success() {
             Ok(process)
         } else {
@@ -130,7 +135,7 @@ impl SBTarget {
     pub fn load_core(&self, core_file: &str) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::default();
         let core_file = CString::new(core_file).unwrap();
-        let process = SBProcess::from(unsafe {
+        let process = SBProcess::wrap(unsafe {
             sys::SBTargetLoadCore(self.raw, core_file.as_ptr(), error.raw)
         });
         if error.is_success() {
@@ -144,7 +149,7 @@ impl SBTarget {
     pub fn attach(&self, attach_info: SBAttachInfo) -> Result<SBProcess, SBError> {
         let error: SBError = SBError::default();
         let process =
-            SBProcess::from(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
+            SBProcess::wrap(unsafe { sys::SBTargetAttach(self.raw, attach_info.raw, error.raw) });
         if error.is_success() {
             Ok(process)
         } else {
@@ -277,7 +282,7 @@ impl SBTarget {
         let watchpoint =
             unsafe { sys::SBTargetWatchAddress(self.raw, addr, size, read, write, error.raw) };
         if error.is_success() {
-            Ok(SBWatchpoint::from(watchpoint))
+            Ok(SBWatchpoint::wrap(watchpoint))
         } else {
             Err(error)
         }
@@ -293,13 +298,13 @@ impl SBTarget {
 
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
-        SBBroadcaster::from(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
+        SBBroadcaster::wrap(unsafe { sys::SBTargetGetBroadcaster(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn find_functions(&self, name: &str, name_type_mask: u32) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::from(unsafe {
+        SBSymbolContextList::wrap(unsafe {
             sys::SBTargetFindFunctions(self.raw, name.as_ptr(), name_type_mask)
         })
     }
@@ -312,7 +317,7 @@ impl SBTarget {
         matchtype: MatchType,
     ) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::from(unsafe {
+        SBSymbolContextList::wrap(unsafe {
             sys::SBTargetFindGlobalFunctions(self.raw, name.as_ptr(), max_matches, matchtype)
         })
     }
@@ -320,7 +325,7 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn find_symbols(&self, name: &str, symbol_type: SymbolType) -> SBSymbolContextList {
         let name = CString::new(name).unwrap();
-        SBSymbolContextList::from(unsafe {
+        SBSymbolContextList::wrap(unsafe {
             sys::SBTargetFindSymbols(self.raw, name.as_ptr(), symbol_type)
         })
     }
@@ -328,7 +333,7 @@ impl SBTarget {
     /// Evaluate an expression.
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
-        SBValue::from(unsafe {
+        SBValue::wrap(unsafe {
             sys::SBTargetEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
         })
     }
@@ -365,12 +370,6 @@ impl Drop for SBTarget {
     }
 }
 
-impl From<sys::SBTargetRef> for SBTarget {
-    fn from(raw: sys::SBTargetRef) -> SBTarget {
-        SBTarget { raw }
-    }
-}
-
 unsafe impl Send for SBTarget {}
 unsafe impl Sync for SBTarget {}
 
@@ -388,7 +387,7 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
 
     fn next(&mut self) -> Option<SBBreakpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumBreakpoints(self.target.raw) as usize } {
-            let r = Some(SBBreakpoint::from(unsafe {
+            let r = Some(SBBreakpoint::wrap(unsafe {
                 sys::SBTargetGetBreakpointAtIndex(self.target.raw, self.idx as u32)
             }));
             self.idx += 1;
@@ -420,7 +419,7 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
 
     fn next(&mut self) -> Option<SBWatchpoint> {
         if self.idx < unsafe { sys::SBTargetGetNumWatchpoints(self.target.raw) as usize } {
-            let r = Some(SBWatchpoint::from(unsafe {
+            let r = Some(SBWatchpoint::wrap(unsafe {
                 sys::SBTargetGetWatchpointAtIndex(self.target.raw, self.idx as u32)
             }));
             self.idx += 1;
@@ -450,7 +449,7 @@ impl<'e> SBTargetEvent<'e> {
     }
 
     pub fn target(&self) -> SBTarget {
-        SBTarget::from(unsafe { sys::SBTargetGetTargetFromEvent(self.event.raw) })
+        SBTarget::wrap(unsafe { sys::SBTargetGetTargetFromEvent(self.event.raw) })
     }
 
     pub fn modules(&self) -> SBTargetEventModuleIter {
@@ -476,7 +475,7 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     fn next(&mut self) -> Option<SBModule> {
         if self.idx < unsafe { sys::SBTargetGetNumModulesFromEvent(self.event.event.raw) as usize }
         {
-            let r = Some(SBModule::from(unsafe {
+            let r = Some(SBModule::wrap(unsafe {
                 sys::SBTargetGetModuleAtIndexFromEvent(self.idx as u32, self.event.event.raw)
             }));
             self.idx += 1;
@@ -508,7 +507,7 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
 
     fn next(&mut self) -> Option<SBModule> {
         if self.idx < unsafe { sys::SBTargetGetNumModules(self.target.raw) } {
-            let r = Some(SBModule::from(unsafe {
+            let r = Some(SBModule::wrap(unsafe {
                 sys::SBTargetGetModuleAtIndex(self.target.raw, self.idx)
             }));
             self.idx += 1;

@@ -14,8 +14,13 @@ pub struct SBData {
 }
 
 impl SBData {
+    /// Construct a new `SBData`.
+    pub(crate) fn wrap(raw: sys::SBDataRef) -> SBData {
+        SBData { raw }
+    }
+
     /// Construct a new `Some(SBData)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBDataRef) -> Option<SBData> {
+    pub(crate) fn maybe_wrap(raw: sys::SBDataRef) -> Option<SBData> {
         if unsafe { sys::SBDataIsValid(raw) } {
             Some(SBData { raw })
         } else {
@@ -40,12 +45,6 @@ impl Clone for SBData {
 impl Drop for SBData {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBData(self.raw) };
-    }
-}
-
-impl From<sys::SBDataRef> for SBData {
-    fn from(raw: sys::SBDataRef) -> SBData {
-        SBData { raw }
     }
 }
 

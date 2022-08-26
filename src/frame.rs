@@ -19,8 +19,13 @@ pub struct SBFrame {
 }
 
 impl SBFrame {
+    /// Construct a new `SBFrame`.
+    pub(crate) fn wrap(raw: sys::SBFrameRef) -> SBFrame {
+        SBFrame { raw }
+    }
+
     /// Construct a new `Some(SBFrame)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBFrameRef) -> Option<SBFrame> {
+    pub(crate) fn maybe_wrap(raw: sys::SBFrameRef) -> Option<SBFrame> {
         if unsafe { sys::SBFrameIsValid(raw) } {
             Some(SBFrame { raw })
         } else {
@@ -77,7 +82,7 @@ impl SBFrame {
 
     /// The program counter (PC) as a section offset address (`SBAddress`).
     pub fn pc_address(&self) -> SBAddress {
-        SBAddress::from(unsafe { sys::SBFrameGetPCAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBFrameGetPCAddress(self.raw) })
     }
 
     /// The symbol context for this frame's current pc value.
@@ -90,32 +95,32 @@ impl SBFrame {
     ///   is needed by the caller. These flags have constants starting
     ///   with `SYMBOL_CONTEXT_ITEM_`.
     pub fn symbol_context(&self, resolve_scope: u32) -> SBSymbolContext {
-        SBSymbolContext::from(unsafe { sys::SBFrameGetSymbolContext(self.raw, resolve_scope) })
+        SBSymbolContext::wrap(unsafe { sys::SBFrameGetSymbolContext(self.raw, resolve_scope) })
     }
 
     /// The `SBModule` for this stack frame.
     pub fn module(&self) -> SBModule {
-        SBModule::from(unsafe { sys::SBFrameGetModule(self.raw) })
+        SBModule::wrap(unsafe { sys::SBFrameGetModule(self.raw) })
     }
 
     /// The `SBCompileUnit` for this stack frame.
     pub fn compile_unit(&self) -> SBCompileUnit {
-        SBCompileUnit::from(unsafe { sys::SBFrameGetCompileUnit(self.raw) })
+        SBCompileUnit::wrap(unsafe { sys::SBFrameGetCompileUnit(self.raw) })
     }
 
     /// The `SBFunction` for this stack frame.
     pub fn function(&self) -> SBFunction {
-        SBFunction::from(unsafe { sys::SBFrameGetFunction(self.raw) })
+        SBFunction::wrap(unsafe { sys::SBFrameGetFunction(self.raw) })
     }
 
     /// The `SBSymbol` for this stack frame.
     pub fn symbol(&self) -> SBSymbol {
-        SBSymbol::from(unsafe { sys::SBFrameGetSymbol(self.raw) })
+        SBSymbol::wrap(unsafe { sys::SBFrameGetSymbol(self.raw) })
     }
 
     /// Get the deepest block that contains the frame PC.
     pub fn block(&self) -> SBBlock {
-        SBBlock::from(unsafe { sys::SBFrameGetBlock(self.raw) })
+        SBBlock::wrap(unsafe { sys::SBFrameGetBlock(self.raw) })
     }
 
     /// Get the appropriate function name for this frame. Inlined functions in
@@ -159,7 +164,7 @@ impl SBFrame {
     /// Evaluate an expression within the context of this frame.
     pub fn evaluate_expression(&self, expression: &str, options: &SBExpressionOptions) -> SBValue {
         let expression = CString::new(expression).unwrap();
-        SBValue::from(unsafe {
+        SBValue::wrap(unsafe {
             sys::SBFrameEvaluateExpression(self.raw, expression.as_ptr(), options.raw)
         })
     }
@@ -177,7 +182,7 @@ impl SBFrame {
     /// block that defines this frame. If the PC isn't currently in an inlined
     /// function, the lexical block that defines the function is returned.
     pub fn frame_block(&self) -> SBBlock {
-        SBBlock::from(unsafe { sys::SBFrameGetFrameBlock(self.raw) })
+        SBBlock::wrap(unsafe { sys::SBFrameGetFrameBlock(self.raw) })
     }
 
     /// The line table entry (`SBLineEntry`) for this stack frame.
@@ -187,7 +192,7 @@ impl SBFrame {
 
     /// The thread that is executing this stack frame.
     pub fn thread(&self) -> SBThread {
-        SBThread::from(unsafe { sys::SBFrameGetThread(self.raw) })
+        SBThread::wrap(unsafe { sys::SBFrameGetThread(self.raw) })
     }
 
     /// The disassembly of this function, presented as a string.
@@ -202,7 +207,7 @@ impl SBFrame {
 
     /// The values for variables matching the specified options.
     pub fn variables(&self, options: &SBVariablesOptions) -> SBValueList {
-        SBValueList::from(unsafe { sys::SBFrameGetVariables(self.raw, options.raw) })
+        SBValueList::wrap(unsafe { sys::SBFrameGetVariables(self.raw, options.raw) })
     }
 
     /// The values for all variables in this stack frame.
@@ -247,7 +252,7 @@ impl SBFrame {
 
     /// The values for the CPU registers for this stack frame.
     pub fn registers(&self) -> SBValueList {
-        SBValueList::from(unsafe { sys::SBFrameGetRegisters(self.raw) })
+        SBValueList::wrap(unsafe { sys::SBFrameGetRegisters(self.raw) })
     }
 
     /// The value for a particular register, if present.
@@ -287,12 +292,6 @@ impl fmt::Debug for SBFrame {
 impl Drop for SBFrame {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBFrame(self.raw) };
-    }
-}
-
-impl From<sys::SBFrameRef> for SBFrame {
-    fn from(raw: sys::SBFrameRef) -> SBFrame {
-        SBFrame { raw }
     }
 }
 

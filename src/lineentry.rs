@@ -15,8 +15,13 @@ pub struct SBLineEntry {
 }
 
 impl SBLineEntry {
+    /// Construct a new `SBLineEntry`.
+    pub(crate) fn wrap(raw: sys::SBLineEntryRef) -> SBLineEntry {
+        SBLineEntry { raw }
+    }
+
     /// Construct a new `Some(SBLineEntry)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBLineEntryRef) -> Option<SBLineEntry> {
+    pub(crate) fn maybe_wrap(raw: sys::SBLineEntryRef) -> Option<SBLineEntry> {
         if unsafe { sys::SBLineEntryIsValid(raw) } {
             Some(SBLineEntry { raw })
         } else {
@@ -31,17 +36,17 @@ impl SBLineEntry {
 
     /// The start address for this line entry.
     pub fn start_address(&self) -> SBAddress {
-        SBAddress::from(unsafe { sys::SBLineEntryGetStartAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBLineEntryGetStartAddress(self.raw) })
     }
 
     /// The end address for this line entry.
     pub fn end_address(&self) -> SBAddress {
-        SBAddress::from(unsafe { sys::SBLineEntryGetEndAddress(self.raw) })
+        SBAddress::wrap(unsafe { sys::SBLineEntryGetEndAddress(self.raw) })
     }
 
     /// The file [`SBFileSpec`] for this line entry.
     pub fn filespec(&self) -> SBFileSpec {
-        SBFileSpec::from(unsafe { sys::SBLineEntryGetFileSpec(self.raw) })
+        SBFileSpec::wrap(unsafe { sys::SBLineEntryGetFileSpec(self.raw) })
     }
 
     /// The 1-based line number for this line entry.
@@ -80,12 +85,6 @@ impl fmt::Debug for SBLineEntry {
 impl Drop for SBLineEntry {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBLineEntry(self.raw) };
-    }
-}
-
-impl From<sys::SBLineEntryRef> for SBLineEntry {
-    fn from(raw: sys::SBLineEntryRef) -> SBLineEntry {
-        SBLineEntry { raw }
     }
 }
 

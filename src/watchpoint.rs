@@ -33,8 +33,13 @@ pub struct SBWatchpoint {
 }
 
 impl SBWatchpoint {
+    /// Construct a new `SBWatchpoint`.
+    pub(crate) fn wrap(raw: sys::SBWatchpointRef) -> SBWatchpoint {
+        SBWatchpoint { raw }
+    }
+
     /// Construct a new `Some(SBWatchpoint)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBWatchpointRef) -> Option<SBWatchpoint> {
+    pub(crate) fn maybe_wrap(raw: sys::SBWatchpointRef) -> Option<SBWatchpoint> {
         if unsafe { sys::SBWatchpointIsValid(raw) } {
             Some(SBWatchpoint { raw })
         } else {
@@ -122,12 +127,6 @@ impl fmt::Debug for SBWatchpoint {
 impl Drop for SBWatchpoint {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBWatchpoint(self.raw) };
-    }
-}
-
-impl From<sys::SBWatchpointRef> for SBWatchpoint {
-    fn from(raw: sys::SBWatchpointRef) -> SBWatchpoint {
-        SBWatchpoint { raw }
     }
 }
 

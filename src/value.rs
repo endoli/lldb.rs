@@ -18,8 +18,13 @@ pub struct SBValue {
 }
 
 impl SBValue {
+    /// Construct a new `SBValue`.
+    pub(crate) fn wrap(raw: sys::SBValueRef) -> SBValue {
+        SBValue { raw }
+    }
+
     /// Construct a new `Some(SBValue)` or `None`.
-    pub fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
+    pub(crate) fn maybe_wrap(raw: sys::SBValueRef) -> Option<SBValue> {
         if unsafe { sys::SBValueIsValid(raw) } {
             Some(SBValue { raw })
         } else {
@@ -124,22 +129,22 @@ impl SBValue {
 
     #[allow(missing_docs)]
     pub fn target(&self) -> SBTarget {
-        SBTarget::from(unsafe { sys::SBValueGetTarget(self.raw) })
+        SBTarget::wrap(unsafe { sys::SBValueGetTarget(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn process(&self) -> SBProcess {
-        SBProcess::from(unsafe { sys::SBValueGetProcess(self.raw) })
+        SBProcess::wrap(unsafe { sys::SBValueGetProcess(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn thread(&self) -> SBThread {
-        SBThread::from(unsafe { sys::SBValueGetThread(self.raw) })
+        SBThread::wrap(unsafe { sys::SBValueGetThread(self.raw) })
     }
 
     #[allow(missing_docs)]
     pub fn frame(&self) -> SBFrame {
-        SBFrame::from(unsafe { sys::SBValueGetFrame(self.raw) })
+        SBFrame::wrap(unsafe { sys::SBValueGetFrame(self.raw) })
     }
 
     /// Get an iterator over the [child values] of this value.
@@ -162,7 +167,7 @@ impl SBValue {
         let error = SBError::default();
         let wp = unsafe { sys::SBValueWatch(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
-            Ok(SBWatchpoint::from(wp))
+            Ok(SBWatchpoint::wrap(wp))
         } else {
             Err(error)
         }
@@ -179,7 +184,7 @@ impl SBValue {
         let wp =
             unsafe { sys::SBValueWatchPointee(self.raw, resolve_location, read, write, error.raw) };
         if error.is_success() {
-            Ok(SBWatchpoint::from(wp))
+            Ok(SBWatchpoint::wrap(wp))
         } else {
             Err(error)
         }
@@ -264,12 +269,6 @@ impl Drop for SBValue {
     }
 }
 
-impl From<sys::SBValueRef> for SBValue {
-    fn from(raw: sys::SBValueRef) -> SBValue {
-        SBValue { raw }
-    }
-}
-
 unsafe impl Send for SBValue {}
 unsafe impl Sync for SBValue {}
 
@@ -287,7 +286,7 @@ impl<'d> Iterator for SBValueChildIter<'d> {
 
     fn next(&mut self) -> Option<SBValue> {
         if self.idx < unsafe { sys::SBValueGetNumChildren(self.value.raw) } {
-            let r = Some(SBValue::from(unsafe {
+            let r = Some(SBValue::wrap(unsafe {
                 sys::SBValueGetChildAtIndex(self.value.raw, self.idx)
             }));
             self.idx += 1;
