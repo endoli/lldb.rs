@@ -171,4 +171,9 @@ impl SBStructuredData {
     fn is_valid() -> bool {
         self.is_valid()
     }
+
+    // TODO(bm) This should be usize
+    fn size() -> i32 {
+        self.size() as i32
+    }
 }

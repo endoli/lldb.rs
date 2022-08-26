@@ -94,4 +94,8 @@ impl SBQueueItem {
     fn is_valid() -> bool {
         self.is_valid()
     }
+
+    fn address() -> Option<SBAddress> {
+        self.address()
+    }
 }
