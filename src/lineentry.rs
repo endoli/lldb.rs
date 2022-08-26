@@ -94,10 +94,6 @@ unsafe impl Sync for SBLineEntry {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBLineEntry {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn start_address() -> SBAddress {
         self.start_address()
     }

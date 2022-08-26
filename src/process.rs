@@ -507,10 +507,6 @@ impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBProcess {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn is_alive() -> bool {
         self.is_alive()
     }

@@ -126,10 +126,6 @@ impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBCompileUnit {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn filespec() -> SBFileSpec {
         self.filespec()
     }

@@ -91,10 +91,6 @@ unsafe impl Sync for SBQueueItem {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBQueueItem {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn address() -> Option<SBAddress> {
         self.address()
     }

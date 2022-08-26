@@ -92,10 +92,6 @@ unsafe impl Sync for SBFileSpec {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBFileSpec {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn exists() -> bool {
         self.exists()
     }

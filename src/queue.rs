@@ -200,10 +200,6 @@ impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBQueue {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     // TODO(bm) This should be u64
     fn queue_id() -> i32 {
         self.queue_id() as i32

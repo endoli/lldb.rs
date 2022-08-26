@@ -173,10 +173,6 @@ unsafe impl Sync for SBType {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBType {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn is_pointer_type() -> bool {
         self.is_pointer_type()
     }

@@ -307,10 +307,6 @@ impl<'d> ExactSizeIterator for SBValueChildIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBValue {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     // TODO(bm): This should be u64
     fn id() -> i32 {
         self.id() as i32

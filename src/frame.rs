@@ -301,10 +301,6 @@ unsafe impl Sync for SBFrame {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBFrame {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     // TODO(bm): This should be u32
     fn frame_id() -> i32 {
         self.frame_id() as i32

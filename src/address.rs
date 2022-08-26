@@ -272,10 +272,6 @@ impl Eq for SBAddress {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBAddress {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     // TODO(bm) This should be u64
     fn file_address() -> i32 {
         self.file_address() as i32

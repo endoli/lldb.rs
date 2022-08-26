@@ -110,10 +110,6 @@ unsafe impl Sync for SBSymbolContext {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBSymbolContext {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn module() -> SBModule {
         self.module()
     }

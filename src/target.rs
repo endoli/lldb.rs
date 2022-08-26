@@ -528,10 +528,6 @@ impl<'d> ExactSizeIterator for SBTargetModuleIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBTarget {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn platform() -> SBPlatform {
         self.platform()
     }

@@ -232,10 +232,6 @@ impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBBreakpoint {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn id() -> i32 {
         self.id()
     }

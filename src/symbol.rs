@@ -152,10 +152,6 @@ unsafe impl Sync for SBSymbol {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBSymbol {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn name() -> &str {
         self.name()
     }

@@ -158,10 +158,6 @@ unsafe impl Sync for SBFunction {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBFunction {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn name() -> &str {
         self.name()
     }

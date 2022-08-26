@@ -187,10 +187,6 @@ unsafe impl Sync for SBPlatform {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBPlatform {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn working_directory() -> &str {
         self.working_directory()
     }

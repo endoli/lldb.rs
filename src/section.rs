@@ -171,10 +171,6 @@ unsafe impl Sync for SBSection {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBSection {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn name() -> &str {
         self.name()
     }

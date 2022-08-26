@@ -147,10 +147,6 @@ unsafe impl Sync for SBBlock {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBBlock {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn is_inlined() -> bool {
         self.is_inlined()
     }

@@ -161,10 +161,6 @@ unsafe impl Sync for SBModule {}
 #[cfg(feature = "graphql")]
 #[graphql_object]
 impl SBModule {
-    fn is_valid() -> bool {
-        self.is_valid()
-    }
-
     fn filespec() -> SBFileSpec {
         self.filespec()
     }
