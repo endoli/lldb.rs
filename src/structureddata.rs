@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::{sys, SBError, SBStream};
+use crate::{sys, SBError, SBStream, SBStringList};
 use std::ffi::CString;
 use std::fmt;
 use std::ptr;
@@ -71,6 +71,14 @@ impl SBStructuredData {
     /// `0` will be returned.
     pub fn size(&self) -> usize {
         unsafe { sys::SBStructuredDataGetSize(self.raw) }
+    }
+
+    /// Return the keys in the structured data if this data structure
+    /// is a dictionary type.
+    pub fn keys(&self) -> SBStringList {
+        let names = SBStringList::new();
+        unsafe { sys::SBStructuredDataGetKeys(self.raw, names.raw) };
+        names
     }
 
     /// Return the value corresponding to a key if this data structure
