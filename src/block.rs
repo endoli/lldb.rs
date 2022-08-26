@@ -146,30 +146,31 @@ unsafe impl Send for SBBlock {}
 unsafe impl Sync for SBBlock {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBBlock: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBBlock {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field is_inlined() -> bool {
+    fn is_inlined() -> bool {
         self.is_inlined()
     }
 
-    field inlined_name() -> &str {
+    fn inlined_name() -> &str {
         self.inlined_name()
     }
 
-    field inlined_call_site_file() -> Option<SBFileSpec> {
+    fn inlined_call_site_file() -> Option<SBFileSpec> {
         self.inlined_call_site_file()
     }
 
     // TODO(bm) This should be u32
-    field inlined_call_site_line() -> Option<i32> {
+    fn inlined_call_site_line() -> Option<i32> {
         self.inlined_call_site_line().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u32
-    field inlined_call_site_column() -> Option<i32> {
+    fn inlined_call_site_column() -> Option<i32> {
         self.inlined_call_site_column().map(|i| i as i32)
     }
-});
+}

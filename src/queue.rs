@@ -199,30 +199,31 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
 impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBQueue: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBQueue {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
     // TODO(bm) This should be u64
-    field queue_id() -> i32 {
+    fn queue_id() -> i32 {
         self.queue_id() as i32
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field threads() -> Vec<SBThread> {
+    fn threads() -> Vec<SBThread> {
         self.threads().collect()
     }
 
-    field pending_items() -> Vec<SBQueueItem> {
+    fn pending_items() -> Vec<SBQueueItem> {
         self.pending_items().collect()
     }
 
     // TODO(bm) This should be u32
-    field num_running_items() -> i32 {
+    fn num_running_items() -> i32 {
         self.num_running_items() as i32
     }
-});
+}

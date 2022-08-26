@@ -172,78 +172,79 @@ unsafe impl Send for SBType {}
 unsafe impl Sync for SBType {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBType: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBType {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field is_pointer_type() -> bool {
+    fn is_pointer_type() -> bool {
         self.is_pointer_type()
     }
 
-    field is_reference_type() -> bool {
+    fn is_reference_type() -> bool {
         self.is_reference_type()
     }
 
-    field is_function_type() -> bool {
+    fn is_function_type() -> bool {
         self.is_function_type()
     }
 
-    field is_polymorphic_class() -> bool {
+    fn is_polymorphic_class() -> bool {
         self.is_polymorphic_class()
     }
 
-    field is_array_type() -> bool {
+    fn is_array_type() -> bool {
         self.is_array_type()
     }
 
-    field is_vector_type() -> bool {
+    fn is_vector_type() -> bool {
         self.is_vector_type()
     }
 
-    field is_typedef_type() -> bool {
+    fn is_typedef_type() -> bool {
         self.is_typedef_type()
     }
 
-    field pointer_type() -> Option<SBType> {
+    fn pointer_type() -> Option<SBType> {
         self.pointer_type()
     }
 
-    field pointee_type() -> Option<SBType> {
+    fn pointee_type() -> Option<SBType> {
         self.pointee_type()
     }
 
-    field reference_type() -> Option<SBType> {
+    fn reference_type() -> Option<SBType> {
         self.reference_type()
     }
 
-    field typedefed_type() -> Option<SBType> {
+    fn typedefed_type() -> Option<SBType> {
         self.typedefed_type()
     }
 
-    field dereferenced_type() -> Option<SBType> {
+    fn dereferenced_type() -> Option<SBType> {
         self.dereferenced_type()
     }
 
-    field unqualified_type() -> Option<SBType> {
+    fn unqualified_type() -> Option<SBType> {
         self.unqualified_type()
     }
 
-    field array_element_type() -> Option<SBType> {
+    fn array_element_type() -> Option<SBType> {
         self.array_element_type()
     }
 
-    field vector_element_type() -> Option<SBType> {
+    fn vector_element_type() -> Option<SBType> {
         self.vector_element_type()
     }
 
-    field canonical_type() -> Option<SBType> {
+    fn canonical_type() -> Option<SBType> {
         self.canonical_type()
     }
 
     // TODO(bm) bind `basic_type`.
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
-});
+}

@@ -151,41 +151,42 @@ unsafe impl Send for SBSymbol {}
 unsafe impl Sync for SBSymbol {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSymbol: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBSymbol {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field display_name() -> &str {
+    fn display_name() -> &str {
         self.display_name()
     }
 
-    field mangled_name() -> &str {
+    fn mangled_name() -> &str {
         self.mangled_name()
     }
 
-    field start_address() -> Option<SBAddress> {
+    fn start_address() -> Option<SBAddress> {
         self.start_address()
     }
 
-    field end_address() -> Option<SBAddress> {
+    fn end_address() -> Option<SBAddress> {
         self.end_address()
     }
 
     // TODO(bm) This should be a u32
-    field prologue_byte_size() -> i32 {
+    fn prologue_byte_size() -> i32 {
         self.prologue_byte_size() as i32
     }
 
-    field is_external() -> bool {
+    fn is_external() -> bool {
         self.is_external()
     }
 
-    field is_synthetic() -> bool {
+    fn is_synthetic() -> bool {
         self.is_synthetic()
     }
-});
+}

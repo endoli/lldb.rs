@@ -91,20 +91,21 @@ unsafe impl Send for SBFileSpec {}
 unsafe impl Sync for SBFileSpec {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFileSpec: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBFileSpec {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field exists() -> bool {
+    fn exists() -> bool {
         self.exists()
     }
 
-    field filename() -> &str {
+    fn filename() -> &str {
         self.filename()
     }
 
-    field directory() -> &str {
+    fn directory() -> &str {
         self.directory()
     }
-});
+}

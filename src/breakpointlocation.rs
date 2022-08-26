@@ -122,38 +122,39 @@ unsafe impl Send for SBBreakpointLocation {}
 unsafe impl Sync for SBBreakpointLocation {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBBreakpointLocation: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBBreakpointLocation {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field id() -> i32 {
+    fn id() -> i32 {
         self.id()
     }
 
-    field address() -> Option<SBAddress> {
+    fn address() -> Option<SBAddress> {
         self.address()
     }
 
     // TODO(bm) This should be u64
-    field load_address() -> i32 {
+    fn load_address() -> i32 {
         self.load_address() as i32
     }
 
-    field is_enabled() -> bool {
+    fn is_enabled() -> bool {
         self.is_enabled()
     }
 
     // TODO(bm) This should be u32
-    field ignore_count() -> i32 {
+    fn ignore_count() -> i32 {
         self.ignore_count() as i32
     }
 
-    field is_resolved() -> bool {
+    fn is_resolved() -> bool {
         self.is_resolved()
     }
 
-    field breakpoint() -> SBBreakpoint {
+    fn breakpoint() -> SBBreakpoint {
         self.breakpoint()
     }
-});
+}

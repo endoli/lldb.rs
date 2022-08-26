@@ -101,58 +101,43 @@ unsafe impl Send for SBProcessInfo {}
 unsafe impl Sync for SBProcessInfo {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBProcessInfo: crate::SBDebugger | &self | {
-    field name() -> &str {
+#[graphql_object]
+impl SBProcessInfo {
+    fn name() -> &str {
         self.name()
     }
 
-    field executable_file() -> SBFileSpec {
+    fn executable_file() -> SBFileSpec {
         self.executable_file()
     }
 
     // TODO(bm) This should be lldb_pid_t
-    field process_id() -> i32 {
+    fn process_id() -> i32 {
         self.process_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field user_id() -> i32 {
-        self.user_id() as i32
+    fn user_id() -> Option<i32> {
+        self.user_id().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u32
-    field group_id() -> i32 {
-        self.group_id() as i32
-    }
-
-    field user_id_is_valid() -> bool {
-        self.user_id_is_valid()
-    }
-
-    field group_id_is_valid() -> bool {
-        self.group_id_is_valid()
+    fn group_id() -> Option<i32> {
+        self.group_id().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u32
-    field effective_user_id() -> i32 {
-        self.effective_user_id() as i32
+    fn effective_user_id() -> Option<i32> {
+        self.effective_user_id().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u32
-    field effective_group_id() -> i32 {
-        self.effective_group_id() as i32
-    }
-
-    field effective_user_id_is_valid() -> bool {
-        self.effective_user_id_is_valid()
-    }
-
-    field effective_group_id_is_valid() -> bool {
-        self.effective_group_id_is_valid()
+    fn effective_group_id() -> Option<i32> {
+        self.effective_group_id().map(|i| i as i32)
     }
 
     // TODO(bm) This should be lldb_pid_t
-    field parent_process_id() -> i32 {
+    fn parent_process_id() -> i32 {
         self.parent_process_id() as i32
     }
-});
+}

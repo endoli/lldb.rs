@@ -185,47 +185,48 @@ unsafe impl Send for SBPlatform {}
 unsafe impl Sync for SBPlatform {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBPlatform: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBPlatform {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field working_directory() -> &str {
+    fn working_directory() -> &str {
         self.working_directory()
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field triple() -> &str {
+    fn triple() -> &str {
         self.triple()
     }
 
-    field hostname() -> &str {
+    fn hostname() -> &str {
         self.hostname()
     }
 
-    field os_build() -> &str {
+    fn os_build() -> &str {
         self.os_build()
     }
 
-    field os_description() -> &str {
+    fn os_description() -> &str {
         self.os_description()
     }
 
     // TODO(bm) This should be u32
-    field os_major_version() -> i32 {
+    fn os_major_version() -> i32 {
         self.os_major_version() as i32
     }
 
     // TODO(bm) This should be u32
-    field os_minor_version() -> i32 {
+    fn os_minor_version() -> i32 {
         self.os_minor_version() as i32
     }
 
     // TODO(bm) This should be u32
-    field os_update_version() -> i32 {
+    fn os_update_version() -> i32 {
         self.os_update_version() as i32
     }
-});
+}

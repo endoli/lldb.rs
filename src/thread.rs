@@ -320,30 +320,31 @@ impl<'e> SBThreadEvent<'e> {
 }
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBThread: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBThread {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
     // TODO(bm): This should be u64
-    field thread_id() -> i32 {
+    fn thread_id(&self) -> i32 {
         self.thread_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field index_id() -> i32 {
+    fn index_id() -> i32 {
         self.index_id() as i32
     }
 
-    field frames() -> Vec<SBFrame> {
+    fn frames() -> Vec<SBFrame> {
         self.frames().collect()
     }
 
-    field selected_frame() -> SBFrame {
+    fn selected_frame() -> SBFrame {
         self.selected_frame()
     }
 
-    field process() -> SBProcess {
+    fn process() -> SBProcess {
         self.process()
     }
-});
+}

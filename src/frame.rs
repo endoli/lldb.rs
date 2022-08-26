@@ -300,81 +300,82 @@ unsafe impl Send for SBFrame {}
 unsafe impl Sync for SBFrame {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFrame: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBFrame {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
     // TODO(bm): This should be u32
-    field frame_id() -> i32 {
+    fn frame_id() -> i32 {
         self.frame_id() as i32
     }
 
     // TODO(bm) This should be u64
-    field cfa() -> Option<i32> {
+    fn cfa() -> Option<i32> {
         self.cfa().map(|i| i as i32)
     }
 
     // TODO(bm) This should be u64
-    field pc() -> i32 {
+    fn pc() -> i32 {
         self.pc() as i32
     }
 
     // TODO(bm) This should be u64
-    field sp() -> i32 {
+    fn sp() -> i32 {
         self.sp() as i32
     }
 
     // TODO(bm) This should be u64
-    field fp() -> i32 {
+    fn fp() -> i32 {
         self.fp() as i32
     }
 
-    field pc_address() -> SBAddress {
+    fn pc_address() -> SBAddress {
         self.pc_address()
     }
 
-    field module() -> SBModule {
+    fn module() -> SBModule {
         self.module()
     }
 
-    field compile_unit() -> SBCompileUnit {
+    fn compile_unit() -> SBCompileUnit {
         self.compile_unit()
     }
 
-    field function() -> SBFunction {
+    fn function() -> SBFunction {
         self.function()
     }
 
-    field symbol() -> SBSymbol {
+    fn symbol() -> SBSymbol {
         self.symbol()
     }
 
-    field block() -> SBBlock {
+    fn block() -> SBBlock {
         self.block()
     }
 
-    field function_name() -> Option<&str> {
+    fn function_name() -> Option<&str> {
         self.function_name()
     }
 
-    field display_function_name() -> Option<&str> {
+    fn display_function_name() -> Option<&str> {
         self.display_function_name()
     }
 
-    field is_inlined() -> bool {
+    fn is_inlined() -> bool {
         self.is_inlined()
     }
 
-    field frame_block() -> SBBlock {
+    fn frame_block() -> SBBlock {
         self.frame_block()
     }
 
-    field line_entry() -> Option<SBLineEntry> {
+    fn line_entry() -> Option<SBLineEntry> {
         self.line_entry()
     }
 
-    field thread() -> SBThread {
+    fn thread() -> SBThread {
         self.thread()
     }
-});
+}

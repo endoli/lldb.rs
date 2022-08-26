@@ -157,45 +157,46 @@ unsafe impl Send for SBFunction {}
 unsafe impl Sync for SBFunction {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBFunction: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBFunction {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field display_name() -> &str {
+    fn display_name() -> &str {
         self.display_name()
     }
 
-    field mangled_name() -> &str {
+    fn mangled_name() -> &str {
         self.mangled_name()
     }
 
-    field start_address() -> SBAddress {
+    fn start_address() -> SBAddress {
         self.start_address()
     }
 
-    field end_address() -> SBAddress {
+    fn end_address() -> SBAddress {
         self.end_address()
     }
 
     // TODO(bm) This should be a u32
-    field prologue_byte_size() -> i32 {
+    fn prologue_byte_size() -> i32 {
         self.prologue_byte_size() as i32
     }
 
-    field return_type() -> SBType {
+    fn return_type() -> SBType {
         self.return_type()
     }
 
-    field block() -> SBBlock {
+    fn block() -> SBBlock {
         self.block()
     }
 
-    field is_optimized() -> bool {
+    fn is_optimized() -> bool {
         self.is_optimized()
     }
-});
+}

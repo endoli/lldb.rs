@@ -527,32 +527,33 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
 impl<'d> ExactSizeIterator for SBTargetModuleIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBTarget: SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBTarget {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field platform() -> SBPlatform {
+    fn platform() -> SBPlatform {
         self.platform()
     }
 
-    field process() -> SBProcess {
+    fn process() -> SBProcess {
         self.process()
     }
 
-    field executable() -> Option<SBFileSpec> {
+    fn executable() -> Option<SBFileSpec> {
         self.executable()
     }
 
-    field debugger() -> SBDebugger {
+    fn debugger() -> SBDebugger {
         self.debugger()
     }
 
-    field breakpoints() -> Vec<SBBreakpoint> {
+    fn breakpoints() -> Vec<SBBreakpoint> {
         self.breakpoints().collect()
     }
 
-    field watchpoints() -> Vec<SBWatchpoint> {
+    fn watchpoints() -> Vec<SBWatchpoint> {
         self.watchpoints().collect()
     }
-});
+}

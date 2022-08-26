@@ -135,40 +135,41 @@ unsafe impl Send for SBWatchpoint {}
 unsafe impl Sync for SBWatchpoint {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBWatchpoint: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBWatchpoint {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field id() -> i32 {
+    fn id() -> i32 {
         self.id()
     }
 
-    field hardware_index() -> Option<i32> {
+    fn hardware_index() -> Option<i32> {
         self.hardware_index()
     }
 
     // TODO(bm) This should be u64
-    field watch_address() -> i32 {
+    fn watch_address() -> i32 {
         self.watch_address() as i32
     }
 
     // TODO(bm) This should be u32
-    field watch_size() -> i32 {
+    fn watch_size() -> i32 {
         self.watch_size() as i32
     }
 
-    field is_enabled() -> bool {
+    fn is_enabled() -> bool {
         self.is_enabled()
     }
 
     // TODO(bm) This should be u32
-    field hit_count() -> i32 {
+    fn hit_count() -> i32 {
         self.hit_count() as i32
     }
 
     // TODO(bm) This should be u32
-    field ignore_count() -> i32 {
+    fn ignore_count() -> i32 {
         self.ignore_count() as i32
     }
-});
+}

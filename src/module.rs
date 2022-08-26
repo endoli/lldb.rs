@@ -160,20 +160,21 @@ unsafe impl Send for SBModule {}
 unsafe impl Sync for SBModule {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBModule: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBModule {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field filespec() -> SBFileSpec {
+    fn filespec() -> SBFileSpec {
         self.filespec()
     }
 
-    field platform_filespec() -> SBFileSpec {
+    fn platform_filespec() -> SBFileSpec {
         self.platform_filespec()
     }
 
-    field sections() -> Vec<SBSection> {
+    fn sections() -> Vec<SBSection> {
         self.sections().collect()
     }
-});
+}

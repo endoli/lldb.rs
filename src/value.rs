@@ -306,34 +306,35 @@ impl<'d> Iterator for SBValueChildIter<'d> {
 impl<'d> ExactSizeIterator for SBValueChildIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBValue: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBValue {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
     // TODO(bm): This should be u64
-    field id() -> i32 {
+    fn id() -> i32 {
         self.id() as i32
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field type_name() -> &str {
+    fn type_name() -> &str {
         self.type_name()
     }
 
-    field display_type_name() -> &str {
+    fn display_type_name() -> &str {
         self.display_type_name()
     }
 
     // TODO(bm): This should be usize.
-    field byte_size() -> i32 {
+    fn byte_size() -> i32 {
         self.byte_size() as i32
     }
 
-    field is_in_scope() -> bool {
+    fn is_in_scope() -> bool {
         self.is_in_scope()
     }
-});
+}

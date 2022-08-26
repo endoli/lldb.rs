@@ -19,4 +19,4 @@ graphql = ["juniper"]
 
 [dependencies]
 lldb-sys = "0.0.27"
-juniper = { version = "0.10", optional = true }
+juniper = { version = "0.15", optional = true }

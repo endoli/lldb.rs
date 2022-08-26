@@ -130,12 +130,13 @@ impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
 impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBCompileUnit: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBCompileUnit {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field filespec() -> SBFileSpec {
+    fn filespec() -> SBFileSpec {
         self.filespec()
     }
-});
+}

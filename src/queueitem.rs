@@ -89,8 +89,9 @@ unsafe impl Send for SBQueueItem {}
 unsafe impl Sync for SBQueueItem {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBQueueItem: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBQueueItem {
+    fn is_valid() -> bool {
         self.is_valid()
     }
-});
+}

@@ -37,6 +37,3 @@ impl From<sys::SBCommandInterpreterRef> for SBCommandInterpreter {
 
 unsafe impl Send for SBCommandInterpreter {}
 unsafe impl Sync for SBCommandInterpreter {}
-
-#[cfg(feature = "graphql")]
-graphql_object!(SBCommandInterpreter: crate::SBDebugger | &self | {});

@@ -505,59 +505,60 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
 impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBProcess: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBProcess {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field is_alive() -> bool {
+    fn is_alive() -> bool {
         self.is_alive()
     }
 
-    field is_running() -> bool {
+    fn is_running() -> bool {
         self.is_running()
     }
 
-    field is_stopped() -> bool {
+    fn is_stopped() -> bool {
         self.is_stopped()
     }
 
-    field exit_status() -> i32 {
+    fn exit_status() -> i32 {
         self.exit_status()
     }
 
-    field exit_description() -> &str {
+    fn exit_description() -> &str {
         self.exit_description()
     }
 
     // TODO(bm): This should be u64
-    field process_id() -> i32 {
+    fn process_id() -> i32 {
         self.process_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field unique_id() -> i32 {
+    fn unique_id() -> i32 {
         self.unique_id() as i32
     }
 
     // TODO(bm) This should be u32
-    field address_byte_size() -> i32 {
+    fn address_byte_size() -> i32 {
         self.address_byte_size() as i32
     }
 
-    field threads() -> Vec<SBThread> {
+    fn threads() -> Vec<SBThread> {
         self.threads().collect()
     }
 
-    field queues() -> Vec<SBQueue> {
+    fn queues() -> Vec<SBQueue> {
         self.queues().collect()
     }
 
-    field selected_thread() -> SBThread {
+    fn selected_thread() -> SBThread {
         self.selected_thread()
     }
 
-    field process_info() -> SBProcessInfo {
+    fn process_info() -> SBProcessInfo {
         self.process_info()
     }
-});
+}

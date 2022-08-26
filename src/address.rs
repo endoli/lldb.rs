@@ -271,40 +271,41 @@ impl PartialEq for SBAddress {
 impl Eq for SBAddress {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBAddress: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBAddress {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
     // TODO(bm) This should be u64
-    field file_address() -> i32 {
+    fn file_address() -> i32 {
         self.file_address() as i32
     }
 
-    field module() -> Option<SBModule> {
+    fn module() -> Option<SBModule> {
         self.module()
     }
 
-    field compile_unit() -> Option<SBCompileUnit> {
+    fn compile_unit() -> Option<SBCompileUnit> {
         self.compile_unit()
     }
 
-    field function() -> Option<SBFunction> {
+    fn function() -> Option<SBFunction> {
         self.function()
     }
 
-    field block() -> Option<SBBlock> {
+    fn block() -> Option<SBBlock> {
         self.block()
     }
 
-    field symbol() -> Option<SBSymbol> {
+    fn symbol() -> Option<SBSymbol> {
         self.symbol()
     }
 
-    field line_entry() -> Option<SBLineEntry> {
+    fn line_entry() -> Option<SBLineEntry> {
         self.line_entry()
     }
-});
+}
 
 #[cfg(test)]
 mod tests {

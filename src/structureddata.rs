@@ -159,8 +159,9 @@ unsafe impl Send for SBStructuredData {}
 unsafe impl Sync for SBStructuredData {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBStructuredData: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBStructuredData {
+    fn is_valid() -> bool {
         self.is_valid()
     }
-});
+}

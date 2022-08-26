@@ -170,36 +170,37 @@ unsafe impl Send for SBSection {}
 unsafe impl Sync for SBSection {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSection: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBSection {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field name() -> &str {
+    fn name() -> &str {
         self.name()
     }
 
-    field subsections() -> Vec<SBSection> {
+    fn subsections() -> Vec<SBSection> {
         self.subsections().collect()
     }
 
-    field file_address() -> i32 {
+    fn file_address() -> i32 {
         self.file_address() as i32
     }
 
-    field byte_size() -> i32 {
+    fn byte_size() -> i32 {
         self.byte_size() as i32
     }
 
-    field file_offset() -> i32 {
+    fn file_offset() -> i32 {
         self.file_offset() as i32
     }
 
-    field file_byte_size() -> i32 {
+    fn file_byte_size() -> i32 {
         self.file_byte_size() as i32
     }
 
-    field target_byte_size() -> i32 {
+    fn target_byte_size() -> i32 {
         self.target_byte_size() as i32
     }
-});
+}

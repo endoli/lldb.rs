@@ -108,32 +108,33 @@ unsafe impl Send for SBSymbolContext {}
 unsafe impl Sync for SBSymbolContext {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBSymbolContext: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBSymbolContext {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field module() -> SBModule {
+    fn module() -> SBModule {
         self.module()
     }
 
-    field compile_unit() -> SBCompileUnit {
+    fn compile_unit() -> SBCompileUnit {
         self.compile_unit()
     }
 
-    field function() -> SBFunction {
+    fn function() -> SBFunction {
         self.function()
     }
 
-    field block() -> SBBlock {
+    fn block() -> SBBlock {
         self.block()
     }
 
-    field line_entry() -> Option<SBLineEntry> {
+    fn line_entry() -> Option<SBLineEntry> {
         self.line_entry()
     }
 
-    field symbol() -> SBSymbol {
+    fn symbol() -> SBSymbol {
         self.symbol()
     }
-});
+}

@@ -515,27 +515,28 @@ impl<'d> ExactSizeIterator for SBDebuggerAvailablePlatformIter<'d> {}
 impl ::juniper::Context for SBDebugger {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBDebugger: SBDebugger | &self | {
-    field targets() -> Vec<SBTarget> {
+#[graphql_object]
+impl SBDebugger {
+    fn targets() -> Vec<SBTarget> {
         self.targets().collect()
     }
 
-    field selected_target() -> Option<SBTarget> {
+    fn selected_target() -> Option<SBTarget> {
         self.selected_target()
     }
 
-    field selected_platform() -> SBPlatform {
+    fn selected_platform() -> SBPlatform {
         self.selected_platform()
     }
 
-    field platforms() -> Vec<SBPlatform> {
+    fn platforms() -> Vec<SBPlatform> {
         self.platforms().collect()
     }
 
-    field available_platforms() -> Vec<SBStructuredData> {
+    fn available_platforms() -> Vec<SBStructuredData> {
         self.available_platforms().collect()
     }
-});
+}
 
 #[cfg(test)]
 mod tests {

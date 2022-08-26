@@ -93,30 +93,31 @@ unsafe impl Send for SBLineEntry {}
 unsafe impl Sync for SBLineEntry {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBLineEntry: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBLineEntry {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field start_address() -> SBAddress {
+    fn start_address() -> SBAddress {
         self.start_address()
     }
 
-    field end_address() -> SBAddress {
+    fn end_address() -> SBAddress {
         self.end_address()
     }
 
-    field filespec() -> SBFileSpec {
+    fn filespec() -> SBFileSpec {
         self.filespec()
     }
 
     // TODO(bm) This should be u32
-    field line() -> i32 {
+    fn line() -> i32 {
         self.line() as i32
     }
 
     // TODO(bm) This should be u32
-    field column() -> i32 {
+    fn column() -> i32 {
         self.column() as i32
     }
-});
+}

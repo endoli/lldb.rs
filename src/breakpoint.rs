@@ -231,47 +231,44 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
 impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
 
 #[cfg(feature = "graphql")]
-graphql_object!(SBBreakpoint: crate::SBDebugger | &self | {
-    field is_valid() -> bool {
+#[graphql_object]
+impl SBBreakpoint {
+    fn is_valid() -> bool {
         self.is_valid()
     }
 
-    field id() -> i32 {
+    fn id() -> i32 {
         self.id()
     }
 
-    field is_enabled() -> bool {
+    fn is_enabled() -> bool {
         self.is_enabled()
     }
 
-    field is_oneshot() -> bool {
+    fn is_oneshot() -> bool {
         self.is_oneshot()
     }
 
-    field is_internal() -> bool {
+    fn is_internal() -> bool {
         self.is_internal()
     }
 
-    field is_valid() -> bool {
-        self.is_valid()
-    }
-
     // TODO(bm) This should be u32
-    field ignore_count() -> i32 {
+    fn ignore_count() -> i32 {
         self.ignore_count() as i32
     }
 
     // TODO(bm) This should be u32
-    field hit_count() -> i32 {
+    fn hit_count() -> i32 {
         self.hit_count() as i32
     }
 
     // TODO(bm) Make this work. (Lifetimes.)
-    // field names() -> Vec<&str> {
+    // fn names() -> Vec<&str> {
     //     self.names().iter().collect()
     // }
 
-    field locations() -> Vec<SBBreakpointLocation> {
+    fn locations() -> Vec<SBBreakpointLocation> {
         self.locations().collect()
     }
-});
+}
