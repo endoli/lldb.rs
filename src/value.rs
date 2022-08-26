@@ -152,7 +152,6 @@ impl SBValue {
         }
     }
 
-
     /// Find and watch a variable.
     pub fn watch(
         &self,
