@@ -102,7 +102,10 @@
     unused_qualifications
 )]
 
-extern crate lldb_sys as sys;
+// Re-export of `lldb-sys` in the event that access to the same version
+// as used by this crate is needed. In general, it is preferable to add
+// bindings for missing functionality to this crate.
+pub extern crate lldb_sys as sys;
 
 #[cfg(feature = "graphql")]
 #[macro_use]
