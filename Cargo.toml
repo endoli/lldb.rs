@@ -8,7 +8,7 @@ readme = "README.md"
 description = "Rust-like bindings to the public LLDB API. LLDB is the debugger from the LLVM project and is the system debugger on macOS."
 keywords = ["lldb", "debugger"]
 categories = ["api-bindings", "development-tools::debugging"]
-documentation = "https://endoli.github.io/lldb.rs/"
+documentation = "https://docs.rs/lldb/latest/lldb/"
 homepage = "https://github.com/endoli/lldb.rs"
 repository = "https://github.com/endoli/lldb.rs"
 
