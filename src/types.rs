@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::{sys, BasicType, DescriptionLevel, SBStream, TypeClass};
+use crate::{sys, BasicType, DescriptionLevel, SBModule, SBStream, TypeClass};
 use std::ffi::CStr;
 use std::fmt;
 
@@ -70,6 +70,16 @@ impl SBType {
     }
 
     #[allow(missing_docs)]
+    pub fn is_anonymous_type(&self) -> bool {
+        unsafe { sys::SBTypeIsAnonymousType(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn is_scoped_enumeration_type(&self) -> bool {
+        unsafe { sys::SBTypeIsScopedEnumerationType(self.raw) }
+    }
+
+    #[allow(missing_docs)]
     pub fn pointer_type(&self) -> Option<SBType> {
         SBType::maybe_wrap(unsafe { sys::SBTypeGetPointerType(self.raw) })
     }
@@ -115,8 +125,23 @@ impl SBType {
     }
 
     #[allow(missing_docs)]
+    pub fn enumeration_integer_type(&self) -> Option<SBType> {
+        SBType::maybe_wrap(unsafe { sys::SBTypeGetEnumerationIntegerType(self.raw) })
+    }
+
+    #[allow(missing_docs)]
     pub fn basic_type(&self) -> BasicType {
         unsafe { sys::SBTypeGetBasicType(self.raw) }
+    }
+
+    /// Returns the [`SBModule`] this type belongs to.
+    ///
+    /// Returns `None` if this type does not belong to any specific
+    /// [`SBModule`] or this type is invalid. An invalid module might also
+    /// indicate that once came from a module but LLDB could no longer
+    /// determine the original module.
+    pub fn module(&self) -> Option<SBModule> {
+        SBModule::maybe_wrap(unsafe { sys::SBTypeGetModule(self.raw) })
     }
 
     #[allow(missing_docs)]

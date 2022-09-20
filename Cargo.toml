@@ -19,5 +19,6 @@ name = "basic_synchronous"
 graphql = ["juniper"]
 
 [dependencies]
-lldb-sys = "0.0.27"
+libc = "0.2"
+lldb-sys = "0.0.29"
 juniper = { version = "0.15", optional = true }

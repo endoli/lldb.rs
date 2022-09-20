@@ -4,7 +4,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::{lldb_addr_t, sys, SBBreakpointLocation, SBStream, SBStringList};
+use crate::{
+    lldb_addr_t, sys, SBBreakpointLocation, SBStream, SBStringList, SBStructuredData, SBTarget,
+};
 use std::ffi::CString;
 use std::fmt;
 
@@ -148,6 +150,11 @@ impl SBBreakpoint {
     }
 
     #[allow(missing_docs)]
+    pub fn target(&self) -> Option<SBTarget> {
+        SBTarget::maybe_wrap(unsafe { sys::SBBreakpointGetTarget(self.raw) })
+    }
+
+    #[allow(missing_docs)]
     pub fn find_location_by_address(&self, address: lldb_addr_t) -> Option<SBBreakpointLocation> {
         SBBreakpointLocation::maybe_wrap(unsafe {
             sys::SBBreakpointFindLocationByAddress(self.raw, address)
@@ -170,6 +177,16 @@ impl SBBreakpoint {
             breakpoint: self,
             idx: 0,
         }
+    }
+
+    #[allow(missing_docs)]
+    pub fn is_hardware(&self) -> bool {
+        unsafe { sys::SBBreakpointIsHardware(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn serialize_to_structured_data(&self) -> SBStructuredData {
+        SBStructuredData::wrap(unsafe { sys::SBBreakpointSerializeToStructuredData(self.raw) })
     }
 }
 

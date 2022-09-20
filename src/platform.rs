@@ -58,6 +58,11 @@ impl SBPlatform {
         unsafe { sys::SBPlatformIsValid(self.raw) }
     }
 
+    #[allow(missing_docs)]
+    pub fn get_host_platform() -> SBPlatform {
+        SBPlatform::wrap(unsafe { sys::SBPlatformGetHostPlatform() })
+    }
+
     /// The working directory for this platform.
     pub fn working_directory(&self) -> &str {
         unsafe {

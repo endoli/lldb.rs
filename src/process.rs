@@ -5,9 +5,10 @@
 // except according to those terms.
 
 use crate::{
-    lldb_pid_t, lldb_tid_t, sys, SBBroadcaster, SBError, SBEvent, SBProcessInfo, SBQueue, SBStream,
-    SBThread, StateType,
+    lldb_addr_t, lldb_pid_t, lldb_tid_t, sys, Permissions, SBBroadcaster, SBError, SBEvent,
+    SBProcessInfo, SBQueue, SBStream, SBStructuredData, SBThread, StateType,
 };
+use libc::size_t;
 use std::ffi::{CStr, CString};
 use std::fmt;
 
@@ -270,6 +271,22 @@ impl SBProcess {
         SBBroadcaster::wrap(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
     }
 
+    /// Returns the process' extended crash information.
+    pub fn get_extended_crash_information(&self) -> SBStructuredData {
+        SBStructuredData::wrap(unsafe { sys::SBProcessGetExtendedCrashInformation(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_num_supported_hardware_watchpoints(&self) -> Result<u32, SBError> {
+        let error = SBError::default();
+        let num = unsafe { sys::SBProcessGetNumSupportedHardwareWatchpoints(self.raw, error.raw) };
+        if error.is_success() {
+            Ok(num)
+        } else {
+            Err(error)
+        }
+    }
+
     /// Get an iterator over the [threads] known to this process instance.
     ///
     /// [threads]: SBThread
@@ -343,6 +360,66 @@ impl SBProcess {
     #[allow(missing_docs)]
     pub fn process_info(&self) -> SBProcessInfo {
         SBProcessInfo::wrap(unsafe { sys::SBProcessGetProcessInfo(self.raw) })
+    }
+
+    /// Allocate memory within the process.
+    ///
+    /// This function will allocate `size` bytes in the process's address space.
+    ///
+    /// The `permissions` must be any of the [`Permissions`] bits OR'd together.
+    /// The permissions on a given memory allocation can't be changed
+    /// after allocation.  Note that a block that isn't set writable
+    /// can still be written from lldb, just not by the process
+    /// itself.
+    ///
+    /// Returns the address of the allocated buffer in the process or
+    /// the error that occurred while trying to allocate.
+    ///
+    /// # Example
+    ///
+    /// ```no_run
+    /// # use lldb::{Permissions, SBProcess};
+    /// # fn look_at_threads(process: SBProcess) {
+    /// if let Ok(data_addr) = process.allocate_memory(1024, Permissions::READABLE) {
+    ///     // Do something with the address.
+    /// }
+    /// if let Ok(code_addr) = process.allocate_memory(1024, Permissions::READABLE | Permissions::EXECUTABLE) {
+    ///     // Do something with the address.
+    /// }
+    /// # }
+    pub fn allocate_memory(
+        &self,
+        size: size_t,
+        permissions: Permissions,
+    ) -> Result<lldb_addr_t, SBError> {
+        let error = SBError::default();
+        let addr =
+            unsafe { sys::SBProcessAllocateMemory(self.raw, size, permissions.bits(), error.raw) };
+        if error.is_success() {
+            Ok(addr)
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Deallocate memory in the process.
+    ///
+    /// This function will deallocate memory in the process's address
+    /// space that was allocated with [`SBProcess::allocate_memory()`].
+    ///
+    /// If an error occurs while deallocating, it will be returned.
+    ///
+    /// # Safety
+    ///
+    /// The `ptr` must be a return value from [`SBProcess::allocate_memory()`],
+    /// pointing to the memory you want to deallocate.
+    pub unsafe fn deallocate_memory(&self, ptr: lldb_addr_t) -> Result<(), SBError> {
+        let error = SBError::wrap(sys::SBProcessDeallocateMemory(self.raw, ptr));
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
     }
 }
 

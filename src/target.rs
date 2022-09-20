@@ -346,6 +346,26 @@ impl SBTarget {
             None
         }
     }
+
+    #[allow(missing_docs)]
+    pub fn get_stack_red_zone_size(&self) -> lldb_addr_t {
+        unsafe { sys::SBTargetGetStackRedZoneSize(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn is_loaded(&self, module: &SBModule) -> bool {
+        unsafe { sys::SBTargetIsLoaded(self.raw, module.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_launch_info(&self) -> SBLaunchInfo {
+        SBLaunchInfo::wrap(unsafe { sys::SBTargetGetLaunchInfo(self.raw) })
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_launch_info(&self, launch_info: SBLaunchInfo) {
+        unsafe { sys::SBTargetSetLaunchInfo(self.raw, launch_info.raw) };
+    }
 }
 
 impl Clone for SBTarget {

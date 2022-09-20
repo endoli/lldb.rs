@@ -381,10 +381,47 @@ impl SBDebugger {
     /// * [`SBDebugger::available_platforms()`]
     /// * [`SBDebugger::platforms()`]
     /// * [`SBDebugger::selected_platform()`]
+    /// * [`SBDebugger::set_current_platform_sdk_root()`]
     /// * [`SBDebugger::set_selected_platform()`]
     pub fn set_current_platform(&self, platform_name: &str) {
         let platform_name = CString::new(platform_name).unwrap();
         unsafe { sys::SBDebuggerSetCurrentPlatform(self.raw, platform_name.as_ptr()) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_current_platform_sdk_root(&self, sysroot: &str) {
+        let sysroot = CString::new(sysroot).unwrap();
+        unsafe { sys::SBDebuggerSetCurrentPlatformSDKRoot(self.raw, sysroot.as_ptr()) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_use_external_editor(&self, use_external_editor: bool) {
+        unsafe { sys::SBDebuggerSetUseExternalEditor(self.raw, use_external_editor) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_use_external_editor(&self) -> bool {
+        unsafe { sys::SBDebuggerGetUseExternalEditor(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_use_color(&self, use_color: bool) {
+        unsafe { sys::SBDebuggerSetUseColor(self.raw, use_color) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_use_color(&self) -> bool {
+        unsafe { sys::SBDebuggerGetUseColor(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    pub fn set_use_source_cache(&self, use_source_cache: bool) {
+        unsafe { sys::SBDebuggerSetUseSourceCache(self.raw, use_source_cache) };
+    }
+
+    #[allow(missing_docs)]
+    pub fn get_use_source_cache(&self) -> bool {
+        unsafe { sys::SBDebuggerGetUseSourceCache(self.raw) }
     }
 }
 
