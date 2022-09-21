@@ -59,6 +59,9 @@ impl Drop for SBMemoryRegionInfoList {
     }
 }
 
+unsafe impl Send for SBMemoryRegionInfoList {}
+unsafe impl Sync for SBMemoryRegionInfoList {}
+
 /// An iterator over the [memory regions] in an [`SBMemoryRegionInfoList`].
 ///
 /// [memory regions]: SBMemoryRegionInfo
