@@ -1,16 +1,22 @@
 use crate::sys;
 use crate::SBMemoryRegionInfo;
 
-#[allow(missing_docs)]
+/// A list of [memory regions].
+///
+/// This is returned from
+/// [`SBProcess::get_memory_regions()`](crate::SBProcess::get_memory_regions).
+///
+/// [memory regions]: SBMemoryRegionInfo
 #[derive(Debug)]
 pub struct SBMemoryRegionInfoList {
+    /// The underlying raw `SBMemoryRegionInfoListRef`.
     pub raw: sys::SBMemoryRegionInfoListRef,
 }
 
 impl SBMemoryRegionInfoList {
-    #[allow(missing_docs)]
-    pub fn new() -> Self {
-        SBMemoryRegionInfoList::from(unsafe { sys::CreateSBMemoryRegionInfoList() })
+    /// Construct a new `SBMemoryRegionInfoList`.
+    pub(crate) fn wrap(raw: sys::SBMemoryRegionInfoListRef) -> SBMemoryRegionInfoList {
+        SBMemoryRegionInfoList { raw }
     }
 
     #[allow(missing_docs)]
@@ -23,32 +29,19 @@ impl SBMemoryRegionInfoList {
         unsafe { sys::SBMemoryRegionInfoListAppendList(self.raw, region_list.raw) };
     }
 
-    #[allow(missing_docs)]
+    /// Is this memory region list empty?
+    pub fn is_empty(&self) -> bool {
+        unsafe { sys::SBMemoryRegionInfoListGetSize(self.raw) == 0 }
+    }
+
+    /// Clear this memory region list.
     pub fn clear(&self) {
         unsafe { sys::SBMemoryRegionInfoListClear(self.raw) };
     }
 
-    #[allow(missing_docs)]
-    pub fn get_memory_region(&self, index: u32) -> Option<SBMemoryRegionInfo> {
-        let tmp = SBMemoryRegionInfo::default();
-        if unsafe { sys::SBMemoryRegionInfoListGetMemoryRegionAtIndex(self.raw, index, tmp.raw) } {
-            Some(tmp)
-        } else {
-            None
-        }
-    }
-
-    #[allow(missing_docs)]
-    pub fn get_size(&self) -> u32 {
-        unsafe { sys::SBMemoryRegionInfoListGetSize(self.raw) }
-    }
-
-    #[allow(missing_docs)]
+    /// Iterate over this memory region list.
     pub fn iter(&self) -> SBMemoryRegionInfoListIter {
-        SBMemoryRegionInfoListIter {
-            memory_list: self,
-            idx: 0,
-        }
+        SBMemoryRegionInfoListIter { list: self, idx: 0 }
     }
 }
 
@@ -60,37 +53,33 @@ impl Clone for SBMemoryRegionInfoList {
     }
 }
 
-impl Default for SBMemoryRegionInfoList {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 impl Drop for SBMemoryRegionInfoList {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBMemoryRegionInfoList(self.raw) };
     }
 }
 
-impl From<sys::SBMemoryRegionInfoListRef> for SBMemoryRegionInfoList {
-    fn from(raw: sys::SBMemoryRegionInfoListRef) -> Self {
-        Self { raw }
-    }
-}
-
-#[allow(missing_docs)]
+/// An iterator over the [memory regions] in an [`SBMemoryRegionInfoList`].
+///
+/// [memory regions]: SBMemoryRegionInfo
 pub struct SBMemoryRegionInfoListIter<'d> {
-    memory_list: &'d SBMemoryRegionInfoList,
+    list: &'d SBMemoryRegionInfoList,
     idx: u32,
 }
 
 impl<'d> Iterator for SBMemoryRegionInfoListIter<'d> {
     type Item = SBMemoryRegionInfo;
 
-    #[allow(missing_docs)]
     fn next(&mut self) -> Option<SBMemoryRegionInfo> {
-        if self.idx < self.memory_list.get_size() {
-            let r = self.memory_list.get_memory_region(self.idx);
+        if self.idx < unsafe { sys::SBMemoryRegionInfoListGetSize(self.list.raw) } {
+            let info = SBMemoryRegionInfo::default();
+            let r = if unsafe {
+                sys::SBMemoryRegionInfoListGetMemoryRegionAtIndex(self.list.raw, self.idx, info.raw)
+            } {
+                Some(info)
+            } else {
+                None
+            };
             self.idx += 1;
             r
         } else {
@@ -98,9 +87,8 @@ impl<'d> Iterator for SBMemoryRegionInfoListIter<'d> {
         }
     }
 
-    #[allow(missing_docs)]
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let sz = self.memory_list.get_size() as usize;
+        let sz = unsafe { sys::SBMemoryRegionInfoListGetSize(self.list.raw) } as usize;
         (sz - self.idx as usize, Some(sz))
     }
 }

@@ -423,7 +423,14 @@ impl SBProcess {
         }
     }
 
-    #[allow(missing_docs)]
+    /// Query the address `load_addr` and return the details of the
+    /// [memory region] that contains it.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::get_memory_regions()`]
+    ///
+    /// [memory region]: SBMemoryRegionInfo
     pub fn get_memory_region_info(
         &self,
         load_addr: lldb_addr_t,
@@ -440,9 +447,16 @@ impl SBProcess {
         }
     }
 
-    #[allow(missing_docs)]
+    /// Return the [list] of [memory regions] within the process.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::get_memory_region_info()`]
+    ///
+    /// [list]: SBMemoryRegionInfoList
+    /// [memory regions]: SBMemoryRegionInfo
     pub fn get_memory_regions(&self) -> SBMemoryRegionInfoList {
-        SBMemoryRegionInfoList::from(unsafe { sys::SBProcessGetMemoryRegions(self.raw) })
+        SBMemoryRegionInfoList::wrap(unsafe { sys::SBProcessGetMemoryRegions(self.raw) })
     }
 }
 
