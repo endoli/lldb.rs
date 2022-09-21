@@ -7,7 +7,8 @@
 use crate::{lldb_pid_t, sys, SBFileSpec};
 use std::ffi::CStr;
 
-#[allow(missing_docs)]
+/// Describes an existing process and any discoverable information that
+/// pertains to that process.
 #[derive(Debug)]
 pub struct SBProcessInfo {
     /// The underlying raw `SBProcessInfoRef`.
@@ -80,6 +81,16 @@ impl SBProcessInfo {
     pub fn parent_process_id(&self) -> lldb_pid_t {
         unsafe { sys::SBProcessInfoGetParentProcessID(self.raw) }
     }
+
+    /// Return the target triple (arch-vendor-os) for the described process.
+    pub fn triple(&self) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBProcessInfoGetTriple(self.raw)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
+    }
 }
 
 impl Clone for SBProcessInfo {
@@ -138,5 +149,9 @@ impl SBProcessInfo {
     // TODO(bm) This should be lldb_pid_t
     fn parent_process_id() -> i32 {
         self.parent_process_id() as i32
+    }
+
+    fn triple() -> &str {
+        self.triple()
     }
 }
