@@ -4,11 +4,22 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::{sys, SBData, SBStream, SBTarget};
+use crate::{sys, Permissions, SBData, SBStream, SBTarget};
 use std::ffi::{CStr, CString};
 use std::fmt;
 
-#[allow(missing_docs)]
+/// Represents an executable image section.
+///
+/// `SBSection` supports iteration through its [subsections],
+/// represented as `SBSection` as well.
+///
+/// See also:
+///
+/// - [`SBModule`](crate::SBModule)
+/// - [`SBModule::find_section()`](crate::SBModule::find_section)
+/// - [`SBModule::sections()`](crate::SBModule::sections)
+///
+/// [subsections]: SBSection::subsections
 pub struct SBSection {
     /// The underlying raw `SBSectionRef`.
     pub raw: sys::SBSectionRef,
@@ -103,6 +114,19 @@ impl SBSection {
     #[allow(missing_docs)]
     pub fn section_type(&self) -> sys::SectionType {
         unsafe { sys::SBSectionGetSectionType(self.raw) }
+    }
+
+    /// Gets the permissions (RWX) of the section of the object file.
+    ///
+    /// `None` is returned for sections without permissions. Invalid
+    /// permissions bits are truncated.
+    pub fn permissions(&self) -> Option<Permissions> {
+        let perms = unsafe { sys::SBSectionGetPermissions(self.raw) };
+        if perms != 0 {
+            Some(Permissions::from_bits_truncate(perms))
+        } else {
+            None
+        }
     }
 
     #[allow(missing_docs)]
