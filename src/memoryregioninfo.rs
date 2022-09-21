@@ -159,6 +159,9 @@ impl Drop for SBMemoryRegionInfo {
     }
 }
 
+unsafe impl Send for SBMemoryRegionInfo {}
+unsafe impl Sync for SBMemoryRegionInfo {}
+
 /// Iterate over the addresses of dirty pages in a [memory region].
 ///
 /// [memory region]: SBMemoryRegionInfo
@@ -185,5 +188,43 @@ impl<'d> Iterator for SBMemoryRegionInfoDirtyPageIter<'d> {
     fn size_hint(&self) -> (usize, Option<usize>) {
         let sz = unsafe { sys::SBMemoryRegionInfoGetNumDirtyPages(self.info.raw) } as usize;
         (sz - self.idx as usize, Some(sz))
+    }
+}
+
+#[cfg(feature = "graphql")]
+#[graphql_object]
+impl SBMemoryRegionInfo {
+    // TODO(bm) This should be u64
+    fn region_base() -> i32 {
+        self.get_region_base() as i32
+    }
+
+    // TODO(bm) This should be u64
+    fn region_end() -> i32 {
+        self.get_region_end() as i32
+    }
+
+    fn is_readable() -> bool {
+        self.is_readable()
+    }
+
+    fn is_writable() -> bool {
+        self.is_writable()
+    }
+
+    fn is_executable() -> bool {
+        self.is_executable()
+    }
+
+    fn is_mapped() -> bool {
+        self.is_mapped()
+    }
+
+    fn name() -> Option<String> {
+        self.get_name()
+    }
+
+    fn page_size() -> i32 {
+        self.get_page_size()
     }
 }

@@ -671,4 +671,8 @@ impl SBProcess {
     fn process_info() -> SBProcessInfo {
         self.process_info()
     }
+
+    fn memory_regions() -> Vec<SBMemoryRegionInfo> {
+        self.get_memory_regions().iter().collect()
+    }
 }
