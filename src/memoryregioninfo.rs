@@ -1,8 +1,8 @@
-use crate::{lldb_addr_t, sys};
+use crate::{lldb_addr_t, sys, SBStream};
 use std::ffi::CStr;
+use std::fmt;
 
 #[allow(missing_docs)]
-#[derive(Debug)]
 pub struct SBMemoryRegionInfo {
     pub raw: sys::SBMemoryRegionInfoRef,
 }
@@ -17,11 +17,6 @@ impl SBMemoryRegionInfo {
     pub fn clear(&self) {
         unsafe { sys::SBMemoryRegionInfoClear(self.raw) };
     }
-
-    /*
-    pub fn get_description(&self, description: SBStream) -> SBStream {
-    }
-    */
 
     #[allow(missing_docs)]
     pub fn is_executable(&self) -> bool {
@@ -75,6 +70,14 @@ impl Clone for SBMemoryRegionInfo {
         Self {
             raw: unsafe { sys::CloneSBMemoryRegionInfo(self.raw) },
         }
+    }
+}
+
+impl fmt::Debug for SBMemoryRegionInfo {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        let stream = SBStream::new();
+        unsafe { sys::SBMemoryRegionInfoGetDescription(self.raw, stream.raw) };
+        write!(fmt, "SBMemoryRegionInfo {{ {} }}", stream.data())
     }
 }
 
