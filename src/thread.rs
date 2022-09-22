@@ -5,11 +5,12 @@
 // except according to those terms.
 
 use crate::{
-    lldb_tid_t, sys, RunMode, SBError, SBEvent, SBFrame, SBProcess, SBQueue, SBStream, SBValue,
-    StopReason,
+    lldb_tid_t, sys, RunMode, SBError, SBEvent, SBFileSpec, SBFrame, SBProcess, SBQueue, SBStream,
+    SBValue, StopReason,
 };
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fmt;
+use std::ptr;
 
 /// A thread of execution.
 ///
@@ -241,6 +242,32 @@ impl SBThread {
     }
 
     #[allow(missing_docs)]
+    pub fn step_into(
+        &self,
+        target_name: Option<&str>,
+        end_line: u32,
+        stop_other_threads: RunMode,
+    ) -> Result<(), SBError> {
+        let error = SBError::default();
+        let target_name =
+            target_name.map(|n| CString::new(n).expect("Invalid target_name supplied."));
+        unsafe {
+            sys::SBThreadStepInto3(
+                self.raw,
+                target_name.map(|s| s.as_ptr()).unwrap_or_else(ptr::null),
+                end_line,
+                error.raw,
+                stop_other_threads,
+            )
+        }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
     pub fn step_out(&self) -> Result<(), SBError> {
         let error = SBError::default();
         unsafe { sys::SBThreadStepOut(self.raw, error.raw) }
@@ -249,6 +276,41 @@ impl SBThread {
         } else {
             Err(error)
         }
+    }
+
+    /// Step out of the specified frame.
+    pub fn step_out_of_frame(&self, frame: &SBFrame) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepOutOfFrame(self.raw, frame.raw, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_instruction(&self, step_over: bool) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe { sys::SBThreadStepInstruction(self.raw, step_over, error.raw) }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_over_until(
+        &self,
+        frame: &SBFrame,
+        file_spec: &SBFileSpec,
+        line: u32,
+    ) -> Result<(), SBError> {
+        SBError::wrap(unsafe {
+            sys::SBThreadStepOverUntil(self.raw, frame.raw, file_spec.raw, line)
+        })
+        .into_result()
     }
 
     /// If the given event is a thread event, return it as an
