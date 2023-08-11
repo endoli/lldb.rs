@@ -4,7 +4,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::SBError;
+use crate::{sys, SBError};
 use libc::FILE;
 use std::ffi::CString;
 

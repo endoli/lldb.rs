@@ -546,7 +546,7 @@ impl<'d> ExactSizeIterator for SBDebuggerAvailablePlatformIter<'d> {}
 impl ::juniper::Context for SBDebugger {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBDebugger {
     fn targets() -> Vec<SBTarget> {
         self.targets().collect()

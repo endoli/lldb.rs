@@ -192,7 +192,7 @@ impl<'d> Iterator for SBMemoryRegionInfoDirtyPageIter<'d> {
 }
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBMemoryRegionInfo {
     // TODO(bm) This should be u64
     fn region_base() -> i32 {

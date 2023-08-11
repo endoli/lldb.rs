@@ -196,7 +196,7 @@ unsafe impl Send for SBType {}
 unsafe impl Sync for SBType {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBType {
     fn is_pointer_type() -> bool {
         self.is_pointer_type()

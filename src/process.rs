@@ -619,7 +619,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
 impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBProcess {
     fn is_alive() -> bool {
         self.is_alive()

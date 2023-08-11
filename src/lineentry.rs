@@ -92,7 +92,7 @@ unsafe impl Send for SBLineEntry {}
 unsafe impl Sync for SBLineEntry {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBLineEntry {
     fn start_address() -> SBAddress {
         self.start_address()

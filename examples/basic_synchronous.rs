@@ -1,5 +1,3 @@
-extern crate lldb;
-
 use lldb::*;
 
 fn main() {

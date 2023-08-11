@@ -193,7 +193,7 @@ unsafe impl Send for SBSection {}
 unsafe impl Sync for SBSection {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBSection {
     fn name() -> &str {
         self.name()

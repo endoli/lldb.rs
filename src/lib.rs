@@ -105,11 +105,7 @@
 // Re-export of `lldb-sys` in the event that access to the same version
 // as used by this crate is needed. In general, it is preferable to add
 // bindings for missing functionality to this crate.
-pub extern crate lldb_sys as sys;
-
-#[cfg(feature = "graphql")]
-#[macro_use]
-extern crate juniper;
+pub use lldb_sys as sys;
 
 pub use crate::sys::{lldb_addr_t, lldb_offset_t, lldb_pid_t, lldb_tid_t, lldb_user_id_t};
 

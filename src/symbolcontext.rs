@@ -108,7 +108,7 @@ unsafe impl Send for SBSymbolContext {}
 unsafe impl Sync for SBSymbolContext {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBSymbolContext {
     fn module() -> SBModule {
         self.module()

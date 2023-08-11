@@ -404,7 +404,7 @@ impl<'e> SBThreadEvent<'e> {
 }
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBThread {
     // TODO(bm): This should be u64
     fn thread_id(&self) -> i32 {

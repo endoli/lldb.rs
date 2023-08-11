@@ -159,7 +159,7 @@ unsafe impl Send for SBModule {}
 unsafe impl Sync for SBModule {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBModule {
     fn filespec() -> SBFileSpec {
         self.filespec()

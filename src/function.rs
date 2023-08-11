@@ -156,7 +156,7 @@ unsafe impl Send for SBFunction {}
 unsafe impl Sync for SBFunction {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBFunction {
     fn name() -> &str {
         self.name()

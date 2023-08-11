@@ -90,7 +90,7 @@ unsafe impl Send for SBFileSpec {}
 unsafe impl Sync for SBFileSpec {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBFileSpec {
     fn exists() -> bool {
         self.exists()

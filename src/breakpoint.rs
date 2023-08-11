@@ -247,7 +247,7 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
 impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBBreakpoint {
     fn id() -> i32 {
         self.id()

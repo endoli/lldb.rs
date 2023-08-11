@@ -270,7 +270,7 @@ impl PartialEq for SBAddress {
 impl Eq for SBAddress {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBAddress {
     // TODO(bm) This should be u64
     fn file_address() -> i32 {
@@ -305,6 +305,7 @@ impl SBAddress {
 #[cfg(test)]
 mod tests {
     use super::SBAddress;
+    use crate::sys;
 
     #[test]
     fn test_equal() {

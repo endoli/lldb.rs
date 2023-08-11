@@ -145,7 +145,7 @@ unsafe impl Send for SBBlock {}
 unsafe impl Sync for SBBlock {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBBlock {
     fn is_inlined() -> bool {
         self.is_inlined()

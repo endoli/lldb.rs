@@ -317,7 +317,7 @@ impl<'d> Iterator for SBValueChildIter<'d> {
 impl<'d> ExactSizeIterator for SBValueChildIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBValue {
     // TODO(bm): This should be u64
     fn id() -> i32 {

@@ -111,7 +111,7 @@ unsafe impl Send for SBProcessInfo {}
 unsafe impl Sync for SBProcessInfo {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBProcessInfo {
     fn name() -> &str {
         self.name()

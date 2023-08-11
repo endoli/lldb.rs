@@ -89,7 +89,7 @@ unsafe impl Send for SBQueueItem {}
 unsafe impl Sync for SBQueueItem {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBQueueItem {
     fn address() -> Option<SBAddress> {
         self.address()

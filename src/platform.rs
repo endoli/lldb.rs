@@ -190,7 +190,7 @@ unsafe impl Send for SBPlatform {}
 unsafe impl Sync for SBPlatform {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBPlatform {
     fn working_directory() -> &str {
         self.working_directory()

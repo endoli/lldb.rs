@@ -299,7 +299,7 @@ unsafe impl Send for SBFrame {}
 unsafe impl Sync for SBFrame {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBFrame {
     // TODO(bm): This should be u32
     fn frame_id() -> i32 {

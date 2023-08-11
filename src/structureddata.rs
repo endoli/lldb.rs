@@ -166,7 +166,7 @@ unsafe impl Send for SBStructuredData {}
 unsafe impl Sync for SBStructuredData {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBStructuredData {
     // TODO(bm) This should be usize
     fn size() -> i32 {

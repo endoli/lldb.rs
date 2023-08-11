@@ -566,7 +566,7 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
 impl<'d> ExactSizeIterator for SBTargetModuleIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBTarget {
     fn platform() -> SBPlatform {
         self.platform()

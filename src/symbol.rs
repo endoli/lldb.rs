@@ -150,7 +150,7 @@ unsafe impl Send for SBSymbol {}
 unsafe impl Sync for SBSymbol {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBSymbol {
     fn name() -> &str {
         self.name()

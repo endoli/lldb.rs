@@ -124,7 +124,7 @@ impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
 impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBCompileUnit {
     fn filespec() -> SBFileSpec {
         self.filespec()

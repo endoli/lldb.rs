@@ -116,7 +116,7 @@ unsafe impl Send for SBBreakpointLocation {}
 unsafe impl Sync for SBBreakpointLocation {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBBreakpointLocation {
     fn id() -> i32 {
         self.id()

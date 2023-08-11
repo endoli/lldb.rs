@@ -198,7 +198,7 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
 impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBQueue {
     // TODO(bm) This should be u64
     fn queue_id() -> i32 {

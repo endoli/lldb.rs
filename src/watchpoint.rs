@@ -134,7 +134,7 @@ unsafe impl Send for SBWatchpoint {}
 unsafe impl Sync for SBWatchpoint {}
 
 #[cfg(feature = "graphql")]
-#[graphql_object]
+#[juniper::graphql_object]
 impl SBWatchpoint {
     fn id() -> i32 {
         self.id()
