@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  merge_group:
+
+jobs:
+  rustfmt:
+    runs-on: ubuntu-latest
+    name: cargo fmt
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install stable toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: rustfmt
+
+      - name: cargo fmt
+        run: cargo fmt --all --check
+
+  test-stable:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    name: cargo clippy + test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install additional linux dependencies
+        run: |
+          sudo apt update
+          sudo apt install llvm liblldb-dev
+        if: contains(matrix.os, 'ubuntu')
+
+      - name: install additional macOS dependencies
+        run: |
+          brew install llvm
+          echo "`brew --prefix llvm`/bin" >> $GITHUB_PATH
+        if: contains(matrix.os, 'macos')
+
+      - name: install stable toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: cargo clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: cargo clippy --all-features
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: cargo test
+        run: cargo test
