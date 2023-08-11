@@ -9,7 +9,6 @@ use crate::{
     SBMemoryRegionInfo, SBMemoryRegionInfoList, SBProcessInfo, SBQueue, SBStream, SBStructuredData,
     SBThread, StateType,
 };
-use libc::size_t;
 use std::ffi::{CStr, CString};
 use std::fmt;
 
@@ -390,7 +389,7 @@ impl SBProcess {
     /// # }
     pub fn allocate_memory(
         &self,
-        size: size_t,
+        size: usize,
         permissions: Permissions,
     ) -> Result<lldb_addr_t, SBError> {
         let error = SBError::default();
