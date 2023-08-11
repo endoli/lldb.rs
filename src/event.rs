@@ -92,6 +92,12 @@ impl fmt::Debug for SBEvent {
     }
 }
 
+impl Default for SBEvent {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Drop for SBEvent {
     fn drop(&mut self) {
         unsafe { sys::DisposeSBEvent(self.raw) };
