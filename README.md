@@ -1,6 +1,7 @@
 # lldb
 
 [![](https://img.shields.io/crates/v/lldb.svg)](https://crates.io/crates/lldb)
+[![docs.rs](https://img.shields.io/docsrs/lldb)](https://docs.rs/lldb)
 
 This crate provides a safe binding to the public API for [LLDB](https://lldb.llvm.org/) the
 debugger provided by the [LLVM project](https://llvm.org/). LLDB provides a modern, high
