@@ -20,5 +20,5 @@ graphql = ["juniper"]
 
 [dependencies]
 libc = "0.2"
-lldb-sys = "0.0.29"
+lldb-sys = "0.0.30"
 juniper = { version = "0.15", optional = true }
