@@ -32,7 +32,7 @@ impl SBMemoryRegionInfo {
     ///
     /// See also:
     ///
-    /// - [SBMemoryRegionInfo::get_region_end()`]
+    /// - [`SBMemoryRegionInfo::get_region_end()`]
     pub fn get_region_base(&self) -> lldb_addr_t {
         unsafe { sys::SBMemoryRegionInfoGetRegionBase(self.raw) }
     }
@@ -41,7 +41,7 @@ impl SBMemoryRegionInfo {
     ///
     /// See also:
     ///
-    /// - [SBMemoryRegionInfo::get_region_base()`]
+    /// - [`SBMemoryRegionInfo::get_region_base()`]
     pub fn get_region_end(&self) -> lldb_addr_t {
         unsafe { sys::SBMemoryRegionInfoGetRegionEnd(self.raw) }
     }
@@ -50,8 +50,8 @@ impl SBMemoryRegionInfo {
     ///
     /// See also:
     ///
-    /// - [SBMemoryRegionInfo::is_writable()`]
-    /// - [SBMemoryRegionInfo::is_executable()`]
+    /// - [`SBMemoryRegionInfo::is_writable()`]
+    /// - [`SBMemoryRegionInfo::is_executable()`]
     pub fn is_readable(&self) -> bool {
         unsafe { sys::SBMemoryRegionInfoIsReadable(self.raw) }
     }
@@ -60,8 +60,8 @@ impl SBMemoryRegionInfo {
     ///
     /// See also:
     ///
-    /// - [SBMemoryRegionInfo::is_readable()`]
-    /// - [SBMemoryRegionInfo::is_executable()`]
+    /// - [`SBMemoryRegionInfo::is_readable()`]
+    /// - [`SBMemoryRegionInfo::is_executable()`]
     pub fn is_writable(&self) -> bool {
         unsafe { sys::SBMemoryRegionInfoIsWritable(self.raw) }
     }
@@ -70,8 +70,8 @@ impl SBMemoryRegionInfo {
     ///
     /// See also:
     ///
-    /// - [SBMemoryRegionInfo::is_readable()`]
-    /// - [SBMemoryRegionInfo::is_writable()`]
+    /// - [`SBMemoryRegionInfo::is_readable()`]
+    /// - [`SBMemoryRegionInfo::is_writable()`]
     pub fn is_executable(&self) -> bool {
         unsafe { sys::SBMemoryRegionInfoIsExecutable(self.raw) }
     }
