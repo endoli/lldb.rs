@@ -57,7 +57,7 @@ impl SBBroadcaster {
     #[allow(missing_docs)]
     pub fn add_initial_events_to_listener(&self, listener: &SBListener, requested_events: u32) {
         unsafe {
-            sys::SBBroadcasterAddInitialEventsToListener(self.raw, listener.raw, requested_events)
+            sys::SBBroadcasterAddInitialEventsToListener(self.raw, listener.raw, requested_events);
         };
     }
 

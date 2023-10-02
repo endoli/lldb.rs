@@ -258,7 +258,7 @@ impl SBThread {
                 end_line,
                 error.raw,
                 stop_other_threads,
-            )
+            );
         }
         if error.is_success() {
             Ok(())
