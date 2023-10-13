@@ -231,7 +231,7 @@ impl SBDebugger {
 
         let err_str = unsafe { sys::SBCommandReturnObjectGetError(result) };
         match unsafe { CStr::from_ptr(err_str).to_str() } {
-            Ok(s) => return Err(s.to_string()),
+            Ok(s) => Err(s.to_string()),
             Err(err_str) => Err(err_str.to_string()),
         }
     }
