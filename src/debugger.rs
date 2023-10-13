@@ -199,6 +199,43 @@ impl SBDebugger {
         SBCommandInterpreter::wrap(unsafe { sys::SBDebuggerGetCommandInterpreter(self.raw) })
     }
 
+    /// Executes a command as lldb would run in the console and returns a result that contains a
+    /// string of the output if the command execution was successful. If there was an error, it
+    /// contains an error message.
+    ///
+    /// (lldb) b main
+    /// => Is equal to debugger.execute_command("b main")
+    ///
+    pub fn execute_command(&self, command: &str) -> Result<&str, String> {
+        let result = unsafe { sys::CreateSBCommandReturnObject() };
+
+        let interpreter = self.command_interpreter();
+        let command = CString::new(command).unwrap();
+
+        unsafe {
+            sys::SBCommandInterpreterHandleCommand(
+                interpreter.raw,
+                command.as_ptr(),
+                result,
+                false,
+            );
+        }
+
+        if unsafe { sys::SBCommandReturnObjectSucceeded(result) } {
+            let output = unsafe { sys::SBCommandReturnObjectGetOutput(result) };
+            return match unsafe { CStr::from_ptr(output).to_str() } {
+                Ok(s) => Ok(s),
+                Err(err_str) => Err(err_str.to_string()),
+            };
+        }
+
+        let err_str = unsafe { sys::SBCommandReturnObjectGetError(result) };
+        match unsafe { CStr::from_ptr(err_str).to_str() } {
+            Ok(s) => return Err(s.to_string()),
+            Err(err_str) => Err(err_str.to_string()),
+        }
+    }
+
     /// Enable logging (defaults to `stderr`).
     ///
     /// `enable_log("lldb", &["default"])` is useful for troubleshooting in most
