@@ -266,6 +266,18 @@ impl SBProcess {
         }
     }
 
+    /// Reads data from the current process's stdout stream.
+    pub fn get_stdout(&self) -> Option<String> {
+        let dst_len = 0x1000;
+        let mut dst: Vec<u8> = Vec::with_capacity(dst_len);
+
+        let out_len =
+            unsafe { sys::SBProcessGetSTDOUT(self.raw, dst.as_mut_ptr() as *mut i8, dst_len) };
+
+        unsafe { dst.set_len(out_len) };
+        String::from_utf8(dst).ok()
+    }
+
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
