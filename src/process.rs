@@ -306,6 +306,24 @@ impl SBProcess {
         }
     }
 
+    /// Reads data from the current process's stdout stream until the end ot the stream.
+    pub fn get_stdout_all(&self) -> Option<String> {
+        let dst_len = 0x1000;
+        let mut output = "".to_string();
+        let mut dst: Vec<u8> = Vec::with_capacity(dst_len);
+        loop {
+            let out_len =
+                unsafe { sys::SBProcessGetSTDOUT(self.raw, dst.as_mut_ptr() as *mut i8, dst_len) };
+            if out_len == 0 {
+                break;
+            }
+            unsafe { dst.set_len(out_len) };
+            output += std::str::from_utf8(&dst).ok()?;
+        }
+
+        Some(output)
+    }
+
     /// Reads data from the current process's stdout stream.
     pub fn get_stdout(&self) -> Option<String> {
         let dst_len = 0x1000;
