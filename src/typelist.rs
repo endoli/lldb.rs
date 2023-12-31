@@ -53,6 +53,14 @@ impl Drop for SBTypeList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBTypeList {
+    type IntoIter = SBTypeListIter<'d>;
+    type Item = SBType;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBTypeList {}
 unsafe impl Sync for SBTypeList {}
 

@@ -78,6 +78,14 @@ impl Drop for SBBreakpointList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBBreakpointList {
+    type IntoIter = SBBreakpointListIter<'d>;
+    type Item = SBBreakpoint;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBBreakpointList {}
 unsafe impl Sync for SBBreakpointList {}
 

@@ -79,6 +79,14 @@ impl Drop for SBSymbolContextList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBSymbolContextList {
+    type IntoIter = SBSymbolContextListIter<'d>;
+    type Item = SBSymbolContext;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBSymbolContextList {}
 unsafe impl Sync for SBSymbolContextList {}
 

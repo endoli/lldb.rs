@@ -82,6 +82,14 @@ impl Drop for SBInstructionList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBInstructionList {
+    type IntoIter = SBInstructionListIter<'d>;
+    type Item = SBInstruction;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBInstructionList {}
 unsafe impl Sync for SBInstructionList {}
 
