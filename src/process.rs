@@ -130,6 +130,13 @@ impl SBProcess {
     }
 
     /// The current state of this process (running, stopped, exited, etc.).
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::is_alive()`]
+    /// - [`SBProcess::is_running()`]
+    /// - [`SBProcess::is_stopped()`]
+    /// - [`StateType`]
     pub fn state(&self) -> StateType {
         unsafe { sys::SBProcessGetState(self.raw) }
     }
@@ -139,6 +146,13 @@ impl SBProcess {
     /// This corresponds to the process being in the `Attaching`,
     /// `Launching`, `Stopped`, `Running`, `Stepping`, `Crashed`
     /// or `Suspended` states.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::is_running()`]
+    /// - [`SBProcess::is_stopped()`]
+    /// - [`SBProcess::state()`]
+    /// - [`StateType`]
     pub fn is_alive(&self) -> bool {
         matches!(
             self.state(),
@@ -156,6 +170,13 @@ impl SBProcess {
     ///
     /// This corresponds to the process being in the `Running`
     /// or `Stepping` states.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::is_alive()`]
+    /// - [`SBProcess::is_stopped()`]
+    /// - [`SBProcess::state()`]
+    /// - [`StateType`]
     pub fn is_running(&self) -> bool {
         matches!(self.state(), StateType::Running | StateType::Stepping)
     }
@@ -164,6 +185,13 @@ impl SBProcess {
     ///
     /// This corresponds to the process being in the `Stopped`, `Crashed`,
     /// or `Suspended` states.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::is_alive()`]
+    /// - [`SBProcess::is_running()`]
+    /// - [`SBProcess::state()`]
+    /// - [`StateType`]
     pub fn is_stopped(&self) -> bool {
         matches!(
             self.state(),
@@ -173,12 +201,24 @@ impl SBProcess {
 
     /// The exit status of the process when the process state is
     /// `Exited`.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::exit_description()`]
+    /// - [`SBProcess::state()`]
+    /// - [`StateType`]
     pub fn exit_status(&self) -> i32 {
         unsafe { sys::SBProcessGetExitStatus(self.raw) }
     }
 
     /// The exit description of the process when the process state
     /// is `Exited`.
+    ///
+    /// See also:
+    ///
+    /// - [`SBProcess::exit_status()`]
+    /// - [`SBProcess::state()`]
+    /// - [`StateType`]
     pub fn exit_description(&self) -> &str {
         unsafe {
             match CStr::from_ptr(sys::SBProcessGetExitDescription(self.raw)).to_str() {
@@ -374,6 +414,8 @@ impl SBProcess {
     ///
     /// Returns the address of the allocated buffer in the process or
     /// the error that occurred while trying to allocate.
+    ///
+    /// The allocated memory can be deallocated with [`SBProcess::deallocate_memory()`].
     ///
     /// # Example
     ///
