@@ -204,7 +204,7 @@ impl SBDebugger {
     /// contains an error message.
     ///
     /// (lldb) b main
-    /// => Is equal to debugger.execute_command("b main")
+    /// => Is equal to `debugger.execute_command("b main")`
     ///
     pub fn execute_command(&self, command: &str) -> Result<&str, String> {
         let result = unsafe { sys::CreateSBCommandReturnObject() };
