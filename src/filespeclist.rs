@@ -83,6 +83,14 @@ impl Drop for SBFileSpecList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBFileSpecList {
+    type IntoIter = SBFileSpecListIter<'d>;
+    type Item = SBFileSpec;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBFileSpecList {}
 unsafe impl Sync for SBFileSpecList {}
 

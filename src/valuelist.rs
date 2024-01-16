@@ -91,6 +91,14 @@ impl Drop for SBValueList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBValueList {
+    type IntoIter = SBValueListIter<'d>;
+    type Item = SBValue;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBValueList {}
 unsafe impl Sync for SBValueList {}
 

@@ -17,7 +17,7 @@ use std::ffi::CStr;
 /// be associated with multiple threads.
 ///
 /// The available queues within a process can be found discovered by
-/// inspecting the [`process`]:
+/// inspecting the [`process`] via [`SBProcess::queues()`]:
 ///
 /// ```no_run
 /// # use lldb::{SBProcess, SBQueue};

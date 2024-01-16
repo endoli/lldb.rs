@@ -94,7 +94,7 @@
 //! [crates.io]: https://crates.io/crates/lldb
 
 #![allow(clippy::upper_case_acronyms)]
-#![warn(missing_docs)]
+#![warn(clippy::doc_markdown, missing_docs)]
 #![deny(
     trivial_numeric_casts,
     unstable_features,

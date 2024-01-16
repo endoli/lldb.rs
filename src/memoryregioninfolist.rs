@@ -59,6 +59,14 @@ impl Drop for SBMemoryRegionInfoList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBMemoryRegionInfoList {
+    type IntoIter = SBMemoryRegionInfoListIter<'d>;
+    type Item = SBMemoryRegionInfo;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBMemoryRegionInfoList {}
 unsafe impl Sync for SBMemoryRegionInfoList {}
 

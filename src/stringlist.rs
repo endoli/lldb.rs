@@ -89,6 +89,14 @@ impl Drop for SBStringList {
     }
 }
 
+impl<'d> IntoIterator for &'d SBStringList {
+    type IntoIter = SBStringListIter<'d>;
+    type Item = &'d str;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+
 unsafe impl Send for SBStringList {}
 unsafe impl Sync for SBStringList {}
 
