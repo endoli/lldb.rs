@@ -36,8 +36,8 @@ Install the `lldb` and `liblldb-dev` packages for your platform so that you have
 
 You will need to have 2 environment variables set to do the build:
 
-    `LLVM_ROOT` - This points to the root of the LLVM source tree.
-    `LLVM_BUILD_ROOT` - This points to the root of an LLVM build directory. This may be the same as the LLVM source tree, especially if you're working from a binary install.
+* `LLVM_ROOT` - This points to the root of the LLVM source tree.
+* `LLVM_BUILD_ROOT` - This points to the root of an LLVM build directory. This may be the same as the LLVM source tree, especially if you're working from a binary install.
 
 For now, you will have to set an @rpath manually on your executables so that they can find the LLDB.framework at runtime. This can be done with install_name_tool:
 
