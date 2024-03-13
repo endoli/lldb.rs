@@ -16,7 +16,7 @@ repository = "https://github.com/endoli/lldb.rs"
 name = "basic_synchronous"
 
 [features]
-graphql = ["juniper"]
+graphql = ["dep:juniper"]
 
 [dependencies]
 libc = "0.2"
