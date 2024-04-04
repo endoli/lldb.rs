@@ -10,6 +10,7 @@ use crate::{
 };
 use std::ffi::{CStr, CString};
 use std::fmt;
+use std::os::raw::c_char;
 use std::ptr;
 
 /// A thread of execution.
@@ -127,13 +128,8 @@ impl SBThread {
     }
 
     /// The name associated with the thread, if any.
-    pub fn name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBThreadGetName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBThreadGetName(self.raw)) }
     }
 
     /// Return the queue associated with this thread, if any.
@@ -150,13 +146,8 @@ impl SBThread {
     ///
     /// For example, this would report a `libdispatch` (Grand Central Dispatch)
     /// queue name.
-    pub fn queue_name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBThreadGetQueueName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn queue_name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBThreadGetQueueName(self.raw)) }
     }
 
     /// Return the `dispatch_queue_id` for this thread, if any.
@@ -318,6 +309,17 @@ impl SBThread {
     pub fn event_as_thread_event(event: &SBEvent) -> Option<SBThreadEvent> {
         if unsafe { sys::SBThreadEventIsThreadEvent(event.raw) } {
             Some(SBThreadEvent::new(event))
+        } else {
+            None
+        }
+    }
+
+    unsafe fn check_null_ptr(&self, ptr: *const c_char) -> Option<&str> {
+        if !ptr.is_null() {
+            match CStr::from_ptr(ptr).to_str() {
+                Ok(s) => Some(s),
+                _ => panic!("Invalid string?"),
+            }
         } else {
             None
         }
