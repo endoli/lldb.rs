@@ -242,7 +242,20 @@ impl SBThread {
     }
 
     #[allow(missing_docs)]
-    pub fn step_into(
+    pub fn step_into(&self, stop_other_threads: RunMode) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe {
+            sys::SBThreadStepInto(self.raw, stop_other_threads);
+        }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_into3(
         &self,
         target_name: Option<&str>,
         end_line: u32,
