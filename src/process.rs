@@ -336,6 +336,36 @@ impl SBProcess {
         String::from_utf8(dst).ok()
     }
 
+    /// Reads data from the current process's stderr stream until the end of the stream.
+    pub fn get_stderr_all(&self) -> Option<String> {
+        let dst_len = 0x1000;
+        let mut output = "".to_string();
+        let mut dst: Vec<u8> = Vec::with_capacity(dst_len);
+        loop {
+            let out_len =
+                unsafe { sys::SBProcessGetSTDERR(self.raw, dst.as_mut_ptr() as *mut i8, dst_len) };
+            if out_len == 0 {
+                break;
+            }
+            unsafe { dst.set_len(out_len) };
+            output += std::str::from_utf8(&dst).ok()?;
+        }
+
+        Some(output)
+    }
+
+    /// Reads data from the current process's stderr stream.
+    pub fn get_stderr(&self) -> Option<String> {
+        let dst_len = 0x1000;
+        let mut dst: Vec<u8> = Vec::with_capacity(dst_len);
+
+        let out_len =
+            unsafe { sys::SBProcessGetSTDERR(self.raw, dst.as_mut_ptr() as *mut i8, dst_len) };
+
+        unsafe { dst.set_len(out_len) };
+        String::from_utf8(dst).ok()
+    }
+
     #[allow(missing_docs)]
     pub fn broadcaster(&self) -> SBBroadcaster {
         SBBroadcaster::wrap(unsafe { sys::SBProcessGetBroadcaster(self.raw) })
