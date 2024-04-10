@@ -249,7 +249,7 @@ impl SBThread {
     }
 
     #[allow(missing_docs)]
-    pub fn step_into3(
+    pub fn step_into_until(
         &self,
         target_name: Option<&str>,
         end_line: u32,
