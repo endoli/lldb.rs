@@ -316,15 +316,15 @@ impl SBValue {
         self.id() as i32
     }
 
-    fn name() -> &str {
+    fn name() -> Option<&str> {
         self.name()
     }
 
-    fn type_name() -> &str {
+    fn type_name() -> Option<&str> {
         self.type_name()
     }
 
-    fn display_type_name() -> &str {
+    fn display_type_name() -> Option<&str> {
         self.display_type_name()
     }
 
