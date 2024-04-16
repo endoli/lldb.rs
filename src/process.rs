@@ -679,6 +679,19 @@ impl<'e> SBProcessEvent<'e> {
             idx: 0,
         }
     }
+
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_STATE_CHANGED: u32 = (1 << 0);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_INTERRUPT: u32 = (1 << 1);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_STDOUT: u32 = (1 << 2);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_STDERR: u32 = (1 << 3);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_PROFILE_DATA: u32 = (1 << 4);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_STRUCTURED_DATA: u32 = (1 << 5);
 }
 
 /// Iterate over the restart reasons in a [process event].
