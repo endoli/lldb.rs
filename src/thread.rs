@@ -401,6 +401,17 @@ impl<'e> SBThreadEvent<'e> {
     pub fn frame(&self) -> Option<SBFrame> {
         SBFrame::maybe_wrap(unsafe { sys::SBThreadGetStackFrameFromEvent(self.event.raw) })
     }
+
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_STACK_CHANGED: u32 = (1 << 0);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_THREAD_SUSPENDED: u32 = (1 << 1);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_THREAD_RESUMED: u32 = (1 << 2);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_SELECTED_FRAME_CHANGED: u32 = (1 << 3);
+    #[allow(missing_docs)]
+    pub const BROADCAST_BIT_THREAD_SELECTED: u32 = (1 << 4);
 }
 
 #[cfg(feature = "graphql")]
