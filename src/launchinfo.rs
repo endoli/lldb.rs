@@ -6,6 +6,7 @@
 
 use crate::{lldb_pid_t, sys, LaunchFlags, SBFileSpec, SBListener};
 use std::ffi::{CStr, CString};
+use std::os::raw::c_char;
 use std::ptr;
 
 /// Configuration for launching a process.
@@ -123,6 +124,38 @@ impl SBLaunchInfo {
     #[allow(missing_docs)]
     pub fn set_launch_flags(&self, launch_flags: LaunchFlags) {
         unsafe { sys::SBLaunchInfoSetLaunchFlags(self.raw, launch_flags.bits()) }
+    }
+
+    /// Specify the command line arguments.
+    pub fn set_arguments<'a>(&self, args: impl IntoIterator<Item = &'a str>, append: bool) {
+        let cstrs: Vec<CString> = args.into_iter().map(|a| CString::new(a).unwrap()).collect();
+        let mut ptrs: Vec<*const c_char> = cstrs.iter().map(|cs| cs.as_ptr()).collect();
+        ptrs.push(ptr::null());
+        let argv = ptrs.as_ptr();
+        unsafe { sys::SBLaunchInfoSetArguments(self.raw, argv, append) };
+    }
+
+    /// Returns an interator over the command line arguments.
+    pub fn arguments(&self) -> impl Iterator<Item = &str> {
+        SBLaunchInfoArgumentsIter {
+            launch_info: self,
+            index: 0,
+        }
+    }
+
+    #[allow(missing_docs)]
+    fn num_arguments(&self) -> u32 {
+        unsafe { sys::SBLaunchInfoGetNumArguments(self.raw) }
+    }
+
+    #[allow(missing_docs)]
+    fn argument_at_index(&self, index: u32) -> &str {
+        unsafe {
+            match CStr::from_ptr(sys::SBLaunchInfoGetArgumentAtIndex(self.raw, index)).to_str() {
+                Ok(s) => s,
+                _ => panic!("Invalid string?"),
+            }
+        }
     }
 
     #[allow(missing_docs)]
@@ -246,3 +279,28 @@ impl Drop for SBLaunchInfo {
 
 unsafe impl Send for SBLaunchInfo {}
 unsafe impl Sync for SBLaunchInfo {}
+
+pub struct SBLaunchInfoArgumentsIter<'d> {
+    launch_info: &'d SBLaunchInfo,
+    index: u32,
+}
+
+impl<'d> Iterator for SBLaunchInfoArgumentsIter<'d> {
+    type Item = &'d str;
+
+    fn next(&mut self) -> Option<&'d str> {
+        if self.index < self.launch_info.num_arguments() {
+            self.index += 1;
+            Some(self.launch_info.argument_at_index(self.index - 1))
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let sz = self.launch_info.num_arguments();
+        (sz as usize - self.index as usize, Some(sz as usize))
+    }
+}
+
+impl<'d> ExactSizeIterator for SBLaunchInfoArgumentsIter<'d> {}
