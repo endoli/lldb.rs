@@ -65,7 +65,7 @@ impl SBSymbol {
         }
     }
 
-    ///
+    #[allow(missing_docs)]
     pub fn get_instructions(
         &self,
         target: &SBTarget,
