@@ -306,7 +306,7 @@ impl SBProcess {
         }
     }
 
-    /// Reads data from the current process's stdout stream until the end ot the stream.
+    /// Reads data from the current process's stdout stream until the end of the stream.
     pub fn get_stdout_all(&self) -> Option<String> {
         let dst_len = 0x1000;
         let mut output = "".to_string();
