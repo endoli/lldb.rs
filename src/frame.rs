@@ -53,7 +53,7 @@ impl SBFrame {
     /// lifetime of the function.
     pub fn cfa(&self) -> Option<lldb_addr_t> {
         let cfa = unsafe { sys::SBFrameGetCFA(self.raw) };
-        if cfa != u64::max_value() {
+        if cfa != u64::MAX {
             Some(cfa)
         } else {
             None

@@ -227,7 +227,7 @@ impl SBValue {
     #[allow(missing_docs)]
     pub fn load_address(&self) -> Option<lldb_addr_t> {
         let load_address = unsafe { sys::SBValueGetLoadAddress(self.raw) };
-        if load_address != u64::max_value() {
+        if load_address != u64::MAX {
             Some(load_address)
         } else {
             None
