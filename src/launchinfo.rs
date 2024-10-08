@@ -135,7 +135,7 @@ impl SBLaunchInfo {
         unsafe { sys::SBLaunchInfoSetArguments(self.raw, argv, append) };
     }
 
-    /// Returns an interator over the command line arguments.
+    /// Returns an iterator over the command line arguments.
     pub fn arguments(&self) -> impl Iterator<Item = &str> {
         SBLaunchInfoArgumentsIter {
             launch_info: self,
