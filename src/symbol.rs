@@ -7,6 +7,7 @@
 use crate::{sys, DisassemblyFlavor, SBAddress, SBInstructionList, SBStream, SBTarget, SymbolType};
 use std::ffi::{CStr, CString};
 use std::fmt;
+use std::os::raw::c_char;
 use std::ptr;
 
 /// The symbol possibly associated with a stack frame.
@@ -56,13 +57,8 @@ impl SBSymbol {
     }
 
     /// The mangled (linkage) name for this function.
-    pub fn mangled_name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBSymbolGetMangledName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn mangled_name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBSymbolGetMangledName(self.raw)) }
     }
 
     #[allow(missing_docs)]
@@ -122,6 +118,17 @@ impl SBSymbol {
     pub fn is_synthetic(&self) -> bool {
         unsafe { sys::SBSymbolIsSynthetic(self.raw) }
     }
+
+    unsafe fn check_null_ptr(&self, ptr: *const c_char) -> Option<&str> {
+        if !ptr.is_null() {
+            match CStr::from_ptr(ptr).to_str() {
+                Ok(s) => Some(s),
+                _ => panic!("Invalid string?"),
+            }
+        } else {
+            None
+        }
+    }
 }
 
 impl Clone for SBSymbol {
@@ -160,7 +167,7 @@ impl SBSymbol {
         self.display_name()
     }
 
-    fn mangled_name() -> &str {
+    fn mangled_name() -> Option<&str> {
         self.mangled_name()
     }
 

@@ -10,6 +10,7 @@ use crate::{
 };
 use std::ffi::{CStr, CString};
 use std::fmt;
+use std::os::raw::c_char;
 use std::ptr;
 
 /// A generic function, which can be inlined or not.
@@ -59,13 +60,8 @@ impl SBFunction {
     }
 
     /// The mangled (linkage) name for this function.
-    pub fn mangled_name(&self) -> &str {
-        unsafe {
-            match CStr::from_ptr(sys::SBFunctionGetMangledName(self.raw)).to_str() {
-                Ok(s) => s,
-                _ => panic!("Invalid string?"),
-            }
-        }
+    pub fn mangled_name(&self) -> Option<&str> {
+        unsafe { self.check_null_ptr(sys::SBFunctionGetMangledName(self.raw)) }
     }
 
     #[allow(missing_docs)]
@@ -128,6 +124,17 @@ impl SBFunction {
     pub fn is_optimized(&self) -> bool {
         unsafe { sys::SBFunctionGetIsOptimized(self.raw) }
     }
+
+    unsafe fn check_null_ptr(&self, ptr: *const c_char) -> Option<&str> {
+        if !ptr.is_null() {
+            match CStr::from_ptr(ptr).to_str() {
+                Ok(s) => Some(s),
+                _ => panic!("Invalid string?"),
+            }
+        } else {
+            None
+        }
+    }
 }
 
 impl Clone for SBFunction {
@@ -166,7 +173,7 @@ impl SBFunction {
         self.display_name()
     }
 
-    fn mangled_name() -> &str {
+    fn mangled_name() -> Option<&str> {
         self.mangled_name()
     }
 
