@@ -7,6 +7,7 @@
 use crate::{sys, SBStream};
 use std::ffi::CStr;
 use std::fmt;
+use std::path::Path;
 
 /// A file specification that divides the path into a
 /// directory and basename.
@@ -34,8 +35,9 @@ impl SBFileSpec {
     }
 
     /// Create SBFileSpec from path
-    pub fn from_path(path: &str, resolve: bool) -> Self {
-        let path_cstring = std::ffi::CString::new(path).unwrap();
+    pub fn from_path<P: AsRef<Path>>(path: P, resolve: bool) -> Self {
+        let path_cstring =
+            std::ffi::CString::new(path.as_ref().as_os_str().as_encoded_bytes()).unwrap();
         Self::wrap(unsafe { sys::CreateSBFileSpec3(path_cstring.as_ptr(), resolve) })
     }
 
