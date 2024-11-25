@@ -6,8 +6,8 @@
 
 use crate::{
     lldb_addr_t, lldb_pid_t, lldb_tid_t, sys, Permissions, SBBroadcaster, SBError, SBEvent,
-    SBMemoryRegionInfo, SBMemoryRegionInfoList, SBProcessInfo, SBQueue, SBStream, SBStructuredData,
-    SBThread, StateType,
+    SBFileSpec, SBMemoryRegionInfo, SBMemoryRegionInfoList, SBProcessInfo, SBQueue, SBStream,
+    SBStructuredData, SBTarget, SBThread, StateType,
 };
 use std::ffi::{CStr, CString};
 use std::fmt;
@@ -558,6 +558,85 @@ impl SBProcess {
     /// [memory regions]: SBMemoryRegionInfo
     pub fn get_memory_regions(&self) -> SBMemoryRegionInfoList {
         SBMemoryRegionInfoList::wrap(unsafe { sys::SBProcessGetMemoryRegions(self.raw) })
+    }
+
+    /// Reads the memory at specified address in the process to the `buffer`
+    pub fn read_memory(&self, addr: lldb_addr_t, buffer: &mut [u8]) -> Result<(), SBError> {
+        // SBProcessReadMemory will return error the memory region is not allowed to read
+        // and does not cause bad behavior so this method can be safe.
+        let error = SBError::default();
+        unsafe {
+            sys::SBProcessReadMemory(
+                self.raw,
+                addr,
+                buffer.as_mut_ptr() as *mut _,
+                buffer.len(),
+                error.raw,
+            );
+        }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Writes the `buffer` data to the memory at specified address in the process
+    pub fn write_memory(&self, addr: lldb_addr_t, buffer: &[u8]) -> Result<(), SBError> {
+        let error = SBError::default();
+        unsafe {
+            sys::SBProcessWriteMemory(
+                self.raw,
+                addr,
+                buffer.as_ptr() as *mut _,
+                buffer.len(),
+                error.raw,
+            );
+        }
+        if error.is_success() {
+            Ok(())
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Returns the byte order of target process
+    pub fn byte_order(&self) -> crate::ByteOrder {
+        unsafe { sys::SBProcessGetByteOrder(self.raw) }
+    }
+
+    /// Loads the specified image to the process
+    pub fn load_image(&self, file: &SBFileSpec) -> Result<u32, SBError> {
+        let error = SBError::default();
+        let image_token = unsafe { sys::SBProcessLoadImage(self.raw, file.raw, error.raw) };
+        if error.is_failure() {
+            Err(error)
+        } else {
+            Ok(image_token)
+        }
+    }
+
+    /// Unloads the image loaded with [`load_image`]
+    ///
+    /// [`load_image`]: Self::load_image
+    pub fn unload_image(&self, image_token: u32) -> Result<(), SBError> {
+        // the method returns error if image_token is not valid, instead of cause undefined behavior
+        let error = SBError::wrap(unsafe { sys::SBProcessUnloadImage(self.raw, image_token) });
+        if error.is_failure() {
+            Err(error)
+        } else {
+            Ok(())
+        }
+    }
+
+    /// Returns the [`SBTarget`] corresponds to this SBProcess.
+    ///
+    /// This never return None if `self` is [`valid`].
+    ///
+    /// [`SBTarget`]: SBTarget
+    /// [`valid`]: Self::is_valid
+    pub fn target(&self) -> Option<SBTarget> {
+        SBTarget::maybe_wrap(unsafe { sys::SBProcessGetTarget(self.raw) })
     }
 }
 

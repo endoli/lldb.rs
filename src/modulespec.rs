@@ -14,6 +14,11 @@ pub struct SBModuleSpec {
 }
 
 impl SBModuleSpec {
+    /// Construct a new `SBModuleSpec`.
+    pub(crate) fn wrap(raw: sys::SBModuleSpecRef) -> SBModuleSpec {
+        SBModuleSpec { raw }
+    }
+
     /// Construct a new `Some(SBModuleSpec)` or `None`.
     #[allow(dead_code)]
     pub(crate) fn maybe_wrap(raw: sys::SBModuleSpecRef) -> Option<SBModuleSpec> {
@@ -27,6 +32,11 @@ impl SBModuleSpec {
     /// Check whether or not this is a valid `SBModuleSpec` value.
     pub fn is_valid(&self) -> bool {
         unsafe { sys::SBModuleSpecIsValid(self.raw) }
+    }
+
+    /// Creates new empty SBModuleSpec
+    pub fn new() -> Self {
+        Self::wrap(unsafe { sys::CreateSBModuleSpec() })
     }
 
     /// The file for the module on the host system that is running LLDB.

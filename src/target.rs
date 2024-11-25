@@ -10,6 +10,7 @@ use crate::{
     SBModule, SBModuleSpec, SBPlatform, SBProcess, SBStream, SBSymbolContextList, SBValue,
     SBWatchpoint, SymbolType,
 };
+use lldb_sys::ByteOrder;
 use std::ffi::{CStr, CString};
 use std::fmt;
 
@@ -385,6 +386,16 @@ impl SBTarget {
     #[allow(missing_docs)]
     pub fn set_launch_info(&self, launch_info: SBLaunchInfo) {
         unsafe { sys::SBTargetSetLaunchInfo(self.raw, launch_info.raw) };
+    }
+
+    /// Returns the byte order of target
+    pub fn byte_order(&self) -> ByteOrder {
+        unsafe { sys::SBTargetGetByteOrder(self.raw) }
+    }
+
+    /// Returns the size of address in bytes
+    fn get_address_byte_size(&self) -> u32 {
+        unsafe { sys::SBTargetGetAddressByteSize(self.raw) }
     }
 }
 

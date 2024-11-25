@@ -5,7 +5,8 @@
 // except according to those terms.
 
 use crate::{
-    sys, SBFileSpec, SBSection, SBStream, SBSymbolContextList, SBTypeList, SymbolType, TypeClass,
+    sys, SBFileSpec, SBSection, SBStream, SBSymbol, SBSymbolContextList, SBTypeList, SymbolType,
+    TypeClass,
 };
 use std::ffi::CString;
 use std::fmt;
@@ -99,6 +100,11 @@ impl SBModule {
     pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
         SBTypeList::wrap(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
     }
+
+    /// Get a list of all symbols in the module
+    pub fn symbols(&self) -> ModuleSymbols {
+        ModuleSymbols { module: self }
+    }
 }
 
 /// Iterate over the [sections] in a [module].
@@ -132,6 +138,63 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 }
 
 impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
+
+/// The list of symbols in the module
+pub struct ModuleSymbols<'d> {
+    module: &'d SBModule,
+}
+
+impl<'d> ModuleSymbols<'d> {
+    pub fn len(&self) -> usize {
+        unsafe { sys::SBModuleGetNumSymbols(self.module.raw) }
+    }
+
+    pub fn get(&self, index: usize) -> Option<SBSymbol> {
+        if index < self.len() {
+            let symbol = unsafe { sys::SBModuleGetSymbolAtIndex(self.module.raw, index) };
+            Some(SBSymbol { raw: symbol })
+        } else {
+            None
+        }
+    }
+}
+
+impl<'a> IntoIterator for ModuleSymbols<'a> {
+    type Item = SBSymbol;
+    type IntoIter = ModuleSymbolsIter<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        ModuleSymbolsIter {
+            module: self,
+            index: 0,
+        }
+    }
+}
+
+pub struct ModuleSymbolsIter<'d> {
+    module: ModuleSymbols<'d>,
+    index: usize,
+}
+
+impl<'d> Iterator for ModuleSymbolsIter<'d> {
+    type Item = SBSymbol;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.index < self.module.len() {
+            self.index += 1;
+            self.module.get(self.index - 1)
+        } else {
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let len = self.module.len() - self.index;
+        (len, Some(len))
+    }
+}
+
+impl<'d> ExactSizeIterator for ModuleSymbolsIter<'d> {}
 
 impl Clone for SBModule {
     fn clone(&self) -> SBModule {

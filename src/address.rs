@@ -234,6 +234,21 @@ impl SBAddress {
     pub fn line_entry(&self) -> Option<SBLineEntry> {
         SBLineEntry::maybe_wrap(unsafe { sys::SBAddressGetLineEntry(self.raw) })
     }
+
+    /// Returns offset of the address in the section
+    ///
+    /// See also:
+    /// - [`get_section`] for get the section corresponding to this address
+    ///
+    /// [`get_section`]: Self::get_section
+    pub fn get_offset(&self) -> lldb_addr_t {
+        unsafe { sys::SBAddressGetOffset(self.raw) }
+    }
+
+    /// Returns the corresponding section of this address.
+    pub fn get_section(&self) -> Option<SBSection> {
+        SBSection::maybe_wrap(unsafe { sys::SBAddressGetSection(self.raw) })
+    }
 }
 
 impl Clone for SBAddress {
