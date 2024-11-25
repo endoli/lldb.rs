@@ -394,7 +394,7 @@ impl SBTarget {
     }
 
     /// Returns the size of address in bytes
-    fn get_address_byte_size(&self) -> u32 {
+    pub fn get_address_byte_size(&self) -> u32 {
         unsafe { sys::SBTargetGetAddressByteSize(self.raw) }
     }
 }

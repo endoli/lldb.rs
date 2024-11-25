@@ -251,7 +251,7 @@ impl SBValue {
     }
 
     /// Get the value as signed integer
-    fn get_as_signed(&self) -> Result<i64, SBError> {
+    pub fn get_as_signed(&self) -> Result<i64, SBError> {
         let error = SBError::default();
         let result = unsafe { sys::SBValueGetValueAsSigned(self.raw, error.raw, 0) };
         if error.is_success() {
