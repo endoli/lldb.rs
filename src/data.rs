@@ -45,7 +45,11 @@ impl SBData {
     }
 
     /// Reads the data at specified offset to the buffer.
-    pub fn read_raw_data(&self, offset: sys::lldb_offset_t, buffer: &mut [u8]) -> Result<(), SBError> {
+    pub fn read_raw_data(
+        &self,
+        offset: sys::lldb_offset_t,
+        buffer: &mut [u8],
+    ) -> Result<(), SBError> {
         let error = SBError::default();
         unsafe {
             sys::SBDataReadRawData(
