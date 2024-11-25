@@ -606,22 +606,22 @@ impl SBProcess {
     }
 
     /// Loads the specified image into the process.
-    pub fn load_image(&self, file: &SBFileSpec) -> Result<u32, SBError> {
+    pub fn load_image(&self, file: &SBFileSpec) -> Result<ImageToken, SBError> {
         let error = SBError::default();
         let image_token = unsafe { sys::SBProcessLoadImage(self.raw, file.raw, error.raw) };
         if error.is_failure() {
             Err(error)
         } else {
-            Ok(image_token)
+            Ok(ImageToken(image_token))
         }
     }
 
     /// Unloads the image loaded with [`load_image`].
     ///
     /// [`load_image`]: Self::load_image
-    pub fn unload_image(&self, image_token: u32) -> Result<(), SBError> {
+    pub fn unload_image(&self, image_token: ImageToken) -> Result<(), SBError> {
         // the method returns error if image_token is not valid, instead of causing undefined behavior.
-        let error = SBError::wrap(unsafe { sys::SBProcessUnloadImage(self.raw, image_token) });
+        let error = SBError::wrap(unsafe { sys::SBProcessUnloadImage(self.raw, image_token.0) });
         if error.is_failure() {
             Err(error)
         } else {
@@ -699,6 +699,9 @@ impl<'d> Iterator for SBProcessQueueIter<'d> {
         (sz - self.idx, Some(sz))
     }
 }
+
+/// The token to unload image
+struct ImageToken(u32);
 
 impl Clone for SBProcess {
     fn clone(&self) -> SBProcess {
