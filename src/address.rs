@@ -238,7 +238,7 @@ impl SBAddress {
     /// Returns offset of the address in the section
     ///
     /// See also:
-    /// - [`get_section`] for get the section corresponding to this address
+    /// - [`get_section`] for getting the section corresponding to this address
     ///
     /// [`get_section`]: Self::get_section
     pub fn get_offset(&self) -> lldb_addr_t {

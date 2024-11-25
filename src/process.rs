@@ -562,7 +562,7 @@ impl SBProcess {
 
     /// Reads the memory at specified address in the process to the `buffer`
     pub fn read_memory(&self, addr: lldb_addr_t, buffer: &mut [u8]) -> Result<(), SBError> {
-        // SBProcessReadMemory will return error the memory region is not allowed to read
+        // SBProcessReadMemory will return an error if the memory region is not allowed to read
         // and does not cause bad behavior so this method can be safe.
         let error = SBError::default();
         unsafe {
@@ -605,7 +605,7 @@ impl SBProcess {
         unsafe { sys::SBProcessGetByteOrder(self.raw) }
     }
 
-    /// Loads the specified image to the process
+    /// Loads the specified image into the process.
     pub fn load_image(&self, file: &SBFileSpec) -> Result<u32, SBError> {
         let error = SBError::default();
         let image_token = unsafe { sys::SBProcessLoadImage(self.raw, file.raw, error.raw) };
@@ -616,11 +616,11 @@ impl SBProcess {
         }
     }
 
-    /// Unloads the image loaded with [`load_image`]
+    /// Unloads the image loaded with [`load_image`].
     ///
     /// [`load_image`]: Self::load_image
     pub fn unload_image(&self, image_token: u32) -> Result<(), SBError> {
-        // the method returns error if image_token is not valid, instead of cause undefined behavior
+        // the method returns error if image_token is not valid, instead of causing undefined behavior.
         let error = SBError::wrap(unsafe { sys::SBProcessUnloadImage(self.raw, image_token) });
         if error.is_failure() {
             Err(error)
@@ -629,9 +629,9 @@ impl SBProcess {
         }
     }
 
-    /// Returns the [`SBTarget`] corresponds to this SBProcess.
+    /// Returns the [`SBTarget`] corresponding to this `SBProcess`.
     ///
-    /// This never return None if `self` is [`valid`].
+    /// This never return `None` if `self` is [`valid`].
     ///
     /// [`SBTarget`]: SBTarget
     /// [`valid`]: Self::is_valid
