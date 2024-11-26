@@ -200,7 +200,7 @@ pub use self::module::{SBModule, SBModuleSectionIter};
 pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::{
-    SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter, SBProcessQueueIter,
+    ImageToken, SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter, SBProcessQueueIter,
     SBProcessThreadIter,
 };
 pub use self::processinfo::SBProcessInfo;

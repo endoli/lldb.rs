@@ -701,7 +701,7 @@ impl<'d> Iterator for SBProcessQueueIter<'d> {
 }
 
 /// The token to unload image
-struct ImageToken(u32);
+pub struct ImageToken(pub u32);
 
 impl Clone for SBProcess {
     fn clone(&self) -> SBProcess {
