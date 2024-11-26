@@ -142,6 +142,10 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 
 impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
 
+/// Iterate over the [symbols] in a [module].
+///
+/// [symbols]: SBSymbol
+/// [module]: SBModule
 pub struct SBModuleSymbolsIter<'d> {
     module: &'d SBModule,
     index: usize,

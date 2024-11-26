@@ -34,7 +34,7 @@ impl SBModuleSpec {
         unsafe { sys::SBModuleSpecIsValid(self.raw) }
     }
 
-    /// Creates new empty SBModuleSpec
+    /// Creates new empty `SBModuleSpec`
     pub fn new() -> Self {
         Self::wrap(unsafe { sys::CreateSBModuleSpec() })
     }
@@ -117,6 +117,12 @@ impl Clone for SBModuleSpec {
         SBModuleSpec {
             raw: unsafe { sys::CloneSBModuleSpec(self.raw) },
         }
+    }
+}
+
+impl Default for SBModuleSpec {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
