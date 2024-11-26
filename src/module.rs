@@ -151,22 +151,19 @@ impl<'d> Iterator for SBModuleSymbolsIter<'d> {
     type Item = SBSymbol;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.index < self.module.len() {
-            self.index += 1;
-            self.module.get(self.index - 1)
-        } else {
-            None
-        }
+        self.nth(0)
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
-        let len = self.module.len() - self.index;
+        let size = unsafe { sys::SBModuleGetNumSections(self.module.raw) };
+        let len = size - self.index;
         (len, Some(len))
     }
 
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
+        let size = unsafe { sys::SBModuleGetNumSections(self.module.raw) };
         let index = n + self.index;
-        if index < self.len() {
+        if index < size {
             let symbol = unsafe { sys::SBModuleGetSymbolAtIndex(self.module.raw, index) };
             self.index = index + 1;
             Some(SBSymbol { raw: symbol })
