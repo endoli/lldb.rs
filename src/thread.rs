@@ -233,7 +233,14 @@ impl SBThread {
     }
 
     #[allow(missing_docs)]
-    pub fn step_into(
+    pub fn step_into(&self, stop_other_threads: RunMode) {
+        unsafe {
+            sys::SBThreadStepInto(self.raw, stop_other_threads);
+        }
+    }
+
+    #[allow(missing_docs)]
+    pub fn step_into_until(
         &self,
         target_name: Option<&str>,
         end_line: u32,
