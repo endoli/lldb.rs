@@ -5,7 +5,8 @@
 // except according to those terms.
 
 use crate::{
-    sys, SBFileSpec, SBSection, SBStream, SBSymbolContextList, SBTypeList, SymbolType, TypeClass,
+    sys, SBFileSpec, SBSection, SBStream, SBSymbol, SBSymbolContextList, SBTypeList, SymbolType,
+    TypeClass,
 };
 use std::ffi::CString;
 use std::fmt;
@@ -99,6 +100,14 @@ impl SBModule {
     pub fn types(&self, type_mask: TypeClass) -> SBTypeList {
         SBTypeList::wrap(unsafe { sys::SBModuleGetTypes(self.raw, type_mask.bits()) })
     }
+
+    /// Get a list of all symbols in the module
+    pub fn symbols(&self) -> SBModuleSymbolsIter {
+        SBModuleSymbolsIter {
+            module: self,
+            index: 0,
+        }
+    }
 }
 
 /// Iterate over the [sections] in a [module].
@@ -132,6 +141,44 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 }
 
 impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
+
+/// Iterate over the [symbols] in a [module].
+///
+/// [symbols]: SBSymbol
+/// [module]: SBModule
+pub struct SBModuleSymbolsIter<'d> {
+    module: &'d SBModule,
+    index: usize,
+}
+
+impl<'d> Iterator for SBModuleSymbolsIter<'d> {
+    type Item = SBSymbol;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.nth(0)
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        let size = unsafe { sys::SBModuleGetNumSections(self.module.raw) };
+        let len = size - self.index;
+        (len, Some(len))
+    }
+
+    fn nth(&mut self, n: usize) -> Option<Self::Item> {
+        let size = unsafe { sys::SBModuleGetNumSections(self.module.raw) };
+        let index = n + self.index;
+        if index < size {
+            let symbol = unsafe { sys::SBModuleGetSymbolAtIndex(self.module.raw, index) };
+            self.index = index + 1;
+            Some(SBSymbol { raw: symbol })
+        } else {
+            self.index = self.len();
+            None
+        }
+    }
+}
+
+impl<'d> ExactSizeIterator for SBModuleSymbolsIter<'d> {}
 
 impl Clone for SBModule {
     fn clone(&self) -> SBModule {

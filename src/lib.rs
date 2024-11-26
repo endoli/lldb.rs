@@ -196,11 +196,11 @@ pub use self::lineentry::SBLineEntry;
 pub use self::listener::SBListener;
 pub use self::memoryregioninfo::SBMemoryRegionInfo;
 pub use self::memoryregioninfolist::{SBMemoryRegionInfoList, SBMemoryRegionInfoListIter};
-pub use self::module::{SBModule, SBModuleSectionIter};
+pub use self::module::{SBModule, SBModuleSectionIter, SBModuleSymbolsIter};
 pub use self::modulespec::SBModuleSpec;
 pub use self::platform::SBPlatform;
 pub use self::process::{
-    SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter, SBProcessQueueIter,
+    ImageToken, SBProcess, SBProcessEvent, SBProcessEventRestartedReasonIter, SBProcessQueueIter,
     SBProcessThreadIter,
 };
 pub use self::processinfo::SBProcessInfo;

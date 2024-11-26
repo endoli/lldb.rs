@@ -249,6 +249,28 @@ impl SBValue {
             None
         }
     }
+
+    /// Get the value as signed integer
+    pub fn get_as_signed(&self) -> Result<i64, SBError> {
+        let error = SBError::default();
+        let result = unsafe { sys::SBValueGetValueAsSigned(self.raw, error.raw, 0) };
+        if error.is_success() {
+            Ok(result)
+        } else {
+            Err(error)
+        }
+    }
+
+    /// Get the value as unsigned integer
+    pub fn get_as_unsigned(&self) -> Result<u64, SBError> {
+        let error = SBError::default();
+        let result = unsafe { sys::SBValueGetValueAsUnsigned(self.raw, error.raw, 0) };
+        if error.is_success() {
+            Ok(result)
+        } else {
+            Err(error)
+        }
+    }
 }
 
 impl Clone for SBValue {
