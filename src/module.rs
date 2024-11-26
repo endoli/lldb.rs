@@ -102,8 +102,11 @@ impl SBModule {
     }
 
     /// Get a list of all symbols in the module
-    pub fn symbols(&self) -> ModuleSymbols {
-        ModuleSymbols { module: self }
+    pub fn symbols(&self) -> SBModuleSymbolsIter {
+        SBModuleSymbolsIter {
+            module: self,
+            index: 0,
+        }
     }
 }
 
@@ -139,44 +142,12 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
 
 impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
 
-/// The list of symbols in the module
-pub struct ModuleSymbols<'d> {
+pub struct SBModuleSymbolsIter<'d> {
     module: &'d SBModule,
-}
-
-impl<'d> ModuleSymbols<'d> {
-    pub fn len(&self) -> usize {
-        unsafe { sys::SBModuleGetNumSymbols(self.module.raw) }
-    }
-
-    pub fn get(&self, index: usize) -> Option<SBSymbol> {
-        if index < self.len() {
-            let symbol = unsafe { sys::SBModuleGetSymbolAtIndex(self.module.raw, index) };
-            Some(SBSymbol { raw: symbol })
-        } else {
-            None
-        }
-    }
-}
-
-impl<'a> IntoIterator for ModuleSymbols<'a> {
-    type Item = SBSymbol;
-    type IntoIter = ModuleSymbolsIter<'a>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        ModuleSymbolsIter {
-            module: self,
-            index: 0,
-        }
-    }
-}
-
-pub struct ModuleSymbolsIter<'d> {
-    module: ModuleSymbols<'d>,
     index: usize,
 }
 
-impl<'d> Iterator for ModuleSymbolsIter<'d> {
+impl<'d> Iterator for SBModuleSymbolsIter<'d> {
     type Item = SBSymbol;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -192,9 +163,21 @@ impl<'d> Iterator for ModuleSymbolsIter<'d> {
         let len = self.module.len() - self.index;
         (len, Some(len))
     }
+
+    fn nth(&mut self, n: usize) -> Option<Self::Item> {
+        let index = n + self.index;
+        if index < self.len() {
+            let symbol = unsafe { sys::SBModuleGetSymbolAtIndex(self.module.raw, index) };
+            self.index = index + 1;
+            Some(SBSymbol { raw: symbol })
+        } else {
+            self.index = self.len();
+            None
+        }
+    }
 }
 
-impl<'d> ExactSizeIterator for ModuleSymbolsIter<'d> {}
+impl<'d> ExactSizeIterator for SBModuleSymbolsIter<'d> {}
 
 impl Clone for SBModule {
     fn clone(&self) -> SBModule {
