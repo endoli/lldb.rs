@@ -307,7 +307,7 @@ pub struct SBValueChildIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBValueChildIter<'d> {
+impl Iterator for SBValueChildIter<'_> {
     type Item = SBValue;
 
     fn next(&mut self) -> Option<SBValue> {
@@ -328,7 +328,7 @@ impl<'d> Iterator for SBValueChildIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBValueChildIter<'d> {}
+impl ExactSizeIterator for SBValueChildIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

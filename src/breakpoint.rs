@@ -223,7 +223,7 @@ pub struct SBBreakpointLocationIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBBreakpointLocationIter<'d> {
+impl Iterator for SBBreakpointLocationIter<'_> {
     type Item = SBBreakpointLocation;
 
     fn next(&mut self) -> Option<SBBreakpointLocation> {
@@ -244,7 +244,7 @@ impl<'d> Iterator for SBBreakpointLocationIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBBreakpointLocationIter<'d> {}
+impl ExactSizeIterator for SBBreakpointLocationIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

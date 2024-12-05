@@ -119,7 +119,7 @@ pub struct SBModuleSectionIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBModuleSectionIter<'d> {
+impl Iterator for SBModuleSectionIter<'_> {
     type Item = SBSection;
 
     fn next(&mut self) -> Option<SBSection> {
@@ -140,7 +140,7 @@ impl<'d> Iterator for SBModuleSectionIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBModuleSectionIter<'d> {}
+impl ExactSizeIterator for SBModuleSectionIter<'_> {}
 
 /// Iterate over the [symbols] in a [module].
 ///
@@ -151,7 +151,7 @@ pub struct SBModuleSymbolsIter<'d> {
     index: usize,
 }
 
-impl<'d> Iterator for SBModuleSymbolsIter<'d> {
+impl Iterator for SBModuleSymbolsIter<'_> {
     type Item = SBSymbol;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -178,7 +178,7 @@ impl<'d> Iterator for SBModuleSymbolsIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBModuleSymbolsIter<'d> {}
+impl ExactSizeIterator for SBModuleSymbolsIter<'_> {}
 
 impl Clone for SBModule {
     fn clone(&self) -> SBModule {

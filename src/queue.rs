@@ -142,7 +142,7 @@ pub struct SBQueueThreadIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBQueueThreadIter<'d> {
+impl Iterator for SBQueueThreadIter<'_> {
     type Item = SBThread;
 
     fn next(&mut self) -> Option<SBThread> {
@@ -163,7 +163,7 @@ impl<'d> Iterator for SBQueueThreadIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBQueueThreadIter<'d> {}
+impl ExactSizeIterator for SBQueueThreadIter<'_> {}
 
 /// Iterate over the [queue items] in a [queue].
 ///
@@ -174,7 +174,7 @@ pub struct SBQueueQueueItemIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBQueueQueueItemIter<'d> {
+impl Iterator for SBQueueQueueItemIter<'_> {
     type Item = SBQueueItem;
 
     fn next(&mut self) -> Option<SBQueueItem> {
@@ -195,7 +195,7 @@ impl<'d> Iterator for SBQueueQueueItemIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBQueueQueueItemIter<'d> {}
+impl ExactSizeIterator for SBQueueQueueItemIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

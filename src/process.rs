@@ -649,7 +649,7 @@ pub struct SBProcessThreadIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBProcessThreadIter<'d> {
+impl Iterator for SBProcessThreadIter<'_> {
     type Item = SBThread;
 
     fn next(&mut self) -> Option<SBThread> {
@@ -679,7 +679,7 @@ pub struct SBProcessQueueIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBProcessQueueIter<'d> {
+impl Iterator for SBProcessQueueIter<'_> {
     type Item = SBQueue;
 
     fn next(&mut self) -> Option<SBQueue> {
@@ -812,7 +812,7 @@ impl<'d> Iterator for SBProcessEventRestartedReasonIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBProcessEventRestartedReasonIter<'d> {}
+impl ExactSizeIterator for SBProcessEventRestartedReasonIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

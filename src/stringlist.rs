@@ -135,4 +135,4 @@ impl<'d> Iterator for SBStringListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBStringListIter<'d> {}
+impl ExactSizeIterator for SBStringListIter<'_> {}

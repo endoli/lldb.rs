@@ -471,7 +471,7 @@ pub struct SBDebuggerTargetIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBDebuggerTargetIter<'d> {
+impl Iterator for SBDebuggerTargetIter<'_> {
     type Item = SBTarget;
 
     fn next(&mut self) -> Option<SBTarget> {
@@ -492,7 +492,7 @@ impl<'d> Iterator for SBDebuggerTargetIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBDebuggerTargetIter<'d> {}
+impl ExactSizeIterator for SBDebuggerTargetIter<'_> {}
 
 impl Clone for SBDebugger {
     fn clone(&self) -> SBDebugger {
@@ -527,7 +527,7 @@ pub struct SBDebuggerPlatformIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBDebuggerPlatformIter<'d> {
+impl Iterator for SBDebuggerPlatformIter<'_> {
     type Item = SBPlatform;
 
     fn next(&mut self) -> Option<SBPlatform> {
@@ -548,7 +548,7 @@ impl<'d> Iterator for SBDebuggerPlatformIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBDebuggerPlatformIter<'d> {}
+impl ExactSizeIterator for SBDebuggerPlatformIter<'_> {}
 
 /// Iterate over the available platforms.
 pub struct SBDebuggerAvailablePlatformIter<'d> {
@@ -556,7 +556,7 @@ pub struct SBDebuggerAvailablePlatformIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBDebuggerAvailablePlatformIter<'d> {
+impl Iterator for SBDebuggerAvailablePlatformIter<'_> {
     type Item = SBStructuredData;
 
     fn next(&mut self) -> Option<SBStructuredData> {
@@ -577,7 +577,7 @@ impl<'d> Iterator for SBDebuggerAvailablePlatformIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBDebuggerAvailablePlatformIter<'d> {}
+impl ExactSizeIterator for SBDebuggerAvailablePlatformIter<'_> {}
 
 #[cfg(feature = "graphql")]
 impl ::juniper::Context for SBDebugger {}

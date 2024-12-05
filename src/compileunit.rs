@@ -100,7 +100,7 @@ pub struct SBCompileUnitLineEntryIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
+impl Iterator for SBCompileUnitLineEntryIter<'_> {
     type Item = SBLineEntry;
 
     fn next(&mut self) -> Option<SBLineEntry> {
@@ -121,7 +121,7 @@ impl<'d> Iterator for SBCompileUnitLineEntryIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBCompileUnitLineEntryIter<'d> {}
+impl ExactSizeIterator for SBCompileUnitLineEntryIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

@@ -433,7 +433,7 @@ pub struct SBTargetBreakpointIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBTargetBreakpointIter<'d> {
+impl Iterator for SBTargetBreakpointIter<'_> {
     type Item = SBBreakpoint;
 
     fn next(&mut self) -> Option<SBBreakpoint> {
@@ -454,7 +454,7 @@ impl<'d> Iterator for SBTargetBreakpointIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBTargetBreakpointIter<'d> {}
+impl ExactSizeIterator for SBTargetBreakpointIter<'_> {}
 
 /// Iterate over the [watchpoints] in a [target].
 ///
@@ -465,7 +465,7 @@ pub struct SBTargetWatchpointIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBTargetWatchpointIter<'d> {
+impl Iterator for SBTargetWatchpointIter<'_> {
     type Item = SBWatchpoint;
 
     fn next(&mut self) -> Option<SBWatchpoint> {
@@ -486,7 +486,7 @@ impl<'d> Iterator for SBTargetWatchpointIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBTargetWatchpointIter<'d> {}
+impl ExactSizeIterator for SBTargetWatchpointIter<'_> {}
 
 #[allow(missing_docs)]
 pub struct SBTargetEvent<'e> {
@@ -520,7 +520,7 @@ pub struct SBTargetEventModuleIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBTargetEventModuleIter<'d> {
+impl Iterator for SBTargetEventModuleIter<'_> {
     type Item = SBModule;
 
     fn next(&mut self) -> Option<SBModule> {
@@ -542,7 +542,7 @@ impl<'d> Iterator for SBTargetEventModuleIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBTargetEventModuleIter<'d> {}
+impl ExactSizeIterator for SBTargetEventModuleIter<'_> {}
 
 /// Iterate over the [modules] in a [target].
 ///
@@ -553,7 +553,7 @@ pub struct SBTargetModuleIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBTargetModuleIter<'d> {
+impl Iterator for SBTargetModuleIter<'_> {
     type Item = SBModule;
 
     fn next(&mut self) -> Option<SBModule> {
@@ -574,7 +574,7 @@ impl<'d> Iterator for SBTargetModuleIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBTargetModuleIter<'d> {}
+impl ExactSizeIterator for SBTargetModuleIter<'_> {}
 
 #[cfg(feature = "graphql")]
 #[juniper::graphql_object]

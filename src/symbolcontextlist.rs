@@ -98,7 +98,7 @@ pub struct SBSymbolContextListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBSymbolContextListIter<'d> {
+impl Iterator for SBSymbolContextListIter<'_> {
     type Item = SBSymbolContext;
 
     fn next(&mut self) -> Option<SBSymbolContext> {
@@ -119,4 +119,4 @@ impl<'d> Iterator for SBSymbolContextListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBSymbolContextListIter<'d> {}
+impl ExactSizeIterator for SBSymbolContextListIter<'_> {}

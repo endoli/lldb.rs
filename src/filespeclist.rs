@@ -102,7 +102,7 @@ pub struct SBFileSpecListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBFileSpecListIter<'d> {
+impl Iterator for SBFileSpecListIter<'_> {
     type Item = SBFileSpec;
 
     fn next(&mut self) -> Option<SBFileSpec> {
@@ -123,4 +123,4 @@ impl<'d> Iterator for SBFileSpecListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBFileSpecListIter<'d> {}
+impl ExactSizeIterator for SBFileSpecListIter<'_> {}

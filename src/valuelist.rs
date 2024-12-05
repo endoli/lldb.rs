@@ -110,7 +110,7 @@ pub struct SBValueListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBValueListIter<'d> {
+impl Iterator for SBValueListIter<'_> {
     type Item = SBValue;
 
     fn next(&mut self) -> Option<SBValue> {
@@ -131,4 +131,4 @@ impl<'d> Iterator for SBValueListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBValueListIter<'d> {}
+impl ExactSizeIterator for SBValueListIter<'_> {}

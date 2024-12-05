@@ -144,7 +144,7 @@ pub struct SBSectionSubSectionIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBSectionSubSectionIter<'d> {
+impl Iterator for SBSectionSubSectionIter<'_> {
     type Item = SBSection;
 
     fn next(&mut self) -> Option<SBSection> {
@@ -165,7 +165,7 @@ impl<'d> Iterator for SBSectionSubSectionIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBSectionSubSectionIter<'d> {}
+impl ExactSizeIterator for SBSectionSubSectionIter<'_> {}
 
 impl Clone for SBSection {
     fn clone(&self) -> SBSection {

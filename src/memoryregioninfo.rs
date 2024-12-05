@@ -170,7 +170,7 @@ pub struct SBMemoryRegionInfoDirtyPageIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBMemoryRegionInfoDirtyPageIter<'d> {
+impl Iterator for SBMemoryRegionInfoDirtyPageIter<'_> {
     type Item = lldb_addr_t;
 
     fn next(&mut self) -> Option<Self::Item> {

@@ -101,7 +101,7 @@ pub struct SBInstructionListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBInstructionListIter<'d> {
+impl Iterator for SBInstructionListIter<'_> {
     type Item = SBInstruction;
 
     fn next(&mut self) -> Option<SBInstruction> {
@@ -125,4 +125,4 @@ impl<'d> Iterator for SBInstructionListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBInstructionListIter<'d> {}
+impl ExactSizeIterator for SBInstructionListIter<'_> {}

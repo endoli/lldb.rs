@@ -78,7 +78,7 @@ pub struct SBMemoryRegionInfoListIter<'d> {
     idx: u32,
 }
 
-impl<'d> Iterator for SBMemoryRegionInfoListIter<'d> {
+impl Iterator for SBMemoryRegionInfoListIter<'_> {
     type Item = SBMemoryRegionInfo;
 
     fn next(&mut self) -> Option<SBMemoryRegionInfo> {
@@ -104,4 +104,4 @@ impl<'d> Iterator for SBMemoryRegionInfoListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBMemoryRegionInfoListIter<'d> {}
+impl ExactSizeIterator for SBMemoryRegionInfoListIter<'_> {}

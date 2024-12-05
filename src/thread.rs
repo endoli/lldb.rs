@@ -342,7 +342,7 @@ pub struct SBThreadFrameIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBThreadFrameIter<'d> {
+impl Iterator for SBThreadFrameIter<'_> {
     type Item = SBFrame;
 
     fn next(&mut self) -> Option<SBFrame> {
@@ -363,7 +363,7 @@ impl<'d> Iterator for SBThreadFrameIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBThreadFrameIter<'d> {}
+impl ExactSizeIterator for SBThreadFrameIter<'_> {}
 
 impl Clone for SBThread {
     fn clone(&self) -> SBThread {

@@ -72,7 +72,7 @@ pub struct SBTypeListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBTypeListIter<'d> {
+impl Iterator for SBTypeListIter<'_> {
     type Item = SBType;
 
     fn next(&mut self) -> Option<SBType> {
@@ -93,4 +93,4 @@ impl<'d> Iterator for SBTypeListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBTypeListIter<'d> {}
+impl ExactSizeIterator for SBTypeListIter<'_> {}

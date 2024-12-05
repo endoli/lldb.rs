@@ -303,4 +303,4 @@ impl<'d> Iterator for SBLaunchInfoArgumentsIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBLaunchInfoArgumentsIter<'d> {}
+impl ExactSizeIterator for SBLaunchInfoArgumentsIter<'_> {}

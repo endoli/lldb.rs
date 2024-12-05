@@ -97,7 +97,7 @@ pub struct SBBreakpointListIter<'d> {
     idx: usize,
 }
 
-impl<'d> Iterator for SBBreakpointListIter<'d> {
+impl Iterator for SBBreakpointListIter<'_> {
     type Item = SBBreakpoint;
 
     fn next(&mut self) -> Option<SBBreakpoint> {
@@ -118,4 +118,4 @@ impl<'d> Iterator for SBBreakpointListIter<'d> {
     }
 }
 
-impl<'d> ExactSizeIterator for SBBreakpointListIter<'d> {}
+impl ExactSizeIterator for SBBreakpointListIter<'_> {}
