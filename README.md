@@ -25,7 +25,7 @@ Add it to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-lldb = "0.0.11"
+lldb = "0.0.12"
 ```
 
 ### Linux
