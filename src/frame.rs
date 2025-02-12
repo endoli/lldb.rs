@@ -139,20 +139,18 @@ impl SBFrame {
     /// See also `is_inlined`.
     pub fn function_name(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBFrameGetFunctionName(self.raw).as_ref()?).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBFrameGetFunctionName(self.raw).as_ref()?)
+                .to_str()
+                .ok()
         }
     }
 
     #[allow(missing_docs)]
     pub fn display_function_name(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBFrameGetDisplayFunctionName(self.raw)).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBFrameGetDisplayFunctionName(self.raw))
+                .to_str()
+                .ok()
         }
     }
 

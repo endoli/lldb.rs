@@ -161,10 +161,9 @@ impl SBLaunchInfo {
     #[allow(missing_docs)]
     pub fn process_plugin_name(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBLaunchInfoGetProcessPluginName(self.raw)).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBLaunchInfoGetProcessPluginName(self.raw))
+                .to_str()
+                .ok()
         }
     }
 
@@ -177,10 +176,9 @@ impl SBLaunchInfo {
     #[allow(missing_docs)]
     pub fn shell(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBLaunchInfoGetShell(self.raw)).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBLaunchInfoGetShell(self.raw))
+                .to_str()
+                .ok()
         }
     }
 
@@ -234,10 +232,9 @@ impl SBLaunchInfo {
     #[allow(missing_docs)]
     pub fn launch_event_data(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBLaunchInfoGetLaunchEventData(self.raw)).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBLaunchInfoGetLaunchEventData(self.raw))
+                .to_str()
+                .ok()
         }
     }
 

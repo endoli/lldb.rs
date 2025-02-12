@@ -109,10 +109,9 @@ impl SBAttachInfo {
     #[allow(missing_docs)]
     pub fn process_plugin_name(&self) -> Option<&str> {
         unsafe {
-            match CStr::from_ptr(sys::SBAttachInfoGetProcessPluginName(self.raw)).to_str() {
-                Ok(s) => Some(s),
-                _ => None,
-            }
+            CStr::from_ptr(sys::SBAttachInfoGetProcessPluginName(self.raw))
+                .to_str()
+                .ok()
         }
     }
 
